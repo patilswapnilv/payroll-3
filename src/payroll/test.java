@@ -15,7 +15,7 @@ public class test {
 public static void main(String[] args) throws Exception {
 Class.forName("org.sqlite.JDBC");
 Connection conn =
-DriverManager.getConnection("jdbc:sqlite:Vinit");
+DriverManager.getConnection("jdbc:sqlite:Vinit.db");
 Statement stat = conn.createStatement();
 stat.executeUpdate("drop table if exists school;");
 stat.executeUpdate("create table school (name, state);");
