@@ -7,7 +7,9 @@ package payroll.libraries;
 
 import java.sql.DriverManager;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,6 +35,17 @@ public class Database
         }
     }
 
+    public void disconnect()
+    {
+        if (isConnected()) {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
     public boolean isConnected()
     {
         try {
@@ -40,5 +53,33 @@ public class Database
         } catch (Exception ex) {
             return false;
         }
+    }
+
+    public ResultSet execute(String query)
+    {
+        ResultSet result = null;
+
+        try {
+            Statement statement = connection.createStatement();
+            result = statement.executeQuery(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.getMessage()).log(Level.WARNING, null, ex);
+        }
+
+        return result;
+    }
+
+    public boolean update(String query)
+    {
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(query);
+
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.getMessage()).log(Level.WARNING, null, ex);
+        }
+
+        return false;
     }
 }
