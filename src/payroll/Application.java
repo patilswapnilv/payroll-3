@@ -5,11 +5,15 @@
 
 package payroll;
 
+import payroll.libraries.Database;
+
 /**
  *
  * @author edward
  */
 public class Application {
+
+    static Database db = null;
 
     /**
      * @param args the command line arguments
@@ -17,6 +21,7 @@ public class Application {
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater((new Runnable() {
             public void run() {
+                db = new Database("payroll.sqlite");
                 new Main().setVisible(true);
             }
         }));

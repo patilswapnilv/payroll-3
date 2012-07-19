@@ -11,20 +11,29 @@
 
 package payroll;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author edward
  */
 public class WorkerForm extends javax.swing.JDialog {
 
+    int worker_id = 0;
+    
     /** Creates new form WorkerForm */
     public WorkerForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
 
-    public WorkerForm(java.awt.Frame parent, boolean modal, int workerID) {
+    public WorkerForm(java.awt.Frame parent, boolean modal, int worker_id) {
         super(parent, modal);
+        this.worker_id = worker_id;
         initComponents();
     }
 
@@ -62,6 +71,7 @@ public class WorkerForm extends javax.swing.JDialog {
 
         jLabel4.setText("Status");
 
+        rbtnActive.setSelected(true);
         rbtnActive.setText("Aktif");
 
         rbtnInactive.setText("Tiada Aktif");
@@ -76,6 +86,11 @@ public class WorkerForm extends javax.swing.JDialog {
         });
 
         btnSave.setText("Rekodkan");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -155,28 +170,80 @@ public class WorkerForm extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-610)/2, (screenSize.height-433)/2, 610, 433);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnEndActionPerformed
 
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                WorkerForm dialog = new WorkerForm(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        if ( ! this._check()) {
+            return;
+        }
+
+        boolean active = rbtnActive.isSelected();
+        java.sql.Date register_date = new java.sql.Date(txtRegisterDate.getDate().getTime());
+        java.sql.Date return_date = new java.sql.Date(txtReturnDate.getDate().getTime());
+        
+        String query = "";
+
+        if (this.worker_id == 0) {
+            query = "INSERT INTO worker(code, name, start_date, end_date, is_active) VALUES(?, ?, ?, ?, ?)";
+        } else {
+            query = "UPDATE worker SET code = ?, name = ?, start_date = ?, end_date = ?, is_active = ? WHERE worker_id = " + this.worker_id;
+        }
+        PreparedStatement ps = Application.db.createPreparedStatement(query);
+
+        try {
+            ps.setString(1, txtWorkerID.getText());
+            ps.setString(2, txtWorkerName.getText());
+            ps.setDate(3, register_date);
+            ps.setDate(4, return_date);
+            ps.setBoolean(5, active);
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.getMessage()).log(Level.WARNING, null, ex);
+        }
+
+        boolean success = false;
+        if (this.worker_id == 0) {
+            this.worker_id = Application.db.insert(ps);
+            success = this.worker_id != 0 ? true : false;
+        } else {
+            success = Application.db.update(ps);
+        }
+
+        if (success) {
+            JOptionPane.showMessageDialog(null, "Worker information is recorded", "Updated", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Unable to update the worker information", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+
+    private boolean _check()
+    {
+        boolean valid = false;
+        String message = "";
+        if (txtWorkerID.getText().isEmpty()) {
+            message = "Please enter the Worker ID";
+        } else if (txtWorkerName.getText().isEmpty()) {
+            message = "Please enter the Worker Name";
+        } else if (txtRegisterDate.getDate() == null) {
+            message = "Please select the worker register date";
+        } else if (txtReturnDate.getDate() == null) {
+            message = "Please select the worker return date";
+        } else if (txtReturnDate.getDate().before(txtRegisterDate.getDate())) {
+            message = "Return date must later than register date";
+        } else {
+            valid = true;
+        }
+        if ( ! valid) {
+            JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return valid;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

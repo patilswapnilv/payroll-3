@@ -931,16 +931,6 @@ public class Main extends javax.swing.JFrame {
         new ClientForm(this, true).setVisible(true);
     }//GEN-LAST:event_btnProfileClientEditActionPerformed
 
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Main().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPayCancel;
