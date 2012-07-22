@@ -11,15 +11,29 @@
 
 package payroll;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author edward
  */
 public class ClientForm extends javax.swing.JDialog {
 
+    int customer_id = 0;
+
     /** Creates new form ClientForm */
     public ClientForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        initComponents();
+    }
+
+    public ClientForm(java.awt.Frame parent, boolean modal, int customer_id) {
+        super(parent, modal);
+        this.customer_id = customer_id;
         initComponents();
     }
 
@@ -32,6 +46,7 @@ public class ClientForm extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         btnEnd = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
@@ -42,7 +57,11 @@ public class ClientForm extends javax.swing.JDialog {
         rbtnActive = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
 
+        buttonGroup1.add(rbtnActive);
+        buttonGroup1.add(rbtnInactive);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cipta Rekod Pelanggan Baru");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -54,6 +73,11 @@ public class ClientForm extends javax.swing.JDialog {
         });
 
         btnSave.setText("Rekodkan");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -76,10 +100,11 @@ public class ClientForm extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jLabel1.setText("Kod dan Name Pekerja");
+        jLabel1.setText("Kod dan Nama Pekerja");
 
         rbtnInactive.setText("Tiada Aktif");
 
+        rbtnActive.setSelected(true);
         rbtnActive.setText("Aktif");
 
         jLabel4.setText("Status");
@@ -132,26 +157,67 @@ public class ClientForm extends javax.swing.JDialog {
         this.dispose();
 }//GEN-LAST:event_btnEndActionPerformed
 
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ClientForm dialog = new ClientForm(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        if ( ! this._check()) {
+            return;
+        }
+
+        boolean active = rbtnActive.isSelected();
+
+        String query = "";
+
+        if (this.customer_id == 0) {
+            query = "INSERT INTO customer(code, name, is_active) VALUES(?, ?, ?)";
+        } else {
+            query = "UPDATE customer SET code = ?, name = ?, is_active = ? WHERE customer_id = " + this.customer_id;
+        }
+        PreparedStatement ps = Application.db.createPreparedStatement(query);
+
+        try {
+            ps.setString(1, txtClientID.getText());
+            ps.setString(2, txtClientName.getText());
+            ps.setBoolean(3, active);
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.getMessage()).log(Level.WARNING, null, ex);
+        }
+
+        boolean success = false;
+        if (this.customer_id == 0) {
+            this.customer_id = Application.db.insert(ps);
+            success = this.customer_id != 0 ? true : false;
+        } else {
+            success = Application.db.update(ps);
+        }
+
+        if (success) {
+            JOptionPane.showMessageDialog(null, "Rekod Pelanggan baru ditambah", "Berjaya!", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Rekod Pelanggan tidak dapat ditambah", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private boolean _check()
+    {
+        boolean valid = false;
+        String message = "";
+        if (txtClientID.getText().isEmpty()) {
+            message = "Sila lengkapkan Kod Pelanggan";
+        } else if (txtClientName.getText().isEmpty()) {
+            message = "Silal lengkapkan Nama Pelanggan";
+        } else {
+            valid = true;
+        }
+        if ( ! valid) {
+            JOptionPane.showMessageDialog(null, message, "Kesilapan", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return valid;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnd;
     private javax.swing.JButton btnSave;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
