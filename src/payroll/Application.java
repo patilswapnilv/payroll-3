@@ -5,6 +5,7 @@
 
 package payroll;
 
+import javax.swing.UIManager;
 import payroll.libraries.Database;
 
 /**
@@ -13,7 +14,7 @@ import payroll.libraries.Database;
  */
 public class Application {
 
-    static Database db = null;
+    public static Database db = null;
 
     /**
      * @param args the command line arguments
@@ -22,6 +23,11 @@ public class Application {
         java.awt.EventQueue.invokeLater((new Runnable() {
             public void run() {
                 db = new Database("payroll.sqlite");
+                try {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } catch (Exception ex) {
+                    System.err.println(ex.getMessage());
+                }
                 new Main().setVisible(true);
             }
         }));

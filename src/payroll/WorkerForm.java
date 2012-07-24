@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import payroll.model.Worker;
 
 /**
  *
@@ -23,18 +24,34 @@ import javax.swing.JOptionPane;
  */
 public class WorkerForm extends javax.swing.JDialog {
 
-    int worker_id = 0;
+    private Worker worker;
+    int id = 0;
     
     /** Creates new form WorkerForm */
     public WorkerForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        worker = new Worker();
     }
 
-    public WorkerForm(java.awt.Frame parent, boolean modal, int worker_id) {
+    public WorkerForm(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
-        this.worker_id = worker_id;
         initComponents();
+        worker = new Worker(id);
+        this.id = id;
+        this._load();
+    }
+
+    private void _load() {
+        txtRegisterDate.setDate(worker.getRegisterDate());
+        txtReturnDate.setDate(worker.getReturnDate());
+        txtWorkerID.setText(worker.getCode());
+        txtWorkerName.setText(worker.getName());
+        if (worker.getStatus()) {
+            rbtnActive.setSelected(true);
+        } else {
+            rbtnInactive.setSelected(true);
+        }
     }
 
     /** This method is called from within the constructor to
@@ -183,36 +200,13 @@ public class WorkerForm extends javax.swing.JDialog {
             return;
         }
 
-        boolean active = rbtnActive.isSelected();
-        java.sql.Date register_date = new java.sql.Date(txtRegisterDate.getDate().getTime());
-        java.sql.Date return_date = new java.sql.Date(txtReturnDate.getDate().getTime());
-        
-        String query = "";
+        worker.setCode(txtWorkerID.getText());
+        worker.setName(txtWorkerName.getText());
+        worker.setRegisterDate(new java.sql.Date(txtRegisterDate.getDate().getTime()));
+        worker.setReturnDate(new java.sql.Date(txtReturnDate.getDate().getTime()));
+        worker.setStatus(rbtnActive.isSelected());
 
-        if (this.worker_id == 0) {
-            query = "INSERT INTO worker(code, name, start_date, end_date, is_active) VALUES(?, ?, ?, ?, ?)";
-        } else {
-            query = "UPDATE worker SET code = ?, name = ?, start_date = ?, end_date = ?, is_active = ? WHERE worker_id = " + this.worker_id;
-        }
-        PreparedStatement ps = Application.db.createPreparedStatement(query);
-
-        try {
-            ps.setString(1, txtWorkerID.getText());
-            ps.setString(2, txtWorkerName.getText());
-            ps.setDate(3, register_date);
-            ps.setDate(4, return_date);
-            ps.setBoolean(5, active);
-        } catch (SQLException ex) {
-            Logger.getLogger(ex.getMessage()).log(Level.WARNING, null, ex);
-        }
-
-        boolean success = false;
-        if (this.worker_id == 0) {
-            this.worker_id = Application.db.insert(ps);
-            success = this.worker_id != 0 ? true : false;
-        } else {
-            success = Application.db.update(ps);
-        }
+        boolean success = worker.save();
 
         if (success) {
             JOptionPane.showMessageDialog(null, "Worker information is recorded", "Updated", JOptionPane.INFORMATION_MESSAGE);

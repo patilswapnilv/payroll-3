@@ -80,6 +80,7 @@ public class Database
             result = ps.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(ex.getMessage()).log(Level.WARNING, null, ex);
+            System.err.println(ex.getMessage());
         }
 
         return result;
@@ -118,16 +119,13 @@ public class Database
     {
         try {
             Statement statement = connection.createStatement();
-            statement.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
-            ResultSet result = statement.getGeneratedKeys();
-            result.next();
-            int id = result.getInt(1);
-            result.close();
-            statement.close();
-
-            return id;
+            if (statement.executeUpdate(query) > 0) {
+                statement.close();
+                return this.last_insert_id();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ex.getMessage()).log(Level.WARNING, null, ex);
+            System.err.println(ex.getMessage());
         }
 
         return 0;
@@ -136,20 +134,33 @@ public class Database
     public int insert(PreparedStatement ps)
     {
         try {
-            ps.executeUpdate();
-            ResultSet result = ps.getGeneratedKeys();
-
-            result.next();
-            int id = result.getInt(1);
-            result.close();
-            ps.close();
-
-            return id;
+            if (ps.executeUpdate() > 0) {
+                ps.close();
+                return this.last_insert_id();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ex.getMessage()).log(Level.WARNING, null, ex);
+            System.err.println(ex.getMessage());
         }
 
         return 0;
+    }
+
+    public int last_insert_id()
+    {
+        ResultSet rs = this.execute("SELECT last_insert_rowid()");
+        try {
+            rs.next();
+            int id = rs.getInt(1);
+            rs.close();
+            return id;
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.getMessage()).log(Level.WARNING, null, ex);
+            System.err.println(ex.getMessage());
+        }
+
+        return 0;
+
     }
 
     public PreparedStatement createPreparedStatement(String sql)
