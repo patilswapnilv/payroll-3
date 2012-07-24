@@ -50,7 +50,7 @@ public class Worker {
             this.name = rs.getString("name");
             this.registerDate = rs.getDate("start_date");
             this.returnDate = rs.getDate("end_date");
-            this.status = rs.getBoolean("status");
+            this.status = rs.getBoolean("is_active");
             this.id = id;
             this._loaded = true;
         } catch (SQLException ex) {
@@ -74,8 +74,6 @@ public class Worker {
         } else {
             query = "UPDATE worker SET code = ?, name = ?, start_date = ?, end_date = ?, is_active = ? WHERE worker_id = " + id;
         }
-
-        System.out.println(query);
 
         PreparedStatement ps = Application.db.createPreparedStatement(query);
 

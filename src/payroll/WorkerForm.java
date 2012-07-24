@@ -12,10 +12,8 @@
 package payroll;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import payroll.model.Worker;
 
@@ -27,6 +25,7 @@ public class WorkerForm extends javax.swing.JDialog {
 
     private Worker worker;
     int id = 0;
+    private boolean _loaded = false;
     
     /** Creates new form WorkerForm */
     public WorkerForm(java.awt.Frame parent, boolean modal) {
@@ -53,6 +52,7 @@ public class WorkerForm extends javax.swing.JDialog {
         } else {
             rbtnInactive.setSelected(true);
         }
+        this._loaded = true;
     }
 
     /** This method is called from within the constructor to
@@ -230,11 +230,31 @@ public class WorkerForm extends javax.swing.JDialog {
     private boolean _check()
     {
         boolean valid = false;
+        boolean valid_code = false;
         String message = "";
+        String query = "SELECT COUNT(worker_id) FROM worker WHERE code = ?";
+
+        if (this._loaded) {
+            query += " AND worker_id != " + this.id;
+        }
+        
+        PreparedStatement ps = Application.db.createPreparedStatement(query);
+        try {
+            ps.setString(1, txtWorkerID.getText());
+            ResultSet rs = Application.db.execute(ps);
+            rs.next();
+            valid_code = rs.getInt(1) > 0 ? false : true;
+            rs.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        
         if (txtWorkerID.getText().isEmpty()) {
             message = "Sila lengkapkan Kod Pekerja";
+        } else if ( ! valid_code) {
+            message = "Kod Pekerja telah di guna";
         } else if (txtWorkerName.getText().isEmpty()) {
-            message = "Silal lengkapkan Nama Pekerja";
+            message = "Sila lengkapkan Nama Pekerja";
         } else if (txtRegisterDate.getDate() == null) {
             message = "Sila lengkapkan Tarikh Bermula";
         } else if (txtReturnDate.getDate() == null) {

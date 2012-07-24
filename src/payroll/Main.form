@@ -1,4 +1,4 @@
-<?xml version="1.1" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
@@ -653,7 +653,7 @@
               <Properties>
                 <Property name="font" type="java.awt.Font" noResource="true" editor="org.netbeans.modules.form.editors2.FontEditor">
                   <FontInfo relative="true">
-                    <Font bold="true" component="jLabel18" property="font" relativeSize="true" size="0"/>
+                    <Font bold="false" component="jLabel18" property="font" relativeSize="true" size="0"/>
                   </FontInfo>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Bayaran Gaji"/>
@@ -794,18 +794,7 @@
             </Constraint>
           </Constraints>
 
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="995" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="672" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-          </Layout>
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel6">
           <Constraints>
@@ -836,7 +825,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
               <SubComponents>
-                <Container class="javax.swing.JPanel" name="jPanel4">
+                <Container class="javax.swing.JPanel" name="jPanel17">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                       <JTabbedPaneConstraints tabName="Profil Pekerja">
@@ -848,7 +837,7 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jPanel15" alignment="0" max="32767" attributes="0"/>
@@ -857,23 +846,23 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="txtProfileWorkerID" min="-2" pref="80" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtProfileWorkerName" min="-2" pref="120" max="-2" attributes="0"/>
+                                      <Component id="txtProfileWorkerName" min="-2" pref="180" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel23" min="-2" pref="180" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="txtProfileWorkerRegisterDay" min="-2" pref="40" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtProfileWorkerRegisterMonth" min="-2" pref="40" max="-2" attributes="0"/>
+                                      <Component id="txtProfileWorkerReturnDay" min="-2" pref="40" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtProfileWorkerRegisterYear" min="-2" pref="80" max="-2" attributes="0"/>
+                                      <Component id="txtProfileWorkerRegisterMonth" min="-2" pref="80" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel24" min="-2" pref="180" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtProfileWorkerReturnDay" min="-2" pref="40" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="txtProfileWorkerReturnMonth" min="-2" pref="40" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtProfileWorkerRegisterYear" min="-2" pref="40" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="txtProfileWorkerReturnYear" min="-2" pref="80" max="-2" attributes="0"/>
                                   </Group>
@@ -894,7 +883,7 @@
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel21" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
@@ -905,15 +894,17 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel23" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                   <Component id="txtProfileWorkerRegisterDay" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Component id="txtProfileWorkerReturnDay" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                   <Component id="txtProfileWorkerRegisterMonth" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Component id="txtProfileWorkerRegisterYear" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel24" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Component id="txtProfileWorkerReturnDay" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Component id="txtProfileWorkerReturnMonth" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Component id="txtProfileWorkerReturnYear" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jLabel24" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="txtProfileWorkerReturnMonth" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                      <Component id="txtProfileWorkerRegisterYear" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                      <Component id="txtProfileWorkerReturnYear" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -1021,7 +1012,7 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="425" max="32767" attributes="0"/>
+                                  <EmptySpace pref="437" max="32767" attributes="0"/>
                                   <Component id="btnProfileWorkerNew" min="-2" pref="141" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnProfileWorkerEdit" min="-2" pref="120" max="-2" attributes="0"/>
