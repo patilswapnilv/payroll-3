@@ -405,6 +405,11 @@ public class Main extends javax.swing.JFrame {
         btnSavingCancel.setText("Batalkan");
 
         btnSavingNew.setText("Transaksi Baru");
+        btnSavingNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSavingNewActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -490,7 +495,7 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Simpanan", jPanel3);
 
-        jLabel18.setFont(jLabel18.getFont().deriveFont(jLabel18.getFont().getStyle() & ~java.awt.Font.BOLD));
+        jLabel18.setFont(jLabel18.getFont().deriveFont(jLabel18.getFont().getStyle() | java.awt.Font.BOLD));
         jLabel18.setText("Bayaran Gaji");
 
         jLabel19.setText("Nama Pekerja");
@@ -547,6 +552,11 @@ public class Main extends javax.swing.JFrame {
         btnPayCancel.setText("Batalkan");
 
         btnPayNew.setText("Transaksi Baru");
+        btnPayNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPayNewActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -973,6 +983,14 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Worker profile not found", "Warning", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_txtProfileWorkerIDActionPerformed
+
+    private void btnSavingNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSavingNewActionPerformed
+        new SavingForm(this, true).setVisible(true);
+    }//GEN-LAST:event_btnSavingNewActionPerformed
+
+    private void btnPayNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayNewActionPerformed
+        new SalaryForm(this, true).setVisible(true);
+    }//GEN-LAST:event_btnPayNewActionPerformed
 
     private void _reset_worker_form()
     {

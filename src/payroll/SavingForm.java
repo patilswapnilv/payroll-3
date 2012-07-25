@@ -16,7 +16,7 @@ package payroll;
  * @author minglih.khor
  */
 public class SavingForm extends javax.swing.JDialog {
-
+    
     /** Creates new form SavingForm */
     public SavingForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -50,6 +50,7 @@ public class SavingForm extends javax.swing.JDialog {
         btnSave = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Simpanan Teta[");
 
         jLabel1.setText("Pekerja");
 

@@ -577,6 +577,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Transaksi Baru"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSavingNewActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -651,9 +654,9 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel18">
               <Properties>
-                <Property name="font" type="java.awt.Font" noResource="true" editor="org.netbeans.modules.form.editors2.FontEditor">
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
                   <FontInfo relative="true">
-                    <Font bold="false" component="jLabel18" property="font" relativeSize="true" size="0"/>
+                    <Font bold="true" component="jLabel18" property="font" relativeSize="true" size="0"/>
                   </FontInfo>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Bayaran Gaji"/>
@@ -780,6 +783,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Transaksi Baru"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPayNewActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
