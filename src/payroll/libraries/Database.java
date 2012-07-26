@@ -23,8 +23,18 @@ import java.util.logging.Logger;
 public class Database
 {
     private Connection connection = null;
+    private static Database _instance;
 
-    public Database(String database)
+    public static Database instance() {
+        if ( Database._instance instanceof Database == false) {
+            Database._instance = new Database();
+        }
+
+        
+        return Database._instance;
+    }
+
+    public Database()
     {
         try {
             Class.forName("org.sqlite.JDBC");
@@ -32,7 +42,7 @@ public class Database
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            connection = DriverManager.getConnection("jdbc:sqlite:" + database);
+            connection = DriverManager.getConnection("jdbc:sqlite:payroll.sqlite");
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }

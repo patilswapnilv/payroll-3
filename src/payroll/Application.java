@@ -22,7 +22,7 @@ public class Application {
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater((new Runnable() {
             public void run() {
-                db = new Database("payroll.sqlite");
+                db = Database.instance();
                 try {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                 } catch (Exception ex) {

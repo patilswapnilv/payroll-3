@@ -5,7 +5,7 @@
 
 package payroll.model;
 
-import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,6 +39,15 @@ public class Worker {
 
     public Worker(int id) {
         this._load(id);
+    }
+
+    public Worker(int id, String code, String name, Date registerDate, Date returnDate, boolean status) {
+        this.id = id;
+        this.code = code;
+        this.name = name;
+        this.registerDate = registerDate;
+        this.returnDate = returnDate;
+        this.status = status;
     }
 
     private boolean _load(int id)
