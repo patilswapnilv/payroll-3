@@ -4,12 +4,16 @@ package payroll;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
-import javax.swing.UIManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import org.apache.commons.lang3.StringUtils;
+import payroll.libraries.Common;
+import payroll.libraries.Database;
+import payroll.model.Customer;
 
 /*
  * To change this template, choose Tools | Templates
@@ -29,6 +33,8 @@ import javax.swing.JOptionPane;
 public class Main extends javax.swing.JFrame {
 
     private int _current_worker_id = 0;
+    private Customer _transaction_customer = null;
+    
     /** Creates new form Main2 */
     public Main() {
         initComponents();
@@ -74,7 +80,7 @@ public class Main extends javax.swing.JFrame {
         txtTransactionClientName = new javax.swing.JTextField();
         txtTransactionPricePerTon = new javax.swing.JTextField();
         txtTransactionTotalReceived = new javax.swing.JTextField();
-        txtTransactionPay = new javax.swing.JTextField();
+        txtTransactionWages = new javax.swing.JTextField();
         txtTransactionSalary = new javax.swing.JTextField();
         txtTransactionBalance = new javax.swing.JTextField();
         txtTransactionCalculate = new javax.swing.JTextField();
@@ -197,11 +203,48 @@ public class Main extends javax.swing.JFrame {
 
         jLabel12.setText("Upah Perseorangan");
 
+        txtTransactionClientID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTransactionClientIDActionPerformed(evt);
+            }
+        });
+
+        txtTransactionWeight.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                calculateTransaction(evt);
+            }
+        });
+
         txtTransactionClientName.setEditable(false);
+
+        txtTransactionPricePerTon.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                calculateTransaction(evt);
+            }
+        });
+
+        txtTransactionTotalReceived.setEditable(false);
+
+        txtTransactionWages.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                calculateTransaction(evt);
+            }
+        });
+
+        txtTransactionSalary.setEditable(false);
+
+        txtTransactionBalance.setEditable(false);
+
+        txtTransactionPayPerPerson.setEditable(false);
 
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnRecord.setText("Rekodkan");
+        btnRecord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecordActionPerformed(evt);
+            }
+        });
 
         txtTransactionNew.setText("Transaksi Baru");
 
@@ -270,7 +313,7 @@ public class Main extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtTransactionPay, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtTransactionWages, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -322,7 +365,7 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTransactionPay, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTransactionWages, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -992,8 +1035,53 @@ public class Main extends javax.swing.JFrame {
         new SalaryForm(this, true).setVisible(true);
     }//GEN-LAST:event_btnPayNewActionPerformed
 
-    private void _reset_worker_form()
-    {
+    private void btnRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecordActionPerformed
+        if ( ! this._validate_transaction_form()) {
+            return;
+        }
+    }//GEN-LAST:event_btnRecordActionPerformed
+
+    private void txtTransactionClientIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTransactionClientIDActionPerformed
+        String clientCode = txtTransactionClientID.getText();
+        String query = "SELECT * FROM customer WHERE code LIKE ? AND is_active = 1 LIMIT 1";
+        PreparedStatement ps = Database.instance().createPreparedStatement(query);
+
+        try {
+            ps.setString(1, clientCode + " %");
+
+            ResultSet rs = Database.instance().execute(ps);
+            rs.next();
+            _transaction_customer = new Customer(rs.getInt("customer_id"), rs.getString("code"), rs.getString("name"), rs.getBoolean("is_active"));
+            txtTransactionClientName.setText(_transaction_customer.getName());
+            txtTransactionClientID.setText(_transaction_customer.getCode());
+            return;
+        } catch (SQLException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex.getMessage());
+        }
+
+        JOptionPane.showMessageDialog(null, "Unable to find related customer", "", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_txtTransactionClientIDActionPerformed
+
+    private void calculateTransaction(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_calculateTransaction
+        if (txtTransactionPricePerTon.getText().isEmpty() || txtTransactionWeight.getText().isEmpty() || ! Common.isDouble(txtTransactionPricePerTon.getText()) || ! Common.isDouble(txtTransactionWeight.getText())) {
+            return;
+        }
+
+        double weight = Double.parseDouble(txtTransactionWeight.getText()), price_per_ton = Double.parseDouble(txtTransactionPricePerTon.getText());
+        double total = weight * price_per_ton / 1000;
+        txtTransactionTotalReceived.setText(Common.currency(total));
+
+        if (txtTransactionWages.getText().isEmpty() || ! Common.isDouble(txtTransactionWages.getText())) {
+            return;
+        }
+
+        double wages = Double.parseDouble(txtTransactionWages.getText());
+
+        txtTransactionSalary.setText(Common.currency(total * (wages / 100)));
+}//GEN-LAST:event_calculateTransaction
+
+    private void _reset_worker_form() {
         txtProfileWorkerCurrentSaving.setText("");
         txtProfileWorkerName.setText("");
         txtProfileWorkerRegisterDay.setText("");
@@ -1003,6 +1091,34 @@ public class Main extends javax.swing.JFrame {
         txtProfileWorkerReturnMonth.setText("");
         txtProfileWorkerReturnYear.setText("");
         txtProfileWorkerStatus.setText("");
+    }
+
+    private boolean _validate_transaction_form() {
+        String message = "";
+
+        if (txtTransactionDate.getDate() == null) {
+            message = "Invalid date";
+        } else if (_transaction_customer == null) {
+            message = "Please select a customer";
+        } else if (txtTransactionWeight.getText().isEmpty()) {
+            message = "Please enter the weight";
+        } else if ( ! Common.isDouble(txtTransactionWeight.getText())) {
+            message = "Invalid weight";
+        } else if (txtTransactionPricePerTon.getText().isEmpty()) {
+            message = "Please enter the price";
+        } else if ( ! Common.isDouble(txtTransactionPricePerTon.getText())) {
+            message = "Invalid price";
+        } else if (txtTransactionWages.getText().isEmpty()) {
+            message = "Please enter the wages";
+        } else if ( ! Common.isDouble(txtTransactionWages.getText())) {
+            message = "Invalid wages";
+        }
+
+        if (message.isEmpty()) {
+            return true;
+        }
+        
+        return false;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1101,11 +1217,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField txtTransactionDescription;
     private javax.swing.JButton txtTransactionEnd;
     private javax.swing.JButton txtTransactionNew;
-    private javax.swing.JTextField txtTransactionPay;
     private javax.swing.JTextField txtTransactionPayPerPerson;
     private javax.swing.JTextField txtTransactionPricePerTon;
     private javax.swing.JTextField txtTransactionSalary;
     private javax.swing.JTextField txtTransactionTotalReceived;
+    private javax.swing.JTextField txtTransactionWages;
     private javax.swing.JTextField txtTransactionWeight;
     // End of variables declaration//GEN-END:variables
 

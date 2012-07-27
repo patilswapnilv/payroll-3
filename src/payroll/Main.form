@@ -114,7 +114,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel8" min="-2" pref="180" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtTransactionPay" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Component id="txtTransactionWages" min="-2" pref="120" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel9" min="-2" pref="180" max="-2" attributes="0"/>
@@ -181,7 +181,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel8" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="txtTransactionPay" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="txtTransactionWages" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -277,10 +277,16 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTransactionClientID">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTransactionClientIDActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTransactionDescription">
             </Component>
             <Component class="javax.swing.JTextField" name="txtTransactionWeight">
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="calculateTransaction"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTransactionClientName">
               <Properties>
@@ -288,18 +294,36 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTransactionPricePerTon">
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="calculateTransaction"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTransactionTotalReceived">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtTransactionPay">
+            <Component class="javax.swing.JTextField" name="txtTransactionWages">
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="calculateTransaction"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTransactionSalary">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTransactionBalance">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTransactionCalculate">
             </Component>
             <Component class="javax.swing.JTextField" name="txtTransactionPayPerPerson">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="txtTransactionDate">
             </Component>
@@ -345,6 +369,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Rekodkan"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRecordActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="txtTransactionNew">
                   <Properties>
