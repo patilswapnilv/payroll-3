@@ -23,7 +23,7 @@ import payroll.libraries.Database;
 public class Transaction {
 
     private int id, customerID;
-    private double weight, pricePerTon, wages;
+    private double weight, pricePerTon, wages, kiraanAsing;
     private ArrayList<Worker> workers;
     private Date date, created;
     private String description;
@@ -41,6 +41,7 @@ public class Transaction {
         this.workers = new ArrayList<Worker>();
         this.date = new Date();
         this.created = Calendar.getInstance().getTime();
+        this.kiraanAsing = 0.0;
     }
 
     public Transaction(int id) {
@@ -48,13 +49,14 @@ public class Transaction {
         this._load();
     }
 
-    public Transaction(int id, int customerID, String description, double weight, double pricePerTon, double wages, ArrayList<Worker> workers, Date date) {
+    public Transaction(int id, int customerID, String description, double weight, double pricePerTon, double wages, double kiraanAsing, ArrayList<Worker> workers, Date date) {
         this.id = id;
         this.customerID = customerID;
         this.description = description;
         this.weight = weight;
         this.pricePerTon = pricePerTon;
         this.wages = wages;
+        this.kiraanAsing = kiraanAsing;
         this.workers = workers;
         this.date = date;
     }
@@ -160,6 +162,10 @@ public class Transaction {
         return weight;
     }
 
+    public double getKiraanAsing() {
+        return kiraanAsing;
+    }
+
     public ArrayList<Worker> getWorkers() {
         return workers;
     }
@@ -181,11 +187,11 @@ public class Transaction {
     }
 
     public double getTotal() {
-        return weight * pricePerTon;
+        return ((weight / 1000) * pricePerTon) + (kiraanAsing * pricePerTon);
     }
 
     public double getTotalSalary() {
-        return weight * wages;
+        return ((weight / 1000) * wages) + (kiraanAsing * wages);
     }
 
     public double getBalance() {
@@ -219,6 +225,10 @@ public class Transaction {
 
     public void setWages(double wages) {
         this.wages = wages;
+    }
+
+    public void setKiraanAsing(double kiraanAsing) {
+        this.kiraanAsing = kiraanAsing;
     }
 
     public void setWeight(double weight) {
