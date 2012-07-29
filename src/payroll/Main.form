@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.1" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
@@ -54,12 +54,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="995" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="992" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="672" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="662" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -217,7 +217,7 @@
                           </Group>
                           <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="69" max="32767" attributes="0"/>
+                      <EmptySpace pref="41" max="32767" attributes="0"/>
                       <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -340,6 +340,9 @@
               </Properties>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="txtTransactionDate">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtTransactionDate.setDateFormatString(&quot;dd/MM/yyyy&quot;);"/>
+              </AuxValues>
             </Component>
             <Container class="javax.swing.JPanel" name="jPanel10">
               <Properties>
@@ -354,7 +357,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="589" max="32767" attributes="0"/>
+                          <EmptySpace pref="580" max="32767" attributes="0"/>
                           <Component id="btnRecord" min="-2" pref="120" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txtTransactionNew" min="-2" pref="120" max="-2" attributes="0"/>
@@ -604,6 +607,9 @@
               </Properties>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="txtSavingDateFrom">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtSavingDateFrom.setDateFormatString(&quot;dd/MM/yyyy&quot;);"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel17">
               <Properties>
@@ -611,6 +617,9 @@
               </Properties>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="txtSavingDateTo">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtSavingDateTo.setDateFormatString(&quot;dd/MM/yyyy&quot;);"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="txtSavingCurrentSaving">
             </Component>
@@ -619,12 +628,12 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" pref="975" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" pref="968" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" pref="429" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" pref="413" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -670,7 +679,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="589" max="32767" attributes="0"/>
+                          <EmptySpace pref="580" max="32767" attributes="0"/>
                           <Component id="btnSavingNew" min="-2" pref="120" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnSavingCancel" min="-2" pref="120" max="-2" attributes="0"/>
@@ -812,6 +821,9 @@
               </Properties>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="txtPayDateFrom">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtPayDateFrom.setDateFormatString(&quot;dd/MM/yyyy&quot;);"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel22">
               <Properties>
@@ -819,18 +831,21 @@
               </Properties>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="txtDateTo">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtDateTo.setDateFormatString(&quot;dd/MM/yyyy&quot;);"/>
+              </AuxValues>
             </Component>
             <Container class="javax.swing.JPanel" name="jPanel12">
 
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane2" alignment="0" pref="975" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" alignment="0" pref="968" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane2" alignment="0" pref="428" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" alignment="0" pref="413" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -876,7 +891,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="589" max="32767" attributes="0"/>
+                          <EmptySpace pref="580" max="32767" attributes="0"/>
                           <Component id="btnPayNew" min="-2" pref="120" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnPayCancel" min="-2" pref="120" max="-2" attributes="0"/>
@@ -946,14 +961,14 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTabbedPane2" alignment="1" pref="995" max="32767" attributes="0"/>
+                  <Component id="jTabbedPane2" alignment="1" pref="992" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTabbedPane2" pref="661" max="32767" attributes="0"/>
+                      <Component id="jTabbedPane2" pref="650" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1054,7 +1069,7 @@
                                   <Component id="jLabel26" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                   <Component id="txtProfileWorkerStatus" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="386" max="32767" attributes="0"/>
+                              <EmptySpace pref="357" max="32767" attributes="0"/>
                               <Component id="jPanel15" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -1150,7 +1165,7 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="437" max="32767" attributes="0"/>
+                                  <EmptySpace pref="425" max="32767" attributes="0"/>
                                   <Component id="btnProfileWorkerNew" min="-2" pref="141" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnProfileWorkerEdit" min="-2" pref="120" max="-2" attributes="0"/>
@@ -1255,7 +1270,7 @@
                                   <Component id="jLabel28" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                   <Component id="txtProfileClientStatus" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="479" max="32767" attributes="0"/>
+                              <EmptySpace pref="452" max="32767" attributes="0"/>
                               <Component id="jPanel16" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -1276,7 +1291,7 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="471" max="32767" attributes="0"/>
+                                  <EmptySpace pref="444" max="32767" attributes="0"/>
                                   <Component id="btnProfileClientNew" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnProfileClientEdit" min="-2" pref="120" max="-2" attributes="0"/>
@@ -1372,12 +1387,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="995" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="992" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="672" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="662" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>

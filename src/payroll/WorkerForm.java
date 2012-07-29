@@ -165,7 +165,7 @@ public class WorkerForm extends javax.swing.JDialog {
                                 .addComponent(rbtnActive)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(rbtnInactive)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 118, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -195,8 +195,8 @@ public class WorkerForm extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        txtRegisterDate.setDateFormatString("yyyy-MM-dd");
-        txtReturnDate.setDateFormatString("yyyy-MM-dd");
+        txtRegisterDate.setDateFormatString("dd/MM/yyyy");
+        txtReturnDate.setDateFormatString("dd/MM/yyyy");
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width-610)/2, (screenSize.height-433)/2, 610, 433);
