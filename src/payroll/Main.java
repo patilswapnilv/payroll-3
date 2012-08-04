@@ -3,7 +3,6 @@ package payroll;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,7 +21,6 @@ import org.lobobrowser.html.parser.InputSourceImpl;
 import org.lobobrowser.html.test.SimpleHtmlRendererContext;
 import org.lobobrowser.html.test.SimpleUserAgentContext;
 import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 import payroll.libraries.Common;
 import payroll.libraries.Database;
 import payroll.model.Customer;
@@ -1812,10 +1810,20 @@ public class Main extends javax.swing.JFrame {
 
         id = id.substring(0, id.length() - 1);
 
-        String query = "SELECT * FROM transactions INNER JOIN transaction_workers ON transactions.id = transaction_workers.transaction_id ";
+        String query = "SELECT * FROM transactions ";
+        query += "INNER JOIN transaction_workers ON transactions.id = transaction_workers.transaction_id ";
+        query += "INNER JOIN customer ON transactions.customer_id = customer.id ";
         query += "WHERE worker_id IN (" + id + ") ";
-        query += "AND date >= '" + dateFrom.get(Calendar.YEAR) + "-" + (dateFrom.get(Calendar.MONTH) + 1) + "-" + dateFrom.get(Calendar.DAY_OF_MONTH) + "' ";
-        query += "AND date <= '" + dateTo.get(Calendar.YEAR) + "-" + (dateTo.get(Calendar.MONTH) + 1) + "-" + dateTo.get(Calendar.DAY_OF_MONTH) + "' ";
+        query += "AND date >= ?";
+        query += "AND date <= ?";
+
+        PreparedStatement ps = Database.instance().createPreparedStatement(query);
+        try {
+            ps.setDate(1, new java.sql.Date(dateFrom.getTime().getTime()));
+            ps.setDate(2, new java.sql.Date(dateTo.getTime().getTime()));
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
 
         ResultSet results = Database.instance().execute(query);
 
@@ -1844,12 +1852,35 @@ public class Main extends javax.swing.JFrame {
 
         String content = "";
 
+        ArrayList<payroll.model.Report> reports = new ArrayList<payroll.model.Report>();
         try {
             while (results.next()) {
+                String[] worker_ids = results.getString("normalized_worker_id").split(",");
+                ArrayList<Worker> involveWorkers = new ArrayList<Worker>();
+                int count = worker_ids.length;
+                for (int i = 0; i < count; i ++) {
+                    involveWorkers.add(new Worker(Integer.parseInt(worker_ids[i])));
+                }
 
+                reports.add(new payroll.model.Report(new Transaction(results.getInt("id"), results.getInt("customer_id"), results.getInt("type"), results.getDouble("weight"), results.getDouble("price_per_ton"), results.getDouble("wages"), results.getDouble("kiraan_asing"), results.getDouble("loan_amount"), involveWorkers, new Date(results.getDate("date").getTime()), results.getString("description"), results.getString("normalized_worker_id")), involveWorkers));
             }
         } catch (SQLException ex) {
             
+        }
+
+        for (payroll.model.Report report : reports) {
+            content += "<tr>";
+            if (chkMonthlyReportDate.isSelected()) content += "<td>" + report.getTransaction().getDate().toString() + "</td>";
+            if (chkMonthlyReportClientName.isSelected()) content += "<td>" + report.getTransaction().getCustomer().getName() + "</td>";
+            if (chkMonthlyReportDescription.isSelected()) header += "<td rowspan=\"2\">Keterangan</td>";
+            if (chkMonthlyReportWeight.isSelected()) header += "<td rowspan=\"2\">Berat KG</td>";
+            if (chkMonthlyReportPricePerTon.isSelected()) header += "<td rowspan=\"2\">Harga Diterima Seton</td>";
+            if (chkMonthlyReportTotalReceived.isSelected()) header += "<td rowspan=\"2\">Jumlah Diterima</td>";
+            if (chkMonthlyReportWages.isSelected()) header += "<td rowspan=\"2\">Upah Kerja</td>";
+            if (chkMonthlyReportSalary.isSelected()) header += "<td rowspan=\"2\">Jumlah Gaji</td>";
+            if (chkMonthlyReportBalance.isSelected()) header += "<td rowspan=\"2\">Jumlah Baki</td>";
+            if (chkMonthlyReportKiraanAsing.isSelected()) header += "<td rowspan=\"2\">Kiraan Asing</td>";
+            if (chkMonthlyReportSaving.isSelected()) header += "<td rowspan=\"2\">Simpanan Tetap</td>";
         }
 
         table += header;

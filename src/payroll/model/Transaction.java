@@ -28,7 +28,7 @@ public class Transaction {
     private double weight, pricePerTon, wages, kiraanAsing, loanAmount;
     private ArrayList<Worker> workers;
     private Date date, created;
-    private String description;
+    private String description, normalizedWorkerID;
 
     private Customer customer;
     private boolean _loaded;
@@ -46,6 +46,7 @@ public class Transaction {
         this.date = new Date();
         this.created = Calendar.getInstance().getTime();
         this.description = "";
+        this.normalizedWorkerID = "";
     }
 
     public Transaction(int id) {
@@ -53,7 +54,7 @@ public class Transaction {
         this._load();
     }
 
-    public Transaction(int id, int customerID, int type, double weight, double pricePerTon, double wages, double kiraanAsing, double loanAmount, ArrayList<Worker> workers, Date date, String description) {
+    public Transaction(int id, int customerID, int type, double weight, double pricePerTon, double wages, double kiraanAsing, double loanAmount, ArrayList<Worker> workers, Date date, String description, String normalizedWorkerID) {
         this.id = id;
         this.customerID = customerID;
         this.type = type;
@@ -65,6 +66,7 @@ public class Transaction {
         this.workers = workers;
         this.date = date;
         this.description = description;
+        this.normalizedWorkerID = normalizedWorkerID;
     }
 
     private void _load() {
@@ -80,6 +82,7 @@ public class Transaction {
             this.setPricePerTon(rs.getDouble("price_per_ton"));
             this.setWages(rs.getDouble("wages"));
             this.setWeight(rs.getDouble("weight"));
+            this.setNormalizedWorkerID(rs.getString("normalized_worker_id"));
 
             query = "SELECT * FROM worker WHERE worker IN (" + rs.getString("workers") + ")";
             rs = Database.instance().execute(query);
@@ -96,7 +99,7 @@ public class Transaction {
 
     public boolean save()
     {
-        String query = "INSERT INTO transactions(type, loan_amount, customer_id, description, weight, price_per_ton, wages, workers, date, created) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO transactions(type, loan_amount, customer_id, description, weight, price_per_ton, wages, date, created, normalized_worker_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = Database.instance().createPreparedStatement(query);
 
         try {
@@ -109,8 +112,16 @@ public class Transaction {
             ps.setDouble(7, this.getWages());
             ps.setDate(8, this.getSQLDate());
             ps.setDate(9, this.getSQLCreated());
+            ps.setString(10, this.getNormalizedWorkerID());
 
             id = Database.instance().insert(ps);
+
+            if (id > 0) {
+                for (Worker worker : workers) {
+                    query = "INSERT INTO transaction_workers(transaction_id, worker_id) VALUES(" + id + ", " + worker.getId() + ")";
+                    Database.instance().insert(query);
+                }
+            }
 
             return id > 0 ? true : false;
         } catch (SQLException ex) {
@@ -119,6 +130,10 @@ public class Transaction {
         }
 
         return false;
+    }
+
+    public void setNormalizedWorkerID(String normalizedWorkerID) {
+        this.normalizedWorkerID = normalizedWorkerID;
     }
 
     public void setCreated(Date created) {
@@ -177,8 +192,22 @@ public class Transaction {
         return created;
     }
 
+    public String getNormalizedWorkerID() {
+        String worker_id = "";
+        for (Worker worker : workers) {
+            worker_id += "" + worker.getId() + ",";
+        }
+
+        normalizedWorkerID = worker_id.substring(0, worker_id.length() - 1);
+        return normalizedWorkerID;
+    }
+
+    public int getTotalWorkers() {
+        return workers.size();
+    }
+
     public java.sql.Date getSQLCreated() {
-        return new java.sql.Date(getCreated().getTime());
+        return new java.sql.Date(created.getTime());
     }
     
     public Customer getCustomer() {
