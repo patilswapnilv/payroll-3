@@ -220,6 +220,8 @@ public class WorkerForm extends javax.swing.JDialog {
         boolean success = worker.save();
 
         if (success) {
+            Main main = (Main) this.getParent();
+            main.load_workers();
             JOptionPane.showMessageDialog(null, "Rekod Pekerja baru ditambah", "Berjaya!", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Rekod Pekerja tidak dapat ditambah", "Kesilapan!", JOptionPane.ERROR_MESSAGE);

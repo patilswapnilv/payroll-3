@@ -11,16 +11,27 @@
 
 package payroll;
 
+import javax.swing.JOptionPane;
+import payroll.libraries.Common;
+import payroll.model.Transaction;
+import payroll.model.Worker;
+
 /**
  *
  * @author minglih.khor
  */
 public class LoanForm extends javax.swing.JDialog {
+
+    private Worker worker;
     
     /** Creates new form LoadForm */
-    public LoanForm(java.awt.Frame parent, boolean modal) {
+    public LoanForm(java.awt.Frame parent, boolean modal, Worker worker) {
         super(parent, modal);
         initComponents();
+        this.worker = worker;
+
+        txtWorkerCode.setText(worker.getCode());
+        txtWorkerName.setText(worker.getName());
     }
 
     /** This method is called from within the constructor to
@@ -72,6 +83,11 @@ public class LoanForm extends javax.swing.JDialog {
         });
 
         btnSave.setText("Rekodkan");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -142,7 +158,7 @@ public class LoanForm extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtLoanDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -154,6 +170,44 @@ public class LoanForm extends javax.swing.JDialog {
     private void btnEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndActionPerformed
         this.dispose();
 }//GEN-LAST:event_btnEndActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        if ( ! this._validate()) {
+            return;
+        }
+
+        Transaction transaction = new Transaction();
+        transaction.setType(Transaction.LOAN);
+        transaction.setDate(txtLoanDate.getDate());
+        transaction.setLoanAmount(Double.parseDouble(txtLoanAmount.getText()));
+        transaction.setDescription(txtLoanDescription.getText());
+        transaction.addWorker(worker);
+        if (transaction.save()) {
+            JOptionPane.showMessageDialog(null, "Transaction Saved", "Saved", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            return;
+        }
+
+        JOptionPane.showMessageDialog(null, "Unable to save the transaction", "Error", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private boolean _validate()
+    {
+        String message = "";
+
+        if (txtLoanDate.getDate() == null) {
+            message = "Please select the date";
+        } else if (txtLoanAmount.getText().isEmpty() || ! Common.isDouble(txtLoanAmount.getText())) {
+            message = "Invalid loan amount";
+        }
+
+        if ( ! message.isEmpty()) {
+            JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        return true;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnd;

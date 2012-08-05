@@ -13,31 +13,31 @@ import java.util.ArrayList;
  */
 public class Report {
 
-    private Transaction transaction;
+    private ArrayList<Transaction> transactions;
+    // Worker which selected to be display
     private ArrayList<Worker> workers;
 
     public Report() {
     }
 
-    public Report(Transaction transaction, ArrayList<Worker> workers) {
-        this.transaction = transaction;
+    public Report(ArrayList<Transaction> transactions, ArrayList<Worker> workers) {
+        this.transactions = transactions;
         this.workers = workers;
     }
 
-    public void setTransaction(Transaction transaction) {
-        this.transaction = transaction;
+    public void setTransactions(ArrayList<Transaction> transactions) {
+        this.transactions = transactions;
     }
 
     public void setWorkers(ArrayList<Worker> workers) {
         this.workers = workers;
     }
 
-    public Transaction getTransaction() {
-        return transaction;
+    public ArrayList<Transaction> getTransactions() {
+        return transactions;
     }
 
     public ArrayList<Worker> getWorkers() {
         return workers;
     }
-
 }

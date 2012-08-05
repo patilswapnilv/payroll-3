@@ -15,15 +15,10 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.apache.commons.lang3.StringUtils;
-import org.lobobrowser.html.UserAgentContext;
-import org.lobobrowser.html.parser.DocumentBuilderImpl;
-import org.lobobrowser.html.parser.InputSourceImpl;
-import org.lobobrowser.html.test.SimpleHtmlRendererContext;
-import org.lobobrowser.html.test.SimpleUserAgentContext;
-import org.w3c.dom.Document;
 import payroll.libraries.Common;
 import payroll.libraries.Database;
 import payroll.model.Customer;
+import payroll.model.ReportCalculation;
 import payroll.model.Transaction;
 import payroll.model.Worker;
 
@@ -47,6 +42,7 @@ public class Main extends javax.swing.JFrame {
     private int _current_worker_id = 0;
     private Customer _transaction_customer = null;
     private ArrayList<Worker> workers = new ArrayList<Worker>();
+    private int _report_column_count = 0;
     
     /** Creates new form Main2 */
     public Main() {
@@ -423,7 +419,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 12));
         jLabel29.setText("Pekerja Terlibat");
 
         tblTransactionInvolvedWorkers.setModel(new javax.swing.table.DefaultTableModel(
@@ -492,6 +488,11 @@ public class Main extends javax.swing.JFrame {
         jScrollPane4.setViewportView(listTransactionLoanWorkers);
 
         btnTransactionNewLoan.setText("Pinjaman Baru");
+        btnTransactionNewLoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTransactionNewLoanActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
@@ -944,26 +945,37 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        chkMonthlyReportDate.setSelected(true);
         chkMonthlyReportDate.setText("Tarikh");
 
+        chkMonthlyReportClientName.setSelected(true);
         chkMonthlyReportClientName.setText("Name Pelanggan");
 
+        chkMonthlyReportDescription.setSelected(true);
         chkMonthlyReportDescription.setText("Keterangan");
 
+        chkMonthlyReportWeight.setSelected(true);
         chkMonthlyReportWeight.setText("Berat KG");
 
+        chkMonthlyReportPricePerTon.setSelected(true);
         chkMonthlyReportPricePerTon.setText("Harga Diterma Seton");
 
+        chkMonthlyReportTotalReceived.setSelected(true);
         chkMonthlyReportTotalReceived.setText("Jumlah Diterima");
 
+        chkMonthlyReportWages.setSelected(true);
         chkMonthlyReportWages.setText("Upah Kerja");
 
+        chkMonthlyReportSalary.setSelected(true);
         chkMonthlyReportSalary.setText("Jumlah Gaji");
 
+        chkMonthlyReportBalance.setSelected(true);
         chkMonthlyReportBalance.setText("Jumlah Baki");
 
+        chkMonthlyReportKiraanAsing.setSelected(true);
         chkMonthlyReportKiraanAsing.setText("Kiraan Asing");
 
+        chkMonthlyReportSaving.setSelected(true);
         chkMonthlyReportSaving.setText("Simpanan Tetap");
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
@@ -1156,14 +1168,13 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jLabel34.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel34.setFont(new java.awt.Font("Tahoma", 1, 12));
         jLabel34.setText("Senarai Pekerja");
 
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
         jPanel24Layout.setHorizontalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 269, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel24Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1174,7 +1185,6 @@ public class Main extends javax.swing.JFrame {
         );
         jPanel24Layout.setVerticalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 428, Short.MAX_VALUE)
             .addGroup(jPanel24Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1231,6 +1241,7 @@ public class Main extends javax.swing.JFrame {
 
         jLabel33.setText("Tempoh Tarikh");
 
+        rbtnWorkerMonthlyIncome.setSelected(true);
         rbtnWorkerMonthlyIncome.setText("Ringkasan Pendapatan Bulanan");
 
         rbtnWorkerSaving.setText("Ringkasan Simpanan Tetap");
@@ -1782,13 +1793,17 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMonthlyReportPersonalActionPerformed
 
     private void btnMonthlyReportGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyReportGenerateActionPerformed
+        // get selected worker to be display
         ArrayList<Worker> selected = new ArrayList<Worker>();
+        ArrayList<ReportCalculation> calculations = new ArrayList<ReportCalculation>();
+        
         String id = "";
         int row = tblMonthlyReportWorkers.getRowCount();
 
         for (int i = 0; i < row; i ++) {
             if (Boolean.parseBoolean(tblMonthlyReportWorkers.getValueAt(i, 0).toString()) == true) {
                 selected.add(workers.get(i));
+                calculations.add(new ReportCalculation(workers.get(i).getId()));
                 id += workers.get(i).getId() + ",";
             }
         }
@@ -1810,39 +1825,174 @@ public class Main extends javax.swing.JFrame {
 
         id = id.substring(0, id.length() - 1);
 
-        String query = "SELECT * FROM transactions ";
+        String query = "SELECT id FROM transactions ";
         query += "INNER JOIN transaction_workers ON transactions.id = transaction_workers.transaction_id ";
-        query += "INNER JOIN customer ON transactions.customer_id = customer.id ";
         query += "WHERE worker_id IN (" + id + ") ";
-        query += "AND date >= ?";
-        query += "AND date <= ?";
+        query += "AND date >= '" + Common.renderSQLDate(dateFrom) + "'";
+        query += "AND date <= '" + Common.renderSQLDate(dateTo) + "'";
 
-        PreparedStatement ps = Database.instance().createPreparedStatement(query);
+        ResultSet results = Database.instance().execute(query);
+        ReportFrame form = new ReportFrame();
+
+        String table = "<table border=\"1\" cellspacing=\"3\">";
+        String header = this._getReportHeader(selected);
+        String content = "<tbody>";
+
         try {
-            ps.setDate(1, new java.sql.Date(dateFrom.getTime().getTime()));
-            ps.setDate(2, new java.sql.Date(dateTo.getTime().getTime()));
+            while (results.next()) {
+                Transaction transaction = new Transaction(results.getInt("id"));
+                content += "<tr>";
+                if (chkMonthlyReportDate.isSelected()) content += "<td>" + Common.renderDisplayDate(transaction.getDate()) + "</td>";
+                if (chkMonthlyReportClientName.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL)
+                        content += "<td>" + transaction.getCustomer().getName() + "</td>";
+                    else
+                        content += "<td>Pinjaman</td>";
+                }
+                if (chkMonthlyReportDescription.isSelected()) content += "<td>" + transaction.getDescription() + "</td>";
+                if (chkMonthlyReportWeight.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL)
+                        content += "<td>" + transaction.getWeight() + "</td>";
+                    else
+                        content += "<td></td>";
+                }
+                if (chkMonthlyReportPricePerTon.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL)
+                        content += "<td>" + Common.currency(transaction.getPricePerTon()) + "</td>";
+                    else
+                        content += "<td></td>";
+                }
+                if (chkMonthlyReportTotalReceived.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL)
+                        content += "<td>" + Common.currency(transaction.getTotal()) + "</td>";
+                    else
+                        content += "<td></td>";
+                }
+                if (chkMonthlyReportWages.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL)
+                        content += "<td>" + Common.currency(transaction.getWages()) + "</td>";
+                    else
+                        content += "<td></td>";
+                }
+                if (chkMonthlyReportSalary.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL)
+                        content += "<td>" + Common.currency(transaction.getTotalSalary()) + "</td>";
+                    else
+                        content += "<td></td>";
+                }
+                if (chkMonthlyReportBalance.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL)
+                        content += "<td>" + Common.currency(transaction.getBalance()) + "</td>";
+                    else
+                        content += "<td></td>";
+                }
+                if (chkMonthlyReportKiraanAsing.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL)
+                        content += "<td>" + transaction.getKiraanAsing() + "</td>";
+                    else
+                        content += "<td></td>";
+                }
+                if (chkMonthlyReportSaving.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL)
+                        content += "<td></td>";
+                    else
+                        content += "<td></td>";
+                }
+                
+                String[] workerIds = transaction.getNormalizedWorkerID().split(",");
+
+                int index = 0;
+                for (Worker worker : selected) {
+                    if (Common.inArray(workerIds, worker.getId())) {
+                        if (transaction.getType() == Transaction.GENERAL) {
+                            calculations.get(index).setSalary(transaction.getWagePerWorker());
+                            content += "<td>" + transaction.getWagePerWorker() + "</td>";
+                            content += "<td></td>";
+                            content += "<td>" + calculations.get(index).getBalance() + "</td>";
+                        } else {
+                            calculations.get(index).setLoan(transaction.getLoanAmount());
+                            content += "<td></td>";
+                            content += "<td>" + transaction.getLoanAmount() + "</td>";
+                            content += "<td>" + calculations.get(index).getBalance() + "</td>";
+                        }
+                    } else {
+                        content += "<td></td>";
+                        content += "<td></td>";
+                        content += "<td></td>";
+                    }
+                    index++;
+                }
+                content += "</tr>";
+            }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
 
-        ResultSet results = Database.instance().execute(query);
+        content += "<tr>";
+        content += "<td colspan=\"" + _report_column_count + "\"</td>";
+        for (ReportCalculation rc : calculations) {
+            content += "<td>" + Common.currency(rc.getSalary()) + "</td>";
+            content += "<td>" + Common.currency(rc.getLoan()) + "</td>";
+            content += "<td>" + Common.currency(rc.getBalance()) + "</td>";
+        }
+        content += "</tr>";
+        content += "</tbody>";
 
-        Report form = new Report(this, true);
+        table += header + content;
+        table += "</table>";
 
-        String table = "<table border=\"1\" cellspacing=\"3\">";
+        form.content.setText(table);
+        form.setVisible(true);
+    }//GEN-LAST:event_btnMonthlyReportGenerateActionPerformed
+
+    private String _getReportHeader(ArrayList<Worker> selected) {
         String header = "<thead><tr>";
+        int column_count = 0;
 
-        if (chkMonthlyReportDate.isSelected()) header += "<td rowspan=\"2\">Tarikh</td>";
-        if (chkMonthlyReportClientName.isSelected()) header += "<td rowspan=\"2\">Name Pelanggan</td>";
-        if (chkMonthlyReportDescription.isSelected()) header += "<td rowspan=\"2\">Keterangan</td>";
-        if (chkMonthlyReportWeight.isSelected()) header += "<td rowspan=\"2\">Berat KG</td>";
-        if (chkMonthlyReportPricePerTon.isSelected()) header += "<td rowspan=\"2\">Harga Diterima Seton</td>";
-        if (chkMonthlyReportTotalReceived.isSelected()) header += "<td rowspan=\"2\">Jumlah Diterima</td>";
-        if (chkMonthlyReportWages.isSelected()) header += "<td rowspan=\"2\">Upah Kerja</td>";
-        if (chkMonthlyReportSalary.isSelected()) header += "<td rowspan=\"2\">Jumlah Gaji</td>";
-        if (chkMonthlyReportBalance.isSelected()) header += "<td rowspan=\"2\">Jumlah Baki</td>";
-        if (chkMonthlyReportKiraanAsing.isSelected()) header += "<td rowspan=\"2\">Kiraan Asing</td>";
-        if (chkMonthlyReportSaving.isSelected()) header += "<td rowspan=\"2\">Simpanan Tetap</td>";
+        if (chkMonthlyReportDate.isSelected()) {
+            column_count ++;
+            header += "<td rowspan=\"2\">Tarikh</td>";
+        }
+        if (chkMonthlyReportClientName.isSelected()) {
+            column_count ++;
+            header += "<td rowspan=\"2\">Name Pelanggan</td>";
+        }
+        if (chkMonthlyReportDescription.isSelected()) {
+            column_count ++;
+            header += "<td rowspan=\"2\">Keterangan</td>";
+        }
+        if (chkMonthlyReportWeight.isSelected()) {
+            column_count ++;
+            header += "<td rowspan=\"2\">Berat KG</td>";
+        }
+        if (chkMonthlyReportPricePerTon.isSelected()) {
+            column_count ++;
+            header += "<td rowspan=\"2\">Harga Diterima Seton</td>";
+        }
+        if (chkMonthlyReportTotalReceived.isSelected()) {
+            column_count ++;
+            header += "<td rowspan=\"2\">Jumlah Diterima</td>";
+        }
+        if (chkMonthlyReportWages.isSelected()) {
+            column_count ++;
+            header += "<td rowspan=\"2\">Upah Kerja</td>";
+        }
+        if (chkMonthlyReportSalary.isSelected()) {
+            column_count ++;
+            header += "<td rowspan=\"2\">Jumlah Gaji</td>";
+        }
+        if (chkMonthlyReportBalance.isSelected()) {
+            column_count ++;
+            header += "<td rowspan=\"2\">Jumlah Baki</td>";
+        }
+        if (chkMonthlyReportKiraanAsing.isSelected()) {
+            column_count ++;
+            header += "<td rowspan=\"2\">Kiraan Asing</td>";
+        }
+        if (chkMonthlyReportSaving.isSelected()) {
+            column_count ++;
+            header += "<td rowspan=\"2\">Simpanan Tetap</td>";
+        }
 
         for (Worker worker : selected) {
             header += "<td colspan=\"3\">" + worker.getCode() + " " + worker.getName() + "</td>";
@@ -1850,46 +2000,9 @@ public class Main extends javax.swing.JFrame {
         header += "</tr><tr>" + StringUtils.repeat("<td>Gaji</td><td>Pinjaman</td><td>Baki</td>", selected.size()) + "</tr>";
         header += "</thead>";
 
-        String content = "";
-
-        ArrayList<payroll.model.Report> reports = new ArrayList<payroll.model.Report>();
-        try {
-            while (results.next()) {
-                String[] worker_ids = results.getString("normalized_worker_id").split(",");
-                ArrayList<Worker> involveWorkers = new ArrayList<Worker>();
-                int count = worker_ids.length;
-                for (int i = 0; i < count; i ++) {
-                    involveWorkers.add(new Worker(Integer.parseInt(worker_ids[i])));
-                }
-
-                reports.add(new payroll.model.Report(new Transaction(results.getInt("id"), results.getInt("customer_id"), results.getInt("type"), results.getDouble("weight"), results.getDouble("price_per_ton"), results.getDouble("wages"), results.getDouble("kiraan_asing"), results.getDouble("loan_amount"), involveWorkers, new Date(results.getDate("date").getTime()), results.getString("description"), results.getString("normalized_worker_id")), involveWorkers));
-            }
-        } catch (SQLException ex) {
-            
-        }
-
-        for (payroll.model.Report report : reports) {
-            content += "<tr>";
-            if (chkMonthlyReportDate.isSelected()) content += "<td>" + report.getTransaction().getDate().toString() + "</td>";
-            if (chkMonthlyReportClientName.isSelected()) content += "<td>" + report.getTransaction().getCustomer().getName() + "</td>";
-            if (chkMonthlyReportDescription.isSelected()) header += "<td rowspan=\"2\">Keterangan</td>";
-            if (chkMonthlyReportWeight.isSelected()) header += "<td rowspan=\"2\">Berat KG</td>";
-            if (chkMonthlyReportPricePerTon.isSelected()) header += "<td rowspan=\"2\">Harga Diterima Seton</td>";
-            if (chkMonthlyReportTotalReceived.isSelected()) header += "<td rowspan=\"2\">Jumlah Diterima</td>";
-            if (chkMonthlyReportWages.isSelected()) header += "<td rowspan=\"2\">Upah Kerja</td>";
-            if (chkMonthlyReportSalary.isSelected()) header += "<td rowspan=\"2\">Jumlah Gaji</td>";
-            if (chkMonthlyReportBalance.isSelected()) header += "<td rowspan=\"2\">Jumlah Baki</td>";
-            if (chkMonthlyReportKiraanAsing.isSelected()) header += "<td rowspan=\"2\">Kiraan Asing</td>";
-            if (chkMonthlyReportSaving.isSelected()) header += "<td rowspan=\"2\">Simpanan Tetap</td>";
-        }
-
-        table += header;
-
-        table += "</table>";
-
-        form.content.setText(table);
-        form.setVisible(true);
-    }//GEN-LAST:event_btnMonthlyReportGenerateActionPerformed
+        _report_column_count = column_count;
+        return header;
+    }
 
     private void cboxMonthlyReportAllWorkersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxMonthlyReportAllWorkersActionPerformed
         boolean selected = cboxMonthlyReportAllWorkers.isSelected();
@@ -1902,6 +2015,16 @@ public class Main extends javax.swing.JFrame {
     private void jTabbedPane4StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane4StateChanged
         jTabbedPane1StateChanged(evt);
     }//GEN-LAST:event_jTabbedPane4StateChanged
+
+    private void btnTransactionNewLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransactionNewLoanActionPerformed
+        if (listTransactionLoanWorkers.getSelectedIndex() < 0) {
+            return;
+        }
+
+        int index = listTransactionLoanWorkers.getSelectedIndex();
+        Worker worker = workers.get(index);
+        new LoanForm(this, true, worker).setVisible(true);
+    }//GEN-LAST:event_btnTransactionNewLoanActionPerformed
 
     private void _reset_worker_form() {
         txtProfileWorkerCurrentSaving.setText("");

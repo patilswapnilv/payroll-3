@@ -8,11 +8,15 @@ package payroll.model;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import payroll.libraries.Common;
 import payroll.libraries.Database;
 
 /**
@@ -26,7 +30,7 @@ public class Transaction {
 
     private int id, customerID, type;
     private double weight, pricePerTon, wages, kiraanAsing, loanAmount;
-    private ArrayList<Worker> workers;
+    private ArrayList<Worker> workers = new ArrayList<Worker>();
     private Date date, created;
     private String description, normalizedWorkerID;
 
@@ -42,7 +46,6 @@ public class Transaction {
         this.wages = 0.0;
         this.kiraanAsing = 0.0;
         this.loanAmount = 0.0;
-        this.workers = new ArrayList<Worker>();
         this.date = new Date();
         this.created = Calendar.getInstance().getTime();
         this.description = "";
@@ -72,19 +75,21 @@ public class Transaction {
     private void _load() {
         String query = "SELECT * FROM transactions WHERE id = " + this.id;
         ResultSet rs = Database.instance().execute(query);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
-            rs.next();
-            this.setCreated(new Date(rs.getDate("created").getTime()));
+            this.setCreated(df.parse(rs.getString("created")));
             this.setCustomerID(rs.getInt("customer_id"));
-            this.setDate(new Date(rs.getDate("date").getTime()));
+            this.setDate(df.parse(rs.getString("date")));
             this.setDescription(rs.getString("description"));
             this.setPricePerTon(rs.getDouble("price_per_ton"));
             this.setWages(rs.getDouble("wages"));
             this.setWeight(rs.getDouble("weight"));
             this.setNormalizedWorkerID(rs.getString("normalized_worker_id"));
+            this.setType(rs.getInt("type"));
+            this.setLoanAmount(rs.getDouble("loan_amount"));
 
-            query = "SELECT * FROM worker WHERE worker IN (" + rs.getString("workers") + ")";
+            query = "SELECT * FROM worker WHERE worker_id IN (" + rs.getString("normalized_worker_id") + ")";
             rs = Database.instance().execute(query);
 
             while (rs.next()) {
@@ -92,14 +97,17 @@ public class Transaction {
             }
 
             this._loaded = true;
+        } catch (ParseException ex) {
+            System.err.println(ex.getMessage());
         } catch (SQLException ex) {
             Logger.getLogger(Transaction2.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex.getMessage());
         }
     }
 
     public boolean save()
     {
-        String query = "INSERT INTO transactions(type, loan_amount, customer_id, description, weight, price_per_ton, wages, date, created, normalized_worker_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO transactions(type, loan_amount, customer_id, description, weight, price_per_ton, wages, date, normalized_worker_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = Database.instance().createPreparedStatement(query);
 
         try {
@@ -110,9 +118,8 @@ public class Transaction {
             ps.setDouble(5, this.getWeight());
             ps.setDouble(6, this.getPricePerTon());
             ps.setDouble(7, this.getWages());
-            ps.setDate(8, this.getSQLDate());
-            ps.setDate(9, this.getSQLCreated());
-            ps.setString(10, this.getNormalizedWorkerID());
+            ps.setString(8, this.getSQLDate());
+            ps.setString(9, this.getNormalizedWorkerID());
 
             id = Database.instance().insert(ps);
 
@@ -206,8 +213,11 @@ public class Transaction {
         return workers.size();
     }
 
-    public java.sql.Date getSQLCreated() {
-        return new java.sql.Date(created.getTime());
+    public String getSQLCreated() {
+        Calendar calender = Calendar.getInstance();
+        calender.setTime(created);
+
+        return Common.renderSQLDate(calender);
     }
     
     public Customer getCustomer() {
@@ -226,8 +236,11 @@ public class Transaction {
         return date;
     }
 
-    public java.sql.Date getSQLDate() {
-        return new java.sql.Date(date.getTime());
+    public String getSQLDate() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        return Common.renderSQLDate(calendar);
     }
     
     public String getDescription() {

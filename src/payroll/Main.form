@@ -1,4 +1,4 @@
-<?xml version="1.1" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
@@ -564,6 +564,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Pinjaman Baru"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTransactionNewLoanActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -1152,56 +1155,67 @@
                       <SubComponents>
                         <Component class="javax.swing.JCheckBox" name="chkMonthlyReportDate">
                           <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Tarikh"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="chkMonthlyReportClientName">
                           <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Name Pelanggan"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="chkMonthlyReportDescription">
                           <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Keterangan"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="chkMonthlyReportWeight">
                           <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Berat KG"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="chkMonthlyReportPricePerTon">
                           <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Harga Diterma Seton"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="chkMonthlyReportTotalReceived">
                           <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Jumlah Diterima"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="chkMonthlyReportWages">
                           <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Upah Kerja"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="chkMonthlyReportSalary">
                           <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Jumlah Gaji"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="chkMonthlyReportBalance">
                           <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Jumlah Baki"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="chkMonthlyReportKiraanAsing">
                           <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Kiraan Asing"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="chkMonthlyReportSaving">
                           <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Simpanan Tetap"/>
                           </Properties>
                         </Component>
@@ -1566,6 +1580,7 @@
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="rbtnWorkerMonthlyIncome">
                       <Properties>
+                        <Property name="selected" type="boolean" value="true"/>
                         <Property name="text" type="java.lang.String" value="Ringkasan Pendapatan Bulanan"/>
                       </Properties>
                     </Component>
