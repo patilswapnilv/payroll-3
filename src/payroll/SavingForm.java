@@ -43,6 +43,7 @@ public class SavingForm extends javax.swing.JDialog {
     public SavingForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        workerRecord = new WorkerRecord();
     }
 
     /** This method is called from within the constructor to

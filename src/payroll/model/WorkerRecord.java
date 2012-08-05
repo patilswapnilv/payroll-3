@@ -76,7 +76,7 @@ public class WorkerRecord {
         String query = "";
 
         if ( ! this._loaded) {
-            query = "INSERT INTO workerRecord(created, worker_id, date, description, amount, is_pay) VALUES(?, ?, ?, ?, ?)";
+            query = "INSERT INTO workerRecord(created, worker_id, date, description, amount, is_pay) VALUES(?, ?, ?, ?, ?, ?)";
         }
 
         PreparedStatement ps = Application.db.createPreparedStatement(query);
