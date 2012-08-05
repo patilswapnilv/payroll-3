@@ -1,22 +1,44 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/*  To change this template, choose Tools | Templates
+ *  and open the template in the editor.
  */
 
-/*
- * SavingForm.java
- *
- * Created on Jul 24, 2012, 1:03:21 PM
+/*  SavingForm.java
+ *  Created on Jul 24, 2012, 1:03:21 PM
  */
 
 package payroll;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import payroll.libraries.Common;
+import payroll.libraries.Database;
+import payroll.model.Customer;
+import payroll.model.Transaction;
+import payroll.model.Worker;
+import payroll.model.WorkerRecord;
+
+
 /**
- *
  * @author minglih.khor
  */
 public class SavingForm extends javax.swing.JDialog {
-    
+
+    private Worker worker;
+    private WorkerRecord workerRecord;
+    int id = 0;
+    private int _current_worker_id = 0;
+
     /** Creates new form SavingForm */
     public SavingForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -37,20 +59,20 @@ public class SavingForm extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         txtWorkerCode = new javax.swing.JTextField();
         txtWorkerName = new javax.swing.JTextField();
         txtSavingDate = new com.toedter.calendar.JDateChooser();
         txtSavingAmount = new javax.swing.JTextField();
-        txtSavingDescription = new javax.swing.JTextField();
         txtPayAmount = new javax.swing.JTextField();
-        txtPayDescription = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         btnEnd = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtDescription = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Simpanan Teta[");
+        setTitle("Simpanan Tetap");
+        setFocusable(false);
 
         jLabel1.setText("Pekerja");
 
@@ -62,7 +84,11 @@ public class SavingForm extends javax.swing.JDialog {
 
         jLabel5.setText("Amaun Bayaran [-]");
 
-        jLabel6.setText("Keterangan");
+        txtWorkerCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtWorkerCodeActionPerformed(evt);
+            }
+        });
 
         txtSavingDate.setDateFormatString("dd/MM/yyyy");
 
@@ -76,6 +102,11 @@ public class SavingForm extends javax.swing.JDialog {
         });
 
         btnSave.setText("Rekodkan");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -98,6 +129,10 @@ public class SavingForm extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        txtDescription.setColumns(20);
+        txtDescription.setRows(5);
+        jScrollPane1.setViewportView(txtDescription);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -106,32 +141,29 @@ public class SavingForm extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtWorkerCode, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtWorkerName, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSavingDate, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSavingAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSavingDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPayAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPayDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtWorkerCode, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtWorkerName))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtSavingDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtSavingAmount))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtPayAmount))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -144,26 +176,21 @@ public class SavingForm extends javax.swing.JDialog {
                     .addComponent(txtWorkerName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSavingAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSavingDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPayAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPayDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSavingDate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSavingAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPayAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -175,6 +202,109 @@ public class SavingForm extends javax.swing.JDialog {
     private void btnEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndActionPerformed
         this.dispose();
 }//GEN-LAST:event_btnEndActionPerformed
+
+    private void txtWorkerCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtWorkerCodeActionPerformed
+        String worker_code = txtWorkerCode.getText();
+
+        String query = "SELECT * FROM worker WHERE code LIKE ? AND is_active = 1 LIMIT 1";
+
+        PreparedStatement ps = Application.db.createPreparedStatement(query);
+        try {
+            ps.setString(1, worker_code + "%");
+        } catch (SQLException ex) {
+            Error.error(ex, "");
+        }
+
+        ResultSet rs = Application.db.execute(ps);
+        try {
+            rs.next();
+            txtWorkerCode.setText(rs.getString("code"));
+            txtWorkerName.setText(rs.getString("name"));
+            this._current_worker_id = rs.getInt("worker_id");
+            rs.close();
+        } catch (SQLException ex) {
+            this._reset_worker_form();
+            JOptionPane.showMessageDialog(null, "Tiada Rekod Pekerja ini", "Kesilapan", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_txtWorkerCodeActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        if ( ! this._check()) {
+            return;
+        }
+
+        workerRecord.setWorkerID(_current_worker_id);
+        workerRecord.setDate(new java.sql.Date(txtSavingDate.getDate().getTime()));
+        workerRecord.setDescription(txtDescription.getText());
+        if (!txtSavingAmount.getText().isEmpty()) {
+            workerRecord.setAmount(Double.parseDouble(txtSavingAmount.getText()));
+            workerRecord.setIsPay(false);
+        }
+        if (!txtPayAmount.getText().isEmpty()) {
+            workerRecord.setAmount(Double.parseDouble(txtPayAmount.getText()));
+            workerRecord.setIsPay(true);
+        }
+
+        boolean success = workerRecord.save();
+
+        if (success) {
+            JOptionPane.showMessageDialog(null, "Rekod Transaksi baru ditambah", "Berjaya!", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Rekod Transaksi tidak dapat ditambah", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private boolean _check()
+    {
+        boolean valid = false;
+        boolean valid_code = false;
+        String message = "";
+        String query = "SELECT COUNT(worker_id) FROM worker WHERE code = ?";
+
+        if (txtWorkerCode.getText().isEmpty()) {
+            message = "Sila lengkapkan Kod Pekerja";
+        } else if (txtSavingDate.getDate() == null) {
+            message = "Sila lengkapkan Tarikh";
+        } else if ((txtSavingAmount.getText().isEmpty()) && (txtPayAmount.getText().isEmpty())) {
+            message = "Sila lengkapkan Amaun Simpanan atau Amaun Bayaran";
+        } else if ((!txtSavingAmount.getText().isEmpty()) && (!txtPayAmount.getText().isEmpty())) {
+            message = "Sila pilih Amaun Simpanan atau Amaun Bayaran sahaja";
+        } else if (!txtSavingAmount.getText().isEmpty()) {           
+            String savingAmount = txtSavingAmount.getText();
+            try {
+                Double.parseDouble(savingAmount);
+                valid = true;
+            } catch(NumberFormatException e){
+                message = "Sila lengkapkan Amaun Simpanan. contoh: 123.45";
+            }
+            //DecimalFormat df = new DecimalFormat("0.00");
+            //txtSavingAmount.setText("" + df.format(savingAmount));
+        } else if (!txtPayAmount.getText().isEmpty()) {
+            String payAmount = txtPayAmount.getText();
+            try {
+                Double.parseDouble(payAmount);
+                valid = true;
+            } catch(NumberFormatException e){
+                message = "Sila lengkapkan Amaun Bayaran. contoh: 123.45";
+            }
+            //DecimalFormat df = new DecimalFormat("0.00");
+            //txtSavingAmount.setText("" + df.format(savingAmount));
+        } else {
+            valid = true;
+        }
+        if ( ! valid) {
+            JOptionPane.showMessageDialog(null, message, "Kesilapan", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return valid;
+    }
+
+
+    private void _reset_worker_form() {
+        txtWorkerName.setText("");
+    }
+
 
     /**
     * @param args the command line arguments
@@ -201,13 +331,12 @@ public class SavingForm extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea txtDescription;
     private javax.swing.JTextField txtPayAmount;
-    private javax.swing.JTextField txtPayDescription;
     private javax.swing.JTextField txtSavingAmount;
     private com.toedter.calendar.JDateChooser txtSavingDate;
-    private javax.swing.JTextField txtSavingDescription;
     private javax.swing.JTextField txtWorkerCode;
     private javax.swing.JTextField txtWorkerName;
     // End of variables declaration//GEN-END:variables
