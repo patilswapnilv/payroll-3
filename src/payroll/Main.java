@@ -15,6 +15,11 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import payroll.libraries.Common;
 import payroll.libraries.Database;
 import payroll.model.Customer;
@@ -42,7 +47,6 @@ public class Main extends javax.swing.JFrame {
     private int _current_worker_id = 0;
     private Customer _transaction_customer = null;
     private ArrayList<Worker> workers = new ArrayList<Worker>();
-    private int _report_column_count = 0;
     
     /** Creates new form Main2 */
     public Main() {
@@ -353,6 +357,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         txtTransactionClientName.setEditable(false);
+        txtTransactionClientName.setFocusable(false);
 
         txtTransactionPricePerTon.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -361,6 +366,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         txtTransactionTotalReceived.setEditable(false);
+        txtTransactionTotalReceived.setFocusable(false);
 
         txtTransactionWages.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -369,8 +375,10 @@ public class Main extends javax.swing.JFrame {
         });
 
         txtTransactionSalary.setEditable(false);
+        txtTransactionSalary.setFocusable(false);
 
         txtTransactionBalance.setEditable(false);
+        txtTransactionBalance.setFocusable(false);
 
         txtTransactionCalculate.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -379,6 +387,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         txtTransactionPayPerPerson.setEditable(false);
+        txtTransactionPayPerPerson.setFocusable(false);
 
         txtTransactionDate.setDateFormatString("dd/MM/yyyy");
 
@@ -419,8 +428,11 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 12));
+        jPanel4.setFocusable(false);
+
+        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel29.setText("Pekerja Terlibat");
+        jLabel29.setFocusable(false);
 
         tblTransactionInvolvedWorkers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -445,6 +457,7 @@ public class Main extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblTransactionInvolvedWorkers.setFocusable(false);
         tblTransactionInvolvedWorkers.setTableHeader(null);
         jScrollPane3.setViewportView(tblTransactionInvolvedWorkers);
         tblTransactionInvolvedWorkers.getColumnModel().getColumn(0).setResizable(false);
@@ -454,6 +467,7 @@ public class Main extends javax.swing.JFrame {
         tblTransactionInvolvedWorkers.getColumnModel().getColumn(2).setResizable(false);
 
         cboxTransactionAllWorkers.setText("Semua Pekerja");
+        cboxTransactionAllWorkers.setFocusable(false);
         cboxTransactionAllWorkers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboxTransactionAllWorkersActionPerformed(evt);
@@ -484,10 +498,14 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel22.setFocusable(false);
+
         listTransactionLoanWorkers.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listTransactionLoanWorkers.setFocusable(false);
         jScrollPane4.setViewportView(listTransactionLoanWorkers);
 
         btnTransactionNewLoan.setText("Pinjaman Baru");
+        btnTransactionNewLoan.setFocusable(false);
         btnTransactionNewLoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTransactionNewLoanActionPerformed(evt);
@@ -654,6 +672,7 @@ public class Main extends javax.swing.JFrame {
         jLabel16.setText("Baki Simpanan Terkini");
 
         txtSavingWorkerName.setEditable(false);
+        txtSavingWorkerName.setFocusable(false);
 
         txtSavingDateFrom.setDateFormatString("dd/MM/yyyy");
 
@@ -805,6 +824,7 @@ public class Main extends javax.swing.JFrame {
         jLabel20.setText("Tempoh Tarikh");
 
         txtPayWorkerName.setEditable(false);
+        txtPayWorkerName.setFocusable(false);
 
         txtPayDateFrom.setDateFormatString("dd/MM/yyyy");
 
@@ -1153,6 +1173,7 @@ public class Main extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblMonthlyReportWorkers.setFocusable(false);
         tblMonthlyReportWorkers.setTableHeader(null);
         jScrollPane5.setViewportView(tblMonthlyReportWorkers);
         tblMonthlyReportWorkers.getColumnModel().getColumn(0).setResizable(false);
@@ -1168,8 +1189,9 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jLabel34.setFont(new java.awt.Font("Tahoma", 1, 12));
+        jLabel34.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel34.setText("Senarai Pekerja");
+        jLabel34.setFocusable(false);
 
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
@@ -1232,6 +1254,7 @@ public class Main extends javax.swing.JFrame {
         jLabel31.setText("Nama Pekerja");
 
         txtReportWorkerName.setEditable(false);
+        txtReportWorkerName.setFocusable(false);
 
         txtSavingDateTo.setDateFormatString("dd/MM/yyyy");
 
@@ -1333,22 +1356,31 @@ public class Main extends javax.swing.JFrame {
         });
 
         txtProfileWorkerName.setEditable(false);
+        txtProfileWorkerName.setFocusable(false);
 
         txtProfileWorkerRegisterDay.setEditable(false);
+        txtProfileWorkerRegisterDay.setFocusable(false);
 
         txtProfileWorkerReturnDay.setEditable(false);
+        txtProfileWorkerReturnDay.setFocusable(false);
 
         txtProfileWorkerRegisterMonth.setEditable(false);
+        txtProfileWorkerRegisterMonth.setFocusable(false);
 
         txtProfileWorkerReturnMonth.setEditable(false);
+        txtProfileWorkerReturnMonth.setFocusable(false);
 
         txtProfileWorkerRegisterYear.setEditable(false);
+        txtProfileWorkerRegisterYear.setFocusable(false);
 
         txtProfileWorkerReturnYear.setEditable(false);
+        txtProfileWorkerReturnYear.setFocusable(false);
 
         txtProfileWorkerCurrentSaving.setEditable(false);
+        txtProfileWorkerCurrentSaving.setFocusable(false);
 
         txtProfileWorkerStatus.setEditable(false);
+        txtProfileWorkerStatus.setFocusable(false);
 
         jPanel15.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -1524,8 +1556,10 @@ public class Main extends javax.swing.JFrame {
         jLabel27.setText("Nama Pelanggan");
 
         txtProfileClientName.setEditable(false);
+        txtProfileClientName.setFocusable(false);
 
         txtProfileClientStatus.setEditable(false);
+        txtProfileClientStatus.setFocusable(false);
 
         jLabel28.setText("Status");
 
@@ -1785,7 +1819,22 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void btnMonthlyReportExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyReportExportActionPerformed
-        // TODO add your handling code here:
+        ArrayList<String> columns = this.getReportColumns();
+        ArrayList<Worker> selected = this.getReportSelectedWorkers();
+        Workbook workbook = new HSSFWorkbook();
+        int index = 0;
+
+        Sheet sheet = (Sheet) workbook.createSheet("Laporan");
+        Row headerRow = sheet.createRow(0);
+
+        index = 0;
+        for (String column : columns) {
+            Cell cell = headerRow.createCell(index);
+            cell.setCellValue(column);
+            index ++;
+        }
+
+        sheet.createFreezePane(0, 1);
     }//GEN-LAST:event_btnMonthlyReportExportActionPerformed
 
     private void btnMonthlyReportPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyReportPersonalActionPerformed
@@ -1794,21 +1843,16 @@ public class Main extends javax.swing.JFrame {
 
     private void btnMonthlyReportGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyReportGenerateActionPerformed
         // get selected worker to be display
-        ArrayList<Worker> selected = new ArrayList<Worker>();
+        ArrayList<Worker> selected = this.getReportSelectedWorkers();
         ArrayList<ReportCalculation> calculations = new ArrayList<ReportCalculation>();
-        
-        String id = "";
-        int row = tblMonthlyReportWorkers.getRowCount();
-
-        for (int i = 0; i < row; i ++) {
-            if (Boolean.parseBoolean(tblMonthlyReportWorkers.getValueAt(i, 0).toString()) == true) {
-                selected.add(workers.get(i));
-                calculations.add(new ReportCalculation(workers.get(i).getId()));
-                id += workers.get(i).getId() + ",";
-            }
-        }
-
         Calendar dateFrom = Calendar.getInstance(), dateTo = Calendar.getInstance();
+        String id = "";
+        
+        for(Worker worker : selected) {
+            id += worker.getId() + ",";
+        }
+        
+        id = id.substring(0, id.length() - 1);
 
         if (rbtnMonhtlyReportCurrentMonth.isSelected()) {
             dateFrom.set(Calendar.DAY_OF_MONTH, 1);
@@ -1823,8 +1867,6 @@ public class Main extends javax.swing.JFrame {
             dateTo.setTime(txtMonthlyReportDateFrom.getDate());
         }
 
-        id = id.substring(0, id.length() - 1);
-
         String query = "SELECT id FROM transactions ";
         query += "INNER JOIN transaction_workers ON transactions.id = transaction_workers.transaction_id ";
         query += "WHERE worker_id IN (" + id + ") ";
@@ -1832,12 +1874,25 @@ public class Main extends javax.swing.JFrame {
         query += "AND date <= '" + Common.renderSQLDate(dateTo) + "'";
 
         ResultSet results = Database.instance().execute(query);
-        ReportFrame form = new ReportFrame();
+        
 
         String table = "<table border=\"1\" cellspacing=\"3\">";
-        String header = this._getReportHeader(selected);
+        String header = "";
         String content = "<tbody>";
+        ArrayList<String> columns = this.getReportColumns();
 
+        /* Render table header */
+        header += "<thead><tr>";
+        for (String column : columns) {
+            header += "<td rowspan=\"2\">" + column + "</td>";
+        }
+        for (Worker worker : selected) {
+            header += "<td colspan=\"3\">" + worker.getCode() + " " + worker.getName() + "</td>";
+        }
+        header += "</tr><tr>" + StringUtils.repeat("<td>Gaji</td><td>Pinjaman</td><td>Baki</td>", selected.size()) + "</tr>";
+        header += "</thead>";
+        /* end of render table header */
+        
         try {
             while (results.next()) {
                 Transaction transaction = new Transaction(results.getInt("id"));
@@ -1929,7 +1984,7 @@ public class Main extends javax.swing.JFrame {
         }
 
         content += "<tr>";
-        content += "<td colspan=\"" + _report_column_count + "\"</td>";
+        content += "<td colspan=\"" + columns.size() + "\"</td>";
         for (ReportCalculation rc : calculations) {
             content += "<td>" + Common.currency(rc.getSalary()) + "</td>";
             content += "<td>" + Common.currency(rc.getLoan()) + "</td>";
@@ -1941,67 +1996,40 @@ public class Main extends javax.swing.JFrame {
         table += header + content;
         table += "</table>";
 
+        ReportFrame form = new ReportFrame();
         form.content.setText(table);
         form.setVisible(true);
     }//GEN-LAST:event_btnMonthlyReportGenerateActionPerformed
 
-    private String _getReportHeader(ArrayList<Worker> selected) {
-        String header = "<thead><tr>";
-        int column_count = 0;
+    private ArrayList<String> getReportColumns() {
+        ArrayList<String> headers = new ArrayList<String>();
+        
+        if (chkMonthlyReportDate.isSelected()) headers.add("Tarikh");
+        if (chkMonthlyReportClientName.isSelected()) headers.add("Nama Pelanggan");
+        if (chkMonthlyReportDescription.isSelected()) headers.add("Keterangan");
+        if (chkMonthlyReportWeight.isSelected()) headers.add("Berat KG");
+        if (chkMonthlyReportPricePerTon.isSelected()) headers.add("Harga Diterima Seton");
+        if (chkMonthlyReportTotalReceived.isSelected()) headers.add("Jumlah Diterima");
+        if (chkMonthlyReportWages.isSelected()) headers.add("Upah Kerja");
+        if (chkMonthlyReportSalary.isSelected()) headers.add("Jumlah Gaji");
+        if (chkMonthlyReportBalance.isSelected()) headers.add("Jumlah Baki");
+        if (chkMonthlyReportKiraanAsing.isSelected()) headers.add("Kiraan Asing");
+        if (chkMonthlyReportSaving.isSelected()) headers.add("Simpanan Tetap");
 
-        if (chkMonthlyReportDate.isSelected()) {
-            column_count ++;
-            header += "<td rowspan=\"2\">Tarikh</td>";
-        }
-        if (chkMonthlyReportClientName.isSelected()) {
-            column_count ++;
-            header += "<td rowspan=\"2\">Name Pelanggan</td>";
-        }
-        if (chkMonthlyReportDescription.isSelected()) {
-            column_count ++;
-            header += "<td rowspan=\"2\">Keterangan</td>";
-        }
-        if (chkMonthlyReportWeight.isSelected()) {
-            column_count ++;
-            header += "<td rowspan=\"2\">Berat KG</td>";
-        }
-        if (chkMonthlyReportPricePerTon.isSelected()) {
-            column_count ++;
-            header += "<td rowspan=\"2\">Harga Diterima Seton</td>";
-        }
-        if (chkMonthlyReportTotalReceived.isSelected()) {
-            column_count ++;
-            header += "<td rowspan=\"2\">Jumlah Diterima</td>";
-        }
-        if (chkMonthlyReportWages.isSelected()) {
-            column_count ++;
-            header += "<td rowspan=\"2\">Upah Kerja</td>";
-        }
-        if (chkMonthlyReportSalary.isSelected()) {
-            column_count ++;
-            header += "<td rowspan=\"2\">Jumlah Gaji</td>";
-        }
-        if (chkMonthlyReportBalance.isSelected()) {
-            column_count ++;
-            header += "<td rowspan=\"2\">Jumlah Baki</td>";
-        }
-        if (chkMonthlyReportKiraanAsing.isSelected()) {
-            column_count ++;
-            header += "<td rowspan=\"2\">Kiraan Asing</td>";
-        }
-        if (chkMonthlyReportSaving.isSelected()) {
-            column_count ++;
-            header += "<td rowspan=\"2\">Simpanan Tetap</td>";
-        }
+        return headers;
+    }
 
-        for (Worker worker : selected) {
-            header += "<td colspan=\"3\">" + worker.getCode() + " " + worker.getName() + "</td>";
-        }
-        header += "</tr><tr>" + StringUtils.repeat("<td>Gaji</td><td>Pinjaman</td><td>Baki</td>", selected.size()) + "</tr>";
-        header += "</thead>";
+    private ArrayList<Worker> getReportSelectedWorkers() {
+        ArrayList<Worker> selected = new ArrayList<Worker>();
+        int row = tblMonthlyReportWorkers.getRowCount();
 
-        _report_column_count = column_count;
-        return header;
+        for (int i = 0; i < row; i ++) {
+            if (Boolean.parseBoolean(tblMonthlyReportWorkers.getValueAt(i, 0).toString())) {
+                selected.add(workers.get(i));
+            }
+        }
+        
+        return selected;
     }
 
     private void cboxMonthlyReportAllWorkersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxMonthlyReportAllWorkersActionPerformed

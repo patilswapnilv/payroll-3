@@ -324,6 +324,7 @@
             <Component class="javax.swing.JTextField" name="txtTransactionClientName">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTransactionPricePerTon">
@@ -334,6 +335,7 @@
             <Component class="javax.swing.JTextField" name="txtTransactionTotalReceived">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTransactionWages">
@@ -344,11 +346,13 @@
             <Component class="javax.swing.JTextField" name="txtTransactionSalary">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTransactionBalance">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTransactionCalculate">
@@ -359,6 +363,7 @@
             <Component class="javax.swing.JTextField" name="txtTransactionPayPerPerson">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="txtTransactionDate">
@@ -425,6 +430,9 @@
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="jPanel4">
+              <Properties>
+                <Property name="focusable" type="boolean" value="false"/>
+              </Properties>
 
               <Layout>
                 <DimensionLayout dim="0">
@@ -461,6 +469,7 @@
                       <Font name="Tahoma" size="12" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Pekerja Terlibat"/>
+                    <Property name="focusable" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane3">
@@ -498,6 +507,7 @@
                             </Column>
                           </TableColumnModel>
                         </Property>
+                        <Property name="focusable" type="boolean" value="false"/>
                         <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                           <Connection code="null" type="code"/>
                         </Property>
@@ -508,6 +518,7 @@
                 <Component class="javax.swing.JCheckBox" name="cboxTransactionAllWorkers">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Semua Pekerja"/>
+                    <Property name="focusable" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboxTransactionAllWorkersActionPerformed"/>
@@ -516,6 +527,9 @@
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="jPanel22">
+              <Properties>
+                <Property name="focusable" type="boolean" value="false"/>
+              </Properties>
 
               <Layout>
                 <DimensionLayout dim="0">
@@ -556,6 +570,7 @@
                           <StringArray count="0"/>
                         </Property>
                         <Property name="selectionMode" type="int" value="0"/>
+                        <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -563,6 +578,7 @@
                 <Component class="javax.swing.JButton" name="btnTransactionNewLoan">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Pinjaman Baru"/>
+                    <Property name="focusable" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTransactionNewLoanActionPerformed"/>
@@ -681,6 +697,7 @@
             <Component class="javax.swing.JTextField" name="txtSavingWorkerName">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="txtSavingDateFrom">
@@ -895,6 +912,7 @@
             <Component class="javax.swing.JTextField" name="txtPayWorkerName">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="txtPayDateFrom">
@@ -1448,6 +1466,7 @@
                                     </Column>
                                   </TableColumnModel>
                                 </Property>
+                                <Property name="focusable" type="boolean" value="false"/>
                                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                                   <Connection code="null" type="code"/>
                                 </Property>
@@ -1469,6 +1488,7 @@
                               <Font name="Tahoma" size="12" style="1"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Senarai Pekerja"/>
+                            <Property name="focusable" type="boolean" value="false"/>
                           </Properties>
                         </Component>
                       </SubComponents>
@@ -1556,6 +1576,7 @@
                     <Component class="javax.swing.JTextField" name="txtReportWorkerName">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="com.toedter.calendar.JDateChooser" name="txtReportWorkerDateTo">
@@ -1764,46 +1785,55 @@
                     <Component class="javax.swing.JTextField" name="txtProfileWorkerName">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtProfileWorkerRegisterDay">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtProfileWorkerReturnDay">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtProfileWorkerRegisterMonth">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtProfileWorkerReturnMonth">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtProfileWorkerRegisterYear">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtProfileWorkerReturnYear">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtProfileWorkerCurrentSaving">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtProfileWorkerStatus">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Container class="javax.swing.JPanel" name="jPanel15">
@@ -2011,11 +2041,13 @@
                     <Component class="javax.swing.JTextField" name="txtProfileClientName">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtProfileClientStatus">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel28">
