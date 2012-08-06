@@ -1,6 +1,11 @@
 package payroll;
 
 
+import java.awt.print.Book;
+import java.awt.print.PageFormat;
+import java.awt.print.Paper;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.sql.PreparedStatement;
@@ -430,7 +435,7 @@ public class Main extends javax.swing.JFrame {
 
         jPanel4.setFocusable(false);
 
-        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 12));
         jLabel29.setText("Pekerja Terlibat");
         jLabel29.setFocusable(false);
 
@@ -1098,6 +1103,11 @@ public class Main extends javax.swing.JFrame {
         btnMonthlyReportEnd.setText("Tamat");
 
         btnMonthlyReportPrint.setText("Cetakkan");
+        btnMonthlyReportPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMonthlyReportPrintActionPerformed(evt);
+            }
+        });
 
         btnMonthlyReportExport.setText("Format Excel");
         btnMonthlyReportExport.addActionListener(new java.awt.event.ActionListener() {
@@ -1189,7 +1199,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jLabel34.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel34.setFont(new java.awt.Font("Tahoma", 1, 12));
         jLabel34.setText("Senarai Pekerja");
         jLabel34.setFocusable(false);
 
@@ -1845,36 +1855,13 @@ public class Main extends javax.swing.JFrame {
         // get selected worker to be display
         ArrayList<Worker> selected = this.getReportSelectedWorkers();
         ArrayList<ReportCalculation> calculations = new ArrayList<ReportCalculation>();
-        Calendar dateFrom = Calendar.getInstance(), dateTo = Calendar.getInstance();
-        String id = "";
-        
-        for(Worker worker : selected) {
-            id += worker.getId() + ",";
+        String query = this.getReportQuery(selected);
+
+        for (Worker worker : selected) {
+            calculations.add(new ReportCalculation(worker.getId()));
         }
         
-        id = id.substring(0, id.length() - 1);
-
-        if (rbtnMonhtlyReportCurrentMonth.isSelected()) {
-            dateFrom.set(Calendar.DAY_OF_MONTH, 1);
-            dateTo.set(Calendar.DAY_OF_MONTH, dateTo.getActualMaximum(Calendar.DAY_OF_MONTH));
-        } else if (rbtnMonthlyReportLastMonth.isSelected()) {
-            dateFrom.set(Calendar.DAY_OF_MONTH, 1);
-            dateTo.set(Calendar.DAY_OF_MONTH, dateTo.getActualMaximum(Calendar.DAY_OF_MONTH));
-            dateFrom.roll(Calendar.MONTH, -1);
-            dateTo.roll(Calendar.MONTH, -1);
-        } else {
-            dateFrom.setTime(txtMonthlyReportDateFrom.getDate());
-            dateTo.setTime(txtMonthlyReportDateFrom.getDate());
-        }
-
-        String query = "SELECT id FROM transactions ";
-        query += "INNER JOIN transaction_workers ON transactions.id = transaction_workers.transaction_id ";
-        query += "WHERE worker_id IN (" + id + ") ";
-        query += "AND date >= '" + Common.renderSQLDate(dateFrom) + "'";
-        query += "AND date <= '" + Common.renderSQLDate(dateTo) + "'";
-
         ResultSet results = Database.instance().execute(query);
-        
 
         String table = "<table border=\"1\" cellspacing=\"3\">";
         String header = "";
@@ -2032,6 +2019,38 @@ public class Main extends javax.swing.JFrame {
         return selected;
     }
 
+    private String getReportQuery(ArrayList<Worker> selected) {
+        Calendar dateFrom = Calendar.getInstance(), dateTo = Calendar.getInstance();
+        String id = "";
+
+        for(Worker worker : selected) {
+            id += worker.getId() + ",";
+        }
+
+        id = id.substring(0, id.length() - 1);
+
+        if (rbtnMonhtlyReportCurrentMonth.isSelected()) {
+            dateFrom.set(Calendar.DAY_OF_MONTH, 1);
+            dateTo.set(Calendar.DAY_OF_MONTH, dateTo.getActualMaximum(Calendar.DAY_OF_MONTH));
+        } else if (rbtnMonthlyReportLastMonth.isSelected()) {
+            dateFrom.set(Calendar.DAY_OF_MONTH, 1);
+            dateTo.set(Calendar.DAY_OF_MONTH, dateTo.getActualMaximum(Calendar.DAY_OF_MONTH));
+            dateFrom.roll(Calendar.MONTH, -1);
+            dateTo.roll(Calendar.MONTH, -1);
+        } else {
+            dateFrom.setTime(txtMonthlyReportDateFrom.getDate());
+            dateTo.setTime(txtMonthlyReportDateFrom.getDate());
+        }
+
+        String query = "SELECT id FROM transactions ";
+        query += "INNER JOIN transaction_workers ON transactions.id = transaction_workers.transaction_id ";
+        query += "WHERE worker_id IN (" + id + ") ";
+        query += "AND date >= '" + Common.renderSQLDate(dateFrom) + "'";
+        query += "AND date <= '" + Common.renderSQLDate(dateTo) + "'";
+
+        return query;
+    }
+
     private void cboxMonthlyReportAllWorkersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxMonthlyReportAllWorkersActionPerformed
         boolean selected = cboxMonthlyReportAllWorkers.isSelected();
         int row = tblMonthlyReportWorkers.getRowCount();
@@ -2053,6 +2072,28 @@ public class Main extends javax.swing.JFrame {
         Worker worker = workers.get(index);
         new LoanForm(this, true, worker).setVisible(true);
     }//GEN-LAST:event_btnTransactionNewLoanActionPerformed
+
+    private void btnMonthlyReportPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyReportPrintActionPerformed
+        ArrayList<String> headers = this.getReportColumns();
+        ArrayList<Worker> selected = this.getReportSelectedWorkers();
+        String query = this.getReportQuery(selected);
+
+        PrinterJob job = PrinterJob.getPrinterJob();
+        
+        
+        PageFormat format = job.defaultPage();
+        format.setOrientation(PageFormat.LANDSCAPE);
+
+        job.setPrintable(new Printer(this, selected, query), format);;
+
+        if (job.printDialog() == true) {
+            try {
+                job.print();
+            } catch (PrinterException ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
+    }//GEN-LAST:event_btnMonthlyReportPrintActionPerformed
 
     private void _reset_worker_form() {
         txtProfileWorkerCurrentSaving.setText("");
@@ -2127,17 +2168,17 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btnTransactionNewLoan;
     private javax.swing.JCheckBox cboxMonthlyReportAllWorkers;
     private javax.swing.JCheckBox cboxTransactionAllWorkers;
-    private javax.swing.JCheckBox chkMonthlyReportBalance;
-    private javax.swing.JCheckBox chkMonthlyReportClientName;
-    private javax.swing.JCheckBox chkMonthlyReportDate;
-    private javax.swing.JCheckBox chkMonthlyReportDescription;
-    private javax.swing.JCheckBox chkMonthlyReportKiraanAsing;
-    private javax.swing.JCheckBox chkMonthlyReportPricePerTon;
-    private javax.swing.JCheckBox chkMonthlyReportSalary;
-    private javax.swing.JCheckBox chkMonthlyReportSaving;
-    private javax.swing.JCheckBox chkMonthlyReportTotalReceived;
-    private javax.swing.JCheckBox chkMonthlyReportWages;
-    private javax.swing.JCheckBox chkMonthlyReportWeight;
+    public javax.swing.JCheckBox chkMonthlyReportBalance;
+    public javax.swing.JCheckBox chkMonthlyReportClientName;
+    public javax.swing.JCheckBox chkMonthlyReportDate;
+    public javax.swing.JCheckBox chkMonthlyReportDescription;
+    public javax.swing.JCheckBox chkMonthlyReportKiraanAsing;
+    public javax.swing.JCheckBox chkMonthlyReportPricePerTon;
+    public javax.swing.JCheckBox chkMonthlyReportSalary;
+    public javax.swing.JCheckBox chkMonthlyReportSaving;
+    public javax.swing.JCheckBox chkMonthlyReportTotalReceived;
+    public javax.swing.JCheckBox chkMonthlyReportWages;
+    public javax.swing.JCheckBox chkMonthlyReportWeight;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
