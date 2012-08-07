@@ -16,6 +16,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.print.attribute.HashAttributeSet;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.standard.MediaPrintableArea;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -2088,7 +2091,9 @@ public class Main extends javax.swing.JFrame {
 
         if (job.printDialog() == true) {
             try {
-                job.print();
+                HashPrintRequestAttributeSet attr = new HashPrintRequestAttributeSet();
+                attr.add(new MediaPrintableArea(0, 0, 210, 297, MediaPrintableArea.MM));
+                job.print(attr);
             } catch (PrinterException ex) {
                 System.err.println(ex.getMessage());
             }
