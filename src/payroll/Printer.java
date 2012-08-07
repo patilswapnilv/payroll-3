@@ -99,213 +99,223 @@ public class Printer implements Printable {
 
         if (printOrNot) {
             System.out.println("Printing...");
-
+            int size = 0;
+            // Initial the position for new page
             x = 20;
             y = 80;
-            int size = 0;
-
-            if (header) {
-                g.setFont(new Font("Calibri", Font.BOLD, 12));
-                if (parent.chkMonthlyReportDate.isSelected()) {
-                    g.drawString("Tarikh", x, y);
-                    size = 60;
-                    g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
-                    g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
-                    g.drawLine(x - 5, y + 5, x - 5, y - 35);
-                    g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
-                    x += size + 10;
-
-                }
-
-                if (parent.chkMonthlyReportClientName.isSelected()) {
-                    g.drawString("Pelanggan", x, y);
-                    size = 80;
-                    g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
-                    g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
-                    g.drawLine(x - 5, y + 5, x - 5, y - 35);
-                    g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
-                    x += size + 10;
-                }
-
-                if (parent.chkMonthlyReportDescription.isSelected()) {
-                    g.drawString("Keterangan", x, y);
-                    size = 120;
-                    g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
-                    g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
-                    g.drawLine(x - 5, y + 5, x - 5, y - 35);
-                    g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
-                    x += size + 10;
-                }
-
-                if (parent.chkMonthlyReportKiraanAsing.isSelected()) {
-                    g.drawString("Kiraan", x, y - 15);
-                    g.drawString("Asing", x, y);
-                    size = 50;
-                    g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
-                    g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
-                    g.drawLine(x - 5, y + 5, x - 5, y - 35);
-                    g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
-                    x += size + 10;
-                }
-
-                if (parent.chkMonthlyReportWeight.isSelected()) {
-                    g.drawString("Berat KG", x, y);
-                    size = 50;
-                    g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
-                    g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
-                    g.drawLine(x - 5, y + 5, x - 5, y - 35);
-                    g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
-                    x += size + 10;
-                }
-
-                if (parent.chkMonthlyReportPricePerTon.isSelected()) {
-                    g.drawString("Seton", x, y);
-                    g.drawString("Harga", x, y - 15);
-                    size = 50;
-                    g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
-                    g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
-                    g.drawLine(x - 5, y + 5, x - 5, y - 35);
-                    g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
-                    x += size + 10;
-                }
-
-                if (parent.chkMonthlyReportTotalReceived.isSelected()) {
-                    g.drawString("Diterima", x, y);
-                    g.drawString("Jumlah", x, y - 15);
-                    size = 50;
-                    g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
-                    g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
-                    g.drawLine(x - 5, y + 5, x - 5, y - 35);
-                    g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
-                    x += size + 10;
-                }
-                header = false;
-            }
-            
-            if (workerHeader) {
-                int total = selected.size();
-                for (int i = workerHeaderIndex; i < total; i ++) {
-                    System.out.println("X index: " + x);
-                    size = 180;
-                    if (x + size > 780.0) {
-                        workerHeaderIndex = i;
-                        workerHeader = true;
-                        pagesNeeded ++;
-                        break;
-                    }
-                    
-                    g.drawString(selected.get(i).getCode() + " " + selected.get(i).getName(), x, y - 18);
-                    g.drawString("Gaji", x, y);
-                    g.drawString("Pinjaman", x + 50, y);
-                    g.drawString("Baki", x + 110, y);
-                    
-
-                    g.drawLine(x - 5 + 50, y + 5, x - 5 + 50, y - 15);
-                    g.drawLine(x - 5 + 110, y + 5, x - 5 + 110, y - 15);
-
-                    g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
-                    g.drawLine(x - 5, y - 15, x + 5 + size, y - 15);
-                    g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
-                    g.drawLine(x - 5, y + 5, x - 5, y - 35);
-                    g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
-                    x += size + 10;
-
-                    workerHeader = false;
-                }
-            }
-
+            this.render_header(g);
+            // Reset the x axis
             x = 20;
-            y += 20;
-
-            int transactionCount = transactionIDs.size();
-            for (int i = 0; i < transactionCount; i ++) {
-                Transaction transaction = new Transaction(transactionIDs.get(i));
-                g.setFont(new Font("Calibri", Font.PLAIN, 12));
-                if ( ! workerOnly) {
-                    workerIndex = 0;
-                    if (parent.chkMonthlyReportDate.isSelected()) {
-                        g.drawString(Common.renderDisplayDate(transaction.getDate()), x, y);
-                        size = 60;
-                        x += size + 10;
-                    }
-
-                    if (parent.chkMonthlyReportClientName.isSelected()) {
-                        if (transaction.getType() == Transaction.GENERAL)
-                            g.drawString(transaction.getCustomer().getName(), x, y);
-                        else
-                            g.drawString("Pinjaman", x, y);
-                        size = 80;
-                        x += size + 10;
-                    }
-
-                    if (parent.chkMonthlyReportDescription.isSelected()) {
-                        g.drawString(transaction.getDescription(), x, y);
-                        size = 120;
-                        x += size + 10;
-                    }
-
-                    if (parent.chkMonthlyReportKiraanAsing.isSelected()) {
-                        if (transaction.getType() == Transaction.GENERAL)
-                            g.drawString("" + transaction.getKiraanAsing(), x, y);
-                        size = 50;
-                        x += size + 10;
-                    }
-
-                    if (parent.chkMonthlyReportWeight.isSelected()) {
-                        if (transaction.getType() == Transaction.GENERAL)
-                            g.drawString("" + transaction.getWeight(), x, y);
-                        size = 50;
-                        x += size + 10;
-                    }
-
-                    if (parent.chkMonthlyReportPricePerTon.isSelected()) {
-                        if (transaction.getType() == Transaction.GENERAL)
-                            g.drawString("" + transaction.getPricePerTon(), x, y);
-                        size = 50;
-                        x += size + 10;
-                    }
-
-                    if (parent.chkMonthlyReportTotalReceived.isSelected()) {
-                        if (transaction.getType() == Transaction.GENERAL)
-                            g.drawString("" + transaction.getTotal(), x, y);
-                        size = 50;
-                        x += size + 10;
-                    }
-                }
-
-                int total = selected.size();
-                int i2 = workerOnly ? workerIndex : 0;
-                for (int c = i2; c < total; c ++) {
-                    size = 180;
-                    if (c + size > 780.0) {
-                        workerIndex = c;
-                        break;
-                    }
-
-                    String[] workerIds = transaction.getNormalizedWorkerID().split(",");
-
-                    if (Common.inArray(workerIds, selected.get(c).getId())) {
-                        if (transaction.getType() == Transaction.GENERAL) {
-                            calculations.get(c).setSalary(transaction.getWagePerWorker());
-                            g.drawString("" + transaction.getWagePerWorker(), x, y);
-                            g.drawString("" + calculations.get(c).getBalance(), x + 110, y);
-                        } else {
-                            calculations.get(c).setLoan(transaction.getLoanAmount());
-                            g.drawString("" + transaction.getLoanAmount(), x + 50, y);
-                            g.drawString("" + calculations.get(c).getBalance(), x + 110, y);
-                        }
- 
-                    }
-                }
-            }
-
-            if (workerIndex < selected.size()) {
-                workerOnly = true;
-            }
-
-            y += 12;
+            this.render_left_content(g, pageIndex);
         }
 
         return PAGE_EXISTS;
+    }
+
+    private void render_header(Graphics2D g) {
+        int size = 0;
+        if (header) {
+            g.setFont(new Font("Calibri", Font.BOLD, 12));
+            if (parent.chkMonthlyReportDate.isSelected()) {
+                g.drawString("Tarikh", x, y);
+                size = 60;
+                g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
+                g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
+                g.drawLine(x - 5, y + 5, x - 5, y - 35);
+                g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
+                x += size + 10;
+
+            }
+
+            if (parent.chkMonthlyReportClientName.isSelected()) {
+                g.drawString("Pelanggan", x, y);
+                size = 80;
+                g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
+                g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
+                g.drawLine(x - 5, y + 5, x - 5, y - 35);
+                g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
+                x += size + 10;
+            }
+
+            if (parent.chkMonthlyReportDescription.isSelected()) {
+                g.drawString("Keterangan", x, y);
+                size = 120;
+                g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
+                g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
+                g.drawLine(x - 5, y + 5, x - 5, y - 35);
+                g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
+                x += size + 10;
+            }
+
+            if (parent.chkMonthlyReportKiraanAsing.isSelected()) {
+                g.drawString("Kiraan", x, y - 15);
+                g.drawString("Asing", x, y);
+                size = 50;
+                g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
+                g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
+                g.drawLine(x - 5, y + 5, x - 5, y - 35);
+                g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
+                x += size + 10;
+            }
+
+            if (parent.chkMonthlyReportWeight.isSelected()) {
+                g.drawString("Berat KG", x, y);
+                size = 50;
+                g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
+                g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
+                g.drawLine(x - 5, y + 5, x - 5, y - 35);
+                g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
+                x += size + 10;
+            }
+
+            if (parent.chkMonthlyReportPricePerTon.isSelected()) {
+                g.drawString("Seton", x, y);
+                g.drawString("Harga", x, y - 15);
+                size = 50;
+                g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
+                g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
+                g.drawLine(x - 5, y + 5, x - 5, y - 35);
+                g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
+                x += size + 10;
+            }
+
+            if (parent.chkMonthlyReportTotalReceived.isSelected()) {
+                g.drawString("Diterima", x, y);
+                g.drawString("Jumlah", x, y - 15);
+                size = 50;
+                g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
+                g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
+                g.drawLine(x - 5, y + 5, x - 5, y - 35);
+                g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
+                x += size + 10;
+            }
+            header = false;
+        }
+
+        if (workerHeader) {
+            int total = selected.size();
+            for (int i = workerHeaderIndex; i < total; i ++) {
+                System.out.println("X index: " + x);
+                size = 180;
+                if (x + size > 780.0) {
+                    workerHeaderIndex = i;
+                    workerHeader = true;
+                    pagesNeeded ++;
+                    break;
+                }
+
+                g.drawString(selected.get(i).getCode() + " " + selected.get(i).getName(), x, y - 18);
+                g.drawString("Gaji", x, y);
+                g.drawString("Pinjaman", x + 50, y);
+                g.drawString("Baki", x + 110, y);
+
+
+                g.drawLine(x - 5 + 50, y + 5, x - 5 + 50, y - 15);
+                g.drawLine(x - 5 + 110, y + 5, x - 5 + 110, y - 15);
+
+                g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
+                g.drawLine(x - 5, y - 15, x + 5 + size, y - 15);
+                g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
+                g.drawLine(x - 5, y + 5, x - 5, y - 35);
+                g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
+                x += size + 10;
+
+                workerHeader = false;
+            }
+        }
+
+        y += 20;
+    }
+
+    private void render_left_content(Graphics2D g, int pageIndex) {
+        int size = 0;
+        int transactionCount = transactionIDs.size();
+        for (int i = transactionIndex; i < transactionCount; i ++) {
+            if (transactionIndex >=  (printCap * pageIndex + 1)) {
+                break;
+            }
+            
+            Transaction transaction = new Transaction(transactionIDs.get(i));
+            g.setFont(new Font("Calibri", Font.PLAIN, 12));
+            if (parent.chkMonthlyReportDate.isSelected()) {
+                g.drawString(Common.renderDisplayDate(transaction.getDate()), x, y);
+                size = 60;
+                x += size + 10;
+            }
+
+            if (parent.chkMonthlyReportClientName.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL)
+                    g.drawString(transaction.getCustomer().getName(), x, y);
+                else
+                    g.drawString("Pinjaman", x, y);
+                size = 80;
+                x += size + 10;
+            }
+
+            if (parent.chkMonthlyReportDescription.isSelected()) {
+                g.drawString(transaction.getDescription(), x, y);
+                size = 120;
+                x += size + 10;
+            }
+
+            if (parent.chkMonthlyReportKiraanAsing.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL)
+                    g.drawString("" + transaction.getKiraanAsing(), x, y);
+                size = 50;
+                x += size + 10;
+            }
+
+            if (parent.chkMonthlyReportWeight.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL)
+                    g.drawString("" + transaction.getWeight(), x, y);
+                size = 50;
+                x += size + 10;
+            }
+
+            if (parent.chkMonthlyReportPricePerTon.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL)
+                    g.drawString("" + transaction.getPricePerTon(), x, y);
+                size = 50;
+                x += size + 10;
+            }
+
+            if (parent.chkMonthlyReportTotalReceived.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL)
+                    g.drawString("" + transaction.getTotal(), x, y);
+                size = 50;
+                x += size + 10;
+            }
+
+            int total = selected.size();
+            for (int c = 0; c < total; c ++) {
+                size = 180;
+                if (c + size > 780.0) {
+                    workerIndex = c;
+                    break;
+                }
+
+                String[] workerIds = transaction.getNormalizedWorkerID().split(",");
+
+                if (Common.inArray(workerIds, selected.get(c).getId())) {
+                    if (transaction.getType() == Transaction.GENERAL) {
+                        calculations.get(c).setSalary(transaction.getWagePerWorker());
+                        g.drawString("" + transaction.getWagePerWorker(), x, y);
+                        g.drawString("" + calculations.get(c).getBalance(), x + 110, y);
+                    } else {
+                        calculations.get(c).setLoan(transaction.getLoanAmount());
+                        g.drawString("" + transaction.getLoanAmount(), x + 50, y);
+                        g.drawString("" + calculations.get(c).getBalance(), x + 110, y);
+                    }
+
+                }
+            }
+        }
+
+        y += 12;
+    }
+
+    // mostly is workers
+    private void render_right_content() {
+
     }
 }
