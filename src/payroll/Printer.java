@@ -326,6 +326,8 @@ public class Printer implements Printable {
             y += 12;
             counter ++;
         }
+
+        transactionIndex = 0;
         endOfLine = true;
     }
 }
