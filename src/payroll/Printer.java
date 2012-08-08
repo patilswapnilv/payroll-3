@@ -34,9 +34,9 @@ public class Printer implements Printable {
     private String query = "";
     private Main parent;
 
-    private ArrayList<Integer> transactionIDs = new ArrayList<Integer>();
+    private ArrayList<Transaction> transactions = new ArrayList<Transaction>();
 
-    final int printCap = 30;
+    final int printCap = 40;
     private int printerPointer = 0;
     private int pagesNeeded = 1;
     private int extraPage = -1;
@@ -46,11 +46,12 @@ public class Printer implements Printable {
 
     boolean printOrNot = true;
 
-    boolean header = true;
-    boolean workerHeader = true;
+    boolean printHeader = true;
+    boolean printOverflowHeader = true;
     boolean workerOnly = false;
+    boolean endOfLine = false;
+    boolean overflow = false;
 
-    int workerHeaderIndex = 0;
     int workerIndex = 0;
     int transactionIndex = 0;
 
@@ -68,10 +69,10 @@ public class Printer implements Printable {
         try {
             itemCount = 0;
             while (results.next()) {
-                transactionIDs.add(results.getInt(1));
+                transactions.add(new Transaction(results.getInt(1)));
             }
 
-            itemCount = transactionIDs.size();
+            itemCount = transactions.size();
         } catch (SQLException ex) {
             System.err.println("Error: Unable to get results size. Detail: " + ex.getMessage());
             ex.printStackTrace();
@@ -83,7 +84,7 @@ public class Printer implements Printable {
 
         pagesNeeded = (int) Math.ceil((double) itemCount / printCap);
 
-        System.out.println("There are " + itemCount + " items, We need: " + pagesNeeded + " pages(s)");
+        System.out.println("Page needed: " + pagesNeeded);
     }
 
     public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
@@ -103,10 +104,12 @@ public class Printer implements Printable {
             // Initial the position for new page
             x = 20;
             y = 80;
-            this.render_header(g);
-            // Reset the x axis
-            x = 20;
-            this.render_left_content(g, pageIndex);
+            if (printHeader || (endOfLine && overflow && printOverflowHeader)) {
+                this.render_header(g);
+                System.out.println("Page needed: " + pagesNeeded);
+            }
+
+            this.render_content(g, pageIndex);
         }
 
         return PAGE_EXISTS;
@@ -114,8 +117,9 @@ public class Printer implements Printable {
 
     private void render_header(Graphics2D g) {
         int size = 0;
-        if (header) {
-            g.setFont(new Font("Calibri", Font.BOLD, 12));
+        g.setFont(new Font("Calibri", Font.BOLD, 12));
+        
+        if (printHeader) {
             if (parent.chkMonthlyReportDate.isSelected()) {
                 g.drawString("Tarikh", x, y);
                 size = 60;
@@ -160,7 +164,7 @@ public class Printer implements Printable {
 
             if (parent.chkMonthlyReportWeight.isSelected()) {
                 g.drawString("Berat KG", x, y);
-                size = 50;
+                size = 60;
                 g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
                 g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
                 g.drawLine(x - 5, y + 5, x - 5, y - 35);
@@ -189,133 +193,139 @@ public class Printer implements Printable {
                 g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
                 x += size + 10;
             }
-            header = false;
+            
+            printHeader = false;
         }
 
-        if (workerHeader) {
-            int total = selected.size();
-            for (int i = workerHeaderIndex; i < total; i ++) {
-                System.out.println("X index: " + x);
-                size = 180;
-                if (x + size > 780.0) {
-                    workerHeaderIndex = i;
-                    workerHeader = true;
-                    pagesNeeded ++;
-                    break;
-                }
-
-                g.drawString(selected.get(i).getCode() + " " + selected.get(i).getName(), x, y - 18);
-                g.drawString("Gaji", x, y);
-                g.drawString("Pinjaman", x + 50, y);
-                g.drawString("Baki", x + 110, y);
-
-
-                g.drawLine(x - 5 + 50, y + 5, x - 5 + 50, y - 15);
-                g.drawLine(x - 5 + 110, y + 5, x - 5 + 110, y - 15);
-
-                g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
-                g.drawLine(x - 5, y - 15, x + 5 + size, y - 15);
-                g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
-                g.drawLine(x - 5, y + 5, x - 5, y - 35);
-                g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
-                x += size + 10;
-
-                workerHeader = false;
+        int total = selected.size();
+        for (int i = workerIndex; i < total; i ++) {
+            size = 180;
+            if (x + size > 780.0) {
+                workerIndex = i;
+                overflow = true;
+                pagesNeeded ++;
+                printOverflowHeader = true;
+                break;
             }
-        }
 
+            g.drawString(selected.get(i).getCode() + " " + selected.get(i).getName(), x, y - 18);
+            g.drawString("Gaji", x, y);
+            g.drawString("Pinjaman", x + 50, y);
+            g.drawString("Baki", x + 110, y);
+
+
+            g.drawLine(x - 5 + 50, y + 5, x - 5 + 50, y - 15);
+            g.drawLine(x - 5 + 110, y + 5, x - 5 + 110, y - 15);
+
+            g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
+            g.drawLine(x - 5, y - 15, x + 5 + size, y - 15);
+            g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
+            g.drawLine(x - 5, y + 5, x - 5, y - 35);
+            g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
+            x += size + 10;
+
+            printOverflowHeader = false;
+        }
+        
         y += 20;
     }
 
-    private void render_left_content(Graphics2D g, int pageIndex) {
+    private void render_content(Graphics2D g, int pageIndex) {
         int size = 0;
-        int transactionCount = transactionIDs.size();
-        for (int i = transactionIndex; i < transactionCount; i ++) {
-            if (transactionIndex >=  (printCap * pageIndex + 1)) {
-                break;
+        int counter = 0;
+        for (int i = transactionIndex; i < itemCount; i ++) {
+            x = 20;
+            if (counter > printCap) {
+                if (overflow && printOverflowHeader) pagesNeeded ++;
+                transactionIndex = i;
+                return;
+            }
+
+            Transaction transaction = transactions.get(i);
+            
+            g.setFont(new Font("Calibri", Font.PLAIN, 12));
+            g.drawLine(x - 5, y + 5, x - 5, y - 35);
+            if ( ! endOfLine) {
+                if (parent.chkMonthlyReportDate.isSelected()) {
+                    g.drawString(Common.renderDisplayDate(transaction.getDate()), x, y);
+                    size = 60;
+                    x += size + 10;
+                }
+
+                if (parent.chkMonthlyReportClientName.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL)
+                        g.drawString(transaction.getCustomer().getName(), x, y);
+                    else
+                        g.drawString("Pinjaman", x, y);
+                    size = 80;
+                    x += size + 10;
+                }
+
+                if (parent.chkMonthlyReportDescription.isSelected()) {
+                    g.drawString(transaction.getDescription(), x, y);
+                    size = 120;
+                    x += size + 10;
+                }
+
+                if (parent.chkMonthlyReportKiraanAsing.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL)
+                        g.drawString("" + Common.currency(transaction.getKiraanAsing()), x, y);
+                    size = 50;
+                    x += size + 10;
+                }
+
+                if (parent.chkMonthlyReportWeight.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL)
+                        g.drawString("" + Common.currency(transaction.getWeight()), x, y);
+                    size = 60;
+                    x += size + 10;
+                }
+
+                if (parent.chkMonthlyReportPricePerTon.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL)
+                        g.drawString("" + Common.currency(transaction.getPricePerTon()), x, y);
+                    size = 50;
+                    x += size + 10;
+                }
+
+                if (parent.chkMonthlyReportTotalReceived.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL)
+                        g.drawString("" + Common.currency(transaction.getTotal()), x, y);
+                    size = 50;
+                    x += size + 10;
+                }
             }
             
-            Transaction transaction = new Transaction(transactionIDs.get(i));
-            g.setFont(new Font("Calibri", Font.PLAIN, 12));
-            if (parent.chkMonthlyReportDate.isSelected()) {
-                g.drawString(Common.renderDisplayDate(transaction.getDate()), x, y);
-                size = 60;
-                x += size + 10;
-            }
-
-            if (parent.chkMonthlyReportClientName.isSelected()) {
-                if (transaction.getType() == Transaction.GENERAL)
-                    g.drawString(transaction.getCustomer().getName(), x, y);
-                else
-                    g.drawString("Pinjaman", x, y);
-                size = 80;
-                x += size + 10;
-            }
-
-            if (parent.chkMonthlyReportDescription.isSelected()) {
-                g.drawString(transaction.getDescription(), x, y);
-                size = 120;
-                x += size + 10;
-            }
-
-            if (parent.chkMonthlyReportKiraanAsing.isSelected()) {
-                if (transaction.getType() == Transaction.GENERAL)
-                    g.drawString("" + transaction.getKiraanAsing(), x, y);
-                size = 50;
-                x += size + 10;
-            }
-
-            if (parent.chkMonthlyReportWeight.isSelected()) {
-                if (transaction.getType() == Transaction.GENERAL)
-                    g.drawString("" + transaction.getWeight(), x, y);
-                size = 50;
-                x += size + 10;
-            }
-
-            if (parent.chkMonthlyReportPricePerTon.isSelected()) {
-                if (transaction.getType() == Transaction.GENERAL)
-                    g.drawString("" + transaction.getPricePerTon(), x, y);
-                size = 50;
-                x += size + 10;
-            }
-
-            if (parent.chkMonthlyReportTotalReceived.isSelected()) {
-                if (transaction.getType() == Transaction.GENERAL)
-                    g.drawString("" + transaction.getTotal(), x, y);
-                size = 50;
-                x += size + 10;
-            }
-
             int total = selected.size();
-            for (int c = 0; c < total; c ++) {
+            int index = overflow && endOfLine ? workerIndex : 0;
+            for (int c = index; c < total; c ++) {
                 size = 180;
-                if (c + size > 780.0) {
-                    workerIndex = c;
+                if (x + size > 780.0) {
                     break;
                 }
 
                 String[] workerIds = transaction.getNormalizedWorkerID().split(",");
 
+                g.drawLine(x - 5, y + 5, x - 5, y - 35);
+
                 if (Common.inArray(workerIds, selected.get(c).getId())) {
                     if (transaction.getType() == Transaction.GENERAL) {
                         calculations.get(c).setSalary(transaction.getWagePerWorker());
-                        g.drawString("" + transaction.getWagePerWorker(), x, y);
-                        g.drawString("" + calculations.get(c).getBalance(), x + 110, y);
+                        g.drawString("" + Common.currency(transaction.getWagePerWorker()), x, y);
+                        g.drawString("" + Common.currency(calculations.get(c).getBalance()), x + 110, y);
                     } else {
                         calculations.get(c).setLoan(transaction.getLoanAmount());
-                        g.drawString("" + transaction.getLoanAmount(), x + 50, y);
-                        g.drawString("" + calculations.get(c).getBalance(), x + 110, y);
+                        g.drawString("" +Common.currency( transaction.getLoanAmount()), x + 50, y);
+                        g.drawString("" + Common.currency(calculations.get(c).getBalance()), x + 110, y);
                     }
-
                 }
+
+                x += size + 10;
             }
+            g.drawLine(x - 5, y + 5, x - 5, y - 35);
+            y += 12;
+            counter ++;
         }
-
-        y += 12;
-    }
-
-    // mostly is workers
-    private void render_right_content() {
-
+        endOfLine = true;
     }
 }

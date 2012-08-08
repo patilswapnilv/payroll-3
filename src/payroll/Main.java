@@ -1,9 +1,7 @@
 package payroll;
 
 
-import java.awt.print.Book;
 import java.awt.print.PageFormat;
-import java.awt.print.Paper;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.beans.PropertyChangeEvent;
@@ -16,7 +14,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.print.attribute.HashAttributeSet;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.standard.MediaPrintableArea;
 import javax.swing.DefaultListModel;
@@ -1747,11 +1744,29 @@ public class Main extends javax.swing.JFrame {
 
         if (transaction.save()) {
             JOptionPane.showMessageDialog(null, "Transaction recorded", "", JOptionPane.INFORMATION_MESSAGE);
+            this._clearTransactionForm();
         } else {
             JOptionPane.showMessageDialog(null, "Unable to record the transaction", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_btnRecordActionPerformed
+
+    private void _clearTransactionForm() {
+        _transaction_customer = null;
+        txtTransactionDate.setDate(null);
+        txtTransactionClientID.setText("");
+        txtTransactionClientName.setText("");
+        txtTransactionDescription.setText("");
+        txtTransactionWeight.setText("");
+        txtTransactionPricePerTon.setText("");
+        txtTransactionTotalReceived.setText("");
+        txtTransactionWages.setText("");
+        txtTransactionSalary.setText("");
+        txtTransactionBalance.setText("");
+        txtTransactionCalculate.setText("");
+        txtTransactionPayPerPerson.setText("");
+        this._prepare_transaction_tab();
+    }
 
     private void txtTransactionClientIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTransactionClientIDActionPerformed
         String clientCode = txtTransactionClientID.getText();
@@ -1951,14 +1966,14 @@ public class Main extends javax.swing.JFrame {
                     if (Common.inArray(workerIds, worker.getId())) {
                         if (transaction.getType() == Transaction.GENERAL) {
                             calculations.get(index).setSalary(transaction.getWagePerWorker());
-                            content += "<td>" + transaction.getWagePerWorker() + "</td>";
+                            content += "<td>" + Common.currency(transaction.getWagePerWorker()) + "</td>";
                             content += "<td></td>";
-                            content += "<td>" + calculations.get(index).getBalance() + "</td>";
+                            content += "<td>" + Common.currency(calculations.get(index).getBalance()) + "</td>";
                         } else {
                             calculations.get(index).setLoan(transaction.getLoanAmount());
                             content += "<td></td>";
-                            content += "<td>" + transaction.getLoanAmount() + "</td>";
-                            content += "<td>" + calculations.get(index).getBalance() + "</td>";
+                            content += "<td>" + Common.currency(transaction.getLoanAmount()) + "</td>";
+                            content += "<td>" + Common.currency(calculations.get(index).getBalance()) + "</td>";
                         }
                     } else {
                         content += "<td></td>";
@@ -2048,8 +2063,9 @@ public class Main extends javax.swing.JFrame {
         String query = "SELECT id FROM transactions ";
         query += "INNER JOIN transaction_workers ON transactions.id = transaction_workers.transaction_id ";
         query += "WHERE worker_id IN (" + id + ") ";
-        query += "AND date >= '" + Common.renderSQLDate(dateFrom) + "'";
-        query += "AND date <= '" + Common.renderSQLDate(dateTo) + "'";
+        query += "AND date >= '" + Common.renderSQLDate(dateFrom) + "'" ;
+        query += "AND date <= '" + Common.renderSQLDate(dateTo) + "'" ;
+        query += "ORDER BY date";
 
         return query;
     }
