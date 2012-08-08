@@ -46,6 +46,13 @@ public class SavingForm extends javax.swing.JDialog {
         workerRecord = new WorkerRecord();
     }
 
+    public SavingForm(java.awt.Frame parent, boolean modal, int id) {
+        super(parent, modal);
+        initComponents();
+        workerRecord = new WorkerRecord();
+        this.id = id;
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
