@@ -44,6 +44,8 @@ public class Printer implements Printable {
     private int x = 0;
     private int y = 0;
 
+    private int totalBasicColumnSize = 0;
+
     boolean printOrNot = true;
 
     boolean printHeader = true;
@@ -100,7 +102,6 @@ public class Printer implements Printable {
 
         if (printOrNot) {
             System.out.println("Printing...");
-            int size = 0;
             // Initial the position for new page
             x = 20;
             y = 80;
@@ -110,6 +111,7 @@ public class Printer implements Printable {
             }
 
             this.render_content(g, pageIndex);
+            g.drawLine(15, y - 10, x - 5, y - 10);
         }
 
         return PAGE_EXISTS;
@@ -193,7 +195,8 @@ public class Printer implements Printable {
                 g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
                 x += size + 10;
             }
-            
+
+            totalBasicColumnSize = x;
             printHeader = false;
         }
 
@@ -323,7 +326,7 @@ public class Printer implements Printable {
                 x += size + 10;
             }
             g.drawLine(x - 5, y + 5, x - 5, y - 35);
-            y += 12;
+            y += 15;
             counter ++;
         }
 

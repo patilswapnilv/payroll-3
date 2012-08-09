@@ -223,6 +223,7 @@ public class WorkerForm extends javax.swing.JDialog {
             Main main = (Main) this.getParent();
             main.load_workers();
             JOptionPane.showMessageDialog(null, "Rekod Pekerja baru ditambah", "Berjaya!", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Rekod Pekerja tidak dapat ditambah", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
         }

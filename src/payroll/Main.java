@@ -18,6 +18,8 @@ import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.standard.MediaPrintableArea;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -90,11 +92,14 @@ public class Main extends javax.swing.JFrame {
         DefaultListModel loanWorkerModel = new DefaultListModel();
         listTransactionLoanWorkers.setModel(loanWorkerModel);
         int row = tblTransactionInvolvedWorkers.getRowCount();
-        tblTransactionInvolvedWorkers.getColumnModel().getColumn(0).addPropertyChangeListener(new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent evt) {
+
+        TableModelListener tableModelListener = new TableModelListener() {
+            public void tableChanged(TableModelEvent e) {
                 calculateTransaction(null);
             }
-        });
+        };
+
+        tblTransactionInvolvedWorkers.getModel().addTableModelListener(tableModelListener);
         
         listTransactionLoanWorkers.removeAll();
 
