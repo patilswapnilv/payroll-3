@@ -158,7 +158,7 @@
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jPanel22" max="32767" attributes="0"/>
+                              <Component id="jPanel22" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -182,7 +182,7 @@
                           <Component id="txtTransactionClientName" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel4" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
@@ -236,7 +236,7 @@
                           </Group>
                           <Component id="jPanel22" max="32767" attributes="1"/>
                       </Group>
-                      <EmptySpace pref="86" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -535,12 +535,17 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jScrollPane4" alignment="0" max="32767" attributes="1"/>
-                              <Component id="btnTransactionNewLoan" alignment="0" pref="229" max="32767" attributes="1"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="btnTransactionNewLoan" min="-2" max="-2" attributes="1"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jScrollPane4" min="-2" max="-2" attributes="1"/>
+                              </Group>
                           </Group>
-                          <EmptySpace pref="94" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -550,8 +555,8 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane4" min="-2" pref="346" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="btnTransactionNewLoan" pref="48" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnTransactionNewLoan" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="116" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1366,16 +1371,14 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="352" max="32767" attributes="0"/>
+                                  <EmptySpace pref="586" max="32767" attributes="0"/>
                                   <Component id="btnMonthlyReportGenerate" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnMonthlyReportPersonal" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnMonthlyReportExport" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnMonthlyReportExport" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Component id="btnMonthlyReportPrint" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnMonthlyReportPrint" min="-2" pref="120" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnMonthlyReportEnd" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Component id="btnMonthlyReportEnd" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -1385,11 +1388,10 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="btnMonthlyReportEnd" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                                      <Component id="btnMonthlyReportPrint" alignment="3" pref="50" max="32767" attributes="1"/>
-                                      <Component id="btnMonthlyReportExport" alignment="3" min="-2" pref="50" max="-2" attributes="1"/>
-                                      <Component id="btnMonthlyReportPersonal" alignment="3" min="-2" pref="50" max="-2" attributes="1"/>
-                                      <Component id="btnMonthlyReportGenerate" alignment="3" min="-2" pref="50" max="-2" attributes="1"/>
+                                      <Component id="btnMonthlyReportEnd" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnMonthlyReportPrint" alignment="3" min="-2" max="-2" attributes="1"/>
+                                      <Component id="btnMonthlyReportExport" alignment="3" min="-2" max="-2" attributes="1"/>
+                                      <Component id="btnMonthlyReportGenerate" alignment="3" min="-2" max="-2" attributes="1"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -1416,14 +1418,6 @@
                           </Properties>
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMonthlyReportExportActionPerformed"/>
-                          </Events>
-                        </Component>
-                        <Component class="javax.swing.JButton" name="btnMonthlyReportPersonal">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Akuan Individu"/>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMonthlyReportPersonalActionPerformed"/>
                           </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnMonthlyReportGenerate">
@@ -1458,7 +1452,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel34" min="-2" pref="25" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jScrollPane5" pref="349" max="32767" attributes="1"/>
+                                  <Component id="jScrollPane5" pref="376" max="32767" attributes="1"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="cboxMonthlyReportAllWorkers" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>

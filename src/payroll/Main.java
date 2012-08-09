@@ -6,6 +6,8 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
@@ -20,6 +22,7 @@ import java.util.logging.Logger;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.standard.MediaPrintableArea;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -30,6 +33,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.lobobrowser.html.UserAgentContext;
 import org.lobobrowser.html.parser.DocumentBuilderImpl;
 import org.lobobrowser.html.parser.InputSourceImpl;
@@ -39,6 +43,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 import payroll.libraries.Common;
 import payroll.libraries.Database;
+import payroll.libraries.ExtensionFileFilter;
 import payroll.model.Customer;
 import payroll.model.ReportCalculation;
 import payroll.model.Transaction;
@@ -264,7 +269,6 @@ public class Main extends javax.swing.JFrame {
         btnMonthlyReportEnd = new javax.swing.JButton();
         btnMonthlyReportPrint = new javax.swing.JButton();
         btnMonthlyReportExport = new javax.swing.JButton();
-        btnMonthlyReportPersonal = new javax.swing.JButton();
         btnMonthlyReportGenerate = new javax.swing.JButton();
         jPanel24 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -538,11 +542,14 @@ public class Main extends javax.swing.JFrame {
         jPanel22Layout.setHorizontalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnTransactionNewLoan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel22Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnTransactionNewLoan))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel22Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -550,8 +557,8 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnTransactionNewLoan, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(btnTransactionNewLoan)
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -617,7 +624,7 @@ public class Main extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -635,7 +642,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(txtTransactionClientID, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTransactionClientName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -676,7 +683,7 @@ public class Main extends javax.swing.JFrame {
                                     .addComponent(txtTransactionPayPerPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1132,13 +1139,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnMonthlyReportPersonal.setText("Akuan Individu");
-        btnMonthlyReportPersonal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMonthlyReportPersonalActionPerformed(evt);
-            }
-        });
-
         btnMonthlyReportGenerate.setText("Senarai Transaksi");
         btnMonthlyReportGenerate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1151,16 +1151,14 @@ public class Main extends javax.swing.JFrame {
         jPanel23Layout.setHorizontalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
-                .addContainerGap(352, Short.MAX_VALUE)
+                .addContainerGap(586, Short.MAX_VALUE)
                 .addComponent(btnMonthlyReportGenerate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMonthlyReportPersonal)
+                .addComponent(btnMonthlyReportExport)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMonthlyReportExport, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnMonthlyReportPrint)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMonthlyReportPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMonthlyReportEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnMonthlyReportEnd)
                 .addContainerGap())
         );
         jPanel23Layout.setVerticalGroup(
@@ -1168,11 +1166,10 @@ public class Main extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnMonthlyReportEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMonthlyReportPrint, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(btnMonthlyReportExport, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMonthlyReportPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMonthlyReportGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnMonthlyReportEnd)
+                    .addComponent(btnMonthlyReportPrint)
+                    .addComponent(btnMonthlyReportExport)
+                    .addComponent(btnMonthlyReportGenerate))
                 .addContainerGap())
         );
 
@@ -1237,7 +1234,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cboxMonthlyReportAllWorkers)
                 .addContainerGap())
@@ -1869,27 +1866,66 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void btnMonthlyReportExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyReportExportActionPerformed
+        JFileChooser dialog = new JFileChooser();
+        dialog.setFileFilter(new ExtensionFileFilter("Microsoft Excel", "xls"));
+
+        if (dialog.showSaveDialog(this) != JFileChooser.APPROVE_OPTION) {
+            return;
+        }
+
         ArrayList<String> columns = this.getReportColumns();
         ArrayList<Worker> selected = this.getReportSelectedWorkers();
         Workbook workbook = new HSSFWorkbook();
         int index = 0;
-
         Sheet sheet = (Sheet) workbook.createSheet("Laporan");
-        Row headerRow = sheet.createRow(0);
+        Row firstHeaderRow = sheet.createRow(0);
+        Row secondHeaderRow = sheet.createRow(1);
 
         index = 0;
+        char pos = 'A';
         for (String column : columns) {
-            Cell cell = headerRow.createCell(index);
+            Cell cell = secondHeaderRow.createCell(index);
             cell.setCellValue(column);
-            index ++;
+            sheet.addMergedRegion(CellRangeAddress.valueOf("$" + pos + "$1:$" + pos + "$2"));
+            index++;
+            pos ++;
         }
 
+        for (Worker worker : selected) {
+            Cell cell = firstHeaderRow.createCell(index);
+            cell.setCellValue(worker.getCode() + " " + worker.getName());
+            sheet.addMergedRegion(CellRangeAddress.valueOf("$" + pos + "$1:$" + (pos + 3) + "$1"));
+            pos ++;
+            
+            cell = secondHeaderRow.createCell(index);
+            cell.setCellValue("Gaji");
+            cell = secondHeaderRow.createCell(index + 1);
+            cell.setCellValue("Pinjaman");
+            cell = secondHeaderRow.createCell(index + 2);
+            cell.setCellValue("Baki");
+            index += 3;
+        }
         sheet.createFreezePane(0, 1);
-    }//GEN-LAST:event_btnMonthlyReportExportActionPerformed
+        
+        FileOutputStream out = null;
+        try {
+            
+            out = new FileOutputStream(dialog.getSelectedFile());
+            workbook.write(out);
+            out.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                out.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
-    private void btnMonthlyReportPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyReportPersonalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMonthlyReportPersonalActionPerformed
+    }//GEN-LAST:event_btnMonthlyReportExportActionPerformed
 
     private void btnMonthlyReportGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyReportGenerateActionPerformed
         // get selected worker to be display
@@ -2112,7 +2148,7 @@ public class Main extends javax.swing.JFrame {
             dateTo.setTime(txtMonthlyReportDateFrom.getDate());
         }
 
-        String query = "SELECT id FROM transactions ";
+        String query = "SELECT DISTINCT id FROM transactions ";
         query += "INNER JOIN transaction_workers ON transactions.id = transaction_workers.transaction_id ";
         query += "WHERE worker_id IN (" + id + ") ";
         query += "AND date >= '" + Common.renderSQLDate(dateFrom) + "'" ;
@@ -2248,7 +2284,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btnMonthlyReportEnd;
     private javax.swing.JButton btnMonthlyReportExport;
     private javax.swing.JButton btnMonthlyReportGenerate;
-    private javax.swing.JButton btnMonthlyReportPersonal;
     private javax.swing.JButton btnMonthlyReportPrint;
     private javax.swing.JButton btnPayCancel;
     private javax.swing.JButton btnPayEnd;

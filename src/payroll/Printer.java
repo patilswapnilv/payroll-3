@@ -36,10 +36,11 @@ public class Printer implements Printable {
 
     private ArrayList<Transaction> transactions = new ArrayList<Transaction>();
 
-    final int printCap = 30;
+    final int printCap = 28;
     private int printerPointer = 0;
     private int pagesNeeded = 1;
     private int totalPage = 0;
+    private int totalItemCounter = 0;
     private int currentPage = 0;
     private int itemCount = 0;
     private int x = 0;
@@ -95,6 +96,7 @@ public class Printer implements Printable {
     public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
         Graphics2D g = (Graphics2D) graphics;
         g.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+        int size = 0;
 
         printOrNot = printOrNot ? false : true;
 
@@ -109,8 +111,37 @@ public class Printer implements Printable {
             x = 20;
             y = 80;
             this.render_header(g);
-            this.render_content(g);
+            int workerLocalIndex = this.render_content(g);
             g.drawLine(15, y - 10, x - 5, y - 10);
+
+            if (totalItemCounter >= itemCount) {
+                if (printMainColumn) {
+                    x = basicColumnSize;
+                } else {
+                    x = 20;
+                }
+
+                size = 180;
+                y += 5;
+                for (int i = workerIndex; i < workerCount; i ++) {
+                    if (x + size > 780.0) {
+                        break;
+                    }
+
+                    g.setFont(new Font("Calibri", Font.BOLD, 12));
+                    g.drawString(Common.currency(calculations.get(i).getSalary()), x, y);
+                    g.drawString(Common.currency(calculations.get(i).getLoan()), x + 50, y);
+                    g.drawString(Common.currency(calculations.get(i).getBalance()), x + 110, y);
+
+                    g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
+                    g.drawLine(x - 5, y + 5, x - 5, y - 35);
+                    g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
+
+                    x += size + 10;
+                }
+            }
+
+            workerIndex = workerLocalIndex;
 
             if (isOverflow && printOverflowColumn == false) {
                 currentPage ++;
@@ -123,7 +154,7 @@ public class Printer implements Printable {
             } else {
                 currentPage ++;
             }
-
+            
             g.setColor(Color.GRAY);
             g.drawString("Page " + currentPage, 20, (int) pageFormat.getHeight() - 20);
         }
@@ -159,7 +190,7 @@ public class Printer implements Printable {
 
             if (parent.chkMonthlyReportDescription.isSelected()) {
                 g.drawString("Keterangan", x, y);
-                size = 120;
+                size = 140;
                 g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
                 g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
                 g.drawLine(x - 5, y + 5, x - 5, y - 35);
@@ -243,7 +274,7 @@ public class Printer implements Printable {
         y += 20;
     }
 
-    private void render_content(Graphics2D g) {
+    private int render_content(Graphics2D g) {
         int size = 0;
         int counter = 0;
         int workerIndexLocal = 0;
@@ -278,7 +309,7 @@ public class Printer implements Printable {
 
                 if (parent.chkMonthlyReportDescription.isSelected()) {
                     g.drawString(transaction.getDescription(), x, y);
-                    size = 120;
+                    size = 140;
                     x += size + 10;
                 }
 
@@ -340,8 +371,9 @@ public class Printer implements Printable {
             // increase the row size
             y += 15;
             counter ++;
+            totalItemCounter ++;
         }
 
-        workerIndex = workerIndexLocal;
+        return workerIndexLocal;
     }
 }
