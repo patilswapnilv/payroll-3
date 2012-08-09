@@ -11,16 +11,33 @@
 
 package payroll;
 
-/**
- *
- * @author Edward
- */
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import payroll.model.Worker;
+import payroll.model.WorkerRecord;
+
+/*  @author Edward  */
 public class SalaryForm extends javax.swing.JDialog {
+
+    private Worker worker;
+    private WorkerRecord workerRecord;
+    int id = 0;
+    private int _current_worker_id = 0;
 
     /** Creates new form SalaryForm */
     public SalaryForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        workerRecord = new WorkerRecord();
+    }
+
+    public SalaryForm(java.awt.Frame parent, boolean modal, int id) {
+        super(parent, modal);
+        initComponents();
+        workerRecord = new WorkerRecord();
+        this.id = id;
     }
 
     /** This method is called from within the constructor to
@@ -42,6 +59,9 @@ public class SalaryForm extends javax.swing.JDialog {
         txtWorkerName = new javax.swing.JTextField();
         txtDate = new com.toedter.calendar.JDateChooser();
         txtTotalPay = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtDescription = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Bayaran Gaji");
@@ -56,6 +76,11 @@ public class SalaryForm extends javax.swing.JDialog {
         });
 
         btnSave.setText("Rekodkan");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -84,7 +109,19 @@ public class SalaryForm extends javax.swing.JDialog {
 
         jLabel3.setText("Amaun Bayaran [-]");
 
+        txtWorkerCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtWorkerCodeActionPerformed(evt);
+            }
+        });
+
         txtDate.setDateFormatString("dd/MM/yyyy");
+
+        jLabel4.setText("Description");
+
+        txtDescription.setColumns(20);
+        txtDescription.setRows(5);
+        jScrollPane1.setViewportView(txtDescription);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,19 +132,27 @@ public class SalaryForm extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtWorkerCode, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtWorkerName, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTotalPay, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtWorkerCode, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtWorkerName, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtTotalPay)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -128,7 +173,11 @@ public class SalaryForm extends javax.swing.JDialog {
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTotalPay, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -140,6 +189,90 @@ public class SalaryForm extends javax.swing.JDialog {
     private void btnEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndActionPerformed
         this.dispose();
 }//GEN-LAST:event_btnEndActionPerformed
+
+    private void txtWorkerCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtWorkerCodeActionPerformed
+        String worker_code = txtWorkerCode.getText();
+
+        String query = "SELECT * FROM worker WHERE code LIKE ? AND is_active = 1 LIMIT 1";
+
+        PreparedStatement ps = Application.db.createPreparedStatement(query);
+        try {
+            ps.setString(1, worker_code + "%");
+        } catch (SQLException ex) {
+            Error.error(ex, "");
+        }
+
+        ResultSet rs = Application.db.execute(ps);
+        try {
+            rs.next();
+            txtWorkerCode.setText(rs.getString("code"));
+            txtWorkerName.setText(rs.getString("name"));
+            this._current_worker_id = rs.getInt("worker_id");
+            rs.close();
+        } catch (SQLException ex) {
+            this._reset_worker_form();
+            JOptionPane.showMessageDialog(null, "Tiada Rekod Pekerja ini", "Kesilapan", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_txtWorkerCodeActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        if ( ! this._check()) {
+            return;
+        }
+
+        workerRecord.setWorkerID(_current_worker_id);
+        workerRecord.setDate(new java.sql.Date(txtDate.getDate().getTime()));
+        workerRecord.setDescription(txtDescription.getText());
+        if (!txtTotalPay.getText().isEmpty()) {
+            workerRecord.setAmount(Double.parseDouble(txtTotalPay.getText()));
+            workerRecord.setIsPay(true);
+        }
+
+        boolean success = workerRecord.save();
+
+        if (success) {
+            JOptionPane.showMessageDialog(null, "Rekod Transaksi baru ditambah", "Berjaya!", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Rekod Transaksi tidak dapat ditambah", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private boolean _check()
+    {
+        boolean valid = false;
+        boolean valid_code = false;
+        String message = "";
+        String query = "SELECT COUNT(worker_id) FROM worker WHERE code = ?";
+
+        if (txtWorkerCode.getText().isEmpty()) {
+            message = "Sila lengkapkan Kod Pekerja";
+        } else if (txtDate.getDate() == null) {
+            message = "Sila lengkapkan Tarikh";
+        } else if (txtTotalPay.getText().isEmpty()) {
+            message = "Sila lengkapkan Amaun Bayaran";
+        } else if (!txtTotalPay.getText().isEmpty()) {
+            String payAmount = txtTotalPay.getText();
+            try {
+                Double.parseDouble(payAmount);
+                valid = true;
+            } catch(NumberFormatException e){
+                message = "Sila lengkapkan Amaun Bayaran. contoh: 123.45";
+            }
+            //DecimalFormat df = new DecimalFormat("0.00");
+            //txtSavingAmount.setText("" + df.format(savingAmount));
+        } else {
+            valid = true;
+        }
+        if ( ! valid) {
+            JOptionPane.showMessageDialog(null, message, "Kesilapan", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return valid;
+    }
+
+    private void _reset_worker_form() {
+        txtWorkerName.setText("");
+    }
 
     /**
     * @param args the command line arguments
@@ -164,8 +297,11 @@ public class SalaryForm extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private com.toedter.calendar.JDateChooser txtDate;
+    private javax.swing.JTextArea txtDescription;
     private javax.swing.JTextField txtTotalPay;
     private javax.swing.JTextField txtWorkerCode;
     private javax.swing.JTextField txtWorkerName;

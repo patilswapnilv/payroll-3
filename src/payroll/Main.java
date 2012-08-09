@@ -2182,7 +2182,7 @@ public class Main extends javax.swing.JFrame {
 
         ResultSet rs = Application.db.execute(ps);
         try {
-            rs.next();
+            //rs.next();
             txtProfileClientID.setText(rs.getString("code"));
             txtProfileClientName.setText(rs.getString("name"));
             String status = rs.getBoolean("is_active") ? "Aktif" : "Tidak Aktif";

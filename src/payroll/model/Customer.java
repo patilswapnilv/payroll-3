@@ -16,49 +16,54 @@ import payroll.libraries.Database;
  * @author Edward
  */
 public class Customer {
-    private int id;
-    private String code, name;
-    private boolean status;
+    int customer_id;
+    String code, name;
+    boolean status;
 
     private boolean _loaded;
 
     public Customer() {
-        id = 0;
+        customer_id = 0;
         code = null;
         name = null;
         status = false;
     }
 
-    public Customer(int id) {
-        this.id = id;
-        this._load();
+    public Customer(int customer_id) {
+        this._load(customer_id);
     }
 
-    public Customer(int id, String code, String name, boolean status) {
-        this.id = id;
+    public Customer(int customer_id, String code, String name, boolean status) {
+        this.customer_id = customer_id;
         this.code = code;
         this.name = name;
         this.status = status;
     }
 
-    private void _load() {
-        String query = "SELECT * FROM customer WHERE customer_id = " + this.id;
+    private boolean _load(int customer_id) {
+        String query = "SELECT * FROM customer WHERE customer_id = " + this.customer_id;
         ResultSet rs = Database.instance().execute(query);
 
         try {
-            rs.next();
             this.setCode(rs.getString("code"));
             this.setName(rs.getString("name"));
             this.setStatus(rs.getBoolean("is_active"));
+            this.customer_id = customer_id;
             this._loaded = true;
         } catch (SQLException ex) {
             Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
-            System.err.println(ex.getMessage());
         }
+
+        return this.loaded();
+    }
+
+    public boolean loaded()
+    {
+        return this._loaded;
     }
 
     public int getId() {
-        return id;
+        return customer_id;
     }
 
     public String getCode() {
@@ -73,8 +78,8 @@ public class Customer {
         return status;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int customer_id) {
+        this.customer_id = customer_id;
     }
 
     public void setCode(String code) {

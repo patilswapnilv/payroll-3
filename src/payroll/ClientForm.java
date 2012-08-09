@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import payroll.model.Customer;
 
 /**
  *
@@ -23,18 +24,34 @@ import javax.swing.JOptionPane;
  */
 public class ClientForm extends javax.swing.JDialog {
 
+    private Customer customer;
     int customer_id = 0;
+    private boolean _loaded = false;
 
     /** Creates new form ClientForm */
     public ClientForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        customer = new Customer();
     }
 
     public ClientForm(java.awt.Frame parent, boolean modal, int customer_id) {
         super(parent, modal);
-        this.customer_id = customer_id;
         initComponents();
+        customer = new Customer(customer_id);
+        this.customer_id = customer_id;
+        this._load();
+    }
+
+    private void _load() {
+        txtClientID.setText(customer.getCode());
+        txtClientName.setText(customer.getName());
+        if (customer.getStatus()) {
+            rbtnActive.setSelected(true);
+        } else {
+            rbtnInactive.setSelected(true);
+        }
+        this._loaded = true;
     }
 
     /** This method is called from within the constructor to
