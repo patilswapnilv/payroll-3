@@ -32,16 +32,6 @@ public class ReportFrame extends javax.swing.JFrame {
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
         }
-        
-        this._setup();
-    }
-
-    private void _setup() {
-        HTMLEditorKit kit = (HTMLEditorKit) content.getEditorKit();
-        StyleSheet css = kit.getStyleSheet();
-        css.addRule("body { font-family: arial; }");
-        css.addRule("table, tr, td { border-style: solid; }");
-        css.addRule("table { border-collapse: collapse; }");
     }
 
     /** This method is called from within the constructor to
@@ -53,14 +43,9 @@ public class ReportFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
-        content = new javax.swing.JEditorPane();
+        html = new org.lobobrowser.html.gui.HtmlPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        content.setContentType("text/html");
-        content.setEditable(false);
-        jScrollPane2.setViewportView(content);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -68,14 +53,14 @@ public class ReportFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 980, Short.MAX_VALUE)
+                .addComponent(html, javax.swing.GroupLayout.DEFAULT_SIZE, 980, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
+                .addComponent(html, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -95,8 +80,7 @@ public class ReportFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JEditorPane content;
-    private javax.swing.JScrollPane jScrollPane2;
+    public org.lobobrowser.html.gui.HtmlPanel html;
     // End of variables declaration//GEN-END:variables
 
 }

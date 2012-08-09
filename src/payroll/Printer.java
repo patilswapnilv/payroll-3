@@ -5,6 +5,7 @@
 
 package payroll;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -30,32 +31,33 @@ public class Printer implements Printable {
     ArrayList<ReportCalculation> calculations = new ArrayList<ReportCalculation>();
     private ArrayList<String> headers = new ArrayList<String>();
     private ArrayList<Worker> selected = new ArrayList<Worker>();
-    private ResultSet results;
     private String query = "";
     private Main parent;
 
     private ArrayList<Transaction> transactions = new ArrayList<Transaction>();
 
-    final int printCap = 40;
+    final int printCap = 30;
     private int printerPointer = 0;
     private int pagesNeeded = 1;
-    private int extraPage = -1;
+    private int totalPage = 0;
+    private int currentPage = 0;
     private int itemCount = 0;
     private int x = 0;
     private int y = 0;
 
-    private int totalBasicColumnSize = 0;
-
     boolean printOrNot = true;
-
-    boolean printHeader = true;
-    boolean printOverflowHeader = true;
-    boolean workerOnly = false;
-    boolean endOfLine = false;
-    boolean overflow = false;
 
     int workerIndex = 0;
     int transactionIndex = 0;
+
+    //---------------------------------
+    boolean printMainColumn = true;
+    boolean printOverflowColumn = false;
+    boolean isOverflow = false;
+
+    int basicColumnSize = 0;
+    int overflowCounter = 0;
+    int workerCount = 0;
 
     public Printer(Main parent, ArrayList<Worker> selected, String query) {
         this.parent = parent;
@@ -66,7 +68,6 @@ public class Printer implements Printable {
 
     private void setup() {
         ResultSet results = Database.instance().execute(query);
-        this.results = results;
 
         try {
             itemCount = 0;
@@ -84,7 +85,9 @@ public class Printer implements Printable {
             calculations.add(new ReportCalculation(worker.getId()));
         }
 
+        workerCount = selected.size();
         pagesNeeded = (int) Math.ceil((double) itemCount / printCap);
+        totalPage = pagesNeeded;
 
         System.out.println("Page needed: " + pagesNeeded);
     }
@@ -105,13 +108,24 @@ public class Printer implements Printable {
             // Initial the position for new page
             x = 20;
             y = 80;
-            if (printHeader || (endOfLine && overflow && printOverflowHeader)) {
-                this.render_header(g);
-                System.out.println("Page needed: " + pagesNeeded);
+            this.render_header(g);
+            this.render_content(g);
+            g.drawLine(15, y - 10, x - 5, y - 10);
+
+            if (isOverflow && printOverflowColumn == false) {
+                currentPage ++;
+                printOverflowColumn = true;
+                printMainColumn = false;
+            } else if (isOverflow && printOverflowColumn) {
+                printMainColumn = true;
+                printOverflowColumn = false;
+                workerIndex = 0;
+            } else {
+                currentPage ++;
             }
 
-            this.render_content(g, pageIndex);
-            g.drawLine(15, y - 10, x - 5, y - 10);
+            g.setColor(Color.GRAY);
+            g.drawString("Page " + currentPage, 20, (int) pageFormat.getHeight() - 20);
         }
 
         return PAGE_EXISTS;
@@ -121,7 +135,7 @@ public class Printer implements Printable {
         int size = 0;
         g.setFont(new Font("Calibri", Font.BOLD, 12));
         
-        if (printHeader) {
+        if (printMainColumn) {
             if (parent.chkMonthlyReportDate.isSelected()) {
                 g.drawString("Tarikh", x, y);
                 size = 60;
@@ -196,18 +210,15 @@ public class Printer implements Printable {
                 x += size + 10;
             }
 
-            totalBasicColumnSize = x;
-            printHeader = false;
+            basicColumnSize = x;
         }
 
-        int total = selected.size();
-        for (int i = workerIndex; i < total; i ++) {
+        for (int i = workerIndex; i < workerCount; i ++) {
             size = 180;
             if (x + size > 780.0) {
-                workerIndex = i;
-                overflow = true;
+                isOverflow = true;
+                printOverflowColumn = false;
                 pagesNeeded ++;
-                printOverflowHeader = true;
                 break;
             }
 
@@ -227,28 +238,29 @@ public class Printer implements Printable {
             g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
             x += size + 10;
 
-            printOverflowHeader = false;
         }
         
         y += 20;
     }
 
-    private void render_content(Graphics2D g, int pageIndex) {
+    private void render_content(Graphics2D g) {
         int size = 0;
         int counter = 0;
+        int workerIndexLocal = 0;
         for (int i = transactionIndex; i < itemCount; i ++) {
+            // reset position
             x = 20;
+
             if (counter > printCap) {
-                if (overflow && printOverflowHeader) pagesNeeded ++;
-                transactionIndex = i;
-                return;
+                if (isOverflow == false || (isOverflow && printOverflowColumn)) transactionIndex = i;
+                break;
             }
 
             Transaction transaction = transactions.get(i);
-            
             g.setFont(new Font("Calibri", Font.PLAIN, 12));
+            // draw line on left
             g.drawLine(x - 5, y + 5, x - 5, y - 35);
-            if ( ! endOfLine) {
+            if (printMainColumn) {
                 if (parent.chkMonthlyReportDate.isSelected()) {
                     g.drawString(Common.renderDisplayDate(transaction.getDate()), x, y);
                     size = 60;
@@ -298,18 +310,15 @@ public class Printer implements Printable {
                     x += size + 10;
                 }
             }
-            
-            int total = selected.size();
-            int index = overflow && endOfLine ? workerIndex : 0;
-            for (int c = index; c < total; c ++) {
+            for (int c = workerIndex; c < workerCount; c ++) {
                 size = 180;
                 if (x + size > 780.0) {
+                    workerIndexLocal = c;
                     break;
                 }
 
-                String[] workerIds = transaction.getNormalizedWorkerID().split(",");
-
                 g.drawLine(x - 5, y + 5, x - 5, y - 35);
+                String[] workerIds = transaction.getNormalizedWorkerID().split(",");
 
                 if (Common.inArray(workerIds, selected.get(c).getId())) {
                     if (transaction.getType() == Transaction.GENERAL) {
@@ -325,12 +334,14 @@ public class Printer implements Printable {
 
                 x += size + 10;
             }
+
+            // draw line on the right side
             g.drawLine(x - 5, y + 5, x - 5, y - 35);
+            // increase the row size
             y += 15;
             counter ++;
         }
 
-        transactionIndex = 0;
-        endOfLine = true;
+        workerIndex = workerIndexLocal;
     }
 }
