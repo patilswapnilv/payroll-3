@@ -6,6 +6,7 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -1873,29 +1874,50 @@ public class Main extends javax.swing.JFrame {
             return;
         }
 
+        File file = dialog.getSelectedFile();
+
+        String filename = file.getPath();
+        if ( ! filename.endsWith(".xls")) {
+            filename += ".xls";
+        }
+
+        if (new File(filename).exists()) {
+            if (JOptionPane.showConfirmDialog(null, "Overwrite the existing file?", "", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) != JOptionPane.YES_OPTION) {
+                return;
+            }
+        }
+
         ArrayList<String> columns = this.getReportColumns();
         ArrayList<Worker> selected = this.getReportSelectedWorkers();
+        ArrayList<ReportCalculation> calculations = new ArrayList<ReportCalculation>();
+        String query = this.getReportQuery(selected);
+        ResultSet results = Database.instance().execute(query);
+        int workerCount = selected.size();
+
+        for (Worker worker : selected) {
+            calculations.add(new ReportCalculation(worker.getId()));
+        }
+
         Workbook workbook = new HSSFWorkbook();
         int index = 0;
         Sheet sheet = (Sheet) workbook.createSheet("Laporan");
         Row firstHeaderRow = sheet.createRow(0);
         Row secondHeaderRow = sheet.createRow(1);
 
+        int pos = 0;
         index = 0;
-        char pos = 'A';
         for (String column : columns) {
-            Cell cell = secondHeaderRow.createCell(index);
+            sheet.addMergedRegion(new CellRangeAddress(0, 1, pos, pos));
+            Cell cell = firstHeaderRow.createCell(index);
             cell.setCellValue(column);
-            sheet.addMergedRegion(CellRangeAddress.valueOf("$" + pos + "$1:$" + pos + "$2"));
             index++;
             pos ++;
         }
-
+        
         for (Worker worker : selected) {
+            sheet.addMergedRegion(new CellRangeAddress(0, 0, pos, pos + 2));
             Cell cell = firstHeaderRow.createCell(index);
             cell.setCellValue(worker.getCode() + " " + worker.getName());
-            sheet.addMergedRegion(CellRangeAddress.valueOf("$" + pos + "$1:$" + (pos + 3) + "$1"));
-            pos ++;
             
             cell = secondHeaderRow.createCell(index);
             cell.setCellValue("Gaji");
@@ -1904,16 +1926,123 @@ public class Main extends javax.swing.JFrame {
             cell = secondHeaderRow.createCell(index + 2);
             cell.setCellValue("Baki");
             index += 3;
+            pos += 3;
         }
-        sheet.createFreezePane(0, 1);
+        sheet.createFreezePane(0, 2);
+
+
+        int rowIndex = 2;
+        
+        try {
+            while(results.next()) {
+                Transaction transaction = new Transaction(results.getInt(1));
+                index = 0;
+
+                Row row = sheet.createRow(rowIndex);
+                Cell cell = null;
+
+                cell = row.createCell(index);
+                if (chkMonthlyReportDate.isSelected()) {
+                    cell.setCellValue(Common.renderDisplayDate(transaction.getDate()));
+                    index ++;
+                    cell = row.createCell(index);
+                }
+                if (chkMonthlyReportClientName.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL) {
+                        cell.setCellValue(transaction.getCustomer().getName());
+                    } else {
+                        cell.setCellValue("Pinjaman");
+                    }
+                    index ++;
+                    cell = row.createCell(index);
+                }
+                if (chkMonthlyReportDescription.isSelected()) {
+                    cell.setCellValue(transaction.getDescription());
+                    index ++;
+                    cell = row.createCell(index);
+                }
+                if (chkMonthlyReportWeight.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL) cell.setCellValue(transaction.getWeight());
+                    index ++;
+                    cell = row.createCell(index);
+                }
+                if (chkMonthlyReportPricePerTon.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL) cell.setCellValue(Common.currency(transaction.getPricePerTon()));
+                    index ++;
+                    cell = row.createCell(index);
+                }
+                if (chkMonthlyReportTotalReceived.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL) cell.setCellValue(Common.currency(transaction.getTotal()));
+                    index ++;
+                    cell = row.createCell(index);
+                }
+                if (chkMonthlyReportWages.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL) cell.setCellValue(Common.currency(transaction.getWages()));
+                    index ++;
+                    cell = row.createCell(index);
+                }
+                if (chkMonthlyReportSalary.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL) cell.setCellValue(Common.currency(transaction.getTotalSalary()));
+                    index ++;
+                    cell = row.createCell(index);
+                }
+                if (chkMonthlyReportBalance.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL) cell.setCellValue(Common.currency(transaction.getBalance()));
+                    index ++;
+                    cell = row.createCell(index);
+                }
+                if (chkMonthlyReportKiraanAsing.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL) cell.setCellValue(Common.currency(transaction.getKiraanAsing()));
+                    index ++;
+                    cell = row.createCell(index);
+                }
+
+                for (int i = 0; i < workerCount; i ++) {
+                    
+                    if (transaction.getType() == Transaction.GENERAL) {
+                        calculations.get(i).setSalary(transaction.getWagePerWorker());
+                        cell = row.createCell(index++);
+                        cell.setCellValue(Common.currency(transaction.getWagePerWorker()));
+                        cell = row.createCell(index++);
+                        cell = row.createCell(index++);
+                        cell.setCellValue(Common.currency(calculations.get(i).getBalance()));
+                    } else {
+                        calculations.get(i).setLoan(transaction.getLoanAmount());
+                        cell = row.createCell(index++);
+                        cell = row.createCell(index++);
+                        cell.setCellValue(transaction.getLoanAmount());
+                        cell = row.createCell(index++);
+                        cell.setCellValue(Common.currency(calculations.get(i).getBalance()));
+                    }
+                }
+                
+                rowIndex ++;
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        
+        Row summaryRow = sheet.createRow(rowIndex);
+        index = columns.size();
+        
+        for (ReportCalculation calculation: calculations) {
+            Cell cell = summaryRow.createCell(index++);
+            cell.setCellValue(Common.currency(calculation.getSalary()));
+            cell = summaryRow.createCell(index++);
+            cell.setCellValue(Common.currency(calculation.getLoan()));
+            cell = summaryRow.createCell(index++);
+            cell.setCellValue(Common.currency(calculation.getBalance()));
+        }
         
         FileOutputStream out = null;
         try {
-            
-            out = new FileOutputStream(dialog.getSelectedFile());
+            out = new FileOutputStream(filename);
             workbook.write(out);
             out.close();
+            JOptionPane.showMessageDialog(null, "Report generated to " + filename, "", JOptionPane.INFORMATION_MESSAGE);
         } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "The process cannot access the file because it is being used by another process", "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -2107,7 +2236,7 @@ public class Main extends javax.swing.JFrame {
         if (chkMonthlyReportSalary.isSelected()) headers.add("Jumlah Gaji");
         if (chkMonthlyReportBalance.isSelected()) headers.add("Jumlah Baki");
         if (chkMonthlyReportKiraanAsing.isSelected()) headers.add("Kiraan Asing");
-        if (chkMonthlyReportSaving.isSelected()) headers.add("Simpanan Tetap");
+        //if (chkMonthlyReportSaving.isSelected()) headers.add("Simpanan Tetap");
 
         return headers;
     }
