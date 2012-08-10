@@ -159,4 +159,8 @@ public class WorkerRecord {
         return isPay;
     }
 
+    public double getAmount() {
+        return amount;
+    }
+
 }

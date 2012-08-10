@@ -29,6 +29,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.hssf.record.SaveRecalcRecord;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -49,6 +50,8 @@ import payroll.model.Customer;
 import payroll.model.ReportCalculation;
 import payroll.model.Transaction;
 import payroll.model.Worker;
+import payroll.model.WorkerRecord;
+import sun.misc.DoubleConsts;
 
 /*
  * To change this template, choose Tools | Templates
@@ -700,6 +703,12 @@ public class Main extends javax.swing.JFrame {
 
         jLabel16.setText("Baki Simpanan Terkini");
 
+        txtSavingWorkerID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getSavingDetails(evt);
+            }
+        });
+
         txtSavingWorkerName.setEditable(false);
         txtSavingWorkerName.setFocusable(false);
 
@@ -708,6 +717,12 @@ public class Main extends javax.swing.JFrame {
         jLabel17.setText("Hingga");
 
         txtSavingDateTo.setDateFormatString("dd/MM/yyyy");
+
+        txtSavingCurrentSaving.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getSavingDetails(evt);
+            }
+        });
 
         tblSaving.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2359,6 +2374,74 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Customer profile not found", "Kesilapan", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_txtProfileClientIDActionPerformed
+
+    private void getSavingDetails(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getSavingDetails
+        Worker selected = null;
+        String searchText = txtSavingWorkerID.getText();
+
+        for (Worker worker : workers) {
+            if (worker.getCode().indexOf(searchText) >= 0) {
+                selected = worker;
+                break;
+            }
+        }
+
+        if (selected == null) {
+            JOptionPane.showMessageDialog(null, "Worker not found", "Not found", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        txtSavingWorkerName.setText(selected.getName());
+        txtSavingWorkerID.setText(selected.getCode());
+        String query = "SELECT * FROM workerRecord WHERE worker_id = " + selected.getId() + " ";
+
+        if (txtSavingDateFrom.getDate() != null) {
+            Calendar calender = Calendar.getInstance();
+            calender.setTime(txtSavingDateFrom.getDate());
+            query += "AND date >= \"" + Common.renderSQLDate(calender) + "\" ";
+        }
+
+        if (txtSavingDateTo.getDate() != null) {
+            Calendar calender = Calendar.getInstance();
+            calender.setTime(txtSavingDateTo.getDate());
+            query += "AND date <= \"" + Common.renderSQLDate(calender) + "\" ";
+        }
+
+        ArrayList<WorkerRecord> records = new ArrayList<WorkerRecord>();
+        ResultSet results = Database.instance().execute(query);
+        int counter = 0;
+        double balance = 0.0;
+
+        DefaultTableModel savingTableModel = (DefaultTableModel) tblSaving.getModel();
+
+        int rowCount = tblSaving.getRowCount();
+
+        for (int i = 0; i < rowCount; i ++) {
+            savingTableModel.removeRow(0);
+        }
+        
+        try {
+            while (results.next()) {
+                WorkerRecord record = new WorkerRecord(results.getInt("id"), results.getInt("worker_id"), results.getDouble("amount"), results.getString("description"), results.getBoolean("is_pay"), results.getDate("date"));
+                records.add(record);
+                balance += record.getIsPay() ? 0 - record.getAmount() : record.getAmount();
+
+                Object[] objects = new Object[] {
+                    new Integer(counter + 1),
+                    new String(Common.renderDisplayDate(record.getDate())),
+                    new String(record.getDescription()),
+                    new String(Common.currency(record.getIsPay() ? 0.00 : record.getAmount())),
+                    new String(Common.currency(record.getIsPay() ? record.getAmount() : 0.00)),
+                    new Double(Common.currency(balance))
+                };
+
+                savingTableModel.addRow(objects);
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+    }//GEN-LAST:event_getSavingDetails
 
     private void _reset_worker_form() {
         txtProfileWorkerCurrentSaving.setText("");
