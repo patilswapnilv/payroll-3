@@ -1,31 +1,24 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/*  To change this template, choose Tools | Templates
+ *  and open the template in the editor.
  */
 
-/*
- * ClientForm.java
- *
- * Created on Jul 18, 2012, 10:12:40 PM
+/*  ClientForm.java
+ *  Created on Jul 18, 2012, 10:12:40 PM
  */
 
 package payroll;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import payroll.model.Customer;
 
-/**
- *
- * @author edward
- */
+/*  @author edward  */
 public class ClientForm extends javax.swing.JDialog {
 
     private Customer customer;
-    int customer_id = 0;
+    int id = 0;
     private boolean _loaded = false;
 
     /** Creates new form ClientForm */
@@ -35,11 +28,11 @@ public class ClientForm extends javax.swing.JDialog {
         customer = new Customer();
     }
 
-    public ClientForm(java.awt.Frame parent, boolean modal, int customer_id) {
+    public ClientForm(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
-        customer = new Customer(customer_id);
-        this.customer_id = customer_id;
+        customer = new Customer(id);
+        this.id = id;
         this._load();
     }
 
@@ -179,35 +172,17 @@ public class ClientForm extends javax.swing.JDialog {
             return;
         }
 
-        boolean active = rbtnActive.isSelected();
+        customer.setCode(txtClientID.getText());
+        customer.setName(txtClientName.getText());
+        customer.setStatus(rbtnActive.isSelected());
 
-        String query = "";
-
-        if (this.customer_id == 0) {
-            query = "INSERT INTO customer(code, name, is_active) VALUES(?, ?, ?)";
-        } else {
-            query = "UPDATE customer SET code = ?, name = ?, is_active = ? WHERE customer_id = " + this.customer_id;
-        }
-        PreparedStatement ps = Application.db.createPreparedStatement(query);
-
-        try {
-            ps.setString(1, txtClientID.getText());
-            ps.setString(2, txtClientName.getText());
-            ps.setBoolean(3, active);
-        } catch (SQLException ex) {
-            Logger.getLogger(ex.getMessage()).log(Level.WARNING, null, ex);
-        }
-
-        boolean success = false;
-        if (this.customer_id == 0) {
-            this.customer_id = Application.db.insert(ps);
-            success = this.customer_id != 0 ? true : false;
-        } else {
-            success = Application.db.update(ps);
-        }
+        boolean success = customer.save();
 
         if (success) {
+            Main main = (Main) this.getParent();
+            main.load_customers();
             JOptionPane.showMessageDialog(null, "Rekod Pelanggan baru ditambah", "Berjaya!", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Rekod Pelanggan tidak dapat ditambah", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
         }
@@ -216,16 +191,34 @@ public class ClientForm extends javax.swing.JDialog {
     private boolean _check()
     {
         boolean valid = false;
+        boolean valid_code = false;
         String message = "";
+        String query = "SELECT COUNT(customer_id) FROM customer WHERE code = ?";
+
+        if (this._loaded) {
+            query += " AND customer_id != " + this.id;
+        }
+
+        PreparedStatement ps = Application.db.createPreparedStatement(query);
+        try {
+            ps.setString(1, txtClientID.getText());
+            ResultSet rs = Application.db.execute(ps);
+            rs.next();
+            valid_code = rs.getInt(1) > 0 ? false : true;
+            rs.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
         if (txtClientID.getText().isEmpty()) {
             message = "Sila lengkapkan Kod Pelanggan";
         } else if (txtClientName.getText().isEmpty()) {
-            message = "Silal lengkapkan Nama Pelanggan";
+            message = "Sila lengkapkan Nama Pelanggan";
         } else {
             valid = true;
         }
         if ( ! valid) {
-            JOptionPane.showMessageDialog(null, message, "Kesilapan", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, message, "Kesilapan!", JOptionPane.ERROR_MESSAGE);
         }
 
         return valid;

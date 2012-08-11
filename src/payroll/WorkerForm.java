@@ -268,7 +268,7 @@ public class WorkerForm extends javax.swing.JDialog {
             valid = true;
         }
         if ( ! valid) {
-            JOptionPane.showMessageDialog(null, message, "Kesilapan", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, message, "Kesilapan!", JOptionPane.ERROR_MESSAGE);
         }
 
         return valid;

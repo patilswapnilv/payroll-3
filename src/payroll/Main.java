@@ -65,6 +65,7 @@ public class Main extends javax.swing.JFrame {
     private int _current_client_id = 0;
     private Customer _transaction_customer = null;
     private ArrayList<Worker> workers = new ArrayList<Worker>();
+    private ArrayList<Customer> customers = new ArrayList<Customer>();
     
     /** Creates new form Main2 */
     public Main() {
@@ -81,6 +82,7 @@ public class Main extends javax.swing.JFrame {
         }
 
         this.load_workers();
+        this.load_customers();
     }
 
     public void load_workers() {
@@ -92,6 +94,21 @@ public class Main extends javax.swing.JFrame {
         try {
             while (rs.next()) {
                 workers.add(new Worker(rs.getInt("worker_id"), rs.getString("code"), rs.getString("name"), new Date(rs.getDate("start_date").getTime()), new Date(rs.getDate("end_date").getTime()), rs.getBoolean("is_active")));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
+    public void load_customers() {
+        customers.clear();
+
+        String query = "SELECT * FROM customer WHERE is_active = 1 ORDER BY code";
+        ResultSet rs = Database.instance().execute(query);
+
+        try {
+            while (rs.next()) {
+                customers.add(new Customer(rs.getInt("customer_id"), rs.getString("code"), rs.getString("name"), rs.getBoolean("is_active")));
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -1693,7 +1710,11 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProfileClientNewActionPerformed
 
     private void btnProfileClientEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileClientEditActionPerformed
-        new ClientForm(this, true).setVisible(true);
+        if (this._current_client_id > 0) {
+            new ClientForm(this, true, this._current_client_id).setVisible(true);
+        } else {
+
+        }
     }//GEN-LAST:event_btnProfileClientEditActionPerformed
 
     private void txtProfileWorkerIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProfileWorkerIDActionPerformed
@@ -1729,7 +1750,7 @@ public class Main extends javax.swing.JFrame {
             rs.close();
         } catch (SQLException ex) {
             this._reset_worker_form();
-            JOptionPane.showMessageDialog(null, "Worker profile not found", "Warning", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Tiada Rekod Pekerja ini.", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_txtProfileWorkerIDActionPerformed
 
@@ -1765,10 +1786,10 @@ public class Main extends javax.swing.JFrame {
         }
 
         if (transaction.save()) {
-            JOptionPane.showMessageDialog(null, "Transaction recorded", "", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Transaksi berjaya direkodkan.", "Berjaya!", JOptionPane.INFORMATION_MESSAGE);
             this._clearTransactionForm();
         } else {
-            JOptionPane.showMessageDialog(null, "Unable to record the transaction", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Transaksi tidak dapat direkodkan.", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_btnRecordActionPerformed
@@ -1810,7 +1831,7 @@ public class Main extends javax.swing.JFrame {
             txtTransactionClientID.setText(_transaction_customer.getCode());
             rs.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Unable to find related customer", "", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Tiada Rekod Pelanggan ini.", "Kesilapan!", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_txtTransactionClientIDActionPerformed
 
@@ -2191,7 +2212,7 @@ public class Main extends javax.swing.JFrame {
             rs.close();
         } catch (SQLException ex) {
             this._reset_worker_form();
-            JOptionPane.showMessageDialog(null, "Customer profile not found", "Kesilapan", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Tiada Rekod Pelanggan ini.", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_txtProfileClientIDActionPerformed
 
@@ -2238,7 +2259,7 @@ public class Main extends javax.swing.JFrame {
             return true;
         }
         
-        JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(null, message, "Kesilapan!", JOptionPane.WARNING_MESSAGE);
         
         return false;
     }

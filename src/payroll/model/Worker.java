@@ -14,10 +14,7 @@ import java.util.logging.Logger;
 import payroll.Application;
 import payroll.Main;
 
-/**
- *
- * @author Tomato
- */
+/*  @author Tomato  */
 public class Worker {
 
     int id;

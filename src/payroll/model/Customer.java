@@ -5,50 +5,49 @@
 
 package payroll.model;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import payroll.libraries.Database;
+import payroll.Application;
 
-/**
- *
- * @author Edward
- */
+
+/*  @author Edward  */
 public class Customer {
-    int customer_id;
-    String code, name;
+    int id;
+    String code;
+    String name;
     boolean status;
 
-    private boolean _loaded;
+    private boolean _loaded = false;
 
     public Customer() {
-        customer_id = 0;
+        id = 0;
         code = null;
         name = null;
         status = false;
     }
 
-    public Customer(int customer_id) {
-        this._load(customer_id);
+    public Customer(int id) {
+        this._load(id);
     }
 
-    public Customer(int customer_id, String code, String name, boolean status) {
-        this.customer_id = customer_id;
+    public Customer(int id, String code, String name, boolean status) {
+        this.id = id;
         this.code = code;
         this.name = name;
         this.status = status;
     }
 
-    private boolean _load(int customer_id) {
-        String query = "SELECT * FROM customer WHERE customer_id = " + this.customer_id;
-        ResultSet rs = Database.instance().execute(query);
-
+    private boolean _load(int id) {
+        String query = "SELECT * FROM customer WHERE customer_id = " + id;
+        ResultSet rs = Application.db.execute(query);
         try {
-            this.setCode(rs.getString("code"));
-            this.setName(rs.getString("name"));
-            this.setStatus(rs.getBoolean("is_active"));
-            this.customer_id = customer_id;
+            this.code = rs.getString("code");
+            this.name = rs.getString("name");
+            this.status = rs.getBoolean("is_active");
+            this.id = id;
             this._loaded = true;
         } catch (SQLException ex) {
             Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
@@ -62,8 +61,37 @@ public class Customer {
         return this._loaded;
     }
 
+    public boolean save()
+    {
+        String query = "";
+
+        if ( ! this._loaded) {
+            query = "INSERT INTO customer(code, name, is_active) VALUES(?, ?, ?)";
+        } else {
+            query = "UPDATE customer SET code = ?, name = ?, is_active = ? WHERE customer_id = " + id;
+        }
+
+        PreparedStatement ps = Application.db.createPreparedStatement(query);
+
+        try {
+            ps.setString(1, this.getCode());
+            ps.setString(2, this.getName());
+            ps.setBoolean(3, this.getStatus());
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.getMessage()).log(Level.WARNING, null, ex);
+            System.err.println(ex.getMessage());
+        }
+
+        if ( ! this._loaded) {
+            this.id = Application.db.insert(ps);
+            return this.id != 0 ? true : false;
+        } else {
+            return Application.db.update(ps);
+        }
+    }
+
     public int getId() {
-        return customer_id;
+        return id;
     }
 
     public String getCode() {
@@ -78,8 +106,8 @@ public class Customer {
         return status;
     }
 
-    public void setId(int customer_id) {
-        this.customer_id = customer_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setCode(String code) {
