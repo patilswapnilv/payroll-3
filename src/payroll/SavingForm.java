@@ -8,8 +8,8 @@
 
 package payroll;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+//import java.beans.PropertyChangeEvent;
+//import java.beans.PropertyChangeListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -232,7 +232,7 @@ public class SavingForm extends javax.swing.JDialog {
             rs.close();
         } catch (SQLException ex) {
             this._reset_worker_form();
-            JOptionPane.showMessageDialog(null, "Tiada Rekod Pekerja ini", "Kesilapan", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Tiada Rekod Pekerja ini", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_txtWorkerCodeActionPerformed
 
@@ -302,7 +302,7 @@ public class SavingForm extends javax.swing.JDialog {
             valid = true;
         }
         if ( ! valid) {
-            JOptionPane.showMessageDialog(null, message, "Kesilapan", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, message, "Kesilapan!", JOptionPane.ERROR_MESSAGE);
         }
 
         return valid;

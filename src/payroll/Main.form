@@ -8,6 +8,8 @@
     </Container>
     <Component class="javax.swing.ButtonGroup" name="btnGroupMonthlyReport">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="btnGroupWorkerReportType">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -35,7 +37,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPane1" alignment="0" pref="700" max="32767" attributes="0"/>
+          <Component id="jTabbedPane1" alignment="0" pref="695" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -67,7 +69,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="672" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="667" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -556,7 +558,7 @@
                           <Component id="jScrollPane4" min="-2" pref="346" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="btnTransactionNewLoan" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="116" max="32767" attributes="0"/>
+                          <EmptySpace pref="111" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -738,7 +740,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" pref="429" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" pref="424" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -834,7 +836,7 @@
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnSavingEnd" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                              <Component id="btnSavingCancel" alignment="3" pref="50" max="32767" attributes="1"/>
+                              <Component id="btnSavingCancel" alignment="3" max="32767" attributes="1"/>
                               <Component id="btnSavingNew" alignment="3" min="-2" pref="50" max="-2" attributes="1"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -985,7 +987,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane2" alignment="0" pref="428" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" alignment="0" pref="423" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -1047,7 +1049,7 @@
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnPayEnd" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                              <Component id="btnPayCancel" alignment="3" pref="50" max="32767" attributes="1"/>
+                              <Component id="btnPayCancel" alignment="3" max="32767" attributes="1"/>
                               <Component id="btnPayNew" alignment="3" min="-2" pref="50" max="-2" attributes="1"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -1097,7 +1099,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTabbedPane4" pref="661" max="32767" attributes="0"/>
+                      <Component id="jTabbedPane4" pref="656" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1492,7 +1494,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel34" min="-2" pref="25" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jScrollPane5" pref="376" max="32767" attributes="1"/>
+                                  <Component id="jScrollPane5" pref="371" max="32767" attributes="1"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="cboxMonthlyReportAllWorkers" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -1577,34 +1579,42 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel31" min="-2" pref="180" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtReportWorkerCode" min="-2" pref="80" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtReportWorkerName" min="-2" pref="280" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="jLabel31" min="-2" pref="180" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txtReportWorkerCode" min="-2" pref="80" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txtReportWorkerName" min="-2" pref="280" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="jLabel33" min="-2" pref="180" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="rbtnWorkerMonthlyIncome" alignment="0" pref="366" max="32767" attributes="1"/>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="txtReportWorkerDate" min="-2" pref="80" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="jLabel32" min="-2" pref="50" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="txtReportWorkerDateTo" min="-2" pref="80" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Component id="rbtnWorkerSaving" alignment="0" pref="366" max="32767" attributes="1"/>
+                                                  <Component id="rbtnWorkerReportFull" alignment="0" pref="366" max="32767" attributes="1"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="430" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel33" min="-2" pref="180" max="-2" attributes="0"/>
+                                      <Component id="jPanel25" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="rbtnWorkerMonthlyIncome" alignment="0" pref="366" max="32767" attributes="1"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="txtReportWorkerDate" min="-2" pref="80" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jLabel32" min="-2" pref="50" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="txtReportWorkerDateTo" min="-2" pref="80" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="rbtnWorkerSaving" alignment="0" pref="366" max="32767" attributes="1"/>
-                                          <Component id="jRadioButton6" alignment="0" pref="366" max="32767" attributes="1"/>
-                                      </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="430" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1629,8 +1639,10 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="rbtnWorkerSaving" min="-2" pref="25" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jRadioButton6" min="-2" pref="25" max="-2" attributes="0"/>
-                              <EmptySpace pref="489" max="32767" attributes="0"/>
+                              <Component id="rbtnWorkerReportFull" min="-2" pref="25" max="-2" attributes="0"/>
+                              <EmptySpace pref="424" max="32767" attributes="0"/>
+                              <Component id="jPanel25" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1642,6 +1654,9 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtReportWorkerCode">
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtReportWorkerCodeActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtReportWorkerName">
                       <Properties>
@@ -1671,20 +1686,101 @@
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="rbtnWorkerMonthlyIncome">
                       <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="btnGroupWorkerReportType"/>
+                        </Property>
                         <Property name="selected" type="boolean" value="true"/>
                         <Property name="text" type="java.lang.String" value="Ringkasan Pendapatan Bulanan"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="rbtnWorkerSaving">
                       <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="btnGroupWorkerReportType"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Ringkasan Simpanan Tetap"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="jRadioButton6">
+                    <Component class="javax.swing.JRadioButton" name="rbtnWorkerReportFull">
                       <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="btnGroupWorkerReportType"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Akaun Lengkap Pekerja"/>
                       </Properties>
                     </Component>
+                    <Container class="javax.swing.JPanel" name="jPanel25">
+                      <Properties>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                            <EtchetBorder/>
+                          </Border>
+                        </Property>
+                      </Properties>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace pref="586" max="32767" attributes="0"/>
+                                  <Component id="btnReportWorkerGenerate" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="btnReportWorkerExport" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="btnReportWorkerPrint" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="btnReportWorkerEnd" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="btnReportWorkerEnd" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnReportWorkerPrint" alignment="3" min="-2" max="-2" attributes="1"/>
+                                      <Component id="btnReportWorkerExport" alignment="3" min="-2" max="-2" attributes="1"/>
+                                      <Component id="btnReportWorkerGenerate" alignment="3" min="-2" max="-2" attributes="1"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JButton" name="btnReportWorkerEnd">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Tamat"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btnReportWorkerPrint">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Cetakkan"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReportWorkerPrintActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btnReportWorkerExport">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Format Excel"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReportWorkerExportActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btnReportWorkerGenerate">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Senarai Transaksi"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReportWorkerGenerateActionPerformed"/>
+                          </Events>
+                        </Component>
+                      </SubComponents>
+                    </Container>
                   </SubComponents>
                 </Container>
               </SubComponents>
@@ -1703,14 +1799,14 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTabbedPane2" alignment="1" pref="995" max="32767" attributes="0"/>
+                  <Component id="jTabbedPane2" alignment="1" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTabbedPane2" pref="661" max="32767" attributes="0"/>
+                      <Component id="jTabbedPane2" pref="656" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1814,7 +1910,7 @@
                                   <Component id="jLabel26" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                   <Component id="txtProfileWorkerStatus" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="386" max="32767" attributes="0"/>
+                              <EmptySpace pref="381" max="32767" attributes="0"/>
                               <Component id="jPanel15" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -1937,7 +2033,7 @@
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="btnProfileWorkerEnd" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                                      <Component id="btnProfileWorkerDelete" alignment="3" pref="50" max="32767" attributes="1"/>
+                                      <Component id="btnProfileWorkerDelete" alignment="3" max="32767" attributes="1"/>
                                       <Component id="btnProfileWorkerEdit" alignment="3" min="-2" pref="50" max="-2" attributes="1"/>
                                       <Component id="btnProfileWorkerNew" alignment="3" min="-2" pref="50" max="-2" attributes="1"/>
                                   </Group>
@@ -2024,7 +2120,7 @@
                                   <Component id="jLabel28" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                   <Component id="txtProfileClientStatus" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="479" max="32767" attributes="0"/>
+                              <EmptySpace pref="474" max="32767" attributes="0"/>
                               <Component id="jPanel16" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -2063,7 +2159,7 @@
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="btnProfileClientEnd" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                                      <Component id="btnProfileClientDelete" alignment="3" pref="50" max="32767" attributes="1"/>
+                                      <Component id="btnProfileClientDelete" alignment="3" max="32767" attributes="1"/>
                                       <Component id="btnProfileClientEdit" alignment="3" min="-2" pref="50" max="-2" attributes="1"/>
                                       <Component id="btnProfileClientNew" alignment="3" min="-2" pref="50" max="-2" attributes="1"/>
                                   </Group>
@@ -2151,7 +2247,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="672" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="667" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>

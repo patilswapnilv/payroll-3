@@ -8,13 +8,13 @@ package payroll.model;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import payroll.libraries.Database;
 import payroll.Application;
+import payroll.libraries.Common;
 
 /**
  * @author ho
@@ -82,9 +82,14 @@ public class WorkerRecord {
         PreparedStatement ps = Application.db.createPreparedStatement(query);
 
         try {
-            ps.setDate(1, this.getSQLCreated());
+            Calendar dateCalendar = Calendar.getInstance();
+            dateCalendar.setTime(this.getDate());
+            Calendar createdCalendar = Calendar.getInstance();
+            createdCalendar.setTime(this.getCreated());
+
+            ps.setString(1, Common.renderSQLDate(createdCalendar));
             ps.setInt(2, this.getWorkerID());
-            ps.setDate(3, this.getSQLDate());
+            ps.setString(3, Common.renderSQLDate(dateCalendar));
             ps.setString(4, this.getDescription());
             ps.setDouble(5, this.amount);
             ps.setBoolean(6, this.getIsPay());
@@ -163,4 +168,7 @@ public class WorkerRecord {
         return amount;
     }
 
+    public Date getCreated() {
+        return created;
+    }
 }

@@ -73,7 +73,9 @@ public class Main extends javax.swing.JFrame {
     private int _current_worker_id = 0;
     private int _current_client_id = 0;
     private Customer _transaction_customer = null;
+    private Worker _selected_report_worker = null;
     private ArrayList<Worker> workers = new ArrayList<Worker>();
+    private ArrayList<Customer> customers = new ArrayList<Customer>();
     
     /** Creates new form Main2 */
     public Main() {
@@ -90,6 +92,7 @@ public class Main extends javax.swing.JFrame {
         }
 
         this.load_workers();
+        this.load_customers();
     }
 
     public void load_workers() {
@@ -101,6 +104,21 @@ public class Main extends javax.swing.JFrame {
         try {
             while (rs.next()) {
                 workers.add(new Worker(rs.getInt("worker_id"), rs.getString("code"), rs.getString("name"), new Date(rs.getDate("start_date").getTime()), new Date(rs.getDate("end_date").getTime()), rs.getBoolean("is_active")));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
+    public void load_customers() {
+        customers.clear();
+
+        String query = "SELECT * FROM customer WHERE is_active = 1 ORDER BY code";
+        ResultSet rs = Database.instance().execute(query);
+
+        try {
+            while (rs.next()) {
+                customers.add(new Customer(rs.getInt("customer_id"), rs.getString("code"), rs.getString("name"), rs.getBoolean("is_active")));
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -173,6 +191,7 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane3 = new javax.swing.JTabbedPane();
         btnGroupMonthlyReport = new javax.swing.ButtonGroup();
+        btnGroupWorkerReportType = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -289,7 +308,12 @@ public class Main extends javax.swing.JFrame {
         jLabel33 = new javax.swing.JLabel();
         rbtnWorkerMonthlyIncome = new javax.swing.JRadioButton();
         rbtnWorkerSaving = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
+        rbtnWorkerReportFull = new javax.swing.JRadioButton();
+        jPanel25 = new javax.swing.JPanel();
+        btnReportWorkerEnd = new javax.swing.JButton();
+        btnReportWorkerPrint = new javax.swing.JButton();
+        btnReportWorkerExport = new javax.swing.JButton();
+        btnReportWorkerGenerate = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel17 = new javax.swing.JPanel();
@@ -343,7 +367,7 @@ public class Main extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 672, Short.MAX_VALUE)
+            .addGap(0, 667, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("File", jPanel2);
@@ -562,7 +586,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnTransactionNewLoan)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -760,7 +784,7 @@ public class Main extends javax.swing.JFrame {
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
         );
 
         jPanel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -795,7 +819,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSavingEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSavingCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(btnSavingCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSavingNew, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -912,7 +936,7 @@ public class Main extends javax.swing.JFrame {
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
         );
 
         jPanel13.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -947,7 +971,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPayEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPayCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(btnPayCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnPayNew, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -1250,7 +1274,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cboxMonthlyReportAllWorkers)
                 .addContainerGap())
@@ -1292,6 +1316,12 @@ public class Main extends javax.swing.JFrame {
 
         jLabel31.setText("Nama Pekerja");
 
+        txtReportWorkerCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtReportWorkerCodeActionPerformed(evt);
+            }
+        });
+
         txtReportWorkerName.setEditable(false);
         txtReportWorkerName.setFocusable(false);
 
@@ -1303,12 +1333,67 @@ public class Main extends javax.swing.JFrame {
 
         jLabel33.setText("Tempoh Tarikh");
 
+        btnGroupWorkerReportType.add(rbtnWorkerMonthlyIncome);
         rbtnWorkerMonthlyIncome.setSelected(true);
         rbtnWorkerMonthlyIncome.setText("Ringkasan Pendapatan Bulanan");
 
+        btnGroupWorkerReportType.add(rbtnWorkerSaving);
         rbtnWorkerSaving.setText("Ringkasan Simpanan Tetap");
 
-        jRadioButton6.setText("Akaun Lengkap Pekerja");
+        btnGroupWorkerReportType.add(rbtnWorkerReportFull);
+        rbtnWorkerReportFull.setText("Akaun Lengkap Pekerja");
+
+        jPanel25.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        btnReportWorkerEnd.setText("Tamat");
+
+        btnReportWorkerPrint.setText("Cetakkan");
+        btnReportWorkerPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportWorkerPrintActionPerformed(evt);
+            }
+        });
+
+        btnReportWorkerExport.setText("Format Excel");
+        btnReportWorkerExport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportWorkerExportActionPerformed(evt);
+            }
+        });
+
+        btnReportWorkerGenerate.setText("Senarai Transaksi");
+        btnReportWorkerGenerate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportWorkerGenerateActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
+        jPanel25.setLayout(jPanel25Layout);
+        jPanel25Layout.setHorizontalGroup(
+            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel25Layout.createSequentialGroup()
+                .addContainerGap(586, Short.MAX_VALUE)
+                .addComponent(btnReportWorkerGenerate)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnReportWorkerExport)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnReportWorkerPrint)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnReportWorkerEnd)
+                .addContainerGap())
+        );
+        jPanel25Layout.setVerticalGroup(
+            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel25Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnReportWorkerEnd)
+                    .addComponent(btnReportWorkerPrint)
+                    .addComponent(btnReportWorkerExport)
+                    .addComponent(btnReportWorkerGenerate))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
@@ -1316,27 +1401,32 @@ public class Main extends javax.swing.JFrame {
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel19Layout.createSequentialGroup()
-                        .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtReportWorkerCode, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtReportWorkerName, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel19Layout.createSequentialGroup()
-                        .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rbtnWorkerMonthlyIncome, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
-                            .addGroup(jPanel19Layout.createSequentialGroup()
-                                .addComponent(txtReportWorkerDate, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel19Layout.createSequentialGroup()
+                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel19Layout.createSequentialGroup()
+                                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtReportWorkerCode, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtReportWorkerDateTo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(rbtnWorkerSaving, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
-                            .addComponent(jRadioButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE))))
-                .addGap(430, 430, 430))
+                                .addComponent(txtReportWorkerName, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel19Layout.createSequentialGroup()
+                                .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(rbtnWorkerMonthlyIncome, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                                    .addGroup(jPanel19Layout.createSequentialGroup()
+                                        .addComponent(txtReportWorkerDate, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtReportWorkerDateTo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(rbtnWorkerSaving, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                                    .addComponent(rbtnWorkerReportFull, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE))))
+                        .addGap(430, 430, 430))
+                    .addGroup(jPanel19Layout.createSequentialGroup()
+                        .addComponent(jPanel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1357,8 +1447,10 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rbtnWorkerSaving, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(489, Short.MAX_VALUE))
+                .addComponent(rbtnWorkerReportFull, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 424, Short.MAX_VALUE)
+                .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTabbedPane4.addTab("Laporan Pekerja", jPanel19);
@@ -1373,7 +1465,7 @@ public class Main extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE))
+                .addComponent(jTabbedPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Laporan", jPanel5);
@@ -1462,7 +1554,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnProfileWorkerEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnProfileWorkerDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(btnProfileWorkerDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnProfileWorkerEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnProfileWorkerNew, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -1538,7 +1630,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtProfileWorkerStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 386, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 381, Short.MAX_VALUE)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1586,7 +1678,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnProfileClientEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnProfileClientDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(btnProfileClientDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnProfileClientEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnProfileClientNew, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -1640,7 +1732,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtProfileClientStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 479, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 474, Short.MAX_VALUE)
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1651,13 +1743,13 @@ public class Main extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 995, Short.MAX_VALUE)
+            .addComponent(jTabbedPane2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE))
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Profil", jPanel6);
@@ -1670,7 +1762,7 @@ public class Main extends javax.swing.JFrame {
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 672, Short.MAX_VALUE)
+            .addGap(0, 667, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Kata Laluan", jPanel7);
@@ -1683,7 +1775,7 @@ public class Main extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
         );
 
         pack();
@@ -1706,7 +1798,11 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProfileClientNewActionPerformed
 
     private void btnProfileClientEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileClientEditActionPerformed
-        new ClientForm(this, true).setVisible(true);
+        if (this._current_client_id > 0) {
+            new ClientForm(this, true, this._current_client_id).setVisible(true);
+        } else {
+
+        }
     }//GEN-LAST:event_btnProfileClientEditActionPerformed
 
     private void txtProfileWorkerIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProfileWorkerIDActionPerformed
@@ -1742,7 +1838,7 @@ public class Main extends javax.swing.JFrame {
             rs.close();
         } catch (SQLException ex) {
             this._reset_worker_form();
-            JOptionPane.showMessageDialog(null, "Worker profile not found", "Warning", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Tiada Rekod Pekerja ini.", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_txtProfileWorkerIDActionPerformed
 
@@ -1778,10 +1874,10 @@ public class Main extends javax.swing.JFrame {
         }
 
         if (transaction.save()) {
-            JOptionPane.showMessageDialog(null, "Transaction recorded", "", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Transaksi berjaya direkodkan.", "Berjaya!", JOptionPane.INFORMATION_MESSAGE);
             this._clearTransactionForm();
         } else {
-            JOptionPane.showMessageDialog(null, "Unable to record the transaction", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Transaksi tidak dapat direkodkan.", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_btnRecordActionPerformed
@@ -1823,7 +1919,7 @@ public class Main extends javax.swing.JFrame {
             txtTransactionClientID.setText(_transaction_customer.getCode());
             rs.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Unable to find related customer", "", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Tiada Rekod Pelanggan ini.", "Kesilapan!", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_txtTransactionClientIDActionPerformed
 
@@ -2362,7 +2458,7 @@ public class Main extends javax.swing.JFrame {
 
         ResultSet rs = Application.db.execute(ps);
         try {
-            rs.next();
+            //rs.next();
             txtProfileClientID.setText(rs.getString("code"));
             txtProfileClientName.setText(rs.getString("name"));
             String status = rs.getBoolean("is_active") ? "Aktif" : "Tidak Aktif";
@@ -2371,7 +2467,7 @@ public class Main extends javax.swing.JFrame {
             rs.close();
         } catch (SQLException ex) {
             this._reset_worker_form();
-            JOptionPane.showMessageDialog(null, "Customer profile not found", "Kesilapan", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Tiada Rekod Pelanggan ini.", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_txtProfileClientIDActionPerformed
 
@@ -2443,6 +2539,68 @@ public class Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_getSavingDetails
 
+    private void txtReportWorkerCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReportWorkerCodeActionPerformed
+        Worker selected = null;
+        String searchText = txtSavingWorkerID.getText();
+
+        for (Worker worker : workers) {
+            if (worker.getCode().indexOf(searchText) >= 0) {
+                selected = worker;
+                break;
+            }
+        }
+
+        if (selected == null) {
+            JOptionPane.showMessageDialog(null, "Worker not found", "Not found", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        _selected_report_worker = selected;
+
+        txtReportWorkerName.setText(selected.getName());
+        txtReportWorkerCode.setText(selected.getCode());
+    }//GEN-LAST:event_txtReportWorkerCodeActionPerformed
+
+    private void btnReportWorkerPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportWorkerPrintActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReportWorkerPrintActionPerformed
+
+    private void btnReportWorkerExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportWorkerExportActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReportWorkerExportActionPerformed
+
+    private void btnReportWorkerGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportWorkerGenerateActionPerformed
+        if (_selected_report_worker == null) {
+            JOptionPane.showMessageDialog(null, "Please select a worker", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (txtReportWorkerDate.getDate() == null || txtReportWorkerDateTo.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Please select a date range", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int type = WorkerReportFrame.FULL;
+
+        if (rbtnWorkerSaving.isSelected()) {
+            type = WorkerReportFrame.SAVING;
+        } else if (rbtnWorkerMonthlyIncome.isSelected()) {
+            type = WorkerReportFrame.INCOME;
+        }
+
+        Calendar dateFrom = Calendar.getInstance();
+        dateFrom.setTime(txtReportWorkerDate.getDate());
+
+        Calendar dateTo = Calendar.getInstance();
+        dateTo.setTime(txtReportWorkerDateTo.getDate());
+
+        String query = "SELECT * FROM workerRecord WHERE date >= \"" + Common.renderSQLDate(dateFrom) + "\" AND date <= \"" + Common.renderSQLDate(dateTo) + "\" AND worker_id = " + _selected_report_worker.getId();
+        
+        WorkerReportFrame frame = new WorkerReportFrame(type, query);
+
+        frame.setVisible(true);
+
+
+    }//GEN-LAST:event_btnReportWorkerGenerateActionPerformed
+
     private void _reset_worker_form() {
         txtProfileWorkerCurrentSaving.setText("");
         txtProfileWorkerName.setText("");
@@ -2486,13 +2644,14 @@ public class Main extends javax.swing.JFrame {
             return true;
         }
         
-        JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(null, message, "Kesilapan!", JOptionPane.WARNING_MESSAGE);
         
         return false;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btnGroupMonthlyReport;
+    private javax.swing.ButtonGroup btnGroupWorkerReportType;
     private javax.swing.JButton btnMonthlyReportEnd;
     private javax.swing.JButton btnMonthlyReportExport;
     private javax.swing.JButton btnMonthlyReportGenerate;
@@ -2509,6 +2668,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btnProfileWorkerEnd;
     private javax.swing.JButton btnProfileWorkerNew;
     private javax.swing.JButton btnRecord;
+    private javax.swing.JButton btnReportWorkerEnd;
+    private javax.swing.JButton btnReportWorkerExport;
+    private javax.swing.JButton btnReportWorkerGenerate;
+    private javax.swing.JButton btnReportWorkerPrint;
     private javax.swing.JButton btnSavingCancel;
     private javax.swing.JButton btnSavingEnd;
     private javax.swing.JButton btnSavingNew;
@@ -2577,6 +2740,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel24;
+    private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -2584,7 +2748,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -2599,6 +2762,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbtnMonhtlyReportDateRange;
     private javax.swing.JRadioButton rbtnMonthlyReportLastMonth;
     private javax.swing.JRadioButton rbtnWorkerMonthlyIncome;
+    private javax.swing.JRadioButton rbtnWorkerReportFull;
     private javax.swing.JRadioButton rbtnWorkerSaving;
     private javax.swing.JTable tblMonthlyReportWorkers;
     private javax.swing.JTable tblPay;
