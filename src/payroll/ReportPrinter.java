@@ -19,6 +19,7 @@ import java.util.Calendar;
 import payroll.libraries.Common;
 import payroll.libraries.Database;
 import payroll.model.ReportCalculation;
+import payroll.model.ReportSaving;
 import payroll.model.Transaction;
 import payroll.model.Worker;
 
@@ -26,7 +27,7 @@ import payroll.model.Worker;
  *
  * @author Edward
  */
-public class Printer implements Printable {
+public class ReportPrinter implements Printable {
 
     ArrayList<ReportCalculation> calculations = new ArrayList<ReportCalculation>();
     private ArrayList<String> headers = new ArrayList<String>();
@@ -35,6 +36,7 @@ public class Printer implements Printable {
     private Main parent;
 
     private ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+    private ArrayList<ReportSaving> savings = new ArrayList<ReportSaving>();
 
     final int printCap = 28;
     private int printerPointer = 0;
@@ -50,20 +52,23 @@ public class Printer implements Printable {
 
     int workerIndex = 0;
     int transactionIndex = 0;
+    int savingIndex = 0;
 
     //---------------------------------
     boolean printMainColumn = true;
     boolean printOverflowColumn = false;
     boolean isOverflow = false;
+    boolean printSummary = true;
 
     int basicColumnSize = 0;
     int overflowCounter = 0;
     int workerCount = 0;
 
-    public Printer(Main parent, ArrayList<Worker> selected, String query) {
+    public ReportPrinter(Main parent, ArrayList<Worker> selected, String query, ArrayList<ReportSaving> savings) {
         this.parent = parent;
         this.query = query;
         this.selected = selected;
+        this.savings = savings;
         this.setup();
     }
 
@@ -115,29 +120,42 @@ public class Printer implements Printable {
             g.drawLine(15, y - 10, x - 5, y - 10);
 
             if (totalItemCounter >= itemCount) {
-                if (printMainColumn) {
-                    x = basicColumnSize;
-                } else {
-                    x = 20;
-                }
 
-                size = 180;
-                y += 5;
-                for (int i = workerIndex; i < workerCount; i ++) {
-                    if (x + size > 780.0) {
-                        break;
+                if (printSummary) {
+                    if (printMainColumn) {
+                        x = basicColumnSize;
+                    } else {
+                        x = 20;
                     }
 
-                    g.setFont(new Font("Calibri", Font.BOLD, 12));
-                    g.drawString(Common.currency(calculations.get(i).getSalary()), x, y);
-                    g.drawString(Common.currency(calculations.get(i).getLoan()), x + 50, y);
-                    g.drawString(Common.currency(calculations.get(i).getBalance()), x + 110, y);
+                    size = 180;
+                    y += 5;
+                    for (int i = workerIndex; i < workerCount; i ++) {
+                        if (x + size > 780.0) {
+                            printSummary = true;
+                            break;
+                        }
 
-                    g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
-                    g.drawLine(x - 5, y + 5, x - 5, y - 35);
-                    g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
+                        g.setFont(new Font("Calibri", Font.BOLD, 12));
+                        g.drawString(Common.currency(calculations.get(i).getSalary()), x, y);
+                        g.drawString(Common.currency(calculations.get(i).getLoan()), x + 50, y);
+                        g.drawString(Common.currency(calculations.get(i).getBalance()), x + 110, y);
 
-                    x += size + 10;
+                        g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
+                        g.drawLine(x - 5, y + 5, x - 5, y - 35);
+                        g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
+
+                        x += size + 10;
+                        printSummary = false;
+                    }
+                }
+                
+                if (savings.size() > 0) {
+                    if (y + 60 > 580) {
+                        pagesNeeded ++;
+                    } else {
+                        printSavings(g);
+                    }
                 }
             }
 
@@ -375,5 +393,100 @@ public class Printer implements Printable {
         }
 
         return workerIndexLocal;
+    }
+
+    private void printSavings(Graphics2D g) {
+        int size = 0;
+        
+        x = 20;
+
+        if (savingIndex == 0) {
+            y += 30;
+            g.setFont(new Font("Calibri", Font.BOLD, 12));
+            g.drawString("Simpanan Tetap", x, y);
+            y += 20;
+            g.setFont(new Font("Calibri", Font.PLAIN, 12));
+
+
+            g.drawLine(x - 5, y - 15, x - 5, y + 30); // left
+            g.drawString("Baki Bulan Lalu", x, y);
+            g.drawString("Bulan Ini", x, y + 12);
+            g.drawString("Baki", x, y + 24);
+
+            x += getSavingColspanSize();
+
+            g.drawLine(15, y - 15, x + size + 5, y - 15); // top
+            g.drawLine(15, y + 30, x + size + 5, y + 30); // bottom
+        } else {
+            g.setFont(new Font("Calibri", Font.PLAIN, 12));
+            y += 50;
+        }
+
+        int count = savings.size();
+        for (int i = savingIndex; i < count; i ++) {
+            ReportSaving saving = savings.get(i);
+            
+            g.drawLine(x - 5, y - 15, x - 5, y + 30);
+            size = 180;
+            if (x + size > 780.0) {
+                savingIndex = i;
+                break;
+            }
+
+            g.drawString(Common.currency(saving.getPrevious()), x, y);
+            g.drawString(Common.currency(saving.getCurrent()), x, y + 12);
+            g.drawString(Common.currency(saving.getBalance()), x, y + 24);
+
+            g.drawLine(x - 5, y - 15, x + size + 5, y - 15); // top
+            g.drawLine(x - 5, y + 30, x + size + 5, y + 30); // bottom
+
+            x += size + 10;
+
+            g.drawLine(x - 5, y - 15, x - 5, y + 30);
+
+
+        }
+        
+    }
+
+    private int getSavingColspanSize() {
+        int size = 0, total = 0;
+
+        if (parent.chkMonthlyReportDate.isSelected()) {
+            size = 60;
+            total += size + 10;
+        }
+
+        if (parent.chkMonthlyReportClientName.isSelected()) {
+            size = 80;
+            total += size + 10;
+        }
+
+        if (parent.chkMonthlyReportDescription.isSelected()) {
+            size = 140;
+            total += size + 10;
+        }
+
+        if (parent.chkMonthlyReportKiraanAsing.isSelected()) {
+            size = 50;
+            total += size + 10;
+        }
+
+        if (parent.chkMonthlyReportWeight.isSelected()) {
+            size = 60;
+            total += size + 10;
+        }
+
+        if (parent.chkMonthlyReportPricePerTon.isSelected()) {
+            size = 50;
+            total += size + 10;
+        }
+
+        if (parent.chkMonthlyReportTotalReceived.isSelected()) {
+            size = 50;
+            total += size + 10;
+        }
+
+        return total;
     }
 }

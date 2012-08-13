@@ -13,10 +13,14 @@ package payroll;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import payroll.libraries.Common;
 import payroll.libraries.Database;
+import payroll.model.Worker;
+import payroll.model.WorkerRecord;
+import payroll.model.WorkerReport;
 
 /**
  *
@@ -24,17 +28,22 @@ import payroll.libraries.Database;
  */
 public class WorkerReportFrame extends javax.swing.JFrame {
 
-    private ResultSet results = null;
+    private ArrayList<WorkerReport> reports = new ArrayList<WorkerReport>();
+    
     private DefaultTableModel tableModel;
+    private Worker worker = null;
 
     public static final int FULL = 1;
     public static final int INCOME = 2;
     public static final int SAVING = 3;
     
     /** Creates new form WorkerReportFrame */
-    public WorkerReportFrame(int type, String query) {
+    public WorkerReportFrame(int type, Worker worker, ArrayList<WorkerReport> reports) {
         initComponents();
-        
+
+        this.reports = reports;
+        this.worker = worker;
+
         try {
             this.setExtendedState(this.MAXIMIZED_BOTH);
             this.setAlwaysOnTop(true);
@@ -45,8 +54,6 @@ public class WorkerReportFrame extends javax.swing.JFrame {
             System.err.println(ex.getMessage());
         }
 
-        results = Database.instance().execute(query);
-        
         if (type == FULL) {
             this.full_setup();
         } else if (type == INCOME) {
@@ -65,24 +72,39 @@ public class WorkerReportFrame extends javax.swing.JFrame {
         );
         tblReport.setModel(tableModel);
 
-        try {
-            double baki = 0.00;
-            while (results.next()) {
-                Object[] objects = new Object[] {
-                    new String(Common.renderDisplayDate(new Date(results.getDate("date").getTime()))),
-                    new String(),
-                    new String(),
-                    new String(),
-                    new String(results.getBoolean("is_pay") ? "" : Common.currency(results.getDouble("amount") )),
-                    new String(results.getBoolean("is_pay") ? Common.currency(results.getDouble("amount") ) : ""),
-                    new String(results.getBoolean("is_pay") ? Common.currency(baki += (0 -results.getDouble("amount"))) : Common.currency(baki += results.getDouble("amount")))
-                };
+        double totalSalary = 0.0, totalLoan = 0.0, totalBalance = 0.0, totalSaving = 0.0, totalPayment = 0.0, totalSavingBalance = 0.0;
 
-                tableModel.addRow(objects);
-            }
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
+        for (WorkerReport report : reports) {
+            
+            totalSalary += report.getSalary();
+            totalLoan += report.getLoan();
+            totalBalance += report.getBalance();
+            totalSalary += report.getSaving();
+            totalPayment += report.getPayment();
+            totalSavingBalance += report.getSavingBalance();
+            
+            Object[] objects = new Object[] {
+                new String(report.getMonth() + "/" + report.getYear()),
+                new String(Common.currency(report.getSalary())),
+                new String(Common.currency(report.getLoan())),
+                new String(Common.currency(report.getBalance())),
+                new String(Common.currency(report.getSaving())),
+                new String(Common.currency(report.getPayment())),
+                new String(Common.currency(report.getSavingBalance())),
+            };
+
+            tableModel.addRow(objects);
         }
+
+        tableModel.addRow(new Object[] {
+            new String("Jumlah"),
+            new String(Common.currency(totalSalary)),
+            new String(Common.currency(totalLoan)),
+            new String(Common.currency(totalBalance)),
+            new String(Common.currency(totalSaving)),
+            new String(Common.currency(totalPayment)),
+            new String(Common.currency(totalSavingBalance))
+        });
     }
 
     private void monthly_income_setup() {
@@ -94,20 +116,23 @@ public class WorkerReportFrame extends javax.swing.JFrame {
         );
         tblReport.setModel(tableModel);
 
+        double totalSalary = 0.0, totalLoan = 0.0, totalBalance = 0.0;
 
-        try {
-            while (results.next()) {
-                Object[] objects = new Object[] {
-                    new String(Common.renderDisplayDate(new Date(results.getDate("date").getTime()))),
-                    new String(),
-                    new String(),
-                    new String(),
-                };
+        for (WorkerReport report : reports) {
 
-                tableModel.addRow(objects);
-            }
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
+            totalSalary += report.getSalary();
+            totalLoan += report.getLoan();
+            totalBalance += report.getBalance();
+            totalSalary += report.getSaving();
+
+            Object[] objects = new Object[] {
+                new String(report.getMonth() + "/" + report.getYear()),
+                new String(Common.currency(report.getSalary())),
+                new String(Common.currency(report.getLoan())),
+                new String(Common.currency(report.getBalance())),
+            };
+
+            tableModel.addRow(objects);
         }
     }
 
@@ -120,20 +145,21 @@ public class WorkerReportFrame extends javax.swing.JFrame {
         );
         tblReport.setModel(tableModel);
 
-        try {
-            double baki = 0.00;
-            while (results.next()) {
-                Object[] objects = new Object[] {
-                    new String(Common.renderDisplayDate(new Date(results.getDate("date").getTime()))),
-                    new String(results.getBoolean("is_pay") ? "" : Common.currency(results.getDouble("amount") )),
-                    new String(results.getBoolean("is_pay") ? Common.currency(results.getDouble("amount") ) : ""),
-                    new String(results.getBoolean("is_pay") ? Common.currency(baki += (0 -results.getDouble("amount"))) : Common.currency(baki += results.getDouble("amount")))
-                };
+        double totalSaving = 0.0, totalPayment = 0.0, totalSavingBalance = 0.0;
 
-                tableModel.addRow(objects);
-            }
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
+        for (WorkerReport report : reports) {
+
+            totalPayment += report.getPayment();
+            totalSavingBalance += report.getSavingBalance();
+
+            Object[] objects = new Object[] {
+                new String(report.getMonth() + "/" + report.getYear()),
+                new String(Common.currency(report.getSaving())),
+                new String(Common.currency(report.getPayment())),
+                new String(Common.currency(report.getSavingBalance())),
+            };
+
+            tableModel.addRow(objects);
         }
     }
 

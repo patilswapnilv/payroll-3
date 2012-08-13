@@ -75,12 +75,11 @@ public class Transaction {
     private void _load() {
         String query = "SELECT * FROM transactions WHERE id = " + this.id;
         ResultSet rs = Database.instance().execute(query);
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
-            this.setCreated(df.parse(rs.getString("created")));
+            this.setCreated(Common.convertStringToDate(rs.getString("created")));
             this.setCustomerID(rs.getInt("customer_id"));
-            this.setDate(df.parse(rs.getString("date")));
+            this.setDate(Common.convertStringToDate(rs.getString("date")));
             this.setDescription(rs.getString("description"));
             this.setPricePerTon(rs.getDouble("price_per_ton"));
             this.setWages(rs.getDouble("wages"));
@@ -97,8 +96,6 @@ public class Transaction {
             }
 
             this._loaded = true;
-        } catch (ParseException ex) {
-            System.err.println(ex.getMessage());
         } catch (SQLException ex) {
             Logger.getLogger(Transaction2.class.getName()).log(Level.SEVERE, null, ex);
             System.err.println(ex.getMessage());
@@ -127,6 +124,15 @@ public class Transaction {
                 for (Worker worker : workers) {
                     query = "INSERT INTO transaction_workers(transaction_id, worker_id) VALUES(" + id + ", " + worker.getId() + ")";
                     Database.instance().insert(query);
+                    WorkerRecord record = new WorkerRecord();
+                    record.setWorkerID(worker.getId());
+                    record.setDate(this.getDate());
+                    record.setAmount(this.getWagePerWorker());
+                    if (this.getType() == Transaction.GENERAL)
+                        record.setType(WorkerRecord.INCOME);
+                    else
+                        record.setType(WorkerRecord.LOAN);
+                    record.save();
                 }
             }
 

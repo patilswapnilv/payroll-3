@@ -536,16 +536,11 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnTransactionNewLoan" min="-2" max="-2" attributes="1"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jScrollPane4" min="-2" max="-2" attributes="1"/>
-                              </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jScrollPane4" pref="258" max="32767" attributes="1"/>
+                              <Component id="btnTransactionNewLoan" alignment="1" min="-2" max="-2" attributes="1"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -556,9 +551,9 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane4" min="-2" pref="346" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnTransactionNewLoan" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="111" max="32767" attributes="0"/>
+                          <EmptySpace pref="116" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -740,7 +735,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" pref="424" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" pref="451" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -755,7 +750,7 @@
                     <Component class="javax.swing.JTable" name="tblSaving">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="6" rowCount="4">
+                          <Table columnCount="6" rowCount="0">
                             <Column editable="false" title="" type="java.lang.Integer"/>
                             <Column editable="false" title="Tarikh" type="java.lang.String"/>
                             <Column editable="false" title="Keterangan" type="java.lang.String"/>
@@ -835,9 +830,9 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnSavingEnd" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="btnSavingEnd" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnSavingCancel" alignment="3" max="32767" attributes="1"/>
-                              <Component id="btnSavingNew" alignment="3" min="-2" pref="50" max="-2" attributes="1"/>
+                              <Component id="btnSavingNew" alignment="3" min="-2" max="-2" attributes="1"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -899,7 +894,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel22" min="-2" pref="80" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtDateTo" min="-2" pref="150" max="-2" attributes="0"/>
+                              <Component id="txtPayDateTo" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -922,7 +917,7 @@
                           <Component id="jLabel20" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
                           <Component id="txtPayDateFrom" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
                           <Component id="jLabel22" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="txtDateTo" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="txtPayDateTo" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                       <Component id="jPanel12" max="32767" attributes="0"/>
@@ -955,6 +950,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtPayWorkerID">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPayWorkerIDActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtPayWorkerName">
               <Properties>
@@ -972,9 +970,9 @@
                 <Property name="text" type="java.lang.String" value="Hingga"/>
               </Properties>
             </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="txtDateTo">
+            <Component class="com.toedter.calendar.JDateChooser" name="txtPayDateTo">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtDateTo.setDateFormatString(&quot;dd/MM/yyyy&quot;);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtPayDateTo.setDateFormatString(&quot;dd/MM/yyyy&quot;);"/>
               </AuxValues>
             </Component>
             <Container class="javax.swing.JPanel" name="jPanel12">
@@ -987,7 +985,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane2" alignment="0" pref="423" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" alignment="0" pref="450" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -1002,14 +1000,48 @@
                     <Component class="javax.swing.JTable" name="tblPay">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="6" rowCount="4">
+                          <Table columnCount="6" rowCount="0">
                             <Column editable="false" title="" type="java.lang.Integer"/>
                             <Column editable="false" title="Tarikh" type="java.lang.String"/>
                             <Column editable="false" title="Keterangan" type="java.lang.String"/>
-                            <Column editable="false" title="Simpanan +" type="java.lang.String"/>
+                            <Column editable="false" title="Baki +" type="java.lang.String"/>
                             <Column editable="false" title="Bayaran -" type="java.lang.String"/>
                             <Column editable="false" title="Baki" type="java.lang.String"/>
                           </Table>
+                        </Property>
+                        <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                          <TableColumnModel selectionModel="0">
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                          </TableColumnModel>
                         </Property>
                         <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -1048,9 +1080,9 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnPayEnd" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="btnPayEnd" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnPayCancel" alignment="3" max="32767" attributes="1"/>
-                              <Component id="btnPayNew" alignment="3" min="-2" pref="50" max="-2" attributes="1"/>
+                              <Component id="btnPayNew" alignment="3" min="-2" max="-2" attributes="1"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -1148,12 +1180,12 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jPanel20" min="-2" max="-2" attributes="1"/>
                                   <Group type="102" attributes="0">
                                       <Component id="jPanel21" min="-2" max="-2" attributes="1"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jPanel24" max="32767" attributes="0"/>
                                   </Group>
+                                  <Component id="jPanel20" max="32767" attributes="1"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jPanel23" min="-2" max="-2" attributes="0"/>
@@ -1212,7 +1244,7 @@
                                   <Component id="chkMonthlyReportKiraanAsing" min="-2" pref="25" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="chkMonthlyReportSaving" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace pref="269" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1595,16 +1627,21 @@
                                               <Component id="jLabel33" min="-2" pref="180" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="rbtnWorkerMonthlyIncome" alignment="0" pref="366" max="32767" attributes="1"/>
+                                                  <Component id="rbtnWorkerMonthlyIncome" alignment="0" pref="370" max="32767" attributes="1"/>
                                                   <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtReportWorkerDate" min="-2" pref="80" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                                      <Component id="txtReportWorkerMonth" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="txtReportWorkerYear" min="-2" max="-2" attributes="0"/>
                                                       <EmptySpace max="-2" attributes="0"/>
                                                       <Component id="jLabel32" min="-2" pref="50" max="-2" attributes="0"/>
                                                       <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="txtReportWorkerDateTo" min="-2" pref="80" max="-2" attributes="0"/>
+                                                      <Component id="txtReportWorkerMonthTo" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="txtReportWorkerYearTo" min="-2" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <Component id="rbtnWorkerSaving" alignment="0" pref="366" max="32767" attributes="1"/>
-                                                  <Component id="rbtnWorkerReportFull" alignment="0" pref="366" max="32767" attributes="1"/>
+                                                  <Component id="rbtnWorkerSaving" alignment="0" pref="370" max="32767" attributes="1"/>
+                                                  <Component id="rbtnWorkerReportFull" alignment="0" pref="370" max="32767" attributes="1"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -1630,9 +1667,11 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel33" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Component id="txtReportWorkerDate" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Component id="jLabel32" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Component id="txtReportWorkerDateTo" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Component id="txtReportWorkerMonth" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Component id="txtReportWorkerYear" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Component id="jLabel32" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Component id="txtReportWorkerMonthTo" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Component id="txtReportWorkerYearTo" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="rbtnWorkerMonthlyIncome" min="-2" pref="25" max="-2" attributes="0"/>
@@ -1664,20 +1703,10 @@
                         <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
-                    <Component class="com.toedter.calendar.JDateChooser" name="txtReportWorkerDateTo">
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtSavingDateTo.setDateFormatString(&quot;dd/MM/yyyy&quot;);"/>
-                      </AuxValues>
-                    </Component>
                     <Component class="javax.swing.JLabel" name="jLabel32">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Hingga"/>
                       </Properties>
-                    </Component>
-                    <Component class="com.toedter.calendar.JDateChooser" name="txtReportWorkerDate">
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtSavingDateFrom.setDateFormatString(&quot;dd/MM/yyyy&quot;);"/>
-                      </AuxValues>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel33">
                       <Properties>
@@ -1781,6 +1810,14 @@
                         </Component>
                       </SubComponents>
                     </Container>
+                    <Component class="com.toedter.calendar.JMonthChooser" name="txtReportWorkerMonth">
+                    </Component>
+                    <Component class="com.toedter.calendar.JYearChooser" name="txtReportWorkerYear">
+                    </Component>
+                    <Component class="com.toedter.calendar.JYearChooser" name="txtReportWorkerYearTo">
+                    </Component>
+                    <Component class="com.toedter.calendar.JMonthChooser" name="txtReportWorkerMonthTo">
+                    </Component>
                   </SubComponents>
                 </Container>
               </SubComponents>

@@ -4,8 +4,6 @@ package payroll;
 import java.awt.print.PageFormat;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -29,7 +27,6 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.hssf.record.SaveRecalcRecord;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -48,10 +45,11 @@ import payroll.libraries.Database;
 import payroll.libraries.ExtensionFileFilter;
 import payroll.model.Customer;
 import payroll.model.ReportCalculation;
+import payroll.model.ReportSaving;
 import payroll.model.Transaction;
 import payroll.model.Worker;
 import payroll.model.WorkerRecord;
-import sun.misc.DoubleConsts;
+import payroll.model.WorkerReport;
 
 /*
  * To change this template, choose Tools | Templates
@@ -258,7 +256,7 @@ public class Main extends javax.swing.JFrame {
         txtPayWorkerName = new javax.swing.JTextField();
         txtPayDateFrom = new com.toedter.calendar.JDateChooser();
         jLabel22 = new javax.swing.JLabel();
-        txtDateTo = new com.toedter.calendar.JDateChooser();
+        txtPayDateTo = new com.toedter.calendar.JDateChooser();
         jPanel12 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPay = new javax.swing.JTable();
@@ -302,9 +300,7 @@ public class Main extends javax.swing.JFrame {
         jLabel31 = new javax.swing.JLabel();
         txtReportWorkerCode = new javax.swing.JTextField();
         txtReportWorkerName = new javax.swing.JTextField();
-        txtReportWorkerDateTo = new com.toedter.calendar.JDateChooser();
         jLabel32 = new javax.swing.JLabel();
-        txtReportWorkerDate = new com.toedter.calendar.JDateChooser();
         jLabel33 = new javax.swing.JLabel();
         rbtnWorkerMonthlyIncome = new javax.swing.JRadioButton();
         rbtnWorkerSaving = new javax.swing.JRadioButton();
@@ -314,6 +310,10 @@ public class Main extends javax.swing.JFrame {
         btnReportWorkerPrint = new javax.swing.JButton();
         btnReportWorkerExport = new javax.swing.JButton();
         btnReportWorkerGenerate = new javax.swing.JButton();
+        txtReportWorkerMonth = new com.toedter.calendar.JMonthChooser();
+        txtReportWorkerYear = new com.toedter.calendar.JYearChooser();
+        txtReportWorkerYearTo = new com.toedter.calendar.JYearChooser();
+        txtReportWorkerMonthTo = new com.toedter.calendar.JMonthChooser();
         jPanel6 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel17 = new javax.swing.JPanel();
@@ -570,13 +570,10 @@ public class Main extends javax.swing.JFrame {
         jPanel22Layout.setHorizontalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createSequentialGroup()
-                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel22Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnTransactionNewLoan))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel22Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                    .addComponent(btnTransactionNewLoan, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         jPanel22Layout.setVerticalGroup(
@@ -584,9 +581,9 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel22Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnTransactionNewLoan)
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -750,10 +747,7 @@ public class Main extends javax.swing.JFrame {
 
         tblSaving.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "", "Tarikh", "Keterangan", "Simpanan +", "Bayaran -", "Baki"
@@ -784,7 +778,7 @@ public class Main extends javax.swing.JFrame {
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
         );
 
         jPanel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -818,9 +812,9 @@ public class Main extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSavingEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSavingEnd)
                     .addComponent(btnSavingCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSavingNew, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSavingNew))
                 .addContainerGap())
         );
 
@@ -891,6 +885,12 @@ public class Main extends javax.swing.JFrame {
 
         jLabel20.setText("Tempoh Tarikh");
 
+        txtPayWorkerID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPayWorkerIDActionPerformed(evt);
+            }
+        });
+
         txtPayWorkerName.setEditable(false);
         txtPayWorkerName.setFocusable(false);
 
@@ -898,17 +898,14 @@ public class Main extends javax.swing.JFrame {
 
         jLabel22.setText("Hingga");
 
-        txtDateTo.setDateFormatString("dd/MM/yyyy");
+        txtPayDateTo.setDateFormatString("dd/MM/yyyy");
 
         tblPay.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "", "Tarikh", "Keterangan", "Simpanan +", "Bayaran -", "Baki"
+                "", "Tarikh", "Keterangan", "Baki +", "Bayaran -", "Baki"
             }
         ) {
             Class[] types = new Class [] {
@@ -936,7 +933,7 @@ public class Main extends javax.swing.JFrame {
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
         );
 
         jPanel13.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -970,9 +967,9 @@ public class Main extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPayEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPayEnd)
                     .addComponent(btnPayCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPayNew, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPayNew))
                 .addContainerGap())
         );
 
@@ -999,7 +996,7 @@ public class Main extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDateTo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtPayDateTo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
@@ -1017,7 +1014,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPayDateFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDateTo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPayDateTo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
                 .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(14, 14, 14)
@@ -1111,7 +1108,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(chkMonthlyReportKiraanAsing, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkMonthlyReportSaving, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
 
         btnGroupMonthlyReport.add(rbtnMonhtlyReportCurrentMonth);
@@ -1302,11 +1299,11 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel18Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel18Layout.createSequentialGroup()
                         .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jPanel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -1325,11 +1322,7 @@ public class Main extends javax.swing.JFrame {
         txtReportWorkerName.setEditable(false);
         txtReportWorkerName.setFocusable(false);
 
-        txtSavingDateTo.setDateFormatString("dd/MM/yyyy");
-
         jLabel32.setText("Hingga");
-
-        txtSavingDateFrom.setDateFormatString("dd/MM/yyyy");
 
         jLabel33.setText("Tempoh Tarikh");
 
@@ -1414,15 +1407,20 @@ public class Main extends javax.swing.JFrame {
                                 .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(rbtnWorkerMonthlyIncome, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                                    .addComponent(rbtnWorkerMonthlyIncome, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
                                     .addGroup(jPanel19Layout.createSequentialGroup()
-                                        .addComponent(txtReportWorkerDate, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(4, 4, 4)
+                                        .addComponent(txtReportWorkerMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtReportWorkerYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtReportWorkerDateTo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(rbtnWorkerSaving, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
-                                    .addComponent(rbtnWorkerReportFull, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE))))
+                                        .addComponent(txtReportWorkerMonthTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtReportWorkerYearTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(rbtnWorkerSaving, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+                                    .addComponent(rbtnWorkerReportFull, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE))))
                         .addGap(430, 430, 430))
                     .addGroup(jPanel19Layout.createSequentialGroup()
                         .addComponent(jPanel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1439,9 +1437,11 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtReportWorkerDate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtReportWorkerMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtReportWorkerYear, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtReportWorkerDateTo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtReportWorkerMonthTo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtReportWorkerYearTo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rbtnWorkerMonthlyIncome, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1853,6 +1853,8 @@ public class Main extends javax.swing.JFrame {
     private void btnRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecordActionPerformed
         if ( ! this._validate_transaction_form()) {
             return;
+        } else if (JOptionPane.showConfirmDialog(null, "Anda pasti merekodkan transaksi baru? Transaksi direkodkan tidak boleh dibatalkan.", "", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) != JOptionPane.YES_OPTION) {
+            return;
         }
 
         Transaction transaction = new Transaction();
@@ -2184,17 +2186,23 @@ public class Main extends javax.swing.JFrame {
         String table = "<table cellpadding=\"4\" cellspacing=\"0\">";
         String header = "";
         String content = "<tbody>";
+        String saving_content = "";
         ArrayList<String> columns = this.getReportColumns();
 
         /* Render table header */
         header += "<thead><tr>";
+        String rowspan = selected.size() > 0 ? " rowspan=\"2\"" : "";
         for (String column : columns) {
-            header += "<td rowspan=\"2\">" + column + "</td>";
+            header += "<td" + rowspan + ">" + column + "</td>";
         }
-        for (Worker worker : selected) {
-            header += "<td colspan=\"3\">" + worker.getCode() + " " + worker.getName() + "</td>";
+
+        if (selected.size() > 0) {
+            for (Worker worker : selected) {
+                header += "<td colspan=\"3\">" + worker.getCode() + " " + worker.getName() + "</td>";
+            }
+            header += "</tr><tr>" + StringUtils.repeat("<td>Gaji</td><td>Pinjaman</td><td>Baki</td>", selected.size());
         }
-        header += "</tr><tr>" + StringUtils.repeat("<td>Gaji</td><td>Pinjaman</td><td>Baki</td>", selected.size()) + "</tr>";
+        header += "</tr>";
         header += "</thead>";
 
         /* end of render table header */
@@ -2258,12 +2266,12 @@ public class Main extends javax.swing.JFrame {
                     else
                         content += "<td></td>";
                 }
-                if (chkMonthlyReportSaving.isSelected()) {
+                /*if (chkMonthlyReportSaving.isSelected()) {
                     if (transaction.getType() == Transaction.GENERAL)
                         content += "<td></td>";
                     else
                         content += "<td></td>";
-                }
+                }*/
                 
                 String[] workerIds = transaction.getNormalizedWorkerID().split(",");
 
@@ -2295,14 +2303,86 @@ public class Main extends javax.swing.JFrame {
             System.err.println(ex.getMessage());
         }
 
-        content += "<tr class=\"summary\">";
-        content += "<td colspan=\"" + columns.size() + "\"</td>";
-        for (ReportCalculation rc : calculations) {
-            content += "<td>" + Common.currency(rc.getSalary()) + "</td>";
-            content += "<td>" + Common.currency(rc.getLoan()) + "</td>";
-            content += "<td>" + Common.currency(rc.getBalance()) + "</td>";
+        if (selected.size() > 0 ) {
+            content += "<tr class=\"summary\">";
+            content += "<td colspan=\"" + columns.size() + "\"></td>";
+            for (ReportCalculation rc : calculations) {
+                content += "<td>" + Common.currency(rc.getSalary()) + "</td>";
+                content += "<td>" + Common.currency(rc.getLoan()) + "</td>";
+                content += "<td>" + Common.currency(rc.getBalance()) + "</td>";
+            }
+            content += "</tr>";
         }
-        content += "</tr>";
+
+        if (chkMonthlyReportSaving.isSelected()) {
+            ArrayList<ReportSaving> savings = this.getReportSaving(selected);
+            content += "<tr class=\"no-border\"><td colspan=\"" + (selected.size() + columns.size()) + "\"><b><u>Simpanan Tetap</u></b></td></tr>";
+
+            /* Baki Lalu */
+            content += "<tr>";
+
+            int colspan_size = columns.size();
+            
+            if (chkMonthlyReportDate.isSelected()) {
+                content += "<td>&nbsp;</td>";
+                colspan_size --;
+            }
+
+            if (chkMonthlyReportClientName.isSelected()) {
+                content += "<td>&nbsp;</td>";
+                colspan_size --;
+            }
+
+            content += "<td colspan=\"" + colspan_size + "\">Baki Bulan Lalu</td>";
+
+            for (ReportSaving saving : savings) {
+                content += "<td colspan=\"3\">" + Common.currency(saving.getPrevious()) + "</td>";
+            }
+
+            content += "</tr>";
+            /* end baki lalu */
+
+            /* current saving */
+            content += "<tr>";
+
+            if (chkMonthlyReportDate.isSelected()) {
+                content += "<td>&nbsp;</td>";
+            }
+
+            if (chkMonthlyReportClientName.isSelected()) {
+                content += "<td>&nbsp;</td>";
+            }
+
+            content += "<td colspan=\"" + colspan_size + "\">Bulan Ini</td>";
+
+            for (ReportSaving saving : savings) {
+                content += "<td colspan=\"3\">" + Common.currency(saving.getCurrent()) + "</td>";
+            }
+
+            content += "</tr>";
+            /* end current saving */
+
+            /* balance */
+            content += "<tr>";
+
+            if (chkMonthlyReportDate.isSelected()) {
+                content += "<td>&nbsp;</td>";
+            }
+
+            if (chkMonthlyReportClientName.isSelected()) {
+                content += "<td>&nbsp;</td>";
+            }
+
+            content += "<td colspan=\"" + colspan_size + "\">Baki</td>";
+
+            for (ReportSaving saving : savings) {
+                content += "<td colspan=\"3\">" + Common.currency(saving.getBalance()) + "</td>";
+            }
+
+            content += "</tr>";
+            /* end balance */
+        }
+        
         content += "</tbody>";
 
         table += header + content;
@@ -2347,7 +2427,6 @@ public class Main extends javax.swing.JFrame {
         if (chkMonthlyReportSalary.isSelected()) headers.add("Jumlah Gaji");
         if (chkMonthlyReportBalance.isSelected()) headers.add("Jumlah Baki");
         if (chkMonthlyReportKiraanAsing.isSelected()) headers.add("Kiraan Asing");
-        //if (chkMonthlyReportSaving.isSelected()) headers.add("Simpanan Tetap");
 
         return headers;
     }
@@ -2373,7 +2452,7 @@ public class Main extends javax.swing.JFrame {
             id += worker.getId() + ",";
         }
 
-        id = id.substring(0, id.length() - 1);
+        id = id.isEmpty() ? "" : id.substring(0, id.length() - 1);
 
         if (rbtnMonhtlyReportCurrentMonth.isSelected()) {
             dateFrom.set(Calendar.DAY_OF_MONTH, 1);
@@ -2390,12 +2469,65 @@ public class Main extends javax.swing.JFrame {
 
         String query = "SELECT DISTINCT id FROM transactions ";
         query += "INNER JOIN transaction_workers ON transactions.id = transaction_workers.transaction_id ";
-        query += "WHERE worker_id IN (" + id + ") ";
-        query += "AND date >= '" + Common.renderSQLDate(dateFrom) + "'" ;
+        query += "WHERE date >= '" + Common.renderSQLDate(dateFrom) + "'" ;
         query += "AND date <= '" + Common.renderSQLDate(dateTo) + "'" ;
+        
+        if ( ! id.isEmpty()) {
+            query += "AND worker_id IN (" + id + ") ";
+        }
+
         query += "ORDER BY date";
 
         return query;
+    }
+
+    private ArrayList<ReportSaving> getReportSaving(ArrayList<Worker> selected) {
+        ArrayList<ReportSaving> saving = new ArrayList<ReportSaving>();
+
+        if ( ! chkMonthlyReportSaving.isSelected()) {
+            return saving;
+        }
+        
+        Calendar dateFrom = Calendar.getInstance(), dateTo = Calendar.getInstance();
+
+        if (rbtnMonhtlyReportCurrentMonth.isSelected()) {
+            dateFrom.set(Calendar.DAY_OF_MONTH, 1);
+            dateTo.set(Calendar.DAY_OF_MONTH, dateTo.getActualMaximum(Calendar.DAY_OF_MONTH));
+        } else if (rbtnMonthlyReportLastMonth.isSelected()) {
+            dateFrom.set(Calendar.DAY_OF_MONTH, 1);
+            dateTo.set(Calendar.DAY_OF_MONTH, dateTo.getActualMaximum(Calendar.DAY_OF_MONTH));
+            dateFrom.roll(Calendar.MONTH, -1);
+            dateTo.roll(Calendar.MONTH, -1);
+        } else {
+            dateFrom.setTime(txtMonthlyReportDateFrom.getDate());
+            dateTo.setTime(txtMonthlyReportDateFrom.getDate());
+        }
+
+        String query = "";
+        ResultSet rs = null;
+
+        
+
+        for (Worker worker : selected) {
+            try {
+                double previous_saving, current_saving;
+                query = "SELECT SUM(amount) as previous_saving FROM workerRecord WHERE worker_id = " + worker.getId() + " AND date < \"" + Common.renderSQLDate(dateFrom) + "\"";
+                rs = Database.instance().execute(query);
+                rs.next();
+                previous_saving = rs.getDouble("previous_saving");
+                query = "SELECT SUM(amount) as previous_saving FROM workerRecord WHERE worker_id = " + worker.getId() + " AND date >= \"" + Common.renderSQLDate(dateFrom) + "\" AND date <= \"" + Common.renderSQLDate(dateTo) + "\"";
+                rs = Database.instance().execute(query);
+                rs.next();
+                current_saving = rs.getDouble("previous_saving");
+
+                saving.add(new ReportSaving(previous_saving, current_saving, worker));
+            } catch(SQLException ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
+
+        return saving;
+
     }
 
     private void cboxMonthlyReportAllWorkersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxMonthlyReportAllWorkersActionPerformed
@@ -2421,8 +2553,8 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTransactionNewLoanActionPerformed
 
     private void btnMonthlyReportPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyReportPrintActionPerformed
-        ArrayList<String> headers = this.getReportColumns();
         ArrayList<Worker> selected = this.getReportSelectedWorkers();
+        ArrayList<ReportSaving> savings = this.getReportSaving(selected);
         String query = this.getReportQuery(selected);
 
         PrinterJob job = PrinterJob.getPrinterJob();
@@ -2431,7 +2563,7 @@ public class Main extends javax.swing.JFrame {
         PageFormat format = job.defaultPage();
         format.setOrientation(PageFormat.LANDSCAPE);
 
-        job.setPrintable(new Printer(this, selected, query), format);;
+        job.setPrintable(new ReportPrinter(this, selected, query, savings), format);
 
         if (job.printDialog() == true) {
             try {
@@ -2472,8 +2604,21 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_txtProfileClientIDActionPerformed
 
     private void getSavingDetails(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getSavingDetails
+        DefaultTableModel savingTableModel = (DefaultTableModel) tblSaving.getModel();
+
+        int rowCount = tblSaving.getRowCount();
+
+        for (int i = 0; i < rowCount; i ++) {
+            savingTableModel.removeRow(0);
+        }
+        
         Worker selected = null;
         String searchText = txtSavingWorkerID.getText();
+
+        if (searchText.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please enter the worker code", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         for (Worker worker : workers) {
             if (worker.getCode().indexOf(searchText) >= 0) {
@@ -2485,11 +2630,14 @@ public class Main extends javax.swing.JFrame {
         if (selected == null) {
             JOptionPane.showMessageDialog(null, "Worker not found", "Not found", JOptionPane.ERROR_MESSAGE);
             return;
+        } else if (txtSavingDateFrom.getDate() == null || txtSavingDateTo.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Please select a date range", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
         txtSavingWorkerName.setText(selected.getName());
         txtSavingWorkerID.setText(selected.getCode());
-        String query = "SELECT * FROM workerRecord WHERE worker_id = " + selected.getId() + " ";
+        String query = "SELECT * FROM workerRecord WHERE type IN (2, 3) AND worker_id = " + selected.getId() + " ";
 
         if (txtSavingDateFrom.getDate() != null) {
             Calendar calender = Calendar.getInstance();
@@ -2503,35 +2651,26 @@ public class Main extends javax.swing.JFrame {
             query += "AND date <= \"" + Common.renderSQLDate(calender) + "\" ";
         }
 
-        ArrayList<WorkerRecord> records = new ArrayList<WorkerRecord>();
         ResultSet results = Database.instance().execute(query);
         int counter = 0;
         double balance = 0.0;
 
-        DefaultTableModel savingTableModel = (DefaultTableModel) tblSaving.getModel();
-
-        int rowCount = tblSaving.getRowCount();
-
-        for (int i = 0; i < rowCount; i ++) {
-            savingTableModel.removeRow(0);
-        }
-        
         try {
             while (results.next()) {
-                WorkerRecord record = new WorkerRecord(results.getInt("id"), results.getInt("worker_id"), results.getDouble("amount"), results.getString("description"), results.getBoolean("is_pay"), results.getDate("date"));
-                records.add(record);
-                balance += record.getIsPay() ? 0 - record.getAmount() : record.getAmount();
+                WorkerRecord record = new WorkerRecord(results.getInt("id"), results.getInt("worker_id"), results.getInt("type"), results.getDouble("amount"), results.getString("description"), Common.convertStringToDate(results.getString("date")));
+                balance += record.getAmount();
 
                 Object[] objects = new Object[] {
                     new Integer(counter + 1),
                     new String(Common.renderDisplayDate(record.getDate())),
                     new String(record.getDescription()),
-                    new String(Common.currency(record.getIsPay() ? 0.00 : record.getAmount())),
-                    new String(Common.currency(record.getIsPay() ? record.getAmount() : 0.00)),
+                    new String(Common.currency(record.getAmount() > 0 ? record.getAmount() : 0.00)),
+                    new String(Common.currency(record.getAmount() < 0 ? record.getAmount() : 0.00)),
                     new Double(Common.currency(balance))
                 };
 
                 savingTableModel.addRow(objects);
+                counter ++;
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -2562,23 +2701,23 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_txtReportWorkerCodeActionPerformed
 
     private void btnReportWorkerPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportWorkerPrintActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnReportWorkerPrintActionPerformed
-
-    private void btnReportWorkerExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportWorkerExportActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnReportWorkerExportActionPerformed
-
-    private void btnReportWorkerGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportWorkerGenerateActionPerformed
+        int monthFrom = txtReportWorkerMonth.getMonth() + 1;
+        int monthTo = txtReportWorkerMonthTo.getMonth() + 1;
+        int yearFrom = txtReportWorkerYear.getYear();
+        int yearTo = txtReportWorkerYearTo.getYear();
+        
         if (_selected_report_worker == null) {
             JOptionPane.showMessageDialog(null, "Please select a worker", "Error", JOptionPane.ERROR_MESSAGE);
             return;
-        } else if (txtReportWorkerDate.getDate() == null || txtReportWorkerDateTo.getDate() == null) {
-            JOptionPane.showMessageDialog(null, "Please select a date range", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (monthTo < monthFrom && yearTo <= yearFrom) {
+            JOptionPane.showMessageDialog(null, "Invalid date range", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        
+        PrinterJob job = PrinterJob.getPrinterJob();
 
         int type = WorkerReportFrame.FULL;
+        ArrayList<WorkerReport> reports = getWorkerReports();
 
         if (rbtnWorkerSaving.isSelected()) {
             type = WorkerReportFrame.SAVING;
@@ -2586,20 +2725,173 @@ public class Main extends javax.swing.JFrame {
             type = WorkerReportFrame.INCOME;
         }
 
-        Calendar dateFrom = Calendar.getInstance();
-        dateFrom.setTime(txtReportWorkerDate.getDate());
+        job.setPrintable(new WorkerReportPrinter(type, _selected_report_worker, reports));;
 
-        Calendar dateTo = Calendar.getInstance();
-        dateTo.setTime(txtReportWorkerDateTo.getDate());
+        if (job.printDialog() == true) {
+            try {
+                job.print();
+            } catch (PrinterException ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
+    }//GEN-LAST:event_btnReportWorkerPrintActionPerformed
 
-        String query = "SELECT * FROM workerRecord WHERE date >= \"" + Common.renderSQLDate(dateFrom) + "\" AND date <= \"" + Common.renderSQLDate(dateTo) + "\" AND worker_id = " + _selected_report_worker.getId();
+    private void btnReportWorkerExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportWorkerExportActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReportWorkerExportActionPerformed
+
+    private void btnReportWorkerGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportWorkerGenerateActionPerformed
+        int monthFrom = txtReportWorkerMonth.getMonth() + 1;
+        int monthTo = txtReportWorkerMonthTo.getMonth() + 1;
+        int yearFrom = txtReportWorkerYear.getYear();
+        int yearTo = txtReportWorkerYearTo.getYear();
         
-        WorkerReportFrame frame = new WorkerReportFrame(type, query);
+        if (_selected_report_worker == null) {
+            JOptionPane.showMessageDialog(null, "Please select a worker", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (monthTo < monthFrom && yearTo <= yearFrom) {
+            JOptionPane.showMessageDialog(null, "Invalid date range", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
+        int type = WorkerReportFrame.FULL;
+        ArrayList<WorkerReport> reports = getWorkerReports();
+
+        if (rbtnWorkerSaving.isSelected()) {
+            type = WorkerReportFrame.SAVING;
+        } else if (rbtnWorkerMonthlyIncome.isSelected()) {
+            type = WorkerReportFrame.INCOME;
+        }
+
+        WorkerReportFrame frame = new WorkerReportFrame(type, _selected_report_worker, reports);
         frame.setVisible(true);
-
-
     }//GEN-LAST:event_btnReportWorkerGenerateActionPerformed
+
+    private ArrayList<WorkerReport> getWorkerReports() {
+        int monthFrom = txtReportWorkerMonth.getMonth() + 1;
+        int monthTo = txtReportWorkerMonthTo.getMonth() + 1;
+        int yearFrom = txtReportWorkerYear.getYear();
+        int yearTo = txtReportWorkerYearTo.getYear();
+        
+        ArrayList<WorkerReport> reports = new ArrayList<WorkerReport>();
+        String query = "";
+        int month = monthFrom, year = yearFrom;
+
+        while (year < yearTo || (month <= monthTo && year <= yearTo)) {
+            double salary = 0.0, loan = 0.0, saving = 0.0, withdraw = 0.0;
+            ResultSet rs = null;
+
+            System.out.println(month + ":" + year);
+            try {
+                // salary
+                query = "SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = " + _selected_report_worker.getId() + " AND strftime(\"%m\", date) = \"" + (month > 9 ? month : "0" + month) + "\" AND strftime(\"%Y\", date) = \"" + year + "\" AND type = " + WorkerRecord.INCOME;
+                rs = Database.instance().execute(query);
+                rs.next();
+                salary  = rs.getDouble("amount");
+                // loan
+                query = "SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = " + _selected_report_worker.getId() + " AND strftime(\"%m\", date) = \"" + (month > 9 ? month : "0" + month) + "\" AND strftime(\"%Y\", date) = \"" + year + "\" AND type = " + WorkerRecord.LOAN;
+                rs = Database.instance().execute(query);
+                rs.next();
+                loan  = rs.getDouble("amount");
+                // saving
+                query = "SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = " + _selected_report_worker.getId() + " AND strftime(\"%m\", date) = \"" + (month > 9 ? month : "0" + month) + "\" AND strftime(\"%Y\", date) = \"" + year + "\" AND type = " + WorkerRecord.SAVING;
+                rs = Database.instance().execute(query);
+                rs.next();
+                saving  = rs.getDouble("amount");
+                // withdraw
+                query = "SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = " + _selected_report_worker.getId() + " AND strftime(\"%m\", date) = \"" + (month > 9 ? month : "0" + month) + "\" AND strftime(\"%Y\", date) = \"" + year + "\" AND type = " + WorkerRecord.WITHDRAW;
+                rs = Database.instance().execute(query);
+                rs.next();
+                withdraw  = rs.getDouble("amount");
+            } catch (SQLException ex) {
+                System.err.println(ex.getMessage());
+            }
+
+            System.out.println("End of " + month + ":" + year);
+
+            reports.add(new WorkerReport(month, year, salary, loan, saving, withdraw));
+
+            month ++;
+
+            if (month > 12) {
+                month = 1;
+                year ++;
+            }
+        }
+
+        return reports;
+    }
+    
+    private void txtPayWorkerIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPayWorkerIDActionPerformed
+        DefaultTableModel paymentTableModel = (DefaultTableModel) tblPay.getModel();
+
+        int rowCount = tblPay.getRowCount();
+
+        for (int i = 0; i < rowCount; i ++) {
+            paymentTableModel.removeRow(0);
+        }
+        
+        Worker selected = null;
+        String searchText = txtPayWorkerID.getText();
+
+        for (Worker worker : workers) {
+            if (worker.getCode().indexOf(searchText) >= 0) {
+                selected = worker;
+                break;
+            }
+        }
+
+        if (selected == null) {
+            JOptionPane.showMessageDialog(null, "Worker not found", "Not found", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (txtPayDateFrom.getDate() == null | txtPayDateTo.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Please select a date range", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        txtPayWorkerName.setText(selected.getName());
+        txtPayWorkerID.setText(selected.getCode());
+
+        String query = "SELECT * FROM workerRecord WHERE type = 1 AND worker_id = " + selected.getId() + " ";
+
+        if (txtPayDateFrom.getDate() != null) {
+            Calendar calender = Calendar.getInstance();
+            calender.setTime(txtPayDateFrom.getDate());
+            query += "AND date >= \"" + Common.renderSQLDate(calender) + "\" ";
+        }
+
+        if (txtPayDateTo.getDate() != null) {
+            Calendar calender = Calendar.getInstance();
+            calender.setTime(txtPayDateTo.getDate());
+            query += "AND date <= \"" + Common.renderSQLDate(calender) + "\" ";
+        }
+
+        ResultSet results = Database.instance().execute(query);
+        int counter = 0;
+        double balance = WorkerRecord.getWorkerSalary(selected.getId(), txtPayDateFrom.getDate(), txtPayDateTo.getDate());
+
+        System.out.println(balance);
+        
+        try {
+            while (results.next()) {
+                WorkerRecord record = new WorkerRecord(results.getInt("id"), results.getInt("worker_id"), results.getInt("type"), results.getDouble("amount"), results.getString("description"), Common.convertStringToDate(results.getString("date")));
+
+                Object[] objects = new Object[] {
+                    new Integer(counter + 1),
+                    new String(Common.renderDisplayDate(record.getDate())),
+                    new String(record.getDescription()),
+                    new String(Common.currency(balance)),
+                    new String(Common.currency(record.getAmount() < 0 ? record.getAmount() : 0.00)),
+                    new Double(Common.currency(balance += record.getAmount()))
+                };
+
+                paymentTableModel.addRow(objects);
+                counter ++;
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_txtPayWorkerIDActionPerformed
 
     private void _reset_worker_form() {
         txtProfileWorkerCurrentSaving.setText("");
@@ -2768,10 +3060,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTable tblPay;
     private javax.swing.JTable tblSaving;
     private javax.swing.JTable tblTransactionInvolvedWorkers;
-    private com.toedter.calendar.JDateChooser txtDateTo;
     private com.toedter.calendar.JDateChooser txtMonthlyReportDateFrom;
     private com.toedter.calendar.JDateChooser txtMonthlyReportDateTo;
     private com.toedter.calendar.JDateChooser txtPayDateFrom;
+    private com.toedter.calendar.JDateChooser txtPayDateTo;
     private javax.swing.JTextField txtPayWorkerID;
     private javax.swing.JTextField txtPayWorkerName;
     private javax.swing.JTextField txtProfileClientID;
@@ -2788,9 +3080,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField txtProfileWorkerReturnYear;
     private javax.swing.JTextField txtProfileWorkerStatus;
     private javax.swing.JTextField txtReportWorkerCode;
-    private com.toedter.calendar.JDateChooser txtReportWorkerDate;
-    private com.toedter.calendar.JDateChooser txtReportWorkerDateTo;
+    private com.toedter.calendar.JMonthChooser txtReportWorkerMonth;
+    private com.toedter.calendar.JMonthChooser txtReportWorkerMonthTo;
     private javax.swing.JTextField txtReportWorkerName;
+    private com.toedter.calendar.JYearChooser txtReportWorkerYear;
+    private com.toedter.calendar.JYearChooser txtReportWorkerYearTo;
     private javax.swing.JTextField txtSavingCurrentSaving;
     private com.toedter.calendar.JDateChooser txtSavingDateFrom;
     private com.toedter.calendar.JDateChooser txtSavingDateTo;

@@ -6,9 +6,12 @@
 package payroll.libraries;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 
 /**
@@ -60,6 +63,12 @@ public class Common {
         return year + "-" + (month > 9 ? month : "0" + month) + "-" + (day > 9 ? day : "0" + day);
     }
 
+    public static String renderSQLDate(Date date) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
+        return df.format(date);
+    }
+
     public static String renderDisplayDate(Date date) {
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -74,5 +83,15 @@ public class Common {
         day = calender.get(Calendar.DAY_OF_MONTH);
 
         return (day > 9 ? day : "0" + day) + "/" + (month > 9 ? month : "0" + month) + "/" + year;
+    }
+
+    public static Date convertStringToDate(String date) {
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            return df.parse(date);
+        } catch (ParseException ex) {
+            return new Date();
+        }
     }
 }

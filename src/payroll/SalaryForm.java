@@ -224,14 +224,15 @@ public class SalaryForm extends javax.swing.JDialog {
         workerRecord.setDate(new java.sql.Date(txtDate.getDate().getTime()));
         workerRecord.setDescription(txtDescription.getText());
         if (!txtTotalPay.getText().isEmpty()) {
-            workerRecord.setAmount(Double.parseDouble(txtTotalPay.getText()));
-            workerRecord.setIsPay(true);
+            workerRecord.setAmount(0 - Double.parseDouble(txtTotalPay.getText()));
+            workerRecord.setType(WorkerRecord.PAYMENT);
         }
 
         boolean success = workerRecord.save();
 
         if (success) {
             JOptionPane.showMessageDialog(null, "Rekod Transaksi baru ditambah", "Berjaya!", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Rekod Transaksi tidak dapat ditambah", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
         }

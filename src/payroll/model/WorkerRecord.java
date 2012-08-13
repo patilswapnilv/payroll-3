@@ -21,10 +21,15 @@ import payroll.libraries.Common;
  */
 public class WorkerRecord {
 
-    private int id, workerID;
+    public static final int PAYMENT = 1;
+    public static final int LOAN = 2;
+    public static final int SAVING = 3;
+    public static final int INCOME = 4;
+    public static final int WITHDRAW = 5;
+
+    private int id, workerID, type;
     private double amount;
     private String description;
-    boolean isPay;
     private Date date, created;
 
     private boolean _loaded = false;
@@ -34,9 +39,9 @@ public class WorkerRecord {
         this.workerID = 0;
         this.amount = 0.0;
         this.description = "";
-        this.isPay = false;
         this.date = new Date();
         this.created = Calendar.getInstance().getTime();
+        this.type = 0;
     }
 
     public WorkerRecord(int id) {
@@ -44,12 +49,12 @@ public class WorkerRecord {
         this._load();
     }
 
-    public WorkerRecord(int id, int workerID, double amount, String description, boolean isPay, Date date) {
+    public WorkerRecord(int id, int workerID, int type, double amount, String description, Date date) {
         this.id = id;
         this.workerID = workerID;
+        this.type = type;
         this.amount = amount;
         this.description = description;
-        this.isPay = isPay;
         this.date = date;
     }
 
@@ -59,12 +64,12 @@ public class WorkerRecord {
 
         try {
             rs.next();
-            this.setCreated(new Date(rs.getDate("created").getTime()));
+            this.setCreated(Common.convertStringToDate(rs.getString("created")));
             this.setWorkerID(rs.getInt("worker_id"));
-            this.setDate(new Date(rs.getDate("date").getTime()));
+            this.setDate(Common.convertStringToDate(rs.getString("date")));
             this.setDescription(rs.getString("description"));
             this.setAmount(rs.getDouble("amount"));
-            this.setIsPay(rs.getBoolean("is_pay"));
+            this.setType(rs.getInt("type"));
             this._loaded = true;
         } catch (SQLException ex) {
             Logger.getLogger(WorkerRecord.class.getName()).log(Level.SEVERE, null, ex);
@@ -76,7 +81,7 @@ public class WorkerRecord {
         String query = "";
 
         if ( ! this._loaded) {
-            query = "INSERT INTO workerRecord(created, worker_id, date, description, amount, is_pay) VALUES(?, ?, ?, ?, ?, ?)";
+            query = "INSERT INTO workerRecord(created, worker_id, date, description, amount, type) VALUES(?, ?, ?, ?, ?, ?)";
         }
 
         PreparedStatement ps = Application.db.createPreparedStatement(query);
@@ -92,7 +97,7 @@ public class WorkerRecord {
             ps.setString(3, Common.renderSQLDate(dateCalendar));
             ps.setString(4, this.getDescription());
             ps.setDouble(5, this.amount);
-            ps.setBoolean(6, this.getIsPay());
+            ps.setInt(6, this.getType());
         } catch (SQLException ex) {
             Logger.getLogger(ex.getMessage()).log(Level.WARNING, null, ex);
             System.err.println(ex.getMessage());
@@ -124,6 +129,10 @@ public class WorkerRecord {
         this.date = date;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -132,12 +141,12 @@ public class WorkerRecord {
         this.amount = amount;
     }
 
-    public void setIsPay(boolean isPay) {
-        this.isPay = isPay;
-    }
-
     public void setLoaded(boolean _loaded) {
         this._loaded = _loaded;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public java.sql.Date getSQLCreated() {
@@ -160,10 +169,6 @@ public class WorkerRecord {
         return description;
     }
 
-    public boolean getIsPay() {
-        return isPay;
-    }
-
     public double getAmount() {
         return amount;
     }
@@ -171,4 +176,38 @@ public class WorkerRecord {
     public Date getCreated() {
         return created;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public static double getWorkerSalary(int workerID, Date dateFrom , Date dateTo) {
+        double salary = 0.00;
+        String query = "SELECT SUM(amount) AS total_salary FROM workerRecord WHERE worker_id = " + workerID + " AND type = 4 ";
+
+        if (dateFrom != null) {
+            query += "AND date >= \"" + Common.renderDisplayDate(dateFrom) + "\" ";
+        }
+
+        if (dateTo != null) {
+            query += "AND date <= \"" + Common.renderDisplayDate(dateTo) + "\" ";
+        }
+
+        ResultSet rs = Database.instance().execute(query);
+        try {
+            rs.next();
+
+            salary = rs.getDouble("total_salary");
+            return salary;
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return 0.0;
+    }
+
 }

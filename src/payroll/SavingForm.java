@@ -246,17 +246,20 @@ public class SavingForm extends javax.swing.JDialog {
         workerRecord.setDescription(txtDescription.getText());
         if (!txtSavingAmount.getText().isEmpty()) {
             workerRecord.setAmount(Double.parseDouble(txtSavingAmount.getText()));
-            workerRecord.setIsPay(false);
+            workerRecord.setType(WorkerRecord.SAVING);
         }
         if (!txtPayAmount.getText().isEmpty()) {
-            workerRecord.setAmount(Double.parseDouble(txtPayAmount.getText()));
-            workerRecord.setIsPay(true);
+            workerRecord.setAmount(0 - Double.parseDouble(txtPayAmount.getText()));
+            workerRecord.setType(WorkerRecord.WITHDRAW);
         }
+        
+        
 
         boolean success = workerRecord.save();
 
         if (success) {
             JOptionPane.showMessageDialog(null, "Rekod Transaksi baru ditambah", "Berjaya!", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Rekod Transaksi tidak dapat ditambah", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
         }
