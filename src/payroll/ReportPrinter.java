@@ -12,12 +12,8 @@ import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import payroll.libraries.Common;
-import payroll.libraries.Database;
 import payroll.model.ReportCalculation;
 import payroll.model.ReportSaving;
 import payroll.model.Transaction;
@@ -64,34 +60,20 @@ public class ReportPrinter implements Printable {
     int overflowCounter = 0;
     int workerCount = 0;
 
-    public ReportPrinter(Main parent, ArrayList<Worker> selected, String query, ArrayList<ReportSaving> savings) {
+    public ReportPrinter(Main parent, ArrayList<Worker> selected, ArrayList<Transaction> transactions, ArrayList<ReportCalculation> calculations, ArrayList<ReportSaving> savings) {
         this.parent = parent;
-        this.query = query;
+        this.transactions = transactions;
         this.selected = selected;
         this.savings = savings;
+        this.calculations = calculations;
         this.setup();
     }
 
     private void setup() {
-        ResultSet results = Database.instance().execute(query);
 
-        try {
-            itemCount = 0;
-            while (results.next()) {
-                transactions.add(new Transaction(results.getInt(1)));
-            }
-
-            itemCount = transactions.size();
-        } catch (SQLException ex) {
-            System.err.println("Error: Unable to get results size. Detail: " + ex.getMessage());
-            ex.printStackTrace();
-        }
-
-        for (Worker worker : selected) {
-            calculations.add(new ReportCalculation(worker.getId()));
-        }
-
+        itemCount = transactions.size();
         workerCount = selected.size();
+
         pagesNeeded = (int) Math.ceil((double) itemCount / printCap);
         totalPage = pagesNeeded;
 

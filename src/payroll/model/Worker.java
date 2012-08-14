@@ -9,10 +9,13 @@ import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import payroll.Application;
 import payroll.Main;
+import payroll.libraries.Common;
+import payroll.libraries.Database;
 
 /*  @author Tomato  */
 public class Worker {
@@ -163,4 +166,32 @@ public class Worker {
         this.status = status;
     }
 
+    public static String join(ArrayList<Worker> workers) {
+        String id = "";
+
+        for (Worker worker : workers) {
+            id += worker.getId() + ",";
+        }
+
+        id = id.isEmpty() ? "" : id.substring(0, id.length() - 1);
+
+        return id;
+    }
+
+    public static ArrayList<Worker> bulk(String id) {
+        ArrayList<Worker> workers = new ArrayList<Worker>();
+
+        String query = "SELECT * FROM worker WHERE worker_id IN (" + id + ")";
+        ResultSet rs = Database.instance().execute(query);
+
+        try {
+            while (rs.next()) {
+                workers.add(new Worker(rs.getInt("worker_id"), rs.getString("code"), rs.getString("name"), Common.convertStringToDate(rs.getString("start_date")), Common.convertStringToDate(rs.getString("end_date")), rs.getBoolean("is_active")));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return workers;
+    }
 }

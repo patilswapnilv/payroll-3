@@ -13,13 +13,6 @@ public class ReportCalculation {
     private double salary, loan, balance;
     private int workerID;
 
-    public ReportCalculation() {
-        this.salary = 0.0;
-        this.loan = 0.0;
-        this.balance = 0.0;
-        this.workerID = 0;
-    }
-
     public ReportCalculation(int workerID) {
         this.salary = 0.0;
         this.loan = 0.0;

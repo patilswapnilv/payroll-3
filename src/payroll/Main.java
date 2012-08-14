@@ -16,6 +16,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Hashtable;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.print.attribute.HashPrintRequestAttributeSet;
@@ -43,6 +45,7 @@ import org.xml.sax.SAXException;
 import payroll.libraries.Common;
 import payroll.libraries.Database;
 import payroll.libraries.ExtensionFileFilter;
+import payroll.libraries.MultiValues;
 import payroll.model.Customer;
 import payroll.model.ReportCalculation;
 import payroll.model.ReportSaving;
@@ -2002,36 +2005,38 @@ public class Main extends javax.swing.JFrame {
 
         ArrayList<String> columns = this.getReportColumns();
         ArrayList<Worker> selected = this.getReportSelectedWorkers();
-        ArrayList<ReportCalculation> calculations = new ArrayList<ReportCalculation>();
-        String query = this.getReportQuery(selected);
-        ResultSet results = Database.instance().execute(query);
+        ArrayList<ReportCalculation> calculations = this.getReportCalculations(selected);
+        ArrayList<Transaction> transactions = this.getReportTransasctions(selected);
+
         int workerCount = selected.size();
+        int index = 0;
+        int pos = 0;
 
         for (Worker worker : selected) {
             calculations.add(new ReportCalculation(worker.getId()));
         }
 
         Workbook workbook = new HSSFWorkbook();
-        int index = 0;
         Sheet sheet = (Sheet) workbook.createSheet("Laporan");
+
         Row firstHeaderRow = sheet.createRow(0);
         Row secondHeaderRow = sheet.createRow(1);
 
-        int pos = 0;
+        // <editor-fold defaultstate="collapsed" desc="render header">
         index = 0;
         for (String column : columns) {
             sheet.addMergedRegion(new CellRangeAddress(0, 1, pos, pos));
             Cell cell = firstHeaderRow.createCell(index);
             cell.setCellValue(column);
             index++;
-            pos ++;
+            pos++;
         }
-        
+
         for (Worker worker : selected) {
             sheet.addMergedRegion(new CellRangeAddress(0, 0, pos, pos + 2));
             Cell cell = firstHeaderRow.createCell(index);
             cell.setCellValue(worker.getCode() + " " + worker.getName());
-            
+
             cell = secondHeaderRow.createCell(index);
             cell.setCellValue("Gaji");
             cell = secondHeaderRow.createCell(index + 1);
@@ -2042,98 +2047,115 @@ public class Main extends javax.swing.JFrame {
             pos += 3;
         }
         sheet.createFreezePane(0, 2);
+        // </editor-fold>
 
-
+        // <editor-fold defaultstate="collapsed" desc="render content">
         int rowIndex = 2;
-        
-        try {
-            while(results.next()) {
-                Transaction transaction = new Transaction(results.getInt(1));
-                index = 0;
+        for (Transaction transaction : transactions) {
+            index = 0;
 
-                Row row = sheet.createRow(rowIndex);
-                Cell cell = null;
+            Row row = sheet.createRow(rowIndex);
+            Cell cell = null;
 
+            cell = row.createCell(index);
+            if (chkMonthlyReportDate.isSelected()) {
+                cell.setCellValue(Common.renderDisplayDate(transaction.getDate()));
+                index++;
                 cell = row.createCell(index);
-                if (chkMonthlyReportDate.isSelected()) {
-                    cell.setCellValue(Common.renderDisplayDate(transaction.getDate()));
-                    index ++;
-                    cell = row.createCell(index);
-                }
-                if (chkMonthlyReportClientName.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL) {
-                        cell.setCellValue(transaction.getCustomer().getName());
-                    } else {
-                        cell.setCellValue("Pinjaman");
-                    }
-                    index ++;
-                    cell = row.createCell(index);
-                }
-                if (chkMonthlyReportDescription.isSelected()) {
-                    cell.setCellValue(transaction.getDescription());
-                    index ++;
-                    cell = row.createCell(index);
-                }
-                if (chkMonthlyReportWeight.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL) cell.setCellValue(transaction.getWeight());
-                    index ++;
-                    cell = row.createCell(index);
-                }
-                if (chkMonthlyReportPricePerTon.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL) cell.setCellValue(Common.currency(transaction.getPricePerTon()));
-                    index ++;
-                    cell = row.createCell(index);
-                }
-                if (chkMonthlyReportTotalReceived.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL) cell.setCellValue(Common.currency(transaction.getTotal()));
-                    index ++;
-                    cell = row.createCell(index);
-                }
-                if (chkMonthlyReportWages.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL) cell.setCellValue(Common.currency(transaction.getWages()));
-                    index ++;
-                    cell = row.createCell(index);
-                }
-                if (chkMonthlyReportSalary.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL) cell.setCellValue(Common.currency(transaction.getTotalSalary()));
-                    index ++;
-                    cell = row.createCell(index);
-                }
-                if (chkMonthlyReportBalance.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL) cell.setCellValue(Common.currency(transaction.getBalance()));
-                    index ++;
-                    cell = row.createCell(index);
-                }
-                if (chkMonthlyReportKiraanAsing.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL) cell.setCellValue(Common.currency(transaction.getKiraanAsing()));
-                    index ++;
-                    cell = row.createCell(index);
-                }
-
-                for (int i = 0; i < workerCount; i ++) {
-                    
-                    if (transaction.getType() == Transaction.GENERAL) {
-                        calculations.get(i).setSalary(transaction.getWagePerWorker());
-                        cell = row.createCell(index++);
-                        cell.setCellValue(Common.currency(transaction.getWagePerWorker()));
-                        cell = row.createCell(index++);
-                        cell = row.createCell(index++);
-                        cell.setCellValue(Common.currency(calculations.get(i).getBalance()));
-                    } else {
-                        calculations.get(i).setLoan(transaction.getLoanAmount());
-                        cell = row.createCell(index++);
-                        cell = row.createCell(index++);
-                        cell.setCellValue(transaction.getLoanAmount());
-                        cell = row.createCell(index++);
-                        cell.setCellValue(Common.currency(calculations.get(i).getBalance()));
-                    }
-                }
-                
-                rowIndex ++;
             }
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
+            if (chkMonthlyReportClientName.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    cell.setCellValue(transaction.getCustomer().getName());
+                } else {
+                    cell.setCellValue("Pinjaman");
+                }
+                index++;
+                cell = row.createCell(index);
+            }
+            if (chkMonthlyReportDescription.isSelected()) {
+                cell.setCellValue(transaction.getDescription());
+                index++;
+                cell = row.createCell(index);
+            }
+            if (chkMonthlyReportWeight.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    cell.setCellValue(transaction.getWeight());
+
+                }
+                index++;
+                cell = row.createCell(index);
+            }
+            if (chkMonthlyReportPricePerTon.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    cell.setCellValue(Common.currency(transaction.getPricePerTon()));
+
+                }
+                index++;
+                cell = row.createCell(index);
+            }
+            if (chkMonthlyReportTotalReceived.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    cell.setCellValue(Common.currency(transaction.getTotal()));
+
+                }
+                index++;
+                cell = row.createCell(index);
+            }
+            if (chkMonthlyReportWages.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    cell.setCellValue(Common.currency(transaction.getWages()));
+
+                }
+                index++;
+                cell = row.createCell(index);
+            }
+            if (chkMonthlyReportSalary.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    cell.setCellValue(Common.currency(transaction.getTotalSalary()));
+
+                }
+                index++;
+                cell = row.createCell(index);
+            }
+            if (chkMonthlyReportBalance.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    cell.setCellValue(Common.currency(transaction.getBalance()));
+
+                }
+                index++;
+                cell = row.createCell(index);
+            }
+            if (chkMonthlyReportKiraanAsing.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    cell.setCellValue(Common.currency(transaction.getKiraanAsing()));
+
+                }
+                index++;
+                cell = row.createCell(index);
+            }
+
+            for (int i = 0; i < workerCount; i++) {
+
+                if (transaction.getType() == Transaction.GENERAL) {
+                    calculations.get(i).setSalary(transaction.getWagePerWorker());
+                    cell = row.createCell(index++);
+                    cell.setCellValue(Common.currency(transaction.getWagePerWorker()));
+                    cell = row.createCell(index++);
+                    cell = row.createCell(index++);
+                    cell.setCellValue(Common.currency(calculations.get(i).getBalance()));
+                } else {
+                    calculations.get(i).setLoan(transaction.getLoanAmount());
+                    cell = row.createCell(index++);
+                    cell = row.createCell(index++);
+                    cell.setCellValue(transaction.getLoanAmount());
+                    cell = row.createCell(index++);
+                    cell.setCellValue(Common.currency(calculations.get(i).getBalance()));
+                }
+            }
+
+            rowIndex++;
         }
+        // </editor-fold>
 
         
         Row summaryRow = sheet.createRow(rowIndex);
@@ -2171,15 +2193,11 @@ public class Main extends javax.swing.JFrame {
 
     private void btnMonthlyReportGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyReportGenerateActionPerformed
         // get selected worker to be display
+        ArrayList<String> columns = this.getReportColumns();
         ArrayList<Worker> selected = this.getReportSelectedWorkers();
-        ArrayList<ReportCalculation> calculations = new ArrayList<ReportCalculation>();
-        String query = this.getReportQuery(selected);
-
-        for (Worker worker : selected) {
-            calculations.add(new ReportCalculation(worker.getId()));
-        }
-        
-        ResultSet results = Database.instance().execute(query);
+        ArrayList<Transaction> transactions = this.getReportTransasctions(selected);
+        ArrayList<ReportSaving> savings = this.getReportSavings(selected);
+        ArrayList<ReportCalculation> calculations = this.getReportCalculations(selected);
 
         String html = "<html>";
         String css = "<style type=\"text/css\">";
@@ -2187,9 +2205,9 @@ public class Main extends javax.swing.JFrame {
         String header = "";
         String content = "<tbody>";
         String saving_content = "";
-        ArrayList<String> columns = this.getReportColumns();
+        
 
-        /* Render table header */
+        // <editor-fold defaultstate="collapsed" desc="render table header">
         header += "<thead><tr>";
         String rowspan = selected.size() > 0 ? " rowspan=\"2\"" : "";
         for (String column : columns) {
@@ -2204,108 +2222,131 @@ public class Main extends javax.swing.JFrame {
         }
         header += "</tr>";
         header += "</thead>";
+        // </editor-fold>
 
-        /* end of render table header */
-
-        /* prepare css */
+        // <editor-fold defaultstate="collapsed" desc="prepare css">
         css += "table { border: 1px solid #333; border-collapse: collapse; }";
         css += "table thead tr, table thead td, table tr.summary, table tr.summary td { border: 1px solid #333; }";
-        /* end if css */
+        css += "table tr td.worker_transaction { border-left: 1px solid #333 }";
+        css += "table tr.summary td.blank { border-left: none; border-botton: none; }";
+        css += "table tr.saving_summary, table tr.saving_summary td { border : 1px solid #333; } ";
+        // </editor-fold>
 
-        try {
-            while (results.next()) {
-                Transaction transaction = new Transaction(results.getInt("id"));
-                content += "<tr>";
-                if (chkMonthlyReportDate.isSelected()) content += "<td>" + Common.renderDisplayDate(transaction.getDate()) + "</td>";
-                if (chkMonthlyReportClientName.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL)
-                        content += "<td>" + transaction.getCustomer().getName() + "</td>";
-                    else
-                        content += "<td>Pinjaman</td>";
-                }
-                if (chkMonthlyReportDescription.isSelected()) content += "<td>" + transaction.getDescription() + "</td>";
-                if (chkMonthlyReportWeight.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL)
-                        content += "<td>" + transaction.getWeight() + "</td>";
-                    else
-                        content += "<td></td>";
-                }
-                if (chkMonthlyReportPricePerTon.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL)
-                        content += "<td>" + Common.currency(transaction.getPricePerTon()) + "</td>";
-                    else
-                        content += "<td></td>";
-                }
-                if (chkMonthlyReportTotalReceived.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL)
-                        content += "<td>" + Common.currency(transaction.getTotal()) + "</td>";
-                    else
-                        content += "<td></td>";
-                }
-                if (chkMonthlyReportWages.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL)
-                        content += "<td>" + Common.currency(transaction.getWages()) + "</td>";
-                    else
-                        content += "<td></td>";
-                }
-                if (chkMonthlyReportSalary.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL)
-                        content += "<td>" + Common.currency(transaction.getTotalSalary()) + "</td>";
-                    else
-                        content += "<td></td>";
-                }
-                if (chkMonthlyReportBalance.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL)
-                        content += "<td>" + Common.currency(transaction.getBalance()) + "</td>";
-                    else
-                        content += "<td></td>";
-                }
-                if (chkMonthlyReportKiraanAsing.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL)
-                        content += "<td>" + transaction.getKiraanAsing() + "</td>";
-                    else
-                        content += "<td></td>";
-                }
-                /*if (chkMonthlyReportSaving.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL)
-                        content += "<td></td>";
-                    else
-                        content += "<td></td>";
-                }*/
-                
-                String[] workerIds = transaction.getNormalizedWorkerID().split(",");
+        // <editor-fold defaultstate="collapsed" desc="render transaction content">
+        for (Transaction transaction : transactions) {
+            content += "<tr>";
+            if (chkMonthlyReportDate.isSelected()) {
+                content += "<td>" + Common.renderDisplayDate(transaction.getDate()) + "</td>";
 
-                int index = 0;
-                for (Worker worker : selected) {
-                    if (Common.inArray(workerIds, worker.getId())) {
-                        if (transaction.getType() == Transaction.GENERAL) {
-                            calculations.get(index).setSalary(transaction.getWagePerWorker());
-                            content += "<td>" + Common.currency(transaction.getWagePerWorker()) + "</td>";
-                            content += "<td></td>";
-                            content += "<td>" + Common.currency(calculations.get(index).getBalance()) + "</td>";
-                        } else {
-                            calculations.get(index).setLoan(transaction.getLoanAmount());
-                            content += "<td></td>";
-                            content += "<td>" + Common.currency(transaction.getLoanAmount()) + "</td>";
-                            content += "<td>" + Common.currency(calculations.get(index).getBalance()) + "</td>";
-                        }
-                    } else {
-                        content += "<td></td>";
-                        content += "<td></td>";
-                        content += "<td></td>";
-                    }
-                    
-                    index++;
-                }
-                content += "</tr>";
             }
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
+            if (chkMonthlyReportClientName.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    content += "<td>" + transaction.getCustomer().getName() + "</td>";
 
-        if (selected.size() > 0 ) {
+                } else {
+                    content += "<td>Pinjaman</td>";
+
+                }
+            }
+            if (chkMonthlyReportDescription.isSelected()) {
+                content += "<td>" + transaction.getDescription() + "</td>";
+
+            }
+            if (chkMonthlyReportWeight.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    content += "<td>" + transaction.getWeight() + "</td>";
+
+                } else {
+                    content += "<td></td>";
+
+                }
+            }
+            if (chkMonthlyReportPricePerTon.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    content += "<td>" + Common.currency(transaction.getPricePerTon()) + "</td>";
+
+                } else {
+                    content += "<td></td>";
+
+                }
+            }
+            if (chkMonthlyReportTotalReceived.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    content += "<td>" + Common.currency(transaction.getTotal()) + "</td>";
+
+                } else {
+                    content += "<td></td>";
+
+                }
+            }
+            if (chkMonthlyReportWages.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    content += "<td>" + Common.currency(transaction.getWages()) + "</td>";
+
+                } else {
+                    content += "<td></td>";
+
+                }
+            }
+            if (chkMonthlyReportSalary.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    content += "<td>" + Common.currency(transaction.getTotalSalary()) + "</td>";
+
+                } else {
+                    content += "<td></td>";
+
+                }
+            }
+            if (chkMonthlyReportBalance.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    content += "<td>" + Common.currency(transaction.getBalance()) + "</td>";
+
+                } else {
+                    content += "<td></td>";
+
+                }
+            }
+            if (chkMonthlyReportKiraanAsing.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    content += "<td>" + transaction.getKiraanAsing() + "</td>";
+
+                } else {
+                    content += "<td></td>";
+
+                }
+            }
+
+            String[] workerIds = transaction.getNormalizedWorkerID().split(",");
+
+            int index = 0;
+            for (Worker worker : selected) {
+                if (Common.inArray(workerIds, worker.getId())) {
+                    if (transaction.getType() == Transaction.GENERAL) {
+                        calculations.get(index).setSalary(transaction.getWagePerWorker());
+                        content += "<td class=\"worker_transaction\">" + Common.currency(transaction.getWagePerWorker()) + "</td>";
+                        content += "<td></td>";
+                        content += "<td>" + Common.currency(calculations.get(index).getBalance()) + "</td>";
+                    } else {
+                        calculations.get(index).setLoan(transaction.getLoanAmount());
+                        content += "<td class=\"worker_transaction\"></td>";
+                        content += "<td>" + Common.currency(transaction.getLoanAmount()) + "</td>";
+                        content += "<td>" + Common.currency(calculations.get(index).getBalance()) + "</td>";
+                    }
+                } else {
+                    content += "<td class=\"worker_transaction\"></td>";
+                    content += StringUtils.repeat("<td></td>", 2);
+                }
+
+                index++;
+            }
+            content += "</tr>";
+        }
+        // </editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc="render transaction worker summary">
+        if (selected.size() > 0) {
             content += "<tr class=\"summary\">";
-            content += "<td colspan=\"" + columns.size() + "\"></td>";
+            content += "<td class=\"blank\" colspan=\"" + columns.size() + "\"></td>";
             for (ReportCalculation rc : calculations) {
                 content += "<td>" + Common.currency(rc.getSalary()) + "</td>";
                 content += "<td>" + Common.currency(rc.getLoan()) + "</td>";
@@ -2313,75 +2354,34 @@ public class Main extends javax.swing.JFrame {
             }
             content += "</tr>";
         }
+        // </editor-fold>
 
+        // <editor-fold defaultstate="collapsed" desc="render report saving summary">
         if (chkMonthlyReportSaving.isSelected()) {
-            ArrayList<ReportSaving> savings = this.getReportSaving(selected);
-            content += "<tr class=\"no-border\"><td colspan=\"" + (selected.size() + columns.size()) + "\"><b><u>Simpanan Tetap</u></b></td></tr>";
+            content += "<tr><td colspan=\"" + (selected.size() + columns.size()) + "\"><br /><b><u>Simpanan Tetap</u></b></td></tr>";
 
             /* Baki Lalu */
-            content += "<tr>";
+            content += "<tr class=\"saving_summary\">";
 
             int colspan_size = columns.size();
-            
-            if (chkMonthlyReportDate.isSelected()) {
-                content += "<td>&nbsp;</td>";
-                colspan_size --;
-            }
 
-            if (chkMonthlyReportClientName.isSelected()) {
-                content += "<td>&nbsp;</td>";
-                colspan_size --;
-            }
-
-            content += "<td colspan=\"" + colspan_size + "\">Baki Bulan Lalu</td>";
+            content += "<td colspan=\"" + colspan_size + "\">";
+            content += "Baki Bulan Lalu<br />";
+            content += "Bulan Ini<br />";
+            content += "Baki";
+            content += "</td>";
 
             for (ReportSaving saving : savings) {
-                content += "<td colspan=\"3\">" + Common.currency(saving.getPrevious()) + "</td>";
+                content += "<td colspan=\"3\">";
+                content += Common.currency(saving.getPrevious()) + "<br />";
+                content += Common.currency(saving.getCurrent()) + "<br />";
+                content += Common.currency(saving.getBalance());
+                content += "</td>";
             }
 
             content += "</tr>";
-            /* end baki lalu */
-
-            /* current saving */
-            content += "<tr>";
-
-            if (chkMonthlyReportDate.isSelected()) {
-                content += "<td>&nbsp;</td>";
-            }
-
-            if (chkMonthlyReportClientName.isSelected()) {
-                content += "<td>&nbsp;</td>";
-            }
-
-            content += "<td colspan=\"" + colspan_size + "\">Bulan Ini</td>";
-
-            for (ReportSaving saving : savings) {
-                content += "<td colspan=\"3\">" + Common.currency(saving.getCurrent()) + "</td>";
-            }
-
-            content += "</tr>";
-            /* end current saving */
-
-            /* balance */
-            content += "<tr>";
-
-            if (chkMonthlyReportDate.isSelected()) {
-                content += "<td>&nbsp;</td>";
-            }
-
-            if (chkMonthlyReportClientName.isSelected()) {
-                content += "<td>&nbsp;</td>";
-            }
-
-            content += "<td colspan=\"" + colspan_size + "\">Baki</td>";
-
-            for (ReportSaving saving : savings) {
-                content += "<td colspan=\"3\">" + Common.currency(saving.getBalance()) + "</td>";
-            }
-
-            content += "</tr>";
-            /* end balance */
         }
+        // </editor-fold>
         
         content += "</tbody>";
 
@@ -2444,83 +2444,63 @@ public class Main extends javax.swing.JFrame {
         return selected;
     }
 
-    private String getReportQuery(ArrayList<Worker> selected) {
-        Calendar dateFrom = Calendar.getInstance(), dateTo = Calendar.getInstance();
-        String id = "";
+    private ArrayList<Transaction> getReportTransasctions(ArrayList<Worker> selected) {
+        ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+        Hashtable dates = getReportSelectedDateRange();
+        String id = Worker.join(selected);
 
-        for(Worker worker : selected) {
-            id += worker.getId() + ",";
-        }
-
-        id = id.isEmpty() ? "" : id.substring(0, id.length() - 1);
-
-        if (rbtnMonhtlyReportCurrentMonth.isSelected()) {
-            dateFrom.set(Calendar.DAY_OF_MONTH, 1);
-            dateTo.set(Calendar.DAY_OF_MONTH, dateTo.getActualMaximum(Calendar.DAY_OF_MONTH));
-        } else if (rbtnMonthlyReportLastMonth.isSelected()) {
-            dateFrom.set(Calendar.DAY_OF_MONTH, 1);
-            dateTo.set(Calendar.DAY_OF_MONTH, dateTo.getActualMaximum(Calendar.DAY_OF_MONTH));
-            dateFrom.roll(Calendar.MONTH, -1);
-            dateTo.roll(Calendar.MONTH, -1);
-        } else {
-            dateFrom.setTime(txtMonthlyReportDateFrom.getDate());
-            dateTo.setTime(txtMonthlyReportDateFrom.getDate());
-        }
-
-        String query = "SELECT DISTINCT id FROM transactions ";
+        String query = "SELECT DISTINCT id, type, loan_amount, customer_id, description, weight, price_per_ton, wages, kiraan_asing, date, created, normalized_worker_id FROM transactions ";
         query += "INNER JOIN transaction_workers ON transactions.id = transaction_workers.transaction_id ";
-        query += "WHERE date >= '" + Common.renderSQLDate(dateFrom) + "'" ;
-        query += "AND date <= '" + Common.renderSQLDate(dateTo) + "'" ;
-        
-        if ( ! id.isEmpty()) {
-            query += "AND worker_id IN (" + id + ") ";
+        query += "WHERE date >= '" + Common.renderSQLDate((Calendar) dates.get("from")) + "' AND date <= '" + Common.renderSQLDate((Calendar) dates.get("to")) + "' ";
+        query += id.isEmpty() ? "ORDER BY date" : "AND worker_id IN (" + id + ") ORDER BY DATE";
+
+        ResultSet rs = Database.instance().execute(query);
+
+        try {
+            while (rs.next()) {
+                ArrayList<Worker> involver = Worker.bulk(rs.getString("normalized_worker_id"));
+                transactions.add(new Transaction(rs.getInt("id"), rs.getInt("customer_id"), rs.getInt("type"), rs.getDouble("weight"), rs.getDouble("price_per_ton"), rs.getDouble("wages"), rs.getDouble("kiraan_asing"), rs.getDouble("loan_amount"), involver, Common.convertStringToDate(rs.getString("date")), rs.getString("description"), rs.getString("normalized_worker_id")));
+            }
+
+            rs.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
         }
 
-        query += "ORDER BY date";
-
-        return query;
+        return transactions;
     }
 
-    private ArrayList<ReportSaving> getReportSaving(ArrayList<Worker> selected) {
+    private ArrayList<ReportCalculation> getReportCalculations(ArrayList<Worker> selected) {
+        ArrayList<ReportCalculation> calculations = new ArrayList<ReportCalculation>();
+
+        for (Worker worker : selected) {
+            calculations.add(new ReportCalculation(worker.getId()));
+        }
+        
+        return calculations;
+    }
+
+    private ArrayList<ReportSaving> getReportSavings(ArrayList<Worker> selected) {
         ArrayList<ReportSaving> saving = new ArrayList<ReportSaving>();
+        Hashtable dates = this.getReportSelectedDateRange();
 
         if ( ! chkMonthlyReportSaving.isSelected()) {
             return saving;
-        }
-        
-        Calendar dateFrom = Calendar.getInstance(), dateTo = Calendar.getInstance();
-
-        if (rbtnMonhtlyReportCurrentMonth.isSelected()) {
-            dateFrom.set(Calendar.DAY_OF_MONTH, 1);
-            dateTo.set(Calendar.DAY_OF_MONTH, dateTo.getActualMaximum(Calendar.DAY_OF_MONTH));
-        } else if (rbtnMonthlyReportLastMonth.isSelected()) {
-            dateFrom.set(Calendar.DAY_OF_MONTH, 1);
-            dateTo.set(Calendar.DAY_OF_MONTH, dateTo.getActualMaximum(Calendar.DAY_OF_MONTH));
-            dateFrom.roll(Calendar.MONTH, -1);
-            dateTo.roll(Calendar.MONTH, -1);
-        } else {
-            dateFrom.setTime(txtMonthlyReportDateFrom.getDate());
-            dateTo.setTime(txtMonthlyReportDateFrom.getDate());
         }
 
         String query = "";
         ResultSet rs = null;
 
-        
-
         for (Worker worker : selected) {
             try {
-                double previous_saving, current_saving;
-                query = "SELECT SUM(amount) as previous_saving FROM workerRecord WHERE worker_id = " + worker.getId() + " AND date < \"" + Common.renderSQLDate(dateFrom) + "\"";
-                rs = Database.instance().execute(query);
-                rs.next();
-                previous_saving = rs.getDouble("previous_saving");
-                query = "SELECT SUM(amount) as previous_saving FROM workerRecord WHERE worker_id = " + worker.getId() + " AND date >= \"" + Common.renderSQLDate(dateFrom) + "\" AND date <= \"" + Common.renderSQLDate(dateTo) + "\"";
-                rs = Database.instance().execute(query);
-                rs.next();
-                current_saving = rs.getDouble("previous_saving");
+                query = "SELECT ";
+                query += "(SELECT SUM(amount) FROM workerRecord WHERE worker_id = " + worker.getId() + " AND date < '" + Common.renderSQLDate((Calendar) dates.get("from")) + "' AND type IN (" + WorkerRecord.SAVING + "," + WorkerRecord.WITHDRAW + ")) AS previous, ";
+                query += "(SELECT SUM(amount) FROM workerRecord WHERE worker_id = " + worker.getId() + " AND date >= '" + Common.renderSQLDate((Calendar) dates.get("from")) + "' AND date <= '" + Common.renderSQLDate((Calendar) dates.get("to")) + "' AND type IN (" + WorkerRecord.SAVING + "," + WorkerRecord.WITHDRAW + ")) AS current ";
 
-                saving.add(new ReportSaving(previous_saving, current_saving, worker));
+                rs = Database.instance().execute(query);
+                rs.next();
+
+                saving.add(new ReportSaving(rs.getDouble("previous"), rs.getDouble("current"), worker));
             } catch(SQLException ex) {
                 System.err.println(ex.getMessage());
             }
@@ -2528,6 +2508,30 @@ public class Main extends javax.swing.JFrame {
 
         return saving;
 
+    }
+
+    private Hashtable getReportSelectedDateRange() {
+        Hashtable values = new Hashtable();
+
+        Calendar dateFrom = Calendar.getInstance(), dateTo = Calendar.getInstance();
+
+        if (rbtnMonhtlyReportCurrentMonth.isSelected()) {
+            dateFrom.set(Calendar.DAY_OF_MONTH, 1);
+            dateTo.set(Calendar.DAY_OF_MONTH, dateTo.getActualMaximum(Calendar.DAY_OF_MONTH));
+        } else if (rbtnMonthlyReportLastMonth.isSelected()) {
+            dateFrom.set(Calendar.DAY_OF_MONTH, 1);
+            dateTo.set(Calendar.DAY_OF_MONTH, dateTo.getActualMaximum(Calendar.DAY_OF_MONTH));
+            dateFrom.roll(Calendar.MONTH, -1);
+            dateTo.roll(Calendar.MONTH, -1);
+        } else {
+            dateFrom.setTime(txtMonthlyReportDateFrom.getDate());
+            dateTo.setTime(txtMonthlyReportDateFrom.getDate());
+        }
+
+        values.put("from", dateFrom);
+        values.put("to", dateTo);
+
+        return values;
     }
 
     private void cboxMonthlyReportAllWorkersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxMonthlyReportAllWorkersActionPerformed
@@ -2554,8 +2558,9 @@ public class Main extends javax.swing.JFrame {
 
     private void btnMonthlyReportPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyReportPrintActionPerformed
         ArrayList<Worker> selected = this.getReportSelectedWorkers();
-        ArrayList<ReportSaving> savings = this.getReportSaving(selected);
-        String query = this.getReportQuery(selected);
+        ArrayList<ReportSaving> savings = this.getReportSavings(selected);
+        ArrayList<Transaction> transactions = this.getReportTransasctions(selected);
+        ArrayList<ReportCalculation> calculations = this.getReportCalculations(selected);
 
         PrinterJob job = PrinterJob.getPrinterJob();
         
@@ -2563,7 +2568,7 @@ public class Main extends javax.swing.JFrame {
         PageFormat format = job.defaultPage();
         format.setOrientation(PageFormat.LANDSCAPE);
 
-        job.setPrintable(new ReportPrinter(this, selected, query, savings), format);
+        job.setPrintable(new ReportPrinter(this, selected, transactions, calculations, savings), format);
 
         if (job.printDialog() == true) {
             try {
@@ -2768,46 +2773,36 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReportWorkerGenerateActionPerformed
 
     private ArrayList<WorkerReport> getWorkerReports() {
+        ArrayList<WorkerReport> reports = new ArrayList<WorkerReport>();
         int monthFrom = txtReportWorkerMonth.getMonth() + 1;
         int monthTo = txtReportWorkerMonthTo.getMonth() + 1;
         int yearFrom = txtReportWorkerYear.getYear();
         int yearTo = txtReportWorkerYearTo.getYear();
-        
-        ArrayList<WorkerReport> reports = new ArrayList<WorkerReport>();
-        String query = "";
         int month = monthFrom, year = yearFrom;
 
         while (year < yearTo || (month <= monthTo && year <= yearTo)) {
             double salary = 0.0, loan = 0.0, saving = 0.0, withdraw = 0.0;
-            ResultSet rs = null;
 
-            System.out.println(month + ":" + year);
             try {
+                String query = "SELECT ";
+                query += "(SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = " + _selected_report_worker.getId() + " AND strftime(\"%m\", date) = \"" + (month > 9 ? month : "0" + month) + "\" AND strftime(\"%Y\", date) = \"" + year + "\" AND type = " + WorkerRecord.INCOME + ") AS salary, ";
+                query += "(SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = " + _selected_report_worker.getId() + " AND strftime(\"%m\", date) = \"" + (month > 9 ? month : "0" + month) + "\" AND strftime(\"%Y\", date) = \"" + year + "\" AND type = " + WorkerRecord.LOAN + ") AS loan, ";
+                query += "(SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = " + _selected_report_worker.getId() + " AND strftime(\"%m\", date) = \"" + (month > 9 ? month : "0" + month) + "\" AND strftime(\"%Y\", date) = \"" + year + "\" AND type = " + WorkerRecord.SAVING + ") AS saving, ";
+                query += "(SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = " + _selected_report_worker.getId() + " AND strftime(\"%m\", date) = \"" + (month > 9 ? month : "0" + month) + "\" AND strftime(\"%Y\", date) = \"" + year + "\" AND type = " + WorkerRecord.WITHDRAW + ") AS withdraw";
                 // salary
-                query = "SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = " + _selected_report_worker.getId() + " AND strftime(\"%m\", date) = \"" + (month > 9 ? month : "0" + month) + "\" AND strftime(\"%Y\", date) = \"" + year + "\" AND type = " + WorkerRecord.INCOME;
-                rs = Database.instance().execute(query);
+                ResultSet rs = Database.instance().execute(query);
                 rs.next();
-                salary  = rs.getDouble("amount");
-                // loan
-                query = "SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = " + _selected_report_worker.getId() + " AND strftime(\"%m\", date) = \"" + (month > 9 ? month : "0" + month) + "\" AND strftime(\"%Y\", date) = \"" + year + "\" AND type = " + WorkerRecord.LOAN;
-                rs = Database.instance().execute(query);
-                rs.next();
-                loan  = rs.getDouble("amount");
-                // saving
-                query = "SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = " + _selected_report_worker.getId() + " AND strftime(\"%m\", date) = \"" + (month > 9 ? month : "0" + month) + "\" AND strftime(\"%Y\", date) = \"" + year + "\" AND type = " + WorkerRecord.SAVING;
-                rs = Database.instance().execute(query);
-                rs.next();
-                saving  = rs.getDouble("amount");
-                // withdraw
-                query = "SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = " + _selected_report_worker.getId() + " AND strftime(\"%m\", date) = \"" + (month > 9 ? month : "0" + month) + "\" AND strftime(\"%Y\", date) = \"" + year + "\" AND type = " + WorkerRecord.WITHDRAW;
-                rs = Database.instance().execute(query);
-                rs.next();
-                withdraw  = rs.getDouble("amount");
+                
+                salary  = rs.getDouble("salary");
+                loan  = rs.getDouble("loan");
+                saving  = rs.getDouble("saving");
+                withdraw  = rs.getDouble("withdraw");
+
+                rs.close();
+
             } catch (SQLException ex) {
                 System.err.println(ex.getMessage());
             }
-
-            System.out.println("End of " + month + ":" + year);
 
             reports.add(new WorkerReport(month, year, salary, loan, saving, withdraw));
 
@@ -2870,8 +2865,6 @@ public class Main extends javax.swing.JFrame {
         int counter = 0;
         double balance = WorkerRecord.getWorkerSalary(selected.getId(), txtPayDateFrom.getDate(), txtPayDateTo.getDate());
 
-        System.out.println(balance);
-        
         try {
             while (results.next()) {
                 WorkerRecord record = new WorkerRecord(results.getInt("id"), results.getInt("worker_id"), results.getInt("type"), results.getDouble("amount"), results.getString("description"), Common.convertStringToDate(results.getString("date")));
