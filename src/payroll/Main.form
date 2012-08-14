@@ -815,12 +815,12 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="589" max="32767" attributes="0"/>
-                          <Component id="btnSavingNew" min="-2" pref="120" max="-2" attributes="0"/>
+                          <EmptySpace pref="710" max="32767" attributes="0"/>
+                          <Component id="btnSavingNew" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnSavingCancel" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Component id="btnSavingCancel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnSavingEnd" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Component id="btnSavingEnd" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -1065,12 +1065,12 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="589" max="32767" attributes="0"/>
-                          <Component id="btnPayNew" min="-2" pref="120" max="-2" attributes="0"/>
+                          <EmptySpace pref="710" max="32767" attributes="0"/>
+                          <Component id="btnPayNew" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnPayCancel" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Component id="btnPayCancel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnPayEnd" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Component id="btnPayEnd" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -1082,7 +1082,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnPayEnd" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnPayCancel" alignment="3" max="32767" attributes="1"/>
-                              <Component id="btnPayNew" alignment="3" min="-2" max="-2" attributes="1"/>
+                              <Component id="btnPayNew" alignment="3" min="-2" pref="23" max="-2" attributes="1"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -1947,7 +1947,7 @@
                                   <Component id="jLabel26" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                   <Component id="txtProfileWorkerStatus" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="381" max="32767" attributes="0"/>
+                              <EmptySpace pref="408" max="32767" attributes="0"/>
                               <Component id="jPanel15" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -2052,14 +2052,14 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="437" max="32767" attributes="0"/>
-                                  <Component id="btnProfileWorkerNew" min="-2" pref="141" max="-2" attributes="0"/>
+                                  <EmptySpace pref="602" max="32767" attributes="0"/>
+                                  <Component id="btnProfileWorkerNew" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnProfileWorkerEdit" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Component id="btnProfileWorkerEdit" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnProfileWorkerDelete" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Component id="btnProfileWorkerDelete" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnProfileWorkerEnd" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Component id="btnProfileWorkerEnd" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -2069,10 +2069,10 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="btnProfileWorkerEnd" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                                      <Component id="btnProfileWorkerEnd" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnProfileWorkerDelete" alignment="3" max="32767" attributes="1"/>
-                                      <Component id="btnProfileWorkerEdit" alignment="3" min="-2" pref="50" max="-2" attributes="1"/>
-                                      <Component id="btnProfileWorkerNew" alignment="3" min="-2" pref="50" max="-2" attributes="1"/>
+                                      <Component id="btnProfileWorkerEdit" alignment="3" min="-2" max="-2" attributes="1"/>
+                                      <Component id="btnProfileWorkerNew" alignment="3" min="-2" max="-2" attributes="1"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -2157,7 +2157,7 @@
                                   <Component id="jLabel28" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                   <Component id="txtProfileClientStatus" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="474" max="32767" attributes="0"/>
+                              <EmptySpace pref="501" max="32767" attributes="0"/>
                               <Component id="jPanel16" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -2178,14 +2178,14 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="471" max="32767" attributes="0"/>
+                                  <EmptySpace pref="588" max="32767" attributes="0"/>
                                   <Component id="btnProfileClientNew" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnProfileClientEdit" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Component id="btnProfileClientEdit" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnProfileClientDelete" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Component id="btnProfileClientDelete" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnProfileClientEnd" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Component id="btnProfileClientEnd" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -2195,10 +2195,10 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="btnProfileClientEnd" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                                      <Component id="btnProfileClientEnd" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnProfileClientDelete" alignment="3" max="32767" attributes="1"/>
-                                      <Component id="btnProfileClientEdit" alignment="3" min="-2" pref="50" max="-2" attributes="1"/>
-                                      <Component id="btnProfileClientNew" alignment="3" min="-2" pref="50" max="-2" attributes="1"/>
+                                      <Component id="btnProfileClientEdit" alignment="3" min="-2" max="-2" attributes="1"/>
+                                      <Component id="btnProfileClientNew" alignment="3" min="-2" max="-2" attributes="1"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>

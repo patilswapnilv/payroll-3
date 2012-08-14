@@ -45,9 +45,9 @@ import org.xml.sax.SAXException;
 import payroll.libraries.Common;
 import payroll.libraries.Database;
 import payroll.libraries.ExtensionFileFilter;
-import payroll.libraries.MultiValues;
 import payroll.model.Customer;
 import payroll.model.ReportCalculation;
+import payroll.model.ReportSalary;
 import payroll.model.ReportSaving;
 import payroll.model.Transaction;
 import payroll.model.Worker;
@@ -2198,6 +2198,7 @@ public class Main extends javax.swing.JFrame {
         ArrayList<Transaction> transactions = this.getReportTransasctions(selected);
         ArrayList<ReportSaving> savings = this.getReportSavings(selected);
         ArrayList<ReportCalculation> calculations = this.getReportCalculations(selected);
+        ArrayList<ReportSalary> salaries = this.getReportSalaries(selected);
 
         String html = "<html>";
         String css = "<style type=\"text/css\">";
@@ -2206,7 +2207,6 @@ public class Main extends javax.swing.JFrame {
         String content = "<tbody>";
         String saving_content = "";
         
-
         // <editor-fold defaultstate="collapsed" desc="render table header">
         header += "<thead><tr>";
         String rowspan = selected.size() > 0 ? " rowspan=\"2\"" : "";
@@ -2225,7 +2225,9 @@ public class Main extends javax.swing.JFrame {
         // </editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="prepare css">
-        css += "table { border: 1px solid #333; border-collapse: collapse; }";
+        css += "table { border-collapse: collapse; }";
+        css += "table tr td.first { border-left: 1px solid #333; }";
+        css += "table tr td.last { border-right: 1px solid #333; }";
         css += "table thead tr, table thead td, table tr.summary, table tr.summary td { border: 1px solid #333; }";
         css += "table tr td.worker_transaction { border-left: 1px solid #333 }";
         css += "table tr.summary td.blank { border-left: none; border-botton: none; }";
@@ -2234,84 +2236,81 @@ public class Main extends javax.swing.JFrame {
 
         // <editor-fold defaultstate="collapsed" desc="render transaction content">
         for (Transaction transaction : transactions) {
+            int first = 0;
             content += "<tr>";
             if (chkMonthlyReportDate.isSelected()) {
-                content += "<td>" + Common.renderDisplayDate(transaction.getDate()) + "</td>";
+                content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + Common.renderDisplayDate(transaction.getDate()) + "</td>";
 
             }
             if (chkMonthlyReportClientName.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td>" + transaction.getCustomer().getName() + "</td>";
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + transaction.getCustomer().getName() + "</td>";
 
                 } else {
-                    content += "<td>Pinjaman</td>";
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">Pinjaman</td>";
 
                 }
             }
             if (chkMonthlyReportDescription.isSelected()) {
-                content += "<td>" + transaction.getDescription() + "</td>";
+                content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + transaction.getDescription() + "</td>";
 
             }
             if (chkMonthlyReportWeight.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td>" + transaction.getWeight() + "</td>";
-
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + transaction.getWeight() + "</td>";
                 } else {
-                    content += "<td></td>";
-
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
                 }
             }
             if (chkMonthlyReportPricePerTon.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td>" + Common.currency(transaction.getPricePerTon()) + "</td>";
-
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + Common.currency(transaction.getPricePerTon()) + "</td>";
                 } else {
-                    content += "<td></td>";
-
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
                 }
             }
             if (chkMonthlyReportTotalReceived.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td>" + Common.currency(transaction.getTotal()) + "</td>";
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + Common.currency(transaction.getTotal()) + "</td>";
 
                 } else {
-                    content += "<td></td>";
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
 
                 }
             }
             if (chkMonthlyReportWages.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td>" + Common.currency(transaction.getWages()) + "</td>";
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + Common.currency(transaction.getWages()) + "</td>";
 
                 } else {
-                    content += "<td></td>";
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
 
                 }
             }
             if (chkMonthlyReportSalary.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td>" + Common.currency(transaction.getTotalSalary()) + "</td>";
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + Common.currency(transaction.getTotalSalary()) + "</td>";
 
                 } else {
-                    content += "<td></td>";
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
 
                 }
             }
             if (chkMonthlyReportBalance.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td>" + Common.currency(transaction.getBalance()) + "</td>";
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + Common.currency(transaction.getBalance()) + "</td>";
 
                 } else {
-                    content += "<td></td>";
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
 
                 }
             }
             if (chkMonthlyReportKiraanAsing.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td>" + transaction.getKiraanAsing() + "</td>";
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + transaction.getKiraanAsing() + "</td>";
 
                 } else {
-                    content += "<td></td>";
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
 
                 }
             }
@@ -2325,16 +2324,15 @@ public class Main extends javax.swing.JFrame {
                         calculations.get(index).setSalary(transaction.getWagePerWorker());
                         content += "<td class=\"worker_transaction\">" + Common.currency(transaction.getWagePerWorker()) + "</td>";
                         content += "<td></td>";
-                        content += "<td>" + Common.currency(calculations.get(index).getBalance()) + "</td>";
+                        content += "<td" + (index == selected.size() - 1 ? " class=\"last\"" : "") + ">" + Common.currency(calculations.get(index).getBalance()) + "</td>";
                     } else {
                         calculations.get(index).setLoan(transaction.getLoanAmount());
                         content += "<td class=\"worker_transaction\"></td>";
                         content += "<td>" + Common.currency(transaction.getLoanAmount()) + "</td>";
-                        content += "<td>" + Common.currency(calculations.get(index).getBalance()) + "</td>";
+                        content += "<td" + (index == selected.size() - 1 ? " class=\"last\"" : "") + ">" + Common.currency(calculations.get(index).getBalance()) + "</td>";
                     }
                 } else {
-                    content += "<td class=\"worker_transaction\"></td>";
-                    content += StringUtils.repeat("<td></td>", 2);
+                    content += "<td class=\"worker_transaction\"></td><td></td><td" + (index == selected.size() -1 ? " class=\"last\"" : "") + "></td>";
                 }
 
                 index++;
@@ -2356,8 +2354,26 @@ public class Main extends javax.swing.JFrame {
         }
         // </editor-fold>
 
+        if (salaries.size() > 0) {
+            content += "<tr class=\"salary\">";
+            for (ReportSalary rs : salaries) {
+                int size = columns.size();
+
+                for (WorkerRecord record : rs.getRecords()) {
+                    if (chkMonthlyReportDate.isSelected()) {
+                        content += "<td>" + Common.renderDisplayDate(record.getDate()) + "</td>";
+                    }
+                    content += "<td colspan=\"" + columns.size() + "\"></td>";
+                    content += "<td>";
+                    content += record.getAmount();
+                }
+                content += "</td>";
+            }
+            content += "</tr>";
+        }
+
         // <editor-fold defaultstate="collapsed" desc="render report saving summary">
-        if (chkMonthlyReportSaving.isSelected()) {
+        if (chkMonthlyReportSaving.isSelected() && selected.size() > 0) {
             content += "<tr><td colspan=\"" + (selected.size() + columns.size()) + "\"><br /><b><u>Simpanan Tetap</u></b></td></tr>";
 
             /* Baki Lalu */
@@ -2508,6 +2524,36 @@ public class Main extends javax.swing.JFrame {
 
         return saving;
 
+    }
+
+    private ArrayList<ReportSalary> getReportSalaries(ArrayList<Worker> selected) {
+        ArrayList<ReportSalary> salaries = new ArrayList<ReportSalary>();
+        Hashtable dates = this.getReportSelectedDateRange();
+
+        String query = "";
+
+        for (Worker worker : selected) {
+            ArrayList<WorkerRecord> records = new ArrayList<WorkerRecord>();
+            
+            query = "SELECT * FROM workerRecord WHERE worker_id = " + worker.getId() + " AND type = " + WorkerRecord.PAYMENT + " ";
+            query += "AND date >= '" + Common.renderSQLDate((Calendar) dates.get("from")) + "' ";
+            query += "AND date <= '" + Common.renderSQLDate((Calendar) dates.get("to")) + "' ";
+            query += "ORDER BY date";
+
+            ResultSet rs = Database.instance().execute(query);
+
+            try {
+                while (rs.next()) {
+                    records.add(new WorkerRecord(rs.getInt("id"), rs.getInt("worker_id"), rs.getInt("type"), rs.getDouble("amount"), rs.getString("description"), Common.convertStringToDate(rs.getString("date"))));
+                }
+            } catch (SQLException ex) {
+                System.err.println(ex.getMessage());
+            }
+
+            salaries.add(new ReportSalary(records, worker));
+        }
+
+        return salaries;
     }
 
     private Hashtable getReportSelectedDateRange() {

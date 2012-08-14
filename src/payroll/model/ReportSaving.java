@@ -34,7 +34,7 @@ public class ReportSaving {
     }
 
     public double getBalance() {
-        return previous - current;
+        return previous + current;
     }
 
     public Worker getWorker() {
