@@ -2230,7 +2230,8 @@ public class Main extends javax.swing.JFrame {
         css += "table tr td.last { border-right: 1px solid #333; }";
         css += "table thead tr, table thead td, table tr.summary, table tr.summary td { border: 1px solid #333; }";
         css += "table tr td.worker_transaction { border-left: 1px solid #333 }";
-        css += "table tr.summary td.blank { border-left: none; border-botton: none; }";
+        css += "table tr.salary td { border: 1px solid #333 }";
+        css += "table tr.summary td.blank { border-left: none; border-bottom: none; }";
         css += "table tr.saving_summary, table tr.saving_summary td { border : 1px solid #333; } ";
         // </editor-fold>
 
@@ -2354,23 +2355,45 @@ public class Main extends javax.swing.JFrame {
         }
         // </editor-fold>
 
+        // <editor-fold defaultstate="collapsed" desc="render salaries report">
         if (salaries.size() > 0) {
-            content += "<tr class=\"salary\">";
-            for (ReportSalary rs : salaries) {
-                int size = columns.size();
+            int size = columns.size();
 
-                for (WorkerRecord record : rs.getRecords()) {
-                    if (chkMonthlyReportDate.isSelected()) {
-                        content += "<td>" + Common.renderDisplayDate(record.getDate()) + "</td>";
-                    }
-                    content += "<td colspan=\"" + columns.size() + "\"></td>";
-                    content += "<td>";
-                    content += record.getAmount();
+            for (ReportSalary rs : salaries) {
+                content += "<tr class=\"salary\">";
+
+
+                if (chkMonthlyReportDate.isSelected()) {
+                    content += "<td>" + Common.renderDisplayDate(rs.getDate()) + "</td>";
+                    size--;
                 }
-                content += "</td>";
+
+                content += "<td colspan=\"" + size + "\">Bayaran Gaji</td>";
+
+                for (ReportCalculation rc : calculations) {
+                    rc.setPayment(rs.getWorkerSalary(rc.getWorkerID()));
+                    content += "<td colspan=\"3\">" + Common.currency(Math.abs(rs.getWorkerSalary(rc.getWorkerID()))) + "</td>";
+                }
+
+                content += "</tr>";
             }
+
+            content += "<tr class=\"salary\">";
+
+            if (chkMonthlyReportDate.isSelected()) {
+                content += "<td>&nbsp;</td>";
+            }
+
+            content += "<td colspan=\"" + size + "\">Baki</td>";
+
+            for (ReportCalculation rc : calculations) {
+                content += "<td colspan=\"3\">" + Common.currency(rc.getTotalBalance()) + "</td>";
+            }
+
             content += "</tr>";
+
         }
+        // </editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="render report saving summary">
         if (chkMonthlyReportSaving.isSelected() && selected.size() > 0) {
@@ -2517,6 +2540,7 @@ public class Main extends javax.swing.JFrame {
                 rs.next();
 
                 saving.add(new ReportSaving(rs.getDouble("previous"), rs.getDouble("current"), worker));
+                rs.close();
             } catch(SQLException ex) {
                 System.err.println(ex.getMessage());
             }
@@ -2530,27 +2554,44 @@ public class Main extends javax.swing.JFrame {
         ArrayList<ReportSalary> salaries = new ArrayList<ReportSalary>();
         Hashtable dates = this.getReportSelectedDateRange();
 
-        String query = "";
-
+        String id = "";
         for (Worker worker : selected) {
-            ArrayList<WorkerRecord> records = new ArrayList<WorkerRecord>();
+            id += worker.getId() + ",";
+        }
+
+        id = id.isEmpty() ? "0" : id.substring(0, id.length() - 1);
+
+        String query = "SELECT worker_id, date, amount FROM workerRecord WHERE worker_id IN (" + id + ") AND type = " + WorkerRecord.PAYMENT + " ";
+        query += "AND date >= '" + Common.renderSQLDate((Calendar) dates.get("from")) + "' ";
+        query += "AND date <= '" + Common.renderSQLDate((Calendar) dates.get("to")) + "' ";
+        query += "ORDER BY date";
+
+        ResultSet rs = Database.instance().execute(query);
+
+        try {
+            String date = "";
+            ReportSalary salary = null;
             
-            query = "SELECT * FROM workerRecord WHERE worker_id = " + worker.getId() + " AND type = " + WorkerRecord.PAYMENT + " ";
-            query += "AND date >= '" + Common.renderSQLDate((Calendar) dates.get("from")) + "' ";
-            query += "AND date <= '" + Common.renderSQLDate((Calendar) dates.get("to")) + "' ";
-            query += "ORDER BY date";
+            while (rs.next()) {
+                
+                if ( ! date.equals(rs.getString("date"))) {
+                    date = rs.getString("date");
 
-            ResultSet rs = Database.instance().execute(query);
-
-            try {
-                while (rs.next()) {
-                    records.add(new WorkerRecord(rs.getInt("id"), rs.getInt("worker_id"), rs.getInt("type"), rs.getDouble("amount"), rs.getString("description"), Common.convertStringToDate(rs.getString("date"))));
+                    if (salary != null) {
+                        salaries.add(salary);
+                    }
+                    
+                    salary = new ReportSalary(workers, Common.convertStringToDate(rs.getString("date")));
                 }
-            } catch (SQLException ex) {
-                System.err.println(ex.getMessage());
+
+                salary.setWorkerSalary(rs.getInt("worker_id"), rs.getDouble("amount"));
             }
 
-            salaries.add(new ReportSalary(records, worker));
+            salaries.add(salary);
+
+            rs.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
         }
 
         return salaries;

@@ -11,6 +11,7 @@ package payroll.model;
  */
 public class ReportCalculation {
     private double salary, loan, balance;
+    private double payment;
     private int workerID;
 
     public ReportCalculation(int workerID) {
@@ -25,6 +26,7 @@ public class ReportCalculation {
         this.loan = loan;
         this.balance = balance;
         this.workerID = workerID;
+        this.payment = 0.0;
     }
 
     public double getBalance() {
@@ -50,5 +52,13 @@ public class ReportCalculation {
 
     public void setSalary(double salary) {
         this.salary += salary;
+    }
+
+    public void setPayment(double payment) {
+        this.payment += payment;
+    }
+
+    public double getTotalBalance() {
+        return this.getBalance() + payment;
     }
 }
