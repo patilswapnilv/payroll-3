@@ -15,6 +15,7 @@ import java.awt.print.PrinterException;
 import java.util.ArrayList;
 import payroll.libraries.Common;
 import payroll.model.ReportCalculation;
+import payroll.model.ReportSalary;
 import payroll.model.ReportSaving;
 import payroll.model.Transaction;
 import payroll.model.Worker;
@@ -28,6 +29,7 @@ public class ReportPrinter implements Printable {
     ArrayList<ReportCalculation> calculations = new ArrayList<ReportCalculation>();
     private ArrayList<String> headers = new ArrayList<String>();
     private ArrayList<Worker> selected = new ArrayList<Worker>();
+    private ArrayList<ReportSalary> salaries = new ArrayList<ReportSalary>();
     private String query = "";
     private Main parent;
 
@@ -49,23 +51,27 @@ public class ReportPrinter implements Printable {
     int workerIndex = 0;
     int transactionIndex = 0;
     int savingIndex = 0;
+    int salaryIndex = 0;
 
     //---------------------------------
     boolean printMainColumn = true;
     boolean printOverflowColumn = false;
     boolean isOverflow = false;
     boolean printSummary = true;
+    boolean printSalary = false;
+    boolean printSaving = false;;
 
     int basicColumnSize = 0;
     int overflowCounter = 0;
     int workerCount = 0;
 
-    public ReportPrinter(Main parent, ArrayList<Worker> selected, ArrayList<Transaction> transactions, ArrayList<ReportCalculation> calculations, ArrayList<ReportSaving> savings) {
+    public ReportPrinter(Main parent, ArrayList<Worker> selected, ArrayList<Transaction> transactions, ArrayList<ReportCalculation> calculations, ArrayList<ReportSaving> savings, ArrayList<ReportSalary> salaries) {
         this.parent = parent;
         this.transactions = transactions;
         this.selected = selected;
         this.savings = savings;
         this.calculations = calculations;
+        this.salaries = salaries;
         this.setup();
     }
 
@@ -104,39 +110,22 @@ public class ReportPrinter implements Printable {
             if (totalItemCounter >= itemCount) {
 
                 if (printSummary) {
-                    if (printMainColumn) {
-                        x = basicColumnSize;
-                    } else {
-                        x = 20;
-                    }
+                    this.render_summary(g);
+                    printSalary = true;
+                }
 
-                    size = 180;
-                    y += 5;
-                    for (int i = workerIndex; i < workerCount; i ++) {
-                        if (x + size > 780.0) {
-                            printSummary = true;
-                            break;
-                        }
-
-                        g.setFont(new Font("Calibri", Font.BOLD, 12));
-                        g.drawString(Common.currency(calculations.get(i).getSalary()), x, y);
-                        g.drawString(Common.currency(calculations.get(i).getLoan()), x + 50, y);
-                        g.drawString(Common.currency(calculations.get(i).getBalance()), x + 110, y);
-
-                        g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
-                        g.drawLine(x - 5, y + 5, x - 5, y - 35);
-                        g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
-
-                        x += size + 10;
-                        printSummary = false;
-                    }
+                if (printSalary) {
+                    this.render_salaries(g);
+                    printSaving = true;
                 }
                 
-                if (savings.size() > 0) {
-                    if (y + 60 > 580) {
-                        pagesNeeded ++;
-                    } else {
-                        printSavings(g);
+                if (printSaving) {
+                    if (savings.size() > 0 && parent.chkMonthlyReportSaving.isSelected()) {
+                        if (y + 60 > 580) {
+                            pagesNeeded ++;
+                        } else {
+                            render_savings(g);
+                        }
                     }
                 }
             }
@@ -377,7 +366,61 @@ public class ReportPrinter implements Printable {
         return workerIndexLocal;
     }
 
-    private void printSavings(Graphics2D g) {
+    private void render_summary(Graphics2D g) {
+        int size = 0;
+        if (printMainColumn) {
+            x = basicColumnSize;
+        } else {
+            x = 20;
+        }
+
+        size = 180;
+        y += 5;
+        for (int i = workerIndex; i < workerCount; i ++) {
+            if (x + size > 780.0) {
+                printSummary = true;
+                break;
+            }
+
+            g.setFont(new Font("Calibri", Font.BOLD, 12));
+            g.drawString(Common.currency(calculations.get(i).getSalary()), x, y);
+            g.drawString(Common.currency(calculations.get(i).getLoan()), x + 50, y);
+            g.drawString(Common.currency(calculations.get(i).getBalance()), x + 110, y);
+
+            g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
+            g.drawLine(x - 5, y + 5, x - 5, y - 35);
+            g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
+
+            x += size + 10;
+            printSummary = false;
+        }
+    }
+
+    private void render_salaries(Graphics2D g) {
+        int size = 0;
+
+        size = 180;
+        y += 5;
+
+        int counter = salaries.size();
+        
+        for (int i = salaryIndex; i < counter; i ++) {
+            x = 20;
+            if (printMainColumn)  {
+                if (parent.chkMonthlyReportDate.isSelected()) {
+                    g.drawString(Common.renderDisplayDate(salaries.get(i).getDate()), x, y);
+                }
+                size = 60;
+                x += size + 10;
+                g.drawString("Bayaran Gaji", x, y);
+                
+                x = basicColumnSize;
+            }
+        }
+        
+    }
+
+    private void render_savings(Graphics2D g) {
         int size = 0;
         
         x = 20;

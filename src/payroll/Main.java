@@ -2648,6 +2648,7 @@ public class Main extends javax.swing.JFrame {
         ArrayList<ReportSaving> savings = this.getReportSavings(selected);
         ArrayList<Transaction> transactions = this.getReportTransasctions(selected);
         ArrayList<ReportCalculation> calculations = this.getReportCalculations(selected);
+        ArrayList<ReportSalary> salaries = this.getReportSalaries(selected);
 
         PrinterJob job = PrinterJob.getPrinterJob();
         
@@ -2655,7 +2656,7 @@ public class Main extends javax.swing.JFrame {
         PageFormat format = job.defaultPage();
         format.setOrientation(PageFormat.LANDSCAPE);
 
-        job.setPrintable(new ReportPrinter(this, selected, transactions, calculations, savings), format);
+        job.setPrintable(new ReportPrinter(this, selected, transactions, calculations, savings, salaries), format);
 
         if (job.printDialog() == true) {
             try {
