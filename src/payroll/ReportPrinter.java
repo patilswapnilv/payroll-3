@@ -394,29 +394,106 @@ public class ReportPrinter implements Printable {
             x += size + 10;
             printSummary = false;
         }
+
+        y += 20;
     }
 
     private void render_salaries(Graphics2D g) {
+        if (salaries.size() == 0) {
+            return;
+        }
+        
         int size = 0;
-
         size = 180;
-        y += 5;
+        int initial_y_axis = y;
 
         int counter = salaries.size();
+
+        g.setFont(new Font("Calibri", Font.PLAIN, 12));
         
         for (int i = salaryIndex; i < counter; i ++) {
             x = 20;
+
+            g.drawLine(x - 5, y + 5, x - 5, y - 15);
+            
+            if ( y + 40 > 580) {
+                salaryIndex = i;
+                pagesNeeded ++;
+                printSalary = true;
+                break;
+            }
+
             if (printMainColumn)  {
                 if (parent.chkMonthlyReportDate.isSelected()) {
+                    size = 60;
                     g.drawString(Common.renderDisplayDate(salaries.get(i).getDate()), x, y);
+                    x += size + 10;
+                    g.drawLine(x - 5, y + 5, x - 5, y - 15);
                 }
-                size = 60;
-                x += size + 10;
+                
                 g.drawString("Bayaran Gaji", x, y);
+                g.drawLine(x - 5, y + 5, x - 5, y - 15);
                 
                 x = basicColumnSize;
             }
+
+            for (int c = workerIndex; c < workerCount; c ++) {
+                size = 180;
+
+                if (x + size > 780) {
+                    printSalary = true;
+                    break;
+                }
+
+                calculations.get(c).setPayment(salaries.get(i).getWorkerSalary(calculations.get(c).getWorkerID()));
+                g.drawString(Common.currency(Math.abs(salaries.get(i).getWorkerSalary(selected.get(c).getId()))), x, y);
+                g.drawLine(x - 5, y + 5, x - 5, y - 15);
+                x += size + 10;
+                g.drawLine(x - 5, y + 5, x - 5, y - 15);
+            }
+
+            y += 12;
+
+            printSalary = false;
         }
+
+        if ( ! printSalary) {
+            x = 20;
+            g.drawLine(x - 5, y + 5, x - 5, y - 15);
+
+            if (printMainColumn)  {
+                if (parent.chkMonthlyReportDate.isSelected()) {
+                    size = 60;
+                    x += size + 10;
+                    g.drawLine(x - 5, y + 5, x - 5, y - 15);
+                }
+
+                g.drawString("Baki", x, y);
+                g.drawLine(x - 5, y + 5, x - 5, y - 15);
+
+                x = basicColumnSize;
+            }
+
+            for (int c = workerIndex; c < workerCount; c ++) {
+                size = 180;
+
+                if (x + size > 780) {
+                    printSalary = true;
+                    break;
+                }
+
+                g.drawString(Common.currency(Math.abs(calculations.get(c).getTotalBalance())), x, y);
+                g.drawLine(x - 5, y + 5, x - 5, y - 15);
+                x += size + 10;
+                g.drawLine(x - 5, y + 5, x - 5, y - 15);
+            }
+
+            y += 12;
+
+        }
+
+        g.drawLine(15, initial_y_axis - 15, x - 5, initial_y_axis - 15);
+        g.drawLine(15, y - 7, x - 5, y - 7);
         
     }
 

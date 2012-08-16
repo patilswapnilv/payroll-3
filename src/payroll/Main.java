@@ -2587,7 +2587,7 @@ public class Main extends javax.swing.JFrame {
                 salary.setWorkerSalary(rs.getInt("worker_id"), rs.getDouble("amount"));
             }
 
-            salaries.add(salary);
+            if (salary != null) salaries.add(salary);
 
             rs.close();
         } catch (SQLException ex) {
