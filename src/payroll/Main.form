@@ -37,7 +37,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPane1" alignment="0" pref="695" max="32767" attributes="0"/>
+          <Component id="jTabbedPane1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -45,6 +45,9 @@
     <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
       <Properties>
         <Property name="tabLayoutPolicy" type="int" value="1"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="18" style="0"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jTabbedPane1StateChanged"/>
@@ -64,17 +67,22 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="995" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="992" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="667" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="928" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="12" style="0"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Transaksi">
@@ -90,77 +98,72 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jPanel10" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabel1" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel2" min="-2" pref="180" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtTransactionDate" min="-2" pref="180" max="-2" attributes="0"/>
-                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Group type="102" alignment="0" attributes="1">
-                                          <Component id="jLabel4" min="-2" pref="180" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtTransactionDescription" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabel3" min="-2" pref="180" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtTransactionClientID" min="-2" pref="100" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtTransactionClientName" min="-2" pref="250" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
                                   <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="jLabel2" max="32767" attributes="0"/>
+                                          <Component id="jLabel3" pref="126" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="txtTransactionDate" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel9" min="-2" pref="180" max="-2" attributes="0"/>
+                                              <Component id="txtTransactionClientID" min="-2" pref="100" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="txtTransactionSalary" min="-2" pref="120" max="-2" attributes="0"/>
+                                              <Component id="txtTransactionClientName" min="-2" pref="250" max="-2" attributes="0"/>
                                           </Group>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="192" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jLabel4" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel10" min="-2" pref="180" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="jLabel5" max="32767" attributes="0"/>
+                                                  <Component id="jLabel6" pref="126" max="32767" attributes="0"/>
+                                                  <Component id="jLabel7" max="32767" attributes="0"/>
+                                                  <Component id="jLabel8" max="32767" attributes="0"/>
+                                                  <Component id="jLabel9" max="32767" attributes="0"/>
+                                                  <Component id="jLabel10" max="32767" attributes="0"/>
+                                                  <Component id="jLabel12" max="32767" attributes="0"/>
+                                                  <Component id="jLabel11" max="32767" attributes="0"/>
+                                              </Group>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="txtTransactionBalance" min="-2" pref="120" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="txtTransactionPricePerTon" min="-2" pref="120" max="-2" attributes="0"/>
+                                                  <Component id="txtTransactionWeight" min="-2" pref="120" max="-2" attributes="0"/>
+                                                  <Component id="txtTransactionTotalReceived" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                                  <Component id="txtTransactionWages" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                                  <Component id="txtTransactionSalary" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                                  <Component id="txtTransactionBalance" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                                  <Component id="txtTransactionCalculate" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                                  <Component id="txtTransactionPayPerPerson" min="-2" pref="120" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel11" min="-2" pref="180" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="txtTransactionCalculate" min="-2" pref="120" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel12" min="-2" pref="180" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="txtTransactionPayPerPerson" min="-2" pref="120" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel5" min="-2" pref="180" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="txtTransactionWeight" min="-2" pref="120" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel6" min="-2" pref="180" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="txtTransactionPricePerTon" min="-2" pref="120" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel7" min="-2" pref="180" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="txtTransactionTotalReceived" min="-2" pref="120" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel8" min="-2" pref="180" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="txtTransactionWages" min="-2" pref="120" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="txtTransactionDescription" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jScrollPane3" min="-2" pref="219" max="-2" attributes="0"/>
+                                                  <Component id="cboxTransactionAllWorkers" max="32767" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="jLabel29" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jPanel22" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel1" min="-2" pref="200" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -187,17 +190,13 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel4" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Component id="txtTransactionDescription" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Component id="txtTransactionWeight" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Component id="jLabel29" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jLabel5" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                          <Component id="txtTransactionWeight" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel6" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                           <Component id="txtTransactionPricePerTon" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
@@ -232,9 +231,19 @@
                                           <Component id="jLabel12" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                           <Component id="txtTransactionPayPerPerson" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                       </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jLabel4" min="-2" pref="25" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtTransactionDescription" min="-2" pref="111" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jScrollPane3" min="-2" pref="331" max="-2" attributes="1"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="cboxTransactionAllWorkers" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
                               </Group>
+                              <EmptySpace min="0" pref="343" max="32767" attributes="0"/>
                           </Group>
                           <Component id="jPanel22" max="32767" attributes="1"/>
                       </Group>
@@ -248,6 +257,9 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Tarikh"/>
               </Properties>
             </Component>
@@ -263,62 +275,107 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nama Pelanggan"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Keterangan"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Berat KG"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Harga Diterima Seton"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Jumlah Diterima"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Upah Kerja"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Jumlah Gaji"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Jumlah Baki"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Kiraan Asing"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel12">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Upah Perseorangan"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTransactionClientID">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTransactionClientIDActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTransactionDescription">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTransactionWeight">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
+              </Properties>
               <Events>
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="calculateTransaction"/>
               </Events>
@@ -326,10 +383,18 @@
             <Component class="javax.swing.JTextField" name="txtTransactionClientName">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTransactionPricePerTon">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
+              </Properties>
               <Events>
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="calculateTransaction"/>
               </Events>
@@ -337,10 +402,18 @@
             <Component class="javax.swing.JTextField" name="txtTransactionTotalReceived">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTransactionWages">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
+              </Properties>
               <Events>
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="calculateTransaction"/>
               </Events>
@@ -348,16 +421,27 @@
             <Component class="javax.swing.JTextField" name="txtTransactionSalary">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTransactionBalance">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTransactionCalculate">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
+              </Properties>
               <Events>
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="calculateTransaction"/>
               </Events>
@@ -365,10 +449,18 @@
             <Component class="javax.swing.JTextField" name="txtTransactionPayPerPerson">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="txtTransactionDate">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
+              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtTransactionDate.setDateFormatString(&quot;dd/MM/yyyy&quot;);"/>
               </AuxValues>
@@ -386,24 +478,24 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="704" max="32767" attributes="0"/>
-                          <Component id="btnRecord" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="btnRecord" min="-2" pref="103" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtTransactionNew" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtTransactionNew" min="-2" pref="130" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtTransactionEnd" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtTransactionEnd" min="-2" pref="83" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtTransactionEnd" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtTransactionNew" alignment="3" min="-2" max="-2" attributes="1"/>
-                              <Component id="btnRecord" alignment="3" min="-2" max="-2" attributes="1"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="btnRecord" alignment="0" pref="42" max="32767" attributes="1"/>
+                              <Component id="txtTransactionNew" alignment="0" max="32767" attributes="1"/>
+                              <Component id="txtTransactionEnd" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -413,6 +505,9 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="btnRecord">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="14" style="0"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Rekodkan"/>
                   </Properties>
                   <Events>
@@ -421,11 +516,17 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="txtTransactionNew">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="14" style="0"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Transaksi Baru"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="txtTransactionEnd">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="14" style="0"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Tamat"/>
                   </Properties>
                 </Component>
@@ -442,9 +543,8 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jScrollPane3" alignment="0" pref="265" max="32767" attributes="0"/>
-                              <Component id="cboxTransactionAllWorkers" alignment="0" pref="265" max="32767" attributes="0"/>
-                              <Component id="jLabel29" alignment="0" pref="265" max="32767" attributes="0"/>
+                              <Component id="jScrollPane4" max="32767" attributes="1"/>
+                              <Component id="btnTransactionNewLoan" max="32767" attributes="1"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -453,107 +553,10 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel29" min="-2" pref="25" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane3" pref="307" max="32767" attributes="1"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="cboxTransactionAllWorkers" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-              <SubComponents>
-                <Component class="javax.swing.JLabel" name="jLabel29">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="12" style="1"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Pekerja Terlibat"/>
-                    <Property name="focusable" type="boolean" value="false"/>
-                  </Properties>
-                </Component>
-                <Container class="javax.swing.JScrollPane" name="jScrollPane3">
-                  <AuxValues>
-                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-                  </AuxValues>
-
-                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-                  <SubComponents>
-                    <Component class="javax.swing.JTable" name="tblTransactionInvolvedWorkers">
-                      <Properties>
-                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="3" rowCount="0">
-                            <Column editable="true" title="" type="java.lang.Boolean"/>
-                            <Column editable="false" title="" type="java.lang.String"/>
-                            <Column editable="false" title="" type="java.lang.String"/>
-                          </Table>
-                        </Property>
-                        <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-                          <TableColumnModel selectionModel="0">
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="20" resizable="false">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="50" resizable="false">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                          </TableColumnModel>
-                        </Property>
-                        <Property name="focusable" type="boolean" value="false"/>
-                        <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                          <Connection code="null" type="code"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                  </SubComponents>
-                </Container>
-                <Component class="javax.swing.JCheckBox" name="cboxTransactionAllWorkers">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Semua Pekerja"/>
-                    <Property name="focusable" type="boolean" value="false"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboxTransactionAllWorkersActionPerformed"/>
-                  </Events>
-                </Component>
-              </SubComponents>
-            </Container>
-            <Container class="javax.swing.JPanel" name="jPanel22">
-              <Properties>
-                <Property name="focusable" type="boolean" value="false"/>
-              </Properties>
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane4" pref="258" max="32767" attributes="1"/>
-                              <Component id="btnTransactionNewLoan" alignment="1" min="-2" max="-2" attributes="1"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane4" min="-2" pref="346" max="-2" attributes="0"/>
+                          <Component id="jScrollPane4" min="-2" pref="331" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnTransactionNewLoan" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="116" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -568,6 +571,9 @@
                   <SubComponents>
                     <Component class="javax.swing.JList" name="listTransactionLoanWorkers">
                       <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
                         <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                           <StringArray count="0"/>
                         </Property>
@@ -579,6 +585,9 @@
                 </Container>
                 <Component class="javax.swing.JButton" name="btnTransactionNewLoan">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="14" style="0"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Pinjaman Baru"/>
                     <Property name="focusable" type="boolean" value="false"/>
                   </Properties>
@@ -588,9 +597,99 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Container class="javax.swing.JPanel" name="jPanel22">
+              <Properties>
+                <Property name="focusable" type="boolean" value="false"/>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="282" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="740" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+            </Container>
+            <Component class="javax.swing.JLabel" name="jLabel29">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Pekerja Terlibat"/>
+                <Property name="focusable" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="tblTransactionInvolvedWorkers">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="12" style="0"/>
+                    </Property>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="3" rowCount="0">
+                        <Column editable="true" title="" type="java.lang.Boolean"/>
+                        <Column editable="false" title="" type="java.lang.String"/>
+                        <Column editable="false" title="" type="java.lang.String"/>
+                      </Table>
+                    </Property>
+                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                      <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="20" resizable="false">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="50" resizable="false">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                      </TableColumnModel>
+                    </Property>
+                    <Property name="focusable" type="boolean" value="false"/>
+                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="null" type="code"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JCheckBox" name="cboxTransactionAllWorkers">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Semua Pekerja"/>
+                <Property name="focusable" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboxTransactionAllWorkersActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel3">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="12" style="0"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Simpanan">
@@ -607,27 +706,34 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jPanel9" alignment="0" max="32767" attributes="0"/>
                           <Component id="jPanel8" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabel13" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel14" min="-2" pref="180" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtSavingWorkerID" min="-2" pref="80" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtSavingWorkerName" min="-2" pref="280" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel15" min="-2" pref="180" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtSavingDateFrom" min="-2" pref="150" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel17" min="-2" pref="80" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtSavingDateTo" min="-2" pref="150" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel16" min="-2" pref="180" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtSavingCurrentSaving" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jLabel13" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="jLabel14" max="32767" attributes="0"/>
+                                          <Component id="jLabel16" alignment="0" pref="146" max="32767" attributes="0"/>
+                                          <Component id="jLabel15" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="txtSavingDateFrom" min="-2" pref="150" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="txtSavingDateTo" min="-2" pref="140" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="txtSavingCurrentSaving" min="-2" pref="363" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="txtSavingWorkerID" min="-2" pref="80" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txtSavingWorkerName" min="-2" pref="280" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -648,7 +754,11 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel15" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel15" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Component id="jLabel17" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Component id="txtSavingDateTo" min="-2" pref="25" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel16" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
@@ -656,8 +766,6 @@
                               </Group>
                           </Group>
                           <Component id="txtSavingDateFrom" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jLabel17" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="txtSavingDateTo" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jPanel8" max="32767" attributes="0"/>
@@ -681,20 +789,34 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel14">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nama Pekerja"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel15">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Tempoh Tarikh"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel16">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Baki Simpanan Terkini"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtSavingWorkerID">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="getSavingDetails"/>
               </Events>
@@ -702,25 +824,46 @@
             <Component class="javax.swing.JTextField" name="txtSavingWorkerName">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="txtSavingDateFrom">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
+              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtSavingDateFrom.setDateFormatString(&quot;dd/MM/yyyy&quot;);"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel17">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Hingga"/>
               </Properties>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="txtSavingDateTo">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
+              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtSavingDateTo.setDateFormatString(&quot;dd/MM/yyyy&quot;);"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="txtSavingCurrentSaving">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="getSavingDetails"/>
               </Events>
@@ -730,12 +873,12 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" pref="975" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" pref="968" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" pref="451" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" pref="702" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -749,6 +892,9 @@
                   <SubComponents>
                     <Component class="javax.swing.JTable" name="tblSaving">
                       <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="6" rowCount="0">
                             <Column editable="false" title="" type="java.lang.Integer"/>
@@ -815,12 +961,12 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="710" max="32767" attributes="0"/>
-                          <Component id="btnSavingNew" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="btnSavingNew" min="-2" pref="125" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnSavingCancel" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnSavingCancel" min="-2" pref="92" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnSavingEnd" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnSavingEnd" min="-2" pref="68" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -842,16 +988,25 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="btnSavingEnd">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="14" style="0"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Tamat"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnSavingCancel">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="14" style="0"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Batalkan"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnSavingNew">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="14" style="0"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Transaksi Baru"/>
                   </Properties>
                   <Events>
@@ -863,6 +1018,11 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel11">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="12" style="0"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Bayaran Gaji">
@@ -879,22 +1039,32 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jPanel13" alignment="0" max="32767" attributes="0"/>
                           <Component id="jPanel12" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabel18" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel19" min="-2" pref="180" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtPayWorkerID" min="-2" pref="80" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtPayWorkerName" min="-2" pref="280" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel20" min="-2" pref="180" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtPayDateFrom" min="-2" pref="150" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel22" min="-2" pref="80" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtPayDateTo" min="-2" pref="150" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jLabel18" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="jLabel20" pref="116" max="32767" attributes="0"/>
+                                          <Component id="jLabel19" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="txtPayDateFrom" min="-2" pref="150" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txtPayDateTo" min="-2" pref="150" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="txtPayWorkerID" min="-2" pref="80" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txtPayWorkerName" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -941,15 +1111,26 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel19">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nama Pekerja"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel20">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Tempoh Tarikh"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtPayWorkerID">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPayWorkerIDActionPerformed"/>
               </Events>
@@ -957,20 +1138,36 @@
             <Component class="javax.swing.JTextField" name="txtPayWorkerName">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="txtPayDateFrom">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
+              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtPayDateFrom.setDateFormatString(&quot;dd/MM/yyyy&quot;);"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel22">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Hingga"/>
               </Properties>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="txtPayDateTo">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="0"/>
+                </Property>
+              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtPayDateTo.setDateFormatString(&quot;dd/MM/yyyy&quot;);"/>
               </AuxValues>
@@ -980,12 +1177,12 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane2" alignment="0" pref="975" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" alignment="0" pref="968" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane2" alignment="0" pref="450" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" alignment="0" pref="701" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -999,6 +1196,9 @@
                   <SubComponents>
                     <Component class="javax.swing.JTable" name="tblPay">
                       <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="6" rowCount="0">
                             <Column editable="false" title="" type="java.lang.Integer"/>
@@ -1065,24 +1265,24 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="710" max="32767" attributes="0"/>
-                          <Component id="btnPayNew" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="btnPayNew" min="-2" pref="148" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnPayCancel" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnPayCancel" min="-2" pref="92" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnPayEnd" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnPayEnd" min="-2" pref="62" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnPayEnd" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnPayEnd" alignment="3" max="32767" attributes="0"/>
                               <Component id="btnPayCancel" alignment="3" max="32767" attributes="1"/>
-                              <Component id="btnPayNew" alignment="3" min="-2" pref="23" max="-2" attributes="1"/>
+                              <Component id="btnPayNew" max="32767" attributes="1"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -1092,16 +1292,25 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="btnPayEnd">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="14" style="0"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Tamat"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnPayCancel">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="14" style="0"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Batalkan"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnPayNew">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="14" style="0"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Transaksi Baru"/>
                   </Properties>
                   <Events>
@@ -1124,20 +1333,25 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTabbedPane4" alignment="0" pref="995" max="32767" attributes="0"/>
+                  <Component id="jTabbedPane4" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTabbedPane4" pref="656" max="32767" attributes="0"/>
+                      <Component id="jTabbedPane4" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
             <Container class="javax.swing.JTabbedPane" name="jTabbedPane4">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="15" style="0"/>
+                </Property>
+              </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jTabbedPane4StateChanged"/>
               </Events>
@@ -1244,7 +1458,7 @@
                                   <Component id="chkMonthlyReportKiraanAsing" min="-2" pref="25" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="chkMonthlyReportSaving" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <EmptySpace pref="269" max="32767" attributes="0"/>
+                                  <EmptySpace pref="444" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1252,6 +1466,9 @@
                       <SubComponents>
                         <Component class="javax.swing.JCheckBox" name="chkMonthlyReportDate">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="12" style="0"/>
+                            </Property>
                             <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Tarikh"/>
                             <Property name="enabled" type="boolean" value="false"/>
@@ -1262,6 +1479,9 @@
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="chkMonthlyReportClientName">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="12" style="0"/>
+                            </Property>
                             <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Name Pelanggan"/>
                           </Properties>
@@ -1271,6 +1491,9 @@
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="chkMonthlyReportDescription">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="12" style="0"/>
+                            </Property>
                             <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Keterangan"/>
                             <Property name="enabled" type="boolean" value="false"/>
@@ -1281,6 +1504,9 @@
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="chkMonthlyReportWeight">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="12" style="0"/>
+                            </Property>
                             <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Berat KG"/>
                           </Properties>
@@ -1290,6 +1516,9 @@
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="chkMonthlyReportPricePerTon">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="12" style="0"/>
+                            </Property>
                             <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Harga Diterma Seton"/>
                           </Properties>
@@ -1299,6 +1528,9 @@
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="chkMonthlyReportTotalReceived">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="12" style="0"/>
+                            </Property>
                             <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Jumlah Diterima"/>
                           </Properties>
@@ -1308,6 +1540,9 @@
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="chkMonthlyReportWages">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="12" style="0"/>
+                            </Property>
                             <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Upah Kerja"/>
                           </Properties>
@@ -1317,6 +1552,9 @@
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="chkMonthlyReportSalary">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="12" style="0"/>
+                            </Property>
                             <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Jumlah Gaji"/>
                           </Properties>
@@ -1326,6 +1564,9 @@
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="chkMonthlyReportBalance">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="12" style="0"/>
+                            </Property>
                             <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Jumlah Baki"/>
                           </Properties>
@@ -1335,6 +1576,9 @@
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="chkMonthlyReportKiraanAsing">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="12" style="0"/>
+                            </Property>
                             <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Kiraan Asing"/>
                           </Properties>
@@ -1344,6 +1588,9 @@
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="chkMonthlyReportSaving">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="12" style="0"/>
+                            </Property>
                             <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Simpanan Tetap"/>
                           </Properties>
@@ -1360,20 +1607,25 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="rbtnMonthlyReportLastMonth" alignment="0" pref="340" max="32767" attributes="1"/>
+                                              <Component id="rbtnMonhtlyReportCurrentMonth" alignment="0" max="32767" attributes="1"/>
+                                          </Group>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="rbtnMonhtlyReportDateRange" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtMonthlyReportDateFrom" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jLabel30" min="-2" pref="40" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtMonthlyReportDateTo" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtMonthlyReportDateFrom" pref="170" max="32767" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="txtMonthlyReportDateTo" min="-2" pref="146" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="rbtnMonthlyReportLastMonth" alignment="0" max="32767" attributes="1"/>
-                                      <Component id="rbtnMonhtlyReportCurrentMonth" alignment="0" max="32767" attributes="1"/>
                                   </Group>
-                                  <EmptySpace pref="101" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1404,6 +1656,9 @@
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="btnGroupMonthlyReport"/>
                             </Property>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="12" style="0"/>
+                            </Property>
                             <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Bulan Ini"/>
                           </Properties>
@@ -1412,6 +1667,9 @@
                           <Properties>
                             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                               <ComponentRef name="btnGroupMonthlyReport"/>
+                            </Property>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="12" style="0"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Bulan Lepas"/>
                           </Properties>
@@ -1424,13 +1682,26 @@
                           </Properties>
                         </Component>
                         <Component class="com.toedter.calendar.JDateChooser" name="txtMonthlyReportDateFrom">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="12" style="0"/>
+                            </Property>
+                          </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel30">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="12" style="0"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Hingga"/>
                           </Properties>
                         </Component>
                         <Component class="com.toedter.calendar.JDateChooser" name="txtMonthlyReportDateTo">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="12" style="0"/>
+                            </Property>
+                          </Properties>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -1447,14 +1718,14 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="586" max="32767" attributes="0"/>
-                                  <Component id="btnMonthlyReportGenerate" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="btnMonthlyReportGenerate" min="-2" pref="145" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnMonthlyReportExport" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnMonthlyReportExport" min="-2" pref="115" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnMonthlyReportPrint" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnMonthlyReportPrint" min="-2" pref="93" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnMonthlyReportEnd" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnMonthlyReportEnd" min="-2" pref="62" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -1477,11 +1748,17 @@
                       <SubComponents>
                         <Component class="javax.swing.JButton" name="btnMonthlyReportEnd">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="14" style="0"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Tamat"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnMonthlyReportPrint">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="14" style="0"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Cetakkan"/>
                           </Properties>
                           <Events>
@@ -1490,6 +1767,9 @@
                         </Component>
                         <Component class="javax.swing.JButton" name="btnMonthlyReportExport">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="14" style="0"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Format Excel"/>
                           </Properties>
                           <Events>
@@ -1498,6 +1778,9 @@
                         </Component>
                         <Component class="javax.swing.JButton" name="btnMonthlyReportGenerate">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="14" style="0"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Senarai Transaksi"/>
                           </Properties>
                           <Events>
@@ -1514,9 +1797,9 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jScrollPane5" alignment="0" pref="340" max="32767" attributes="0"/>
-                                      <Component id="cboxMonthlyReportAllWorkers" alignment="0" pref="340" max="32767" attributes="0"/>
-                                      <Component id="jLabel34" alignment="0" pref="340" max="32767" attributes="0"/>
+                                      <Component id="jScrollPane5" alignment="0" pref="420" max="32767" attributes="0"/>
+                                      <Component id="cboxMonthlyReportAllWorkers" alignment="0" pref="420" max="32767" attributes="0"/>
+                                      <Component id="jLabel34" alignment="0" pref="420" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -1528,7 +1811,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel34" min="-2" pref="25" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jScrollPane5" pref="371" max="32767" attributes="1"/>
+                                  <Component id="jScrollPane5" pref="583" max="32767" attributes="1"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="cboxMonthlyReportAllWorkers" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -1546,6 +1829,9 @@
                           <SubComponents>
                             <Component class="javax.swing.JTable" name="tblMonthlyReportWorkers">
                               <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Arial" size="12" style="0"/>
+                                </Property>
                                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                                   <Table columnCount="3" rowCount="0">
                                     <Column editable="true" title="" type="java.lang.Boolean"/>
@@ -1582,6 +1868,9 @@
                         </Container>
                         <Component class="javax.swing.JCheckBox" name="cboxMonthlyReportAllWorkers">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="12" style="0"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Semua Pekerja"/>
                           </Properties>
                           <Events>
@@ -1591,7 +1880,7 @@
                         <Component class="javax.swing.JLabel" name="jLabel34">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Tahoma" size="12" style="1"/>
+                              <Font name="Arial" size="12" style="1"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Senarai Pekerja"/>
                             <Property name="focusable" type="boolean" value="false"/>
@@ -1617,43 +1906,42 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jLabel31" max="32767" attributes="0"/>
+                                          <Component id="jLabel33" pref="120" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel31" min="-2" pref="180" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
                                               <Component id="txtReportWorkerCode" min="-2" pref="80" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="txtReportWorkerName" min="-2" pref="280" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel33" min="-2" pref="180" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="rbtnWorkerMonthlyIncome" alignment="0" pref="370" max="32767" attributes="1"/>
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                                   <Group type="102" alignment="0" attributes="0">
-                                                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                                      <Component id="txtReportWorkerMonth" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="txtReportWorkerYear" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="jLabel32" min="-2" pref="50" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
                                                       <Component id="txtReportWorkerMonthTo" min="-2" max="-2" attributes="0"/>
                                                       <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="txtReportWorkerYearTo" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="txtReportWorkerYearTo" max="32767" attributes="0"/>
                                                   </Group>
-                                                  <Component id="rbtnWorkerSaving" alignment="0" pref="370" max="32767" attributes="1"/>
-                                                  <Component id="rbtnWorkerReportFull" alignment="0" pref="370" max="32767" attributes="1"/>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="txtReportWorkerMonth" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="txtReportWorkerYear" min="-2" pref="70" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Component id="rbtnWorkerMonthlyIncome" alignment="0" max="32767" attributes="1"/>
+                                                  <Component id="rbtnWorkerSaving" alignment="0" max="32767" attributes="1"/>
+                                                  <Component id="rbtnWorkerReportFull" alignment="0" max="32767" attributes="1"/>
                                               </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jLabel32" min="-2" pref="50" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace min="-2" pref="430" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="462" max="32767" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jPanel25" max="32767" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="jPanel25" alignment="0" max="32767" attributes="0"/>
                               </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1672,16 +1960,19 @@
                                   <Component id="txtReportWorkerMonth" min="-2" pref="25" max="-2" attributes="0"/>
                                   <Component id="txtReportWorkerYear" min="-2" pref="25" max="-2" attributes="0"/>
                                   <Component id="jLabel32" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Component id="txtReportWorkerMonthTo" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Component id="txtReportWorkerYearTo" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtReportWorkerMonthTo" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Component id="txtReportWorkerYearTo" min="-2" pref="25" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="rbtnWorkerMonthlyIncome" min="-2" pref="25" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="rbtnWorkerSaving" min="-2" pref="25" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="rbtnWorkerReportFull" min="-2" pref="25" max="-2" attributes="0"/>
-                              <EmptySpace pref="424" max="32767" attributes="0"/>
+                              <EmptySpace pref="599" max="32767" attributes="0"/>
                               <Component id="jPanel25" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -1691,10 +1982,18 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="jLabel31">
                       <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Nama Pekerja"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtReportWorkerCode">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
+                      </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtReportWorkerCodeActionPerformed"/>
                       </Events>
@@ -1702,16 +2001,25 @@
                     <Component class="javax.swing.JTextField" name="txtReportWorkerName">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
                         <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel32">
                       <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Hingga"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel33">
                       <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Tempoh Tarikh"/>
                       </Properties>
                     </Component>
@@ -1719,6 +2027,9 @@
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="btnGroupWorkerReportType"/>
+                        </Property>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
                         </Property>
                         <Property name="selected" type="boolean" value="true"/>
                         <Property name="text" type="java.lang.String" value="Ringkasan Pendapatan Bulanan"/>
@@ -1729,6 +2040,9 @@
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="btnGroupWorkerReportType"/>
                         </Property>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Ringkasan Simpanan Tetap"/>
                       </Properties>
                     </Component>
@@ -1736,6 +2050,9 @@
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="btnGroupWorkerReportType"/>
+                        </Property>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Akaun Lengkap Pekerja"/>
                       </Properties>
@@ -1753,14 +2070,14 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="586" max="32767" attributes="0"/>
-                                  <Component id="btnReportWorkerGenerate" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="btnReportWorkerGenerate" min="-2" pref="147" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnReportWorkerExport" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnReportWorkerExport" min="-2" pref="109" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnReportWorkerPrint" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnReportWorkerPrint" min="-2" pref="84" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnReportWorkerEnd" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnReportWorkerEnd" min="-2" pref="62" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -1783,11 +2100,17 @@
                       <SubComponents>
                         <Component class="javax.swing.JButton" name="btnReportWorkerEnd">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="14" style="0"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Tamat"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnReportWorkerPrint">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="14" style="0"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Cetakkan"/>
                           </Properties>
                           <Events>
@@ -1796,6 +2119,9 @@
                         </Component>
                         <Component class="javax.swing.JButton" name="btnReportWorkerExport">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="14" style="0"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Format Excel"/>
                           </Properties>
                           <Events>
@@ -1804,6 +2130,9 @@
                         </Component>
                         <Component class="javax.swing.JButton" name="btnReportWorkerGenerate">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="14" style="0"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Senarai Transaksi"/>
                           </Properties>
                           <Events>
@@ -1813,12 +2142,32 @@
                       </SubComponents>
                     </Container>
                     <Component class="com.toedter.calendar.JMonthChooser" name="txtReportWorkerMonth">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
+                      </Properties>
                     </Component>
                     <Component class="com.toedter.calendar.JYearChooser" name="txtReportWorkerYear">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
+                      </Properties>
                     </Component>
                     <Component class="com.toedter.calendar.JYearChooser" name="txtReportWorkerYearTo">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
+                      </Properties>
                     </Component>
                     <Component class="com.toedter.calendar.JMonthChooser" name="txtReportWorkerMonthTo">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
+                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1845,13 +2194,18 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTabbedPane2" pref="656" max="32767" attributes="0"/>
+                      <Component id="jTabbedPane2" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
             <Container class="javax.swing.JTabbedPane" name="jTabbedPane2">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="15" style="0"/>
+                </Property>
+              </Properties>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
               <SubComponents>
@@ -1870,46 +2224,60 @@
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jPanel15" alignment="0" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel21" min="-2" pref="180" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtProfileWorkerID" min="-2" pref="80" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtProfileWorkerName" min="-2" pref="180" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel25" min="-2" pref="180" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtProfileWorkerCurrentSaving" min="-2" pref="80" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel26" min="-2" pref="180" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtProfileWorkerStatus" min="-2" pref="80" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Group type="102" alignment="0" attributes="1">
-                                              <Component id="jLabel23" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="jLabel26" min="-2" pref="120" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="txtProfileWorkerRegisterDay" min="-2" pref="40" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="txtProfileWorkerRegisterMonth" max="32767" attributes="0"/>
+                                              <Component id="txtProfileWorkerStatus" min="-2" pref="166" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel24" min="-2" pref="180" max="-2" attributes="0"/>
+                                              <Component id="jLabel21" min="-2" pref="120" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="txtProfileWorkerReturnDay" min="-2" pref="40" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="txtProfileWorkerRegisterDay" min="-2" pref="40" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="txtProfileWorkerRegisterMonth" min="-2" pref="34" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Component id="txtProfileWorkerID" min="-2" pref="80" max="-2" attributes="0"/>
+                                              </Group>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="txtProfileWorkerReturnMonth" min="-2" pref="40" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="txtProfileWorkerName" min="-2" pref="180" max="-2" attributes="0"/>
+                                                  <Component id="txtProfileWorkerRegisterYear" alignment="0" min="-2" pref="80" max="-2" attributes="1"/>
+                                              </Group>
                                           </Group>
                                       </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="txtProfileWorkerRegisterYear" max="32767" attributes="1"/>
-                                          <Component id="txtProfileWorkerReturnYear" alignment="0" pref="80" max="32767" attributes="1"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="jPanel15" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="1">
+                                              <Component id="jLabel23" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="466" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="jLabel24" max="32767" attributes="0"/>
+                                                  <Component id="jLabel25" pref="120" max="32767" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="txtProfileWorkerReturnDay" min="-2" pref="40" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="txtProfileWorkerReturnMonth" min="-2" pref="34" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="txtProfileWorkerReturnYear" min="-2" pref="80" max="-2" attributes="1"/>
+                                                  </Group>
+                                                  <Component id="txtProfileWorkerCurrentSaving" max="32767" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          </Group>
                                       </Group>
+                                      <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -1949,7 +2317,7 @@
                                   <Component id="jLabel26" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                   <Component id="txtProfileWorkerStatus" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="408" max="32767" attributes="0"/>
+                              <EmptySpace pref="648" max="32767" attributes="0"/>
                               <Component id="jPanel15" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -1959,30 +2327,50 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="jLabel21">
                       <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Nama Pekerja"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel23">
                       <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Tarikh Daftar"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel24">
                       <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Tarikh Pulang"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel25">
                       <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Baki Simpanan Kini"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel26">
                       <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Status"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtProfileWorkerID">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
+                      </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtProfileWorkerIDActionPerformed"/>
                       </Events>
@@ -1990,54 +2378,81 @@
                     <Component class="javax.swing.JTextField" name="txtProfileWorkerName">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
                         <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtProfileWorkerRegisterDay">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
                         <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtProfileWorkerReturnDay">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
                         <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtProfileWorkerRegisterMonth">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
                         <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtProfileWorkerReturnMonth">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
                         <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtProfileWorkerRegisterYear">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
                         <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtProfileWorkerReturnYear">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
                         <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtProfileWorkerCurrentSaving">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
                         <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtProfileWorkerStatus">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
                         <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
                     </Component>
@@ -2054,14 +2469,14 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="602" max="32767" attributes="0"/>
-                                  <Component id="btnProfileWorkerNew" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="563" max="32767" attributes="0"/>
+                                  <Component id="btnProfileWorkerNew" min="-2" pref="112" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnProfileWorkerEdit" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnProfileWorkerEdit" min="-2" pref="100" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnProfileWorkerDelete" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnProfileWorkerEnd" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnProfileWorkerEnd" min="-2" pref="62" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -2084,16 +2499,25 @@
                       <SubComponents>
                         <Component class="javax.swing.JButton" name="btnProfileWorkerEnd">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="14" style="0"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Tamat"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnProfileWorkerDelete">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="14" style="0"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Batal Rekod"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnProfileWorkerEdit">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="14" style="0"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Ubah Rekod"/>
                           </Properties>
                           <Events>
@@ -2102,6 +2526,9 @@
                         </Component>
                         <Component class="javax.swing.JButton" name="btnProfileWorkerNew">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="14" style="0"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Pekerja Baru"/>
                           </Properties>
                           <Events>
@@ -2127,18 +2554,21 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jPanel16" alignment="0" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel27" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Component id="jPanel16" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="jLabel28" max="32767" attributes="0"/>
+                                          <Component id="jLabel27" pref="120" max="32767" attributes="0"/>
+                                      </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtProfileClientID" min="-2" pref="80" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtProfileClientName" min="-2" pref="120" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel28" min="-2" pref="180" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtProfileClientStatus" min="-2" pref="80" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="txtProfileClientID" min="-2" pref="80" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txtProfileClientName" min="-2" pref="120" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="txtProfileClientStatus" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -2159,7 +2589,7 @@
                                   <Component id="jLabel28" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                   <Component id="txtProfileClientStatus" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="501" max="32767" attributes="0"/>
+                              <EmptySpace pref="736" max="32767" attributes="0"/>
                               <Component id="jPanel16" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -2180,14 +2610,14 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="588" max="32767" attributes="0"/>
-                                  <Component id="btnProfileClientNew" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="527" max="32767" attributes="0"/>
+                                  <Component id="btnProfileClientNew" min="-2" pref="131" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnProfileClientEdit" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnProfileClientEdit" min="-2" pref="100" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnProfileClientDelete" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnProfileClientDelete" min="-2" pref="100" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnProfileClientEnd" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnProfileClientEnd" min="-2" pref="68" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -2210,16 +2640,25 @@
                       <SubComponents>
                         <Component class="javax.swing.JButton" name="btnProfileClientEnd">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="14" style="0"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Tamat"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnProfileClientDelete">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="14" style="0"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Batal Rekod"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnProfileClientEdit">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="14" style="0"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Ubah Rekod"/>
                           </Properties>
                           <Events>
@@ -2228,6 +2667,9 @@
                         </Component>
                         <Component class="javax.swing.JButton" name="btnProfileClientNew">
                           <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="14" style="0"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Pelanggan Baru"/>
                           </Properties>
                           <Events>
@@ -2238,6 +2680,9 @@
                     </Container>
                     <Component class="javax.swing.JLabel" name="jLabel27">
                       <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Nama Pelanggan"/>
                       </Properties>
                     </Component>
@@ -2260,6 +2705,9 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel28">
                       <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Arial" size="12" style="0"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Status"/>
                       </Properties>
                     </Component>
