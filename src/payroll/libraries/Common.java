@@ -5,6 +5,8 @@
 
 package payroll.libraries;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -90,5 +92,32 @@ public class Common {
         } catch (ParseException ex) {
             return new Date();
         }
+    }
+
+    public static String md5(byte[] defaultBytes)
+    {
+        StringBuffer hexString = new StringBuffer();
+        try
+        {
+            MessageDigest algorithm = MessageDigest.getInstance("MD5");
+            algorithm.reset();
+            algorithm.update(defaultBytes);
+            byte messageDigest[] = algorithm.digest();
+
+
+            for(int i = 0; i < messageDigest.length;i ++)
+            {
+                String hex=Integer.toHexString(0xFF & messageDigest[i]);
+                if(hex.length() == 1)
+                    hexString.append('0');
+                hexString.append(hex);
+            }
+        }
+        catch(NoSuchAlgorithmException ex)
+        {
+            System.err.println(ex.getMessage());
+        }
+        
+        return hexString.toString();
     }
 }

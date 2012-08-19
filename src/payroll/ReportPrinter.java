@@ -285,6 +285,7 @@ public class ReportPrinter implements Printable {
                     g.drawString(Common.renderDisplayDate(transaction.getDate()), x, y);
                     size = 60;
                     x += size + 10;
+                    g.drawLine(x - 5, y + 5, x - 5, y - 35);
                 }
 
                 if (parent.chkMonthlyReportClientName.isSelected()) {
@@ -294,12 +295,14 @@ public class ReportPrinter implements Printable {
                         g.drawString("Pinjaman", x, y);
                     size = 80;
                     x += size + 10;
+                    g.drawLine(x - 5, y + 5, x - 5, y - 35);
                 }
 
                 if (parent.chkMonthlyReportDescription.isSelected()) {
                     g.drawString(transaction.getDescription(), x, y);
                     size = 140;
                     x += size + 10;
+                    g.drawLine(x - 5, y + 5, x - 5, y - 35);
                 }
 
                 if (parent.chkMonthlyReportKiraanAsing.isSelected()) {
@@ -307,6 +310,7 @@ public class ReportPrinter implements Printable {
                         g.drawString("" + Common.currency(transaction.getKiraanAsing()), x, y);
                     size = 50;
                     x += size + 10;
+                    g.drawLine(x - 5, y + 5, x - 5, y - 35);
                 }
 
                 if (parent.chkMonthlyReportWeight.isSelected()) {
@@ -314,6 +318,7 @@ public class ReportPrinter implements Printable {
                         g.drawString("" + Common.currency(transaction.getWeight()), x, y);
                     size = 60;
                     x += size + 10;
+                    g.drawLine(x - 5, y + 5, x - 5, y - 35);
                 }
 
                 if (parent.chkMonthlyReportPricePerTon.isSelected()) {
@@ -321,6 +326,7 @@ public class ReportPrinter implements Printable {
                         g.drawString("" + Common.currency(transaction.getPricePerTon()), x, y);
                     size = 50;
                     x += size + 10;
+                    g.drawLine(x - 5, y + 5, x - 5, y - 35);
                 }
 
                 if (parent.chkMonthlyReportTotalReceived.isSelected()) {
@@ -328,6 +334,7 @@ public class ReportPrinter implements Printable {
                         g.drawString("" + Common.currency(transaction.getTotal()), x, y);
                     size = 50;
                     x += size + 10;
+                    g.drawLine(x - 5, y + 5, x - 5, y - 35);
                 }
             }
             for (int c = workerIndex; c < workerCount; c ++) {
@@ -350,9 +357,15 @@ public class ReportPrinter implements Printable {
                         g.drawString("" +Common.currency( transaction.getLoanAmount()), x + 50, y);
                         g.drawString("" + Common.currency(calculations.get(c).getBalance()), x + 110, y);
                     }
+                    
                 }
 
+                g.drawLine(x + 50 - 5, y + 5, x + 50 - 5, y - 35);
+                g.drawLine(x + 110 - 5, y + 5, x + 110 - 5, y - 35);
+                
                 x += size + 10;
+
+                g.drawLine(x - 5, y + 5, x - 5, y - 35);
             }
 
             // draw line on the right side
@@ -482,7 +495,7 @@ public class ReportPrinter implements Printable {
                     break;
                 }
 
-                g.drawString(Common.currency(Math.abs(calculations.get(c).getTotalBalance())), x, y);
+                g.drawString(Common.currency(calculations.get(c).getTotalBalance()), x, y);
                 g.drawLine(x - 5, y + 5, x - 5, y - 15);
                 x += size + 10;
                 g.drawLine(x - 5, y + 5, x - 5, y - 15);

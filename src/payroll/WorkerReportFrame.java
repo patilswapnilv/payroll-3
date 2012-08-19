@@ -11,15 +11,10 @@
 
 package payroll;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import payroll.libraries.Common;
-import payroll.libraries.Database;
 import payroll.model.Worker;
-import payroll.model.WorkerRecord;
 import payroll.model.WorkerReport;
 
 /**
@@ -61,6 +56,8 @@ public class WorkerReportFrame extends javax.swing.JFrame {
         } else if (type == SAVING) {
             this.saving_setup();
         }
+
+        tblReport.setRowHeight(25);
     }
 
     private void full_setup() {

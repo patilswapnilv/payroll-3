@@ -119,6 +119,7 @@ public class Database
 
             return updated;
         } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
             Logger.getLogger(ex.getMessage()).log(Level.WARNING, null, ex);
         }
 

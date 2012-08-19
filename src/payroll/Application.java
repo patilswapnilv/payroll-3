@@ -14,6 +14,7 @@ import payroll.libraries.Database;
  */
 public class Application {
 
+    public static int id = 1;
     public static Database db = null;
 
     /**
@@ -28,7 +29,8 @@ public class Application {
                 } catch (Exception ex) {
                     System.err.println(ex.getMessage());
                 }
-                new Main().setVisible(true);
+                
+                new Login(null, true).setVisible(true);
             }
         }));
     }

@@ -10,10 +10,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Hashtable;
@@ -352,6 +356,10 @@ public class Main extends javax.swing.JFrame {
         txtProfileClientStatus = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
+        jLabel35 = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JPasswordField();
+        txtPasswordConfirm = new javax.swing.JPasswordField();
+        btnPasswordChange = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -802,12 +810,12 @@ public class Main extends javax.swing.JFrame {
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addContainerGap(589, Short.MAX_VALUE)
-                .addComponent(btnSavingNew, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(710, Short.MAX_VALUE)
+                .addComponent(btnSavingNew)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSavingCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSavingCancel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSavingEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSavingEnd)
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -957,12 +965,12 @@ public class Main extends javax.swing.JFrame {
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                .addContainerGap(589, Short.MAX_VALUE)
-                .addComponent(btnPayNew, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(710, Short.MAX_VALUE)
+                .addComponent(btnPayNew)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPayCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnPayCancel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPayEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnPayEnd)
                 .addContainerGap())
         );
         jPanel13Layout.setVerticalGroup(
@@ -972,7 +980,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPayEnd)
                     .addComponent(btnPayCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPayNew))
+                    .addComponent(btnPayNew, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -1035,12 +1043,14 @@ public class Main extends javax.swing.JFrame {
 
         chkMonthlyReportDate.setSelected(true);
         chkMonthlyReportDate.setText("Tarikh");
+        chkMonthlyReportDate.setEnabled(false);
 
         chkMonthlyReportClientName.setSelected(true);
         chkMonthlyReportClientName.setText("Name Pelanggan");
 
         chkMonthlyReportDescription.setSelected(true);
         chkMonthlyReportDescription.setText("Keterangan");
+        chkMonthlyReportDescription.setEnabled(false);
 
         chkMonthlyReportWeight.setSelected(true);
         chkMonthlyReportWeight.setText("Berat KG");
@@ -1541,14 +1551,14 @@ public class Main extends javax.swing.JFrame {
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                .addContainerGap(437, Short.MAX_VALUE)
-                .addComponent(btnProfileWorkerNew, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(602, Short.MAX_VALUE)
+                .addComponent(btnProfileWorkerNew)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnProfileWorkerEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnProfileWorkerEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnProfileWorkerDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnProfileWorkerDelete)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnProfileWorkerEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnProfileWorkerEnd)
                 .addContainerGap())
         );
         jPanel15Layout.setVerticalGroup(
@@ -1556,10 +1566,10 @@ public class Main extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnProfileWorkerEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnProfileWorkerEnd)
                     .addComponent(btnProfileWorkerDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnProfileWorkerEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnProfileWorkerNew, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnProfileWorkerEdit)
+                    .addComponent(btnProfileWorkerNew))
                 .addContainerGap())
         );
 
@@ -1633,7 +1643,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtProfileWorkerStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 381, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 408, Short.MAX_VALUE)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1665,14 +1675,14 @@ public class Main extends javax.swing.JFrame {
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                .addContainerGap(471, Short.MAX_VALUE)
+                .addContainerGap(588, Short.MAX_VALUE)
                 .addComponent(btnProfileClientNew)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnProfileClientEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnProfileClientEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnProfileClientDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnProfileClientDelete)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnProfileClientEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnProfileClientEnd)
                 .addContainerGap())
         );
         jPanel16Layout.setVerticalGroup(
@@ -1680,10 +1690,10 @@ public class Main extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnProfileClientEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnProfileClientEnd)
                     .addComponent(btnProfileClientDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnProfileClientEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnProfileClientNew, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnProfileClientEdit)
+                    .addComponent(btnProfileClientNew))
                 .addContainerGap())
         );
 
@@ -1735,7 +1745,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtProfileClientStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 474, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 501, Short.MAX_VALUE)
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1757,15 +1767,55 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Profil", jPanel6);
 
+        jLabel35.setText("Kata Laluan");
+
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
+
+        txtPasswordConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordConfirmActionPerformed(evt);
+            }
+        });
+
+        btnPasswordChange.setText("Ubah");
+        btnPasswordChange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPasswordChangeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 995, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnPasswordChange)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPasswordConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(716, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 667, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPasswordConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPasswordChange)
+                .addContainerGap(571, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Kata Laluan", jPanel7);
@@ -2007,6 +2057,7 @@ public class Main extends javax.swing.JFrame {
         ArrayList<Worker> selected = this.getReportSelectedWorkers();
         ArrayList<ReportCalculation> calculations = this.getReportCalculations(selected);
         ArrayList<Transaction> transactions = this.getReportTransasctions(selected);
+        ArrayList<ReportSalary> salaries = this.getReportSalaries(selected);
 
         int workerCount = selected.size();
         int index = 0;
@@ -2112,7 +2163,6 @@ public class Main extends javax.swing.JFrame {
             if (chkMonthlyReportSalary.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
                     cell.setCellValue(Common.currency(transaction.getTotalSalary()));
-
                 }
                 index++;
                 cell = row.createCell(index);
@@ -2156,12 +2206,15 @@ public class Main extends javax.swing.JFrame {
             rowIndex++;
         }
         // </editor-fold>
-
         
+        // <editor-fold defaultstate="collapsed" desc="render summary">
         Row summaryRow = sheet.createRow(rowIndex);
         index = columns.size();
-        
-        for (ReportCalculation calculation: calculations) {
+
+        sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0, columns.size() - 1));
+
+        for (int i = 0; i < workerCount; i ++) {
+            ReportCalculation calculation = calculations.get(i);
             Cell cell = summaryRow.createCell(index++);
             cell.setCellValue(Common.currency(calculation.getSalary()));
             cell = summaryRow.createCell(index++);
@@ -2169,6 +2222,93 @@ public class Main extends javax.swing.JFrame {
             cell = summaryRow.createCell(index++);
             cell.setCellValue(Common.currency(calculation.getBalance()));
         }
+        // </editor-fold>
+
+        rowIndex ++;
+        for (ReportSalary salary : salaries) {
+            index = 0;
+            Row row = sheet.createRow(rowIndex);
+            Cell cell = null;
+            
+            if (chkMonthlyReportDate.isSelected()) {
+                cell = row.createCell(index++);
+                cell.setCellValue(Common.renderDisplayDate(salary.getDate()));
+            }
+
+            sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, index, columns.size() - 1));
+
+            cell = row.createCell(index);
+            cell.setCellValue("Bayaran Gaji");
+
+            index = columns.size();
+
+            for (int i = 0; i < workerCount; i ++) {
+                double salaryValue = salary.getWorkerSalary(selected.get(i).getId());
+                cell = row.createCell(index++);
+                sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, index - 1, index + 1));
+                cell.setCellValue(Common.currency(Math.abs(salaryValue)));
+                calculations.get(i).setPayment(salaryValue);
+
+                index += 2;
+            }
+            rowIndex++;
+        }
+
+        Row salarySummaryRow = sheet.createRow(rowIndex);
+        
+        index = 0;
+        
+        if (chkMonthlyReportDate.isSelected()) {
+            index++;
+        }
+
+        salarySummaryRow.createCell(index).setCellValue("Baki");
+
+        index = columns.size();
+
+        for (int i = 0; i < workerCount; i ++) {
+            ReportCalculation calculation = calculations.get(i);
+            Cell cell = salarySummaryRow.createCell(index++);
+            sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, index - 1, index + 1));
+            cell.setCellValue(Common.currency(calculation.getTotalBalance()));
+
+            index += 2;
+        }
+
+        rowIndex ++;
+
+        if (chkMonthlyReportSaving.isSelected()) {
+            rowIndex ++;
+
+            sheet.createRow(rowIndex++).createCell(0).setCellValue("Simpanan Tetap");
+            Row previousBalanceRow = sheet.createRow(rowIndex);
+            sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0, columns.size() - 1));
+            previousBalanceRow.createCell(0).setCellValue("Baki Bulan Lalu");
+
+            Row currentBalanceRow = sheet.createRow(rowIndex + 1);
+            sheet.addMergedRegion(new CellRangeAddress(rowIndex + 1, rowIndex + 1, 0, columns.size() - 1));
+            currentBalanceRow.createCell(0).setCellValue("Bulan Ini");
+
+            Row balanceRow = sheet.createRow(rowIndex + 2);
+            sheet.addMergedRegion(new CellRangeAddress(rowIndex + 2, rowIndex + 2, 0, columns.size() - 1));
+            balanceRow.createCell(0).setCellValue("Jumlah Baki");
+
+            ArrayList<ReportSaving> savings = this.getReportSavings(selected);
+
+            index = columns.size();
+            for (ReportSaving saving : savings) {
+                sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, index, index + 2));
+                sheet.addMergedRegion(new CellRangeAddress(rowIndex + 1, rowIndex + 1, index, index + 2));
+                sheet.addMergedRegion(new CellRangeAddress(rowIndex + 2, rowIndex + 2, index, index + 2));
+                previousBalanceRow.createCell(index).setCellValue(saving.getPrevious());
+                currentBalanceRow.createCell(index).setCellValue(saving.getCurrent());
+                balanceRow.createCell(index).setCellValue(saving.getBalance());
+
+                index += 3;
+            }
+        }
+
+        
         
         FileOutputStream out = null;
         try {
@@ -2225,7 +2365,7 @@ public class Main extends javax.swing.JFrame {
         // </editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="prepare css">
-        css += "table { border-collapse: collapse; }";
+        css += "table { border-collapse: collapse; font-family: calibri; font-size: 12px; }";
         css += "table tr td.first { border-left: 1px solid #333; }";
         css += "table tr td.last { border-right: 1px solid #333; }";
         css += "table thead tr, table thead td, table tr.summary, table tr.summary td { border: 1px solid #333; }";
@@ -2358,11 +2498,11 @@ public class Main extends javax.swing.JFrame {
         // <editor-fold defaultstate="collapsed" desc="render salaries report">
         if (salaries.size() > 0) {
             int size = columns.size();
-
             for (ReportSalary rs : salaries) {
                 content += "<tr class=\"salary\">";
 
 
+                size = columns.size();
                 if (chkMonthlyReportDate.isSelected()) {
                     content += "<td>" + Common.renderDisplayDate(rs.getDate()) + "</td>";
                     size--;
@@ -2974,6 +3114,48 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtPayWorkerIDActionPerformed
 
+    private void btnPasswordChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasswordChangeActionPerformed
+        String password = "";
+        char[] passwords = txtPassword.getPassword(), confirms = txtPasswordConfirm.getPassword();
+
+
+        if ( ! Arrays.equals(passwords, confirms)) {
+            JOptionPane.showMessageDialog(null, "Password tidak tepat", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        for (Character ch : passwords) {
+            password += ch;
+        }
+
+        password = Common.md5(password.getBytes());
+        String query = "UPDATE accesses SET access_key = ? WHERE id = " + Application.id;
+        PreparedStatement ps = Database.instance().createPreparedStatement(query);
+
+        try {
+            ps.setString(1, password);
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        if (Database.instance().update(ps)) {
+            JOptionPane.showMessageDialog(null, "Password changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+            txtPassword.setText("");
+            txtPasswordConfirm.setText("");
+        } else {
+            JOptionPane.showMessageDialog(null, "Unable to change password", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btnPasswordChangeActionPerformed
+
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        btnPasswordChangeActionPerformed(evt);
+    }//GEN-LAST:event_txtPasswordActionPerformed
+
+    private void txtPasswordConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordConfirmActionPerformed
+btnPasswordChangeActionPerformed(evt);
+    }//GEN-LAST:event_txtPasswordConfirmActionPerformed
+
     private void _reset_worker_form() {
         txtProfileWorkerCurrentSaving.setText("");
         txtProfileWorkerName.setText("");
@@ -3029,6 +3211,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btnMonthlyReportExport;
     private javax.swing.JButton btnMonthlyReportGenerate;
     private javax.swing.JButton btnMonthlyReportPrint;
+    private javax.swing.JButton btnPasswordChange;
     private javax.swing.JButton btnPayCancel;
     private javax.swing.JButton btnPayEnd;
     private javax.swing.JButton btnPayNew;
@@ -3090,6 +3273,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -3143,6 +3327,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTable tblTransactionInvolvedWorkers;
     private com.toedter.calendar.JDateChooser txtMonthlyReportDateFrom;
     private com.toedter.calendar.JDateChooser txtMonthlyReportDateTo;
+    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JPasswordField txtPasswordConfirm;
     private com.toedter.calendar.JDateChooser txtPayDateFrom;
     private com.toedter.calendar.JDateChooser txtPayDateTo;
     private javax.swing.JTextField txtPayWorkerID;
