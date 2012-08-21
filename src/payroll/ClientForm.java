@@ -75,7 +75,7 @@ public class ClientForm extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnEnd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnEnd.setFont(new java.awt.Font("Arial", 0, 14));
         btnEnd.setText("Tamat");
         btnEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,7 +83,7 @@ public class ClientForm extends javax.swing.JDialog {
             }
         });
 
-        btnSave.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnSave.setFont(new java.awt.Font("Arial", 0, 14));
         btnSave.setText("Rekodkan");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,7 +98,7 @@ public class ClientForm extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
                 .addComponent(btnEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -112,21 +112,21 @@ public class ClientForm extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel1.setText("Kod dan Nama Pekerja");
 
-        txtClientID.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtClientID.setFont(new java.awt.Font("Arial", 0, 12));
 
-        txtClientName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtClientName.setFont(new java.awt.Font("Arial", 0, 12));
 
-        rbtnInactive.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        rbtnInactive.setFont(new java.awt.Font("Arial", 0, 12));
         rbtnInactive.setText("Tiada Aktif");
 
         rbtnActive.setSelected(true);
-        rbtnActive.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        rbtnActive.setFont(new java.awt.Font("Arial", 0, 12));
         rbtnActive.setText("Aktif");
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel4.setText("Status");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

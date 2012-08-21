@@ -173,6 +173,7 @@ public class WorkerReportFrame extends javax.swing.JFrame {
         tblReport = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/payroll/images/icon.png")).getImage());
 
         tblReport.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

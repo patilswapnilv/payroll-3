@@ -85,36 +85,36 @@ public class WorkerForm extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cipta Rekod Pekerja Baru");
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel1.setText("Kod dan Nama Pekerja");
 
-        txtWorkerID.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtWorkerID.setFont(new java.awt.Font("Arial", 0, 12));
 
-        txtWorkerName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtWorkerName.setFont(new java.awt.Font("Arial", 0, 12));
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel2.setText("Tarikh Bermula");
 
-        txtRegisterDate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtRegisterDate.setFont(new java.awt.Font("Arial", 0, 12));
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel3.setText("Tarikh Tamat");
 
-        txtReturnDate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtReturnDate.setFont(new java.awt.Font("Arial", 0, 12));
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel4.setText("Status");
 
-        rbtnActive.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        rbtnActive.setFont(new java.awt.Font("Arial", 0, 12));
         rbtnActive.setSelected(true);
         rbtnActive.setText("Aktif");
 
-        rbtnInactive.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        rbtnInactive.setFont(new java.awt.Font("Arial", 0, 12));
         rbtnInactive.setText("Tidak Aktif");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnEnd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnEnd.setFont(new java.awt.Font("Arial", 0, 14));
         btnEnd.setText("Tamat");
         btnEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,7 +122,7 @@ public class WorkerForm extends javax.swing.JDialog {
             }
         });
 
-        btnSave.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnSave.setFont(new java.awt.Font("Arial", 0, 14));
         btnSave.setText("Rekodkan");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,7 +137,7 @@ public class WorkerForm extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
                 .addComponent(btnEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -177,7 +177,7 @@ public class WorkerForm extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(rbtnInactive))
                             .addComponent(txtRegisterDate, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

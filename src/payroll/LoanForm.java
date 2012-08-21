@@ -59,34 +59,34 @@ public class LoanForm extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pinjaman");
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel1.setText("Kod dan Nama Pekerja");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel2.setText("Tarikh");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel3.setText("Amaun Pinjaman");
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel4.setText("Keterangan");
 
         txtWorkerCode.setEditable(false);
-        txtWorkerCode.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtWorkerCode.setFont(new java.awt.Font("Arial", 0, 12));
 
         txtWorkerName.setEditable(false);
-        txtWorkerName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtWorkerName.setFont(new java.awt.Font("Arial", 0, 12));
 
         txtLoanDate.setDateFormatString("dd/MM/yyyy");
-        txtLoanDate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtLoanDate.setFont(new java.awt.Font("Arial", 0, 12));
 
-        txtLoanAmount.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtLoanAmount.setFont(new java.awt.Font("Arial", 0, 12));
 
-        txtLoanDescription.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtLoanDescription.setFont(new java.awt.Font("Arial", 0, 12));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnEnd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnEnd.setFont(new java.awt.Font("Arial", 0, 14));
         btnEnd.setText("Tamat");
         btnEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,7 +94,7 @@ public class LoanForm extends javax.swing.JDialog {
             }
         });
 
-        btnSave.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnSave.setFont(new java.awt.Font("Arial", 0, 14));
         btnSave.setText("Rekodkan");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,7 +109,7 @@ public class LoanForm extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
                 .addComponent(btnEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -146,7 +146,7 @@ public class LoanForm extends javax.swing.JDialog {
                                 .addComponent(txtWorkerName, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtLoanAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtLoanDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

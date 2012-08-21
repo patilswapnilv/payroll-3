@@ -82,40 +82,40 @@ public class SavingForm extends javax.swing.JDialog {
         setTitle("Simpanan Tetap");
         setFocusable(false);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel1.setText("Pekerja");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel2.setText("Tarikh");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel3.setText("Amaun Simpanan [ + ]");
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel4.setText("Keterangan");
 
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel5.setText("Amaun Bayaran [ - ]");
 
-        txtWorkerCode.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtWorkerCode.setFont(new java.awt.Font("Arial", 0, 12));
         txtWorkerCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtWorkerCodeActionPerformed(evt);
             }
         });
 
-        txtWorkerName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtWorkerName.setFont(new java.awt.Font("Arial", 0, 12));
 
         txtSavingDate.setDateFormatString("dd/MM/yyyy");
-        txtSavingDate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtSavingDate.setFont(new java.awt.Font("Arial", 0, 12));
 
-        txtSavingAmount.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtSavingAmount.setFont(new java.awt.Font("Arial", 0, 12));
 
-        txtPayAmount.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtPayAmount.setFont(new java.awt.Font("Arial", 0, 12));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnEnd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnEnd.setFont(new java.awt.Font("Arial", 0, 14));
         btnEnd.setText("Tamat");
         btnEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,7 +123,7 @@ public class SavingForm extends javax.swing.JDialog {
             }
         });
 
-        btnSave.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnSave.setFont(new java.awt.Font("Arial", 0, 14));
         btnSave.setText("Rekodkan");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,7 +138,7 @@ public class SavingForm extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
                 .addComponent(btnEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -153,7 +153,7 @@ public class SavingForm extends javax.swing.JDialog {
         );
 
         txtDescription.setColumns(20);
-        txtDescription.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtDescription.setFont(new java.awt.Font("Arial", 0, 12));
         txtDescription.setRows(5);
         jScrollPane1.setViewportView(txtDescription);
 
@@ -182,7 +182,7 @@ public class SavingForm extends javax.swing.JDialog {
                             .addComponent(txtSavingDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtPayAmount)
                             .addComponent(jScrollPane1))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

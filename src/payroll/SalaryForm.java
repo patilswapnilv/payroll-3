@@ -65,7 +65,7 @@ public class SalaryForm extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnEnd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnEnd.setFont(new java.awt.Font("Arial", 0, 14));
         btnEnd.setText("Tamat");
         btnEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,7 +73,7 @@ public class SalaryForm extends javax.swing.JDialog {
             }
         });
 
-        btnSave.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnSave.setFont(new java.awt.Font("Arial", 0, 14));
         btnSave.setText("Rekodkan");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,7 +88,7 @@ public class SalaryForm extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
                 .addComponent(btnEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -102,27 +102,27 @@ public class SalaryForm extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel1.setText("Pekerja");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel2.setText("Tarikh");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel3.setText("Amaun Bayaran [ - ]");
 
-        txtWorkerCode.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtWorkerCode.setFont(new java.awt.Font("Arial", 0, 12));
         txtWorkerCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtWorkerCodeActionPerformed(evt);
             }
         });
 
-        txtWorkerName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtWorkerName.setFont(new java.awt.Font("Arial", 0, 12));
 
         txtDate.setDateFormatString("dd/MM/yyyy");
 
-        txtTotalPay.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTotalPay.setFont(new java.awt.Font("Arial", 0, 12));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,7 +145,7 @@ public class SalaryForm extends javax.swing.JDialog {
                                 .addComponent(txtWorkerName, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTotalPay, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
