@@ -5,6 +5,7 @@
 
 package payroll;
 
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import payroll.libraries.Database;
 
@@ -23,14 +24,15 @@ public class Application {
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater((new Runnable() {
             public void run() {
-                db = Database.instance();
                 try {
+                    db = Database.instance();
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
+                    new Login(null, true).setVisible(true);
                 } catch (Exception ex) {
                     System.err.println(ex.getMessage());
+                    JOptionPane.showMessageDialog(null, "Unexpected Error occur!!", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
-                
-                new Login(null, true).setVisible(true);
             }
         }));
     }

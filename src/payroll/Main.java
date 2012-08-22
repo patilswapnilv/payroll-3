@@ -365,7 +365,7 @@ public class Main extends javax.swing.JFrame {
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/payroll/images/icon.png")).getImage());
 
         jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
-        jTabbedPane1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jTabbedPane1.setFont(new java.awt.Font("Arial", 0, 18));
         jTabbedPane1.setName("Payroll Software"); // NOI18N
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -386,54 +386,54 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("File", jPanel2);
 
-        jPanel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jPanel1.setFont(new java.awt.Font("Arial", 0, 12));
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel2.setText("Tarikh");
 
         jLabel1.setFont(jLabel1.getFont().deriveFont(jLabel1.getFont().getStyle() | java.awt.Font.BOLD));
         jLabel1.setText("Transaksi Baru Dan Pinjam");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel3.setText("Kod & Nama Pelanggan");
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel4.setText("Keterangan");
 
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel5.setText("Berat KG");
 
-        jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel6.setText("Harga Diterima Seton");
 
-        jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel7.setText("Jumlah Diterima");
 
-        jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel8.setText("Upah Kerja");
 
-        jLabel9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel9.setText("Jumlah Gaji");
 
-        jLabel10.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel10.setText("Jumlah Baki");
 
-        jLabel11.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel11.setText("Kiraan Asing");
 
-        jLabel12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel12.setText("Upah Perseorangan");
 
-        txtTransactionClientID.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionClientID.setFont(new java.awt.Font("Arial", 0, 12));
         txtTransactionClientID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTransactionClientIDActionPerformed(evt);
             }
         });
 
-        txtTransactionDescription.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionDescription.setFont(new java.awt.Font("Arial", 0, 12));
 
-        txtTransactionWeight.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionWeight.setFont(new java.awt.Font("Arial", 0, 12));
         txtTransactionWeight.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 calculateTransaction(evt);
@@ -441,10 +441,10 @@ public class Main extends javax.swing.JFrame {
         });
 
         txtTransactionClientName.setEditable(false);
-        txtTransactionClientName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionClientName.setFont(new java.awt.Font("Arial", 0, 12));
         txtTransactionClientName.setFocusable(false);
 
-        txtTransactionPricePerTon.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionPricePerTon.setFont(new java.awt.Font("Arial", 0, 12));
         txtTransactionPricePerTon.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 calculateTransaction(evt);
@@ -452,10 +452,10 @@ public class Main extends javax.swing.JFrame {
         });
 
         txtTransactionTotalReceived.setEditable(false);
-        txtTransactionTotalReceived.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionTotalReceived.setFont(new java.awt.Font("Arial", 0, 12));
         txtTransactionTotalReceived.setFocusable(false);
 
-        txtTransactionWages.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionWages.setFont(new java.awt.Font("Arial", 0, 12));
         txtTransactionWages.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 calculateTransaction(evt);
@@ -463,14 +463,14 @@ public class Main extends javax.swing.JFrame {
         });
 
         txtTransactionSalary.setEditable(false);
-        txtTransactionSalary.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionSalary.setFont(new java.awt.Font("Arial", 0, 12));
         txtTransactionSalary.setFocusable(false);
 
         txtTransactionBalance.setEditable(false);
-        txtTransactionBalance.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionBalance.setFont(new java.awt.Font("Arial", 0, 12));
         txtTransactionBalance.setFocusable(false);
 
-        txtTransactionCalculate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionCalculate.setFont(new java.awt.Font("Arial", 0, 12));
         txtTransactionCalculate.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 calculateTransaction(evt);
@@ -478,15 +478,15 @@ public class Main extends javax.swing.JFrame {
         });
 
         txtTransactionPayPerPerson.setEditable(false);
-        txtTransactionPayPerPerson.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionPayPerPerson.setFont(new java.awt.Font("Arial", 0, 12));
         txtTransactionPayPerPerson.setFocusable(false);
 
         txtTransactionDate.setDateFormatString("dd/MM/yyyy");
-        txtTransactionDate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionDate.setFont(new java.awt.Font("Arial", 0, 12));
 
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnRecord.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnRecord.setFont(new java.awt.Font("Arial", 0, 14));
         btnRecord.setText("Rekodkan");
         btnRecord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -494,10 +494,10 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        txtTransactionNew.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtTransactionNew.setFont(new java.awt.Font("Arial", 0, 14));
         txtTransactionNew.setText("Transaksi Baru");
 
-        txtTransactionEnd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtTransactionEnd.setFont(new java.awt.Font("Arial", 0, 14));
         txtTransactionEnd.setText("Tutup");
         txtTransactionEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -531,12 +531,12 @@ public class Main extends javax.swing.JFrame {
 
         jPanel4.setFocusable(false);
 
-        listTransactionLoanWorkers.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        listTransactionLoanWorkers.setFont(new java.awt.Font("Arial", 0, 12));
         listTransactionLoanWorkers.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listTransactionLoanWorkers.setFocusable(false);
         jScrollPane4.setViewportView(listTransactionLoanWorkers);
 
-        btnTransactionNewLoan.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnTransactionNewLoan.setFont(new java.awt.Font("Arial", 0, 14));
         btnTransactionNewLoan.setText("Pinjaman Baru");
         btnTransactionNewLoan.setFocusable(false);
         btnTransactionNewLoan.addActionListener(new java.awt.event.ActionListener() {
@@ -553,7 +553,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane4)
-                    .addComponent(btnTransactionNewLoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnTransactionNewLoan, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -575,14 +575,14 @@ public class Main extends javax.swing.JFrame {
         );
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 739, Short.MAX_VALUE)
+            .addGap(0, 743, Short.MAX_VALUE)
         );
 
-        jLabel29.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel29.setFont(new java.awt.Font("Arial", 1, 12));
         jLabel29.setText("Pekerja Terlibat");
         jLabel29.setFocusable(false);
 
-        tblTransactionInvolvedWorkers.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        tblTransactionInvolvedWorkers.setFont(new java.awt.Font("Arial", 0, 12));
         tblTransactionInvolvedWorkers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -615,7 +615,7 @@ public class Main extends javax.swing.JFrame {
         tblTransactionInvolvedWorkers.getColumnModel().getColumn(1).setPreferredWidth(50);
         tblTransactionInvolvedWorkers.getColumnModel().getColumn(2).setResizable(false);
 
-        cboxTransactionAllWorkers.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cboxTransactionAllWorkers.setFont(new java.awt.Font("Arial", 0, 12));
         cboxTransactionAllWorkers.setText("Semua Pekerja");
         cboxTransactionAllWorkers.setFocusable(false);
         cboxTransactionAllWorkers.addActionListener(new java.awt.event.ActionListener() {
@@ -675,10 +675,10 @@ public class Main extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cboxTransactionAllWorkers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(cboxTransactionAllWorkers, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -755,18 +755,18 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Transaksi", jPanel1);
 
-        jPanel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jPanel3.setFont(new java.awt.Font("Arial", 0, 12));
 
         jLabel13.setFont(jLabel13.getFont().deriveFont(jLabel13.getFont().getStyle() | java.awt.Font.BOLD));
         jLabel13.setText("Simpanan Tetap");
 
-        jLabel14.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel14.setText("Nama Pekerja");
 
-        jLabel15.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel15.setText("Tempoh Tarikh");
 
-        jLabel16.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel16.setText("Baki Simpanan Terkini");
 
         txtSavingWorkerID.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -777,18 +777,19 @@ public class Main extends javax.swing.JFrame {
         });
 
         txtSavingWorkerName.setEditable(false);
-        txtSavingWorkerName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtSavingWorkerName.setFont(new java.awt.Font("Arial", 0, 12));
         txtSavingWorkerName.setFocusable(false);
 
         txtSavingDateFrom.setDateFormatString("dd/MM/yyyy");
-        txtSavingDateFrom.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtSavingDateFrom.setFont(new java.awt.Font("Arial", 0, 12));
 
-        jLabel17.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel17.setText("Hingga");
 
         txtSavingDateTo.setDateFormatString("dd/MM/yyyy");
-        txtSavingDateTo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtSavingDateTo.setFont(new java.awt.Font("Arial", 0, 12));
 
+        txtSavingCurrentSaving.setEditable(false);
         txtSavingCurrentSaving.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtSavingCurrentSaving.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -796,7 +797,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        tblSaving.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        tblSaving.setFont(new java.awt.Font("Arial", 0, 12));
         tblSaving.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -835,7 +836,7 @@ public class Main extends javax.swing.JFrame {
 
         jPanel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnSavingEnd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnSavingEnd.setFont(new java.awt.Font("Arial", 0, 14));
         btnSavingEnd.setText("Tutup");
         btnSavingEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -843,10 +844,10 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnSavingCancel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnSavingCancel.setFont(new java.awt.Font("Arial", 0, 14));
         btnSavingCancel.setText("Batalkan");
 
-        btnSavingNew.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnSavingNew.setFont(new java.awt.Font("Arial", 0, 14));
         btnSavingNew.setText("Transaksi Baru");
         btnSavingNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -859,7 +860,7 @@ public class Main extends javax.swing.JFrame {
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(762, Short.MAX_VALUE)
                 .addComponent(btnSavingNew)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSavingCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -942,18 +943,18 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Simpanan", jPanel3);
 
-        jPanel11.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jPanel11.setFont(new java.awt.Font("Arial", 0, 12));
 
         jLabel18.setFont(jLabel18.getFont().deriveFont(jLabel18.getFont().getStyle() | java.awt.Font.BOLD));
         jLabel18.setText("Bayaran Gaji");
 
-        jLabel19.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel19.setText("Nama Pekerja");
 
-        jLabel20.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel20.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel20.setText("Tempoh Tarikh");
 
-        txtPayWorkerID.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtPayWorkerID.setFont(new java.awt.Font("Arial", 0, 12));
         txtPayWorkerID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPayWorkerIDActionPerformed(evt);
@@ -961,19 +962,19 @@ public class Main extends javax.swing.JFrame {
         });
 
         txtPayWorkerName.setEditable(false);
-        txtPayWorkerName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtPayWorkerName.setFont(new java.awt.Font("Arial", 0, 12));
         txtPayWorkerName.setFocusable(false);
 
         txtPayDateFrom.setDateFormatString("dd/MM/yyyy");
-        txtPayDateFrom.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtPayDateFrom.setFont(new java.awt.Font("Arial", 0, 12));
 
-        jLabel22.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel22.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel22.setText("Hingga");
 
         txtPayDateTo.setDateFormatString("dd/MM/yyyy");
-        txtPayDateTo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtPayDateTo.setFont(new java.awt.Font("Arial", 0, 12));
 
-        tblPay.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        tblPay.setFont(new java.awt.Font("Arial", 0, 12));
         tblPay.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1012,7 +1013,7 @@ public class Main extends javax.swing.JFrame {
 
         jPanel13.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnPayEnd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnPayEnd.setFont(new java.awt.Font("Arial", 0, 14));
         btnPayEnd.setText("Tutup");
         btnPayEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1020,10 +1021,10 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnPayCancel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnPayCancel.setFont(new java.awt.Font("Arial", 0, 14));
         btnPayCancel.setText("Batalkan");
 
-        btnPayNew.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnPayNew.setFont(new java.awt.Font("Arial", 0, 14));
         btnPayNew.setText("Transaksi Baru");
         btnPayNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1036,7 +1037,7 @@ public class Main extends javax.swing.JFrame {
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(761, Short.MAX_VALUE)
                 .addComponent(btnPayNew, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPayCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1111,56 +1112,56 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Bayaran Gaji", jPanel11);
 
-        jTabbedPane4.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        jTabbedPane4.setFont(new java.awt.Font("Arial", 0, 15));
         jTabbedPane4.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jTabbedPane4StateChanged(evt);
             }
         });
 
-        chkMonthlyReportDate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        chkMonthlyReportDate.setFont(new java.awt.Font("Arial", 0, 12));
         chkMonthlyReportDate.setSelected(true);
         chkMonthlyReportDate.setText("Tarikh");
         chkMonthlyReportDate.setEnabled(false);
 
-        chkMonthlyReportClientName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        chkMonthlyReportClientName.setFont(new java.awt.Font("Arial", 0, 12));
         chkMonthlyReportClientName.setSelected(true);
         chkMonthlyReportClientName.setText("Name Pelanggan");
 
-        chkMonthlyReportDescription.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        chkMonthlyReportDescription.setFont(new java.awt.Font("Arial", 0, 12));
         chkMonthlyReportDescription.setSelected(true);
         chkMonthlyReportDescription.setText("Keterangan");
         chkMonthlyReportDescription.setEnabled(false);
 
-        chkMonthlyReportWeight.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        chkMonthlyReportWeight.setFont(new java.awt.Font("Arial", 0, 12));
         chkMonthlyReportWeight.setSelected(true);
         chkMonthlyReportWeight.setText("Berat KG");
 
-        chkMonthlyReportPricePerTon.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        chkMonthlyReportPricePerTon.setFont(new java.awt.Font("Arial", 0, 12));
         chkMonthlyReportPricePerTon.setSelected(true);
         chkMonthlyReportPricePerTon.setText("Harga Diterma Seton");
 
-        chkMonthlyReportTotalReceived.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        chkMonthlyReportTotalReceived.setFont(new java.awt.Font("Arial", 0, 12));
         chkMonthlyReportTotalReceived.setSelected(true);
         chkMonthlyReportTotalReceived.setText("Jumlah Diterima");
 
-        chkMonthlyReportWages.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        chkMonthlyReportWages.setFont(new java.awt.Font("Arial", 0, 12));
         chkMonthlyReportWages.setSelected(true);
         chkMonthlyReportWages.setText("Upah Kerja");
 
-        chkMonthlyReportSalary.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        chkMonthlyReportSalary.setFont(new java.awt.Font("Arial", 0, 12));
         chkMonthlyReportSalary.setSelected(true);
         chkMonthlyReportSalary.setText("Jumlah Gaji");
 
-        chkMonthlyReportBalance.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        chkMonthlyReportBalance.setFont(new java.awt.Font("Arial", 0, 12));
         chkMonthlyReportBalance.setSelected(true);
         chkMonthlyReportBalance.setText("Jumlah Baki");
 
-        chkMonthlyReportKiraanAsing.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        chkMonthlyReportKiraanAsing.setFont(new java.awt.Font("Arial", 0, 12));
         chkMonthlyReportKiraanAsing.setSelected(true);
         chkMonthlyReportKiraanAsing.setText("Kiraan Asing");
 
-        chkMonthlyReportSaving.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        chkMonthlyReportSaving.setFont(new java.awt.Font("Arial", 0, 12));
         chkMonthlyReportSaving.setSelected(true);
         chkMonthlyReportSaving.setText("Simpanan Tetap");
 
@@ -1213,22 +1214,22 @@ public class Main extends javax.swing.JFrame {
         );
 
         btnGroupMonthlyReport.add(rbtnMonhtlyReportCurrentMonth);
-        rbtnMonhtlyReportCurrentMonth.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        rbtnMonhtlyReportCurrentMonth.setFont(new java.awt.Font("Arial", 0, 12));
         rbtnMonhtlyReportCurrentMonth.setSelected(true);
         rbtnMonhtlyReportCurrentMonth.setText("Bulan Ini");
 
         btnGroupMonthlyReport.add(rbtnMonthlyReportLastMonth);
-        rbtnMonthlyReportLastMonth.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        rbtnMonthlyReportLastMonth.setFont(new java.awt.Font("Arial", 0, 12));
         rbtnMonthlyReportLastMonth.setText("Bulan Lepas");
 
         btnGroupMonthlyReport.add(rbtnMonhtlyReportDateRange);
 
-        txtMonthlyReportDateFrom.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtMonthlyReportDateFrom.setFont(new java.awt.Font("Arial", 0, 12));
 
-        jLabel30.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel30.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel30.setText("Hingga");
 
-        txtMonthlyReportDateTo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtMonthlyReportDateTo.setFont(new java.awt.Font("Arial", 0, 12));
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
@@ -1271,7 +1272,7 @@ public class Main extends javax.swing.JFrame {
 
         jPanel23.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnMonthlyReportEnd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnMonthlyReportEnd.setFont(new java.awt.Font("Arial", 0, 14));
         btnMonthlyReportEnd.setText("Tutup");
         btnMonthlyReportEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1279,7 +1280,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnMonthlyReportPrint.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnMonthlyReportPrint.setFont(new java.awt.Font("Arial", 0, 14));
         btnMonthlyReportPrint.setText("Cetakkan");
         btnMonthlyReportPrint.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1287,7 +1288,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnMonthlyReportExport.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnMonthlyReportExport.setFont(new java.awt.Font("Arial", 0, 14));
         btnMonthlyReportExport.setText("Format Excel");
         btnMonthlyReportExport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1295,7 +1296,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnMonthlyReportGenerate.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnMonthlyReportGenerate.setFont(new java.awt.Font("Arial", 0, 14));
         btnMonthlyReportGenerate.setText("Senarai Transaksi");
         btnMonthlyReportGenerate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1308,7 +1309,7 @@ public class Main extends javax.swing.JFrame {
         jPanel23Layout.setHorizontalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(617, Short.MAX_VALUE)
                 .addComponent(btnMonthlyReportGenerate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnMonthlyReportExport, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1330,7 +1331,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tblMonthlyReportWorkers.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        tblMonthlyReportWorkers.setFont(new java.awt.Font("Arial", 0, 12));
         tblMonthlyReportWorkers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1363,7 +1364,7 @@ public class Main extends javax.swing.JFrame {
         tblMonthlyReportWorkers.getColumnModel().getColumn(1).setPreferredWidth(50);
         tblMonthlyReportWorkers.getColumnModel().getColumn(2).setResizable(false);
 
-        cboxMonthlyReportAllWorkers.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cboxMonthlyReportAllWorkers.setFont(new java.awt.Font("Arial", 0, 12));
         cboxMonthlyReportAllWorkers.setText("Semua Pekerja");
         cboxMonthlyReportAllWorkers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1371,7 +1372,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jLabel34.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel34.setFont(new java.awt.Font("Arial", 1, 12));
         jLabel34.setText("Senarai Pekerja");
         jLabel34.setFocusable(false);
 
@@ -1433,10 +1434,10 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane4.addTab("Laporan Bulanan", jPanel18);
 
-        jLabel31.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel31.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel31.setText("Nama Pekerja");
 
-        txtReportWorkerCode.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtReportWorkerCode.setFont(new java.awt.Font("Arial", 0, 12));
         txtReportWorkerCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtReportWorkerCodeActionPerformed(evt);
@@ -1444,31 +1445,31 @@ public class Main extends javax.swing.JFrame {
         });
 
         txtReportWorkerName.setEditable(false);
-        txtReportWorkerName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtReportWorkerName.setFont(new java.awt.Font("Arial", 0, 12));
         txtReportWorkerName.setFocusable(false);
 
-        jLabel32.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel32.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel32.setText("Hingga");
 
-        jLabel33.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel33.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel33.setText("Tempoh Tarikh");
 
         btnGroupWorkerReportType.add(rbtnWorkerMonthlyIncome);
-        rbtnWorkerMonthlyIncome.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        rbtnWorkerMonthlyIncome.setFont(new java.awt.Font("Arial", 0, 12));
         rbtnWorkerMonthlyIncome.setSelected(true);
         rbtnWorkerMonthlyIncome.setText("Ringkasan Pendapatan Bulanan");
 
         btnGroupWorkerReportType.add(rbtnWorkerSaving);
-        rbtnWorkerSaving.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        rbtnWorkerSaving.setFont(new java.awt.Font("Arial", 0, 12));
         rbtnWorkerSaving.setText("Ringkasan Simpanan Tetap");
 
         btnGroupWorkerReportType.add(rbtnWorkerReportFull);
-        rbtnWorkerReportFull.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        rbtnWorkerReportFull.setFont(new java.awt.Font("Arial", 0, 12));
         rbtnWorkerReportFull.setText("Akaun Lengkap Pekerja");
 
         jPanel25.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnReportWorkerEnd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnReportWorkerEnd.setFont(new java.awt.Font("Arial", 0, 14));
         btnReportWorkerEnd.setText("Tutup");
         btnReportWorkerEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1476,7 +1477,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnReportWorkerPrint.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnReportWorkerPrint.setFont(new java.awt.Font("Arial", 0, 14));
         btnReportWorkerPrint.setText("Cetakkan");
         btnReportWorkerPrint.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1484,7 +1485,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnReportWorkerExport.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnReportWorkerExport.setFont(new java.awt.Font("Arial", 0, 14));
         btnReportWorkerExport.setText("Format Excel");
         btnReportWorkerExport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1492,7 +1493,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnReportWorkerGenerate.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnReportWorkerGenerate.setFont(new java.awt.Font("Arial", 0, 14));
         btnReportWorkerGenerate.setText("Senarai Transaksi");
         btnReportWorkerGenerate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1505,7 +1506,7 @@ public class Main extends javax.swing.JFrame {
         jPanel25Layout.setHorizontalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel25Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(617, Short.MAX_VALUE)
                 .addComponent(btnReportWorkerGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnReportWorkerExport)
@@ -1527,9 +1528,9 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        txtReportWorkerMonth.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtReportWorkerMonth.setFont(new java.awt.Font("Arial", 0, 12));
 
-        txtReportWorkerMonthTo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtReportWorkerMonthTo.setFont(new java.awt.Font("Arial", 0, 12));
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
@@ -1546,9 +1547,9 @@ public class Main extends javax.swing.JFrame {
                         .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel19Layout.createSequentialGroup()
                                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(rbtnWorkerMonthlyIncome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(rbtnWorkerSaving, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(rbtnWorkerReportFull, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(rbtnWorkerMonthlyIncome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+                                    .addComponent(rbtnWorkerSaving, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+                                    .addComponent(rbtnWorkerReportFull, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel19Layout.createSequentialGroup()
                                         .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel19Layout.createSequentialGroup()
@@ -1617,24 +1618,24 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Laporan", jPanel5);
 
-        jTabbedPane2.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        jTabbedPane2.setFont(new java.awt.Font("Arial", 0, 15));
 
-        jLabel21.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel21.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel21.setText("Nama Pekerja");
 
-        jLabel23.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel23.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel23.setText("Tarikh Daftar");
 
-        jLabel24.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel24.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel24.setText("Tarikh Pulang");
 
-        jLabel25.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel25.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel25.setText("Baki Simpanan Kini");
 
-        jLabel26.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel26.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel26.setText("Status");
 
-        txtProfileWorkerID.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtProfileWorkerID.setFont(new java.awt.Font("Arial", 0, 12));
         txtProfileWorkerID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtProfileWorkerIDActionPerformed(evt);
@@ -1642,44 +1643,44 @@ public class Main extends javax.swing.JFrame {
         });
 
         txtProfileWorkerName.setEditable(false);
-        txtProfileWorkerName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtProfileWorkerName.setFont(new java.awt.Font("Arial", 0, 12));
         txtProfileWorkerName.setFocusable(false);
 
         txtProfileWorkerRegisterDay.setEditable(false);
-        txtProfileWorkerRegisterDay.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtProfileWorkerRegisterDay.setFont(new java.awt.Font("Arial", 0, 12));
         txtProfileWorkerRegisterDay.setFocusable(false);
 
         txtProfileWorkerReturnDay.setEditable(false);
-        txtProfileWorkerReturnDay.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtProfileWorkerReturnDay.setFont(new java.awt.Font("Arial", 0, 12));
         txtProfileWorkerReturnDay.setFocusable(false);
 
         txtProfileWorkerRegisterMonth.setEditable(false);
-        txtProfileWorkerRegisterMonth.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtProfileWorkerRegisterMonth.setFont(new java.awt.Font("Arial", 0, 12));
         txtProfileWorkerRegisterMonth.setFocusable(false);
 
         txtProfileWorkerReturnMonth.setEditable(false);
-        txtProfileWorkerReturnMonth.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtProfileWorkerReturnMonth.setFont(new java.awt.Font("Arial", 0, 12));
         txtProfileWorkerReturnMonth.setFocusable(false);
 
         txtProfileWorkerRegisterYear.setEditable(false);
-        txtProfileWorkerRegisterYear.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtProfileWorkerRegisterYear.setFont(new java.awt.Font("Arial", 0, 12));
         txtProfileWorkerRegisterYear.setFocusable(false);
 
         txtProfileWorkerReturnYear.setEditable(false);
-        txtProfileWorkerReturnYear.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtProfileWorkerReturnYear.setFont(new java.awt.Font("Arial", 0, 12));
         txtProfileWorkerReturnYear.setFocusable(false);
 
         txtProfileWorkerCurrentSaving.setEditable(false);
-        txtProfileWorkerCurrentSaving.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtProfileWorkerCurrentSaving.setFont(new java.awt.Font("Arial", 0, 12));
         txtProfileWorkerCurrentSaving.setFocusable(false);
 
         txtProfileWorkerStatus.setEditable(false);
-        txtProfileWorkerStatus.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtProfileWorkerStatus.setFont(new java.awt.Font("Arial", 0, 12));
         txtProfileWorkerStatus.setFocusable(false);
 
         jPanel15.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnProfileWorkerEnd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnProfileWorkerEnd.setFont(new java.awt.Font("Arial", 0, 14));
         btnProfileWorkerEnd.setText("Tutup");
         btnProfileWorkerEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1687,10 +1688,10 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnProfileWorkerDelete.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnProfileWorkerDelete.setFont(new java.awt.Font("Arial", 0, 14));
         btnProfileWorkerDelete.setText("Batal Rekod");
 
-        btnProfileWorkerEdit.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnProfileWorkerEdit.setFont(new java.awt.Font("Arial", 0, 14));
         btnProfileWorkerEdit.setText("Ubah Rekod");
         btnProfileWorkerEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1698,7 +1699,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnProfileWorkerNew.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnProfileWorkerNew.setFont(new java.awt.Font("Arial", 0, 14));
         btnProfileWorkerNew.setText("Pekerja Baru");
         btnProfileWorkerNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1711,7 +1712,7 @@ public class Main extends javax.swing.JFrame {
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(638, Short.MAX_VALUE)
                 .addComponent(btnProfileWorkerNew)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnProfileWorkerEdit)
@@ -1779,7 +1780,7 @@ public class Main extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtProfileWorkerReturnYear, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(txtProfileWorkerCurrentSaving))
-                                .addGap(0, 697, Short.MAX_VALUE)))
+                                .addGap(0, 231, Short.MAX_VALUE)))
                         .addGap(86, 86, 86)))
                 .addContainerGap())
         );
@@ -1820,7 +1821,7 @@ public class Main extends javax.swing.JFrame {
 
         jPanel16.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnProfileClientEnd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnProfileClientEnd.setFont(new java.awt.Font("Arial", 0, 14));
         btnProfileClientEnd.setText("Tutup");
         btnProfileClientEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1828,10 +1829,10 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnProfileClientDelete.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnProfileClientDelete.setFont(new java.awt.Font("Arial", 0, 14));
         btnProfileClientDelete.setText("Batal Rekod");
 
-        btnProfileClientEdit.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnProfileClientEdit.setFont(new java.awt.Font("Arial", 0, 14));
         btnProfileClientEdit.setText("Ubah Rekod");
         btnProfileClientEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1839,7 +1840,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnProfileClientNew.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnProfileClientNew.setFont(new java.awt.Font("Arial", 0, 14));
         btnProfileClientNew.setText("Pelanggan Baru");
         btnProfileClientNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1852,7 +1853,7 @@ public class Main extends javax.swing.JFrame {
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(617, Short.MAX_VALUE)
                 .addComponent(btnProfileClientNew)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnProfileClientEdit)
@@ -1874,7 +1875,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel27.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel27.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel27.setText("Nama Pelanggan");
 
         txtProfileClientID.addActionListener(new java.awt.event.ActionListener() {
@@ -1889,7 +1890,7 @@ public class Main extends javax.swing.JFrame {
         txtProfileClientStatus.setEditable(false);
         txtProfileClientStatus.setFocusable(false);
 
-        jLabel28.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel28.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel28.setText("Status");
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
@@ -1947,24 +1948,24 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Profil", jPanel6);
 
-        jLabel35.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel35.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel35.setText("Kata Laluan Baru");
 
-        txtPassword.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtPassword.setFont(new java.awt.Font("Arial", 0, 12));
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPasswordActionPerformed(evt);
             }
         });
 
-        txtPasswordConfirm.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtPasswordConfirm.setFont(new java.awt.Font("Arial", 0, 12));
         txtPasswordConfirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPasswordConfirmActionPerformed(evt);
             }
         });
 
-        btnPasswordChange.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnPasswordChange.setFont(new java.awt.Font("Arial", 0, 14));
         btnPasswordChange.setText("Ubah");
         btnPasswordChange.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2971,10 +2972,21 @@ public class Main extends javax.swing.JFrame {
                 savingTableModel.addRow(objects);
                 counter ++;
             }
+            results.close();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
 
+        query = "SELECT SUM(amount) as current_saving FROM workerRecord WHERE type IN (2,3) AND worker_id = " + selected.getId();
+
+        ResultSet result = Database.instance().execute(query);
+
+        try {
+            result.next();
+            txtSavingCurrentSaving.setText(Common.currency(result.getDouble("current_saving")));
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
     }//GEN-LAST:event_getSavingDetails
 
     private void txtReportWorkerCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReportWorkerCodeActionPerformed
