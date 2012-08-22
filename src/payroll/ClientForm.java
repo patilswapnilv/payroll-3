@@ -75,15 +75,15 @@ public class ClientForm extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnEnd.setFont(new java.awt.Font("Arial", 0, 14));
-        btnEnd.setText("Tamat");
+        btnEnd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnEnd.setText("Tutup");
         btnEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEndActionPerformed(evt);
             }
         });
 
-        btnSave.setFont(new java.awt.Font("Arial", 0, 14));
+        btnSave.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnSave.setText("Rekodkan");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,21 +112,21 @@ public class ClientForm extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel1.setText("Kod dan Nama Pekerja");
 
-        txtClientID.setFont(new java.awt.Font("Arial", 0, 12));
+        txtClientID.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        txtClientName.setFont(new java.awt.Font("Arial", 0, 12));
+        txtClientName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        rbtnInactive.setFont(new java.awt.Font("Arial", 0, 12));
+        rbtnInactive.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         rbtnInactive.setText("Tiada Aktif");
 
         rbtnActive.setSelected(true);
-        rbtnActive.setFont(new java.awt.Font("Arial", 0, 12));
+        rbtnActive.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         rbtnActive.setText("Aktif");
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel4.setText("Status");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -192,10 +192,10 @@ public class ClientForm extends javax.swing.JDialog {
         if (success) {
             Main main = (Main) this.getParent();
             main.load_customers();
-            JOptionPane.showMessageDialog(null, "Rekod Pelanggan baru ditambah", "Berjaya!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Rekod Pelanggan baru disimpan", "Berjaya!", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(null, "Rekod Pelanggan tidak dapat ditambah", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Rekod Pelanggan tidak dapat disimpan", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 

@@ -82,48 +82,48 @@ public class SavingForm extends javax.swing.JDialog {
         setTitle("Simpanan Tetap");
         setFocusable(false);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel1.setText("Pekerja");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel2.setText("Tarikh");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel3.setText("Amaun Simpanan [ + ]");
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel4.setText("Keterangan");
 
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel5.setText("Amaun Bayaran [ - ]");
 
-        txtWorkerCode.setFont(new java.awt.Font("Arial", 0, 12));
+        txtWorkerCode.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtWorkerCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtWorkerCodeActionPerformed(evt);
             }
         });
 
-        txtWorkerName.setFont(new java.awt.Font("Arial", 0, 12));
+        txtWorkerName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         txtSavingDate.setDateFormatString("dd/MM/yyyy");
-        txtSavingDate.setFont(new java.awt.Font("Arial", 0, 12));
+        txtSavingDate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        txtSavingAmount.setFont(new java.awt.Font("Arial", 0, 12));
+        txtSavingAmount.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        txtPayAmount.setFont(new java.awt.Font("Arial", 0, 12));
+        txtPayAmount.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnEnd.setFont(new java.awt.Font("Arial", 0, 14));
-        btnEnd.setText("Tamat");
+        btnEnd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnEnd.setText("Tutup");
         btnEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEndActionPerformed(evt);
             }
         });
 
-        btnSave.setFont(new java.awt.Font("Arial", 0, 14));
+        btnSave.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnSave.setText("Rekodkan");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,7 +153,7 @@ public class SavingForm extends javax.swing.JDialog {
         );
 
         txtDescription.setColumns(20);
-        txtDescription.setFont(new java.awt.Font("Arial", 0, 12));
+        txtDescription.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtDescription.setRows(5);
         jScrollPane1.setViewportView(txtDescription);
 
@@ -209,12 +209,12 @@ public class SavingForm extends javax.swing.JDialog {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-438)/2, (screenSize.height-325)/2, 438, 325);
+        setBounds((screenSize.width-438)/2, (screenSize.height-334)/2, 438, 334);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndActionPerformed

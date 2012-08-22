@@ -85,44 +85,44 @@ public class WorkerForm extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cipta Rekod Pekerja Baru");
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel1.setText("Kod dan Nama Pekerja");
 
-        txtWorkerID.setFont(new java.awt.Font("Arial", 0, 12));
+        txtWorkerID.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        txtWorkerName.setFont(new java.awt.Font("Arial", 0, 12));
+        txtWorkerName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel2.setText("Tarikh Bermula");
 
-        txtRegisterDate.setFont(new java.awt.Font("Arial", 0, 12));
+        txtRegisterDate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel3.setText("Tarikh Tamat");
 
-        txtReturnDate.setFont(new java.awt.Font("Arial", 0, 12));
+        txtReturnDate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel4.setText("Status");
 
-        rbtnActive.setFont(new java.awt.Font("Arial", 0, 12));
+        rbtnActive.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         rbtnActive.setSelected(true);
         rbtnActive.setText("Aktif");
 
-        rbtnInactive.setFont(new java.awt.Font("Arial", 0, 12));
+        rbtnInactive.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         rbtnInactive.setText("Tidak Aktif");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnEnd.setFont(new java.awt.Font("Arial", 0, 14));
-        btnEnd.setText("Tamat");
+        btnEnd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnEnd.setText("Tutup");
         btnEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEndActionPerformed(evt);
             }
         });
 
-        btnSave.setFont(new java.awt.Font("Arial", 0, 14));
+        btnSave.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnSave.setText("Rekodkan");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,7 +137,7 @@ public class WorkerForm extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -232,10 +232,10 @@ public class WorkerForm extends javax.swing.JDialog {
         if (success) {
             Main main = (Main) this.getParent();
             main.load_workers();
-            JOptionPane.showMessageDialog(null, "Rekod Pekerja baru ditambah", "Berjaya!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Rekod Pekerja baru disimpan", "Berjaya!", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(null, "Rekod Pekerja tidak dapat ditambah", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Rekod Pekerja tidak dapat disimpan", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
