@@ -90,8 +90,8 @@ public class Worker {
         try {
             ps.setString(1, this.getCode());
             ps.setString(2, this.getName());
-            ps.setDate(3, this.getSQLRegisterDate());
-            ps.setDate(4, this.getSQLReturnDate());
+            ps.setString(3, Common.renderSQLDate(this.getRegisterDate()));
+            ps.setString(4, Common.renderSQLDate(this.getReturnDate()));
             ps.setBoolean(5, this.getStatus());
         } catch (SQLException ex) {
             Logger.getLogger(ex.getMessage()).log(Level.WARNING, null, ex);
@@ -99,7 +99,7 @@ public class Worker {
         }
 
         if ( ! this._loaded) {
-            this.id = Application.db.insert(ps);
+            this.id = Database.instance().insert(ps);
             return this.id != 0 ? true : false;
         } else {
             return Application.db.update(ps);

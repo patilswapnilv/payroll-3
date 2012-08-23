@@ -28,7 +28,8 @@ public class Application {
                     db = Database.instance();
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-                    new Login(null, true).setVisible(true);
+                    //new Login(null, true).setVisible(true);
+                    new Main().setVisible(true);
                 } catch (Exception ex) {
                     System.err.println(ex.getMessage());
                     JOptionPane.showMessageDialog(null, "Unexpected Error occur!!", "ERROR", JOptionPane.ERROR_MESSAGE);

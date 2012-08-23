@@ -98,6 +98,8 @@ public class Main extends javax.swing.JFrame {
 
         this.load_workers();
         this.load_customers();
+
+        new Login(this, true).setVisible(true);
     }
 
     public void load_workers() {
@@ -2053,18 +2055,21 @@ public class Main extends javax.swing.JFrame {
             System.err.println(ex.getMessage());
         }
 
+        int worker_id = 0;
+
         ResultSet rs = Application.db.execute(ps);
         try {
             rs.next();
+            worker_id = rs.getInt("worker_id");
             txtProfileWorkerID.setText(rs.getString("code"));
             txtProfileWorkerName.setText(rs.getString("name"));
             Calendar register_date = Calendar.getInstance();
-            register_date.setTime((Date) rs.getTimestamp("start_date"));
+            register_date.setTime(Common.convertStringToDate(rs.getString("start_date")));
             txtProfileWorkerRegisterDay.setText("" + register_date.get(Calendar.DAY_OF_MONTH));
             txtProfileWorkerRegisterMonth.setText("" + (register_date.get(Calendar.MONTH) + 1));
             txtProfileWorkerRegisterYear.setText("" + register_date.get(Calendar.YEAR));
             Calendar return_date = Calendar.getInstance();
-            return_date.setTime((Date) rs.getTimestamp(("end_date")));
+            return_date.setTime(Common.convertStringToDate(rs.getString("end_date")));
             txtProfileWorkerReturnDay.setText("" + return_date.get(Calendar.DAY_OF_MONTH));
             txtProfileWorkerReturnMonth.setText("" + (return_date.get(Calendar.MONTH) + 1));
             txtProfileWorkerReturnYear.setText("" + return_date.get(Calendar.YEAR));
@@ -2072,6 +2077,8 @@ public class Main extends javax.swing.JFrame {
             txtProfileWorkerStatus.setText(status);
             this._current_worker_id = rs.getInt("worker_id");
             rs.close();
+
+            txtProfileWorkerCurrentSaving.setText(Common.currency(this.getWorkerCurrentSaving(worker_id)));
         } catch (SQLException ex) {
             this._reset_worker_form();
             JOptionPane.showMessageDialog(null, "Tiada Rekod Pekerja ini.", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
@@ -2977,17 +2984,23 @@ public class Main extends javax.swing.JFrame {
             System.err.println(ex.getMessage());
         }
 
-        query = "SELECT SUM(amount) as current_saving FROM workerRecord WHERE type IN (2,3) AND worker_id = " + selected.getId();
+        txtSavingCurrentSaving.setText(Common.currency(this.getWorkerCurrentSaving(selected.getId())));
+    }//GEN-LAST:event_getSavingDetails
+
+    private double getWorkerCurrentSaving(int worker_id) {
+        String query = "SELECT SUM(amount) as current_saving FROM workerRecord WHERE type IN (2,3) AND worker_id = " + worker_id;
 
         ResultSet result = Database.instance().execute(query);
 
         try {
             result.next();
-            txtSavingCurrentSaving.setText(Common.currency(result.getDouble("current_saving")));
+            return result.getDouble("current_saving");
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-    }//GEN-LAST:event_getSavingDetails
+
+        return 0.0;
+    }
 
     private void txtReportWorkerCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReportWorkerCodeActionPerformed
         Worker selected = null;
@@ -3048,7 +3061,30 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReportWorkerPrintActionPerformed
 
     private void btnReportWorkerExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportWorkerExportActionPerformed
-        // TODO add your handling code here:
+        int monthFrom = txtReportWorkerMonth.getMonth() + 1;
+        int monthTo = txtReportWorkerMonthTo.getMonth() + 1;
+        int yearFrom = txtReportWorkerYear.getYear();
+        int yearTo = txtReportWorkerYearTo.getYear();
+
+        if (_selected_report_worker == null) {
+            JOptionPane.showMessageDialog(null, "Silih Pilih Pekerja", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (monthTo < monthFrom && yearTo <= yearFrom) {
+            JOptionPane.showMessageDialog(null, "Terdapat Kesilapan Tempoh Tarikh", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int type = WorkerReportFrame.FULL;
+        ArrayList<WorkerReport> reports = getWorkerReports();
+
+        if (rbtnWorkerSaving.isSelected()) {
+            type = WorkerReportFrame.SAVING;
+        } else if (rbtnWorkerMonthlyIncome.isSelected()) {
+            type = WorkerReportFrame.INCOME;
+        }
+
+        WorkerReportFrame frame = new WorkerReportFrame(type, _selected_report_worker, reports);
+        frame.setVisible(true);
     }//GEN-LAST:event_btnReportWorkerExportActionPerformed
 
     private void btnReportWorkerGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportWorkerGenerateActionPerformed

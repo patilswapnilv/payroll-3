@@ -147,7 +147,7 @@ public class Login extends javax.swing.JDialog {
 
             if (rs.getString("access_key").equals(password)) {
                 Application.id = rs.getInt("id");
-                new Main().setVisible(true);
+                rs.close();
                 this.dispose();
                 return;
             }
