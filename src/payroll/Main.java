@@ -3074,6 +3074,27 @@ public class Main extends javax.swing.JFrame {
             return;
         }
 
+        JFileChooser dialog = new JFileChooser();
+        dialog.setFileFilter(new ExtensionFileFilter("Microsoft Excel", "xls"));
+
+        if (dialog.showSaveDialog(this) != JFileChooser.APPROVE_OPTION) {
+            return;
+        }
+
+        File file = dialog.getSelectedFile();
+
+        String filename = file.getPath();
+
+        if ( ! filename.endsWith(".xls")) {
+            filename += ".xls";
+        }
+
+        if (new File(filename).exists()) {
+            if (JOptionPane.showConfirmDialog(null, "Overwrite the existing file?", "", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) != JOptionPane.YES_OPTION) {
+                return;
+            }
+        }
+
         int type = WorkerReportFrame.FULL;
         ArrayList<WorkerReport> reports = getWorkerReports();
 
@@ -3082,9 +3103,119 @@ public class Main extends javax.swing.JFrame {
         } else if (rbtnWorkerMonthlyIncome.isSelected()) {
             type = WorkerReportFrame.INCOME;
         }
+        
+        int index = 0;
+        int pos = 0;
+        
+        Workbook workbook = new HSSFWorkbook();
+        Sheet sheet = (Sheet) workbook.createSheet("Laporan");
 
-        WorkerReportFrame frame = new WorkerReportFrame(type, _selected_report_worker, reports);
-        frame.setVisible(true);
+        Row header = sheet.createRow(pos);
+
+        Cell cell = header.createCell(index++);
+        cell.setCellValue("Tempoh");
+
+        if (type == WorkerReportFrame.INCOME || type == WorkerReportFrame.FULL) {
+            cell = header.createCell(index++);
+            cell.setCellValue("Gaji");
+            cell = header.createCell(index++);
+            cell.setCellValue("Pinjaman");
+            cell = header.createCell(index++);
+            cell.setCellValue("Baki");
+        }
+
+        if (type == WorkerReportFrame.SAVING || type == WorkerReportFrame.FULL) {
+            cell = header.createCell(index++);
+            cell.setCellValue("Simpanan");
+            cell = header.createCell(index++);
+            cell.setCellValue("Bayaran");
+            cell = header.createCell(index++);
+            cell.setCellValue("Baki");
+        }
+
+
+
+        pos ++;
+        double totalSalary = 0.0, totalLoan = 0.0, totalBalance = 0.0, totalSaving = 0.0, totalPayment = 0.0, totalSavingBalance = 0.0;
+        
+        for (WorkerReport report : reports) {
+            Row row = sheet.createRow(pos++);
+            
+            index = 0;
+            totalSalary += report.getSalary();
+            totalLoan += report.getLoan();
+            totalBalance += report.getBalance();
+            totalSalary += report.getSaving();
+            totalPayment += report.getPayment();
+            totalSavingBalance += report.getSavingBalance();
+
+            cell = row.createCell(index++);
+            cell.setCellValue(report.getMonth() + "/" + report.getYear());
+
+            if (type == WorkerReportFrame.INCOME || type == WorkerReportFrame.FULL) {
+                cell = row.createCell(index++);
+                cell.setCellValue(Common.currency(report.getSalary()));
+                cell = row.createCell(index++);
+                cell.setCellValue(Common.currency(report.getLoan()));
+                cell = row.createCell(index++);
+                cell.setCellValue(Common.currency(report.getBalance()));
+            }
+
+            if (type == WorkerReportFrame.SAVING || type == WorkerReportFrame.FULL) {
+                cell = row.createCell(index++);
+                cell.setCellValue(Common.currency(report.getSaving()));
+                cell = row.createCell(index++);
+                cell.setCellValue(Common.currency(report.getPayment()));
+                cell = row.createCell(index++);
+                cell.setCellValue(Common.currency(report.getSavingBalance()));
+            }
+        }
+
+        index = 0;
+        Row footer = sheet.createRow(pos++);
+        cell = footer.createCell(index ++);
+        cell.setCellValue("Jumlah");
+
+        if (type == WorkerReportFrame.INCOME || type == WorkerReportFrame.FULL) {
+            cell = footer.createCell(index++);
+            cell.setCellValue(Common.currency(totalSalary));
+            cell = footer.createCell(index++);
+            cell.setCellValue(Common.currency(totalLoan));
+            cell = footer.createCell(index++);
+            cell.setCellValue(Common.currency(totalBalance));
+        }
+
+        if (type == WorkerReportFrame.SAVING || type == WorkerReportFrame.FULL) {
+            cell = footer.createCell(index++);
+            cell.setCellValue(Common.currency(totalSaving));
+            cell = footer.createCell(index++);
+            cell.setCellValue(Common.currency(totalPayment));
+            cell = footer.createCell(index++);
+            cell.setCellValue(Common.currency(totalSavingBalance));
+        }
+
+
+        FileOutputStream out = null;
+
+        try {
+            out = new FileOutputStream(filename);
+            workbook.write(out);
+            out.close();
+            JOptionPane.showMessageDialog(null, "Report generated to " + filename, "", JOptionPane.INFORMATION_MESSAGE);
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "The process cannot access the file because it is being used by another process", "Error", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                out.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+
     }//GEN-LAST:event_btnReportWorkerExportActionPerformed
 
     private void btnReportWorkerGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportWorkerGenerateActionPerformed
