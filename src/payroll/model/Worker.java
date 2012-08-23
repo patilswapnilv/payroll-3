@@ -58,8 +58,8 @@ public class Worker {
         try {
             this.code = rs.getString("code");
             this.name = rs.getString("name");
-            this.registerDate = rs.getDate("start_date");
-            this.returnDate = rs.getDate("end_date");
+            this.registerDate = Common.convertStringToDate(rs.getString("start_date"));
+            this.returnDate = Common.convertStringToDate(rs.getString("end_date"));
             this.status = rs.getBoolean("is_active");
             this.id = id;
             this._loaded = true;
