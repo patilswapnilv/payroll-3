@@ -13,18 +13,8 @@ package payroll;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.*;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import payroll.libraries.Common;
-import payroll.libraries.Database;
-import payroll.model.Customer;
-import payroll.model.Transaction;
 import payroll.model.Worker;
 import payroll.model.WorkerRecord;
 
@@ -34,23 +24,27 @@ import payroll.model.WorkerRecord;
  */
 public class SavingForm extends javax.swing.JDialog {
 
-    private Worker worker;
+    private ArrayList<Worker> workers = new ArrayList<Worker>();
     private WorkerRecord workerRecord;
-    int id = 0;
-    private int _current_worker_id = 0;
 
     /** Creates new form SavingForm */
-    public SavingForm(java.awt.Frame parent, boolean modal) {
+    public SavingForm(Main parent, boolean modal) {
         super(parent, modal);
         initComponents();
         workerRecord = new WorkerRecord();
+
+        workers = parent.workers;
+
+        this.setup();
     }
 
-    public SavingForm(java.awt.Frame parent, boolean modal, int id) {
-        super(parent, modal);
-        initComponents();
-        workerRecord = new WorkerRecord();
-        this.id = id;
+    private void setup() {
+        cbxSalaryWorkers.removeAllItems();
+        cbxSalaryWorkers.addItem(new String());
+
+        for (Worker worker : workers) {
+            cbxSalaryWorkers.addItem(new String(worker.getCode() + " - " + worker.getName()));
+        }
     }
 
     /** This method is called from within the constructor to
@@ -67,8 +61,6 @@ public class SavingForm extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtWorkerCode = new javax.swing.JTextField();
-        txtWorkerName = new javax.swing.JTextField();
         txtSavingDate = new com.toedter.calendar.JDateChooser();
         txtSavingAmount = new javax.swing.JTextField();
         txtPayAmount = new javax.swing.JTextField();
@@ -77,6 +69,7 @@ public class SavingForm extends javax.swing.JDialog {
         btnSave = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescription = new javax.swing.JTextArea();
+        cbxSalaryWorkers = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Simpanan Tetap");
@@ -96,16 +89,6 @@ public class SavingForm extends javax.swing.JDialog {
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel5.setText("Amaun Bayaran [ - ]");
-
-        txtWorkerCode.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        txtWorkerCode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtWorkerCodeActionPerformed(evt);
-            }
-        });
-
-        txtWorkerName.setEditable(false);
-        txtWorkerName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         txtSavingDate.setDateFormatString("dd/MM/yyyy");
         txtSavingDate.setFont(new java.awt.Font("Arial", 0, 12));
@@ -175,14 +158,12 @@ public class SavingForm extends javax.swing.JDialog {
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtWorkerCode, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtWorkerName, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtSavingAmount)
-                            .addComponent(txtSavingDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtPayAmount)
-                            .addComponent(jScrollPane1))))
+                            .addComponent(cbxSalaryWorkers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtSavingAmount)
+                                .addComponent(txtSavingDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtPayAmount)
+                                .addComponent(jScrollPane1)))))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -191,8 +172,7 @@ public class SavingForm extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtWorkerCode, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtWorkerName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxSalaryWorkers, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -222,37 +202,14 @@ public class SavingForm extends javax.swing.JDialog {
         this.dispose();
 }//GEN-LAST:event_btnEndActionPerformed
 
-    private void txtWorkerCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtWorkerCodeActionPerformed
-        String worker_code = txtWorkerCode.getText();
-
-        String query = "SELECT * FROM worker WHERE code LIKE ? AND is_active = 1 LIMIT 1";
-
-        PreparedStatement ps = Application.db.createPreparedStatement(query);
-        try {
-            ps.setString(1, worker_code + "%");
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());            
-        }
-
-        ResultSet rs = Application.db.execute(ps);
-        try {
-            rs.next();
-            txtWorkerCode.setText(rs.getString("code"));
-            txtWorkerName.setText(rs.getString("name"));
-            this._current_worker_id = rs.getInt("worker_id");
-            rs.close();
-        } catch (SQLException ex) {
-            this._reset_worker_form();
-            JOptionPane.showMessageDialog(null, "Tiada Rekod Pekerja ini", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_txtWorkerCodeActionPerformed
-
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         if ( ! this._check()) {
             return;
         }
 
-        workerRecord.setWorkerID(_current_worker_id);
+        Worker current = workers.get(cbxSalaryWorkers.getSelectedIndex() - 1);
+
+        workerRecord.setWorkerID(current.getId());
         workerRecord.setDate(new java.sql.Date(txtSavingDate.getDate().getTime()));
         workerRecord.setDescription(txtDescription.getText());
         if (!txtSavingAmount.getText().isEmpty()) {
@@ -280,12 +237,10 @@ public class SavingForm extends javax.swing.JDialog {
     private boolean _check()
     {
         boolean valid = false;
-        boolean valid_code = false;
         String message = "";
-        String query = "SELECT COUNT(worker_id) FROM worker WHERE code = ?";
 
-        if (txtWorkerCode.getText().isEmpty()) {
-            message = "Sila lengkapkan Kod Pekerja";
+        if (cbxSalaryWorkers.getSelectedIndex() == 0) {
+            message = "Sila Pilih Pekerja";
         } else if (txtSavingDate.getDate() == null) {
             message = "Sila lengkapkan Tarikh";
         } else if ((txtSavingAmount.getText().isEmpty()) && (txtPayAmount.getText().isEmpty())) {
@@ -323,31 +278,10 @@ public class SavingForm extends javax.swing.JDialog {
     }
 
 
-    private void _reset_worker_form() {
-        txtWorkerName.setText("");
-    }
-
-
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                SavingForm dialog = new SavingForm(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnd;
     private javax.swing.JButton btnSave;
+    private javax.swing.JComboBox cbxSalaryWorkers;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -359,8 +293,6 @@ public class SavingForm extends javax.swing.JDialog {
     private javax.swing.JTextField txtPayAmount;
     private javax.swing.JTextField txtSavingAmount;
     private com.toedter.calendar.JDateChooser txtSavingDate;
-    private javax.swing.JTextField txtWorkerCode;
-    private javax.swing.JTextField txtWorkerName;
     // End of variables declaration//GEN-END:variables
 
 }

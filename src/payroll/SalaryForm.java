@@ -14,6 +14,7 @@ package payroll;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import payroll.model.Worker;
 import payroll.model.WorkerRecord;
@@ -21,23 +22,26 @@ import payroll.model.WorkerRecord;
 /*  @author Edward  */
 public class SalaryForm extends javax.swing.JDialog {
 
-    private Worker worker;
+    private ArrayList<Worker> workers = new ArrayList<Worker>();
     private WorkerRecord workerRecord;
-    int id = 0;
-    private int _current_worker_id = 0;
 
     /** Creates new form SalaryForm */
-    public SalaryForm(java.awt.Frame parent, boolean modal) {
+    public SalaryForm(Main parent, boolean modal) {
         super(parent, modal);
         initComponents();
         workerRecord = new WorkerRecord();
+        this.workers = parent.workers;
+
+        this.setup();
     }
 
-    public SalaryForm(java.awt.Frame parent, boolean modal, int id) {
-        super(parent, modal);
-        initComponents();
-        workerRecord = new WorkerRecord();
-        this.id = id;
+    private void setup() {
+        cbxSalaryWorkers.removeAllItems();
+        cbxSalaryWorkers.addItem(new String());
+
+        for (Worker worker : workers) {
+            cbxSalaryWorkers.addItem(new String(worker.getCode() + " - " + worker.getName()));
+        }
     }
 
     /** This method is called from within the constructor to
@@ -55,17 +59,16 @@ public class SalaryForm extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtWorkerCode = new javax.swing.JTextField();
-        txtWorkerName = new javax.swing.JTextField();
         txtDate = new com.toedter.calendar.JDateChooser();
         txtTotalPay = new javax.swing.JTextField();
+        cbxSalaryWorkers = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Bayaran Gaji");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnEnd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnEnd.setFont(new java.awt.Font("Arial", 0, 14));
         btnEnd.setText("Tutup");
         btnEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,7 +76,7 @@ public class SalaryForm extends javax.swing.JDialog {
             }
         });
 
-        btnSave.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnSave.setFont(new java.awt.Font("Arial", 0, 14));
         btnSave.setText("Rekodkan");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,27 +105,18 @@ public class SalaryForm extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel1.setText("Pekerja");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel2.setText("Tarikh");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel3.setText("Amaun Bayaran [ - ]");
-
-        txtWorkerCode.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        txtWorkerCode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtWorkerCodeActionPerformed(evt);
-            }
-        });
-
-        txtWorkerName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         txtDate.setDateFormatString("dd/MM/yyyy");
 
-        txtTotalPay.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTotalPay.setFont(new java.awt.Font("Arial", 0, 12));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,10 +133,7 @@ public class SalaryForm extends javax.swing.JDialog {
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtWorkerCode, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtWorkerName, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbxSalaryWorkers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTotalPay, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(16, Short.MAX_VALUE))
@@ -153,8 +144,7 @@ public class SalaryForm extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtWorkerCode, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtWorkerName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxSalaryWorkers, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -176,37 +166,14 @@ public class SalaryForm extends javax.swing.JDialog {
         this.dispose();
 }//GEN-LAST:event_btnEndActionPerformed
 
-    private void txtWorkerCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtWorkerCodeActionPerformed
-        String worker_code = txtWorkerCode.getText();
-
-        String query = "SELECT * FROM worker WHERE code LIKE ? AND is_active = 1 LIMIT 1";
-
-        PreparedStatement ps = Application.db.createPreparedStatement(query);
-        try {
-            ps.setString(1, worker_code + "%");
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());           
-        }
-
-        ResultSet rs = Application.db.execute(ps);
-        try {
-            rs.next();
-            txtWorkerCode.setText(rs.getString("code"));
-            txtWorkerName.setText(rs.getString("name"));
-            this._current_worker_id = rs.getInt("worker_id");
-            rs.close();
-        } catch (SQLException ex) {
-            this._reset_worker_form();
-            JOptionPane.showMessageDialog(null, "Tiada Rekod Pekerja ini", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_txtWorkerCodeActionPerformed
-
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         if ( ! this._check()) {
             return;
         }
 
-        workerRecord.setWorkerID(_current_worker_id);
+        Worker current = workers.get(cbxSalaryWorkers.getSelectedIndex() - 1);
+
+        workerRecord.setWorkerID(current.getId());
         workerRecord.setDate(new java.sql.Date(txtDate.getDate().getTime()));
         workerRecord.setDescription("Bayaran Gaji");
         if (!txtTotalPay.getText().isEmpty()) {
@@ -231,8 +198,8 @@ public class SalaryForm extends javax.swing.JDialog {
         String message = "";
         String query = "SELECT COUNT(worker_id) FROM worker WHERE code = ?";
 
-        if (txtWorkerCode.getText().isEmpty()) {
-            message = "Sila lengkapkan Kod Pekerja";
+        if (cbxSalaryWorkers.getSelectedIndex() == 0) {
+            message = "Sila pilih Pekerja";
         } else if (txtDate.getDate() == null) {
             message = "Sila lengkapkan Tarikh";
         } else if (txtTotalPay.getText().isEmpty()) {
@@ -257,38 +224,16 @@ public class SalaryForm extends javax.swing.JDialog {
         return valid;
     }
 
-    private void _reset_worker_form() {
-        txtWorkerName.setText("");
-    }
-
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                SalaryForm dialog = new SalaryForm(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnd;
     private javax.swing.JButton btnSave;
+    private javax.swing.JComboBox cbxSalaryWorkers;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private com.toedter.calendar.JDateChooser txtDate;
     private javax.swing.JTextField txtTotalPay;
-    private javax.swing.JTextField txtWorkerCode;
-    private javax.swing.JTextField txtWorkerName;
     // End of variables declaration//GEN-END:variables
 
 }
