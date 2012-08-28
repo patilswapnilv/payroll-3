@@ -2357,57 +2357,60 @@ public class Main extends javax.swing.JFrame {
         // </editor-fold>
 
         rowIndex ++;
-        for (ReportSalary salary : salaries) {
-            index = 0;
-            Row row = sheet.createRow(rowIndex);
-            Cell cell = null;
-            
-            if (chkMonthlyReportDate.isSelected()) {
-                cell = row.createCell(index++);
-                cell.setCellValue(Common.renderDisplayDate(salary.getDate()));
+
+        if (chkMonthlyReportSalaryPayment.isSelected()) {
+            for (ReportSalary salary : salaries) {
+                index = 0;
+                Row row = sheet.createRow(rowIndex);
+                Cell cell = null;
+
+                if (chkMonthlyReportDate.isSelected()) {
+                    cell = row.createCell(index++);
+                    cell.setCellValue(Common.renderDisplayDate(salary.getDate()));
+                }
+
+                sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, index, columns.size() - 1));
+
+                cell = row.createCell(index);
+                cell.setCellValue("Bayaran Gaji");
+
+                index = columns.size();
+
+                for (int i = 0; i < workerCount; i ++) {
+                    double salaryValue = salary.getWorkerSalary(selected.get(i).getId());
+                    cell = row.createCell(index++);
+                    sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, index - 1, index + 1));
+                    cell.setCellValue(Common.currency(Math.abs(salaryValue)));
+                    calculations.get(i).setPayment(salaryValue);
+
+                    index += 2;
+                }
+                rowIndex++;
             }
 
-            sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, index, columns.size() - 1));
+            Row salarySummaryRow = sheet.createRow(rowIndex);
 
-            cell = row.createCell(index);
-            cell.setCellValue("Bayaran Gaji");
+            index = 0;
+
+            if (chkMonthlyReportDate.isSelected()) {
+                index++;
+            }
+
+            salarySummaryRow.createCell(index).setCellValue("Baki");
 
             index = columns.size();
 
             for (int i = 0; i < workerCount; i ++) {
-                double salaryValue = salary.getWorkerSalary(selected.get(i).getId());
-                cell = row.createCell(index++);
+                ReportCalculation calculation = calculations.get(i);
+                Cell cell = salarySummaryRow.createCell(index++);
                 sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, index - 1, index + 1));
-                cell.setCellValue(Common.currency(Math.abs(salaryValue)));
-                calculations.get(i).setPayment(salaryValue);
+                cell.setCellValue(Common.currency(calculation.getTotalBalance()));
 
                 index += 2;
             }
-            rowIndex++;
+
+            rowIndex ++;
         }
-
-        Row salarySummaryRow = sheet.createRow(rowIndex);
-        
-        index = 0;
-        
-        if (chkMonthlyReportDate.isSelected()) {
-            index++;
-        }
-
-        salarySummaryRow.createCell(index).setCellValue("Baki");
-
-        index = columns.size();
-
-        for (int i = 0; i < workerCount; i ++) {
-            ReportCalculation calculation = calculations.get(i);
-            Cell cell = salarySummaryRow.createCell(index++);
-            sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, index - 1, index + 1));
-            cell.setCellValue(Common.currency(calculation.getTotalBalance()));
-
-            index += 2;
-        }
-
-        rowIndex ++;
 
         if (chkMonthlyReportSaving.isSelected()) {
             rowIndex ++;
