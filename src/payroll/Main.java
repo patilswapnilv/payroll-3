@@ -15,7 +15,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -312,6 +311,7 @@ public class Main extends javax.swing.JFrame {
         chkMonthlyReportBalance = new javax.swing.JCheckBox();
         chkMonthlyReportKiraanAsing = new javax.swing.JCheckBox();
         chkMonthlyReportSaving = new javax.swing.JCheckBox();
+        chkMonthlyReportSalaryPayment = new javax.swing.JCheckBox();
         jPanel21 = new javax.swing.JPanel();
         rbtnMonhtlyReportCurrentMonth = new javax.swing.JRadioButton();
         rbtnMonthlyReportLastMonth = new javax.swing.JRadioButton();
@@ -518,7 +518,8 @@ public class Main extends javax.swing.JFrame {
         txtTransactionPayPerPerson.setFocusable(false);
 
         txtTransactionDate.setDateFormatString("dd/MM/yyyy");
-        txtTransactionDate.setFont(new java.awt.Font("Arial", 0, 12));
+        txtTransactionDate.setDate(Calendar.getInstance().getTime());
+        txtTransactionDate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -826,7 +827,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        tblSaving.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        tblSaving.setFont(new java.awt.Font("Arial", 0, 12));
         tblSaving.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1204,24 +1205,29 @@ public class Main extends javax.swing.JFrame {
         chkMonthlyReportSaving.setSelected(true);
         chkMonthlyReportSaving.setText("Simpanan Tetap");
 
+        chkMonthlyReportSalaryPayment.setFont(new java.awt.Font("Arial", 0, 12));
+        chkMonthlyReportSalaryPayment.setSelected(true);
+        chkMonthlyReportSalaryPayment.setText("Bayaran Gaji");
+
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
+            .addGroup(jPanel20Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(chkMonthlyReportDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(chkMonthlyReportDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(chkMonthlyReportClientName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(chkMonthlyReportWeight, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(chkMonthlyReportPricePerTon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(chkMonthlyReportTotalReceived, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(chkMonthlyReportWages, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(chkMonthlyReportSalary, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(chkMonthlyReportBalance, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(chkMonthlyReportKiraanAsing, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(chkMonthlyReportSaving, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(chkMonthlyReportDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(chkMonthlyReportDate, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(chkMonthlyReportClientName, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(chkMonthlyReportWeight, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(chkMonthlyReportPricePerTon, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(chkMonthlyReportTotalReceived, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(chkMonthlyReportWages, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(chkMonthlyReportSalary, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(chkMonthlyReportBalance, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(chkMonthlyReportKiraanAsing, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(chkMonthlyReportSaving, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(chkMonthlyReportSalaryPayment, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel20Layout.setVerticalGroup(
@@ -1249,7 +1255,9 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(chkMonthlyReportKiraanAsing, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkMonthlyReportSaving, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(519, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkMonthlyReportSalaryPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(494, Short.MAX_VALUE))
         );
 
         btnGroupMonthlyReport.add(rbtnMonhtlyReportCurrentMonth);
@@ -2621,7 +2629,7 @@ public class Main extends javax.swing.JFrame {
         // </editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="render salaries report">
-        if (salaries.size() > 0) {
+        if (salaries.size() > 0 && chkMonthlyReportSalaryPayment.isSelected()) {
             int size = columns.size();
             for (ReportSalary rs : salaries) {
                 content += "<tr class=\"salary\">";
@@ -3794,6 +3802,7 @@ public class Main extends javax.swing.JFrame {
     public javax.swing.JCheckBox chkMonthlyReportKiraanAsing;
     public javax.swing.JCheckBox chkMonthlyReportPricePerTon;
     public javax.swing.JCheckBox chkMonthlyReportSalary;
+    public javax.swing.JCheckBox chkMonthlyReportSalaryPayment;
     public javax.swing.JCheckBox chkMonthlyReportSaving;
     public javax.swing.JCheckBox chkMonthlyReportTotalReceived;
     public javax.swing.JCheckBox chkMonthlyReportWages;

@@ -420,6 +420,9 @@
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="txtTransactionDate">
               <Properties>
+                <Property name="date" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="Calendar.getInstance().getTime()" type="code"/>
+                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="12" style="0"/>
                 </Property>
@@ -1420,9 +1423,9 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
+                              <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="chkMonthlyReportDescription" alignment="0" pref="200" max="32767" attributes="0"/>
                                       <Component id="chkMonthlyReportDate" alignment="0" pref="200" max="32767" attributes="0"/>
                                       <Component id="chkMonthlyReportClientName" alignment="0" pref="200" max="32767" attributes="0"/>
@@ -1434,6 +1437,7 @@
                                       <Component id="chkMonthlyReportBalance" alignment="0" pref="200" max="32767" attributes="0"/>
                                       <Component id="chkMonthlyReportKiraanAsing" alignment="0" pref="200" max="32767" attributes="0"/>
                                       <Component id="chkMonthlyReportSaving" alignment="0" pref="200" max="32767" attributes="0"/>
+                                      <Component id="chkMonthlyReportSalaryPayment" alignment="0" pref="200" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -1464,7 +1468,9 @@
                                   <Component id="chkMonthlyReportKiraanAsing" min="-2" pref="25" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="chkMonthlyReportSaving" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <EmptySpace pref="519" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="chkMonthlyReportSalaryPayment" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <EmptySpace pref="494" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1598,6 +1604,18 @@
                             </Property>
                             <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Simpanan Tetap"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="chkMonthlyReportSalaryPayment">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Arial" size="12" style="0"/>
+                            </Property>
+                            <Property name="selected" type="boolean" value="true"/>
+                            <Property name="text" type="java.lang.String" value="Bayaran Gaji"/>
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

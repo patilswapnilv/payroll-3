@@ -154,18 +154,16 @@ public class ReportPrinter implements Printable {
     private void render_header(Graphics2D g) {
         int size = 0;
         g.setFont(new Font("Calibri", Font.BOLD, 12));
-        
-        if (printMainColumn) {
-            if (parent.chkMonthlyReportDate.isSelected()) {
-                g.drawString("Tarikh", x, y);
-                size = 60;
-                g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
-                g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
-                g.drawLine(x - 5, y + 5, x - 5, y - 35);
-                g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
-                x += size + 10;
 
-            }
+        g.drawString("Tarikh", x, y);
+        size = 60;
+        g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
+        g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
+        g.drawLine(x - 5, y + 5, x - 5, y - 35);
+        g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
+        x += size + 10;
+
+        if (printMainColumn) {
 
             if (parent.chkMonthlyReportClientName.isSelected()) {
                 g.drawString("Pelanggan", x, y);
@@ -280,14 +278,13 @@ public class ReportPrinter implements Printable {
             g.setFont(new Font("Calibri", Font.PLAIN, 12));
             // draw line on left
             g.drawLine(x - 5, y + 5, x - 5, y - 35);
-            if (printMainColumn) {
-                if (parent.chkMonthlyReportDate.isSelected()) {
-                    g.drawString(Common.renderDisplayDate(transaction.getDate()), x, y);
-                    size = 60;
-                    x += size + 10;
-                    g.drawLine(x - 5, y + 5, x - 5, y - 35);
-                }
 
+            g.drawString(Common.renderDisplayDate(transaction.getDate()), x, y);
+            size = 60;
+            x += size + 10;
+            g.drawLine(x - 5, y + 5, x - 5, y - 35);
+            
+            if (printMainColumn) {
                 if (parent.chkMonthlyReportClientName.isSelected()) {
                     if (transaction.getType() == Transaction.GENERAL)
                         g.drawString(transaction.getCustomer().getName(), x, y);
@@ -384,7 +381,7 @@ public class ReportPrinter implements Printable {
         if (printMainColumn) {
             x = basicColumnSize;
         } else {
-            x = 20;
+            x = 20 + 60 + 10; // add date size as well
         }
 
         size = 180;
@@ -437,17 +434,17 @@ public class ReportPrinter implements Printable {
             }
 
             if (printMainColumn)  {
-                if (parent.chkMonthlyReportDate.isSelected()) {
-                    size = 60;
-                    g.drawString(Common.renderDisplayDate(salaries.get(i).getDate()), x, y);
-                    x += size + 10;
-                    g.drawLine(x - 5, y + 5, x - 5, y - 15);
-                }
+                size = 60;
+                g.drawString(Common.renderDisplayDate(salaries.get(i).getDate()), x, y);
+                x += size + 10;
+                g.drawLine(x - 5, y + 5, x - 5, y - 15);
                 
                 g.drawString("Bayaran Gaji", x, y);
                 g.drawLine(x - 5, y + 5, x - 5, y - 15);
                 
                 x = basicColumnSize;
+            } else {
+                x += 60 + 10; // add date field size
             }
 
             for (int c = workerIndex; c < workerCount; c ++) {
@@ -485,6 +482,8 @@ public class ReportPrinter implements Printable {
                 g.drawLine(x - 5, y + 5, x - 5, y - 15);
 
                 x = basicColumnSize;
+            } else {
+                x += 60 + 10; // add date size
             }
 
             for (int c = workerIndex; c < workerCount; c ++) {
@@ -534,6 +533,7 @@ public class ReportPrinter implements Printable {
             g.drawLine(15, y + 30, x + size + 5, y + 30); // bottom
         } else {
             g.setFont(new Font("Calibri", Font.PLAIN, 12));
+            x += 60 + 10; // add date size;
             y += 50;
         }
 

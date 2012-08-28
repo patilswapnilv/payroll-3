@@ -91,7 +91,8 @@ public class SavingForm extends javax.swing.JDialog {
         jLabel5.setText("Amaun Bayaran [ - ]");
 
         txtSavingDate.setDateFormatString("dd/MM/yyyy");
-        txtSavingDate.setFont(new java.awt.Font("Arial", 0, 12));
+        txtSavingDate.setDate(Calendar.getInstance().getTime());
+        txtSavingDate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         txtSavingAmount.setFont(new java.awt.Font("Arial", 0, 12));
 
