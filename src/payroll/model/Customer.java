@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import payroll.Application;
+import payroll.libraries.Database;
 
 
 /*  @author Edward  */
@@ -30,6 +31,9 @@ public class Customer {
     }
 
     public Customer(int id) {
+        code = null;
+        name = null;
+        status = false;
         this._load(id);
     }
 
@@ -42,8 +46,9 @@ public class Customer {
 
     private boolean _load(int id) {
         String query = "SELECT * FROM customer WHERE customer_id = " + id;
-        ResultSet rs = Application.db.execute(query);
+        ResultSet rs = Database.instance().execute(query);
         try {
+            rs.next();
             this.code = rs.getString("code");
             this.name = rs.getString("name");
             this.status = rs.getBoolean("is_active");

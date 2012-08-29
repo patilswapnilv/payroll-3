@@ -27,7 +27,7 @@ public class WorkerRecord {
     public static final int INCOME = 4;
     public static final int WITHDRAW = 5;
 
-    private int id, workerID, type;
+    private int id, workerID, type, transaction_id;
     private double amount;
     private String description;
     private Date date, created;
@@ -42,10 +42,12 @@ public class WorkerRecord {
         this.date = new Date();
         this.created = Calendar.getInstance().getTime();
         this.type = 0;
+        this.transaction_id = 0;
     }
 
     public WorkerRecord(int id) {
         this.id = id;
+        this.transaction_id = 0;
         this._load();
     }
 
@@ -56,6 +58,7 @@ public class WorkerRecord {
         this.amount = amount;
         this.description = description;
         this.date = date;
+        this.transaction_id = 0;
     }
 
     private void _load() {
@@ -70,6 +73,7 @@ public class WorkerRecord {
             this.setDescription(rs.getString("description"));
             this.setAmount(rs.getDouble("amount"));
             this.setType(rs.getInt("type"));
+            this.setTransactionID(rs.getInt("transaction_id"));
             this._loaded = true;
         } catch (SQLException ex) {
             Logger.getLogger(WorkerRecord.class.getName()).log(Level.SEVERE, null, ex);
@@ -81,7 +85,7 @@ public class WorkerRecord {
         String query = "";
 
         if ( ! this._loaded) {
-            query = "INSERT INTO workerRecord(created, worker_id, date, description, amount, type) VALUES(?, ?, ?, ?, ?, ?)";
+            query = "INSERT INTO workerRecord(created, worker_id, date, description, amount, type, transaction_id) VALUES(?, ?, ?, ?, ?, ?, ?)";
         }
 
         PreparedStatement ps = Application.db.createPreparedStatement(query);
@@ -98,6 +102,7 @@ public class WorkerRecord {
             ps.setString(4, this.getDescription());
             ps.setDouble(5, this.amount);
             ps.setInt(6, this.getType());
+            ps.setInt((7), this.getTransactionID());
         } catch (SQLException ex) {
             Logger.getLogger(ex.getMessage()).log(Level.WARNING, null, ex);
             System.err.println(ex.getMessage());
@@ -149,6 +154,10 @@ public class WorkerRecord {
         this.type = type;
     }
 
+    public void setTransactionID(int transaction_id) {
+        this.transaction_id = transaction_id;
+    }
+
     public java.sql.Date getSQLCreated() {
         return new java.sql.Date(created.getTime());
     }
@@ -183,6 +192,10 @@ public class WorkerRecord {
 
     public int getType() {
         return type;
+    }
+
+    public int getTransactionID() {
+        return transaction_id;
     }
 
     public static double getWorkerSalary(int workerID, Date dateFrom , Date dateTo) {

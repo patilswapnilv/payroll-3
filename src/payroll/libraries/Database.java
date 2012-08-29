@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Savepoint;
 import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
@@ -181,6 +182,45 @@ public class Database
         } catch (SQLException ex) {
             Logger.getLogger(ex.getMessage()).log(Level.WARNING, null, ex);
             return null;
+        }
+    }
+
+    public void begin()
+    {
+        try {
+            connection.setAutoCommit(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.getMessage()).log(Level.WARNING, null, ex);
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException ex1) {
+                Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+
+        }
+
+        
+    }
+
+    public boolean commit()
+    {
+        try {
+            connection.commit();
+            connection.setAutoCommit(true);
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
+
+    public void rollback() {
+        try {
+            connection.rollback();
+            connection.setAutoCommit(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

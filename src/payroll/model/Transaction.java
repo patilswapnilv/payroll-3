@@ -77,6 +77,7 @@ public class Transaction {
         ResultSet rs = Database.instance().execute(query);
 
         try {
+            rs.next();
             this.setCreated(Common.convertStringToDate(rs.getString("created")));
             this.setCustomerID(rs.getInt("customer_id"));
             this.setDate(Common.convertStringToDate(rs.getString("date")));
@@ -128,6 +129,7 @@ public class Transaction {
                     record.setWorkerID(worker.getId());
                     record.setDate(this.getDate());
                     record.setAmount(this.getWagePerWorker());
+                    record.setTransactionID(id);
                     if (this.getType() == Transaction.GENERAL)
                         record.setType(WorkerRecord.INCOME);
                     else
@@ -300,5 +302,11 @@ public class Transaction {
     public double getWagePerWorker() {
         int size = workers.size() > 0 ? workers.size() : 1;
         return this.getTotalSalary() / size;
+    }
+
+    public String getCompiledWorkerCodes() {
+        String codes = "";
+
+        return codes;
     }
 }
