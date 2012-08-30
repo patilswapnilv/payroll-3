@@ -4125,7 +4125,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTransactionSaveActionPerformed
 
     private void btnTransactionListEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransactionListEndActionPerformed
-        jTabbedPane1.setSelectedIndex(7);
+        System.exit(0);
     }//GEN-LAST:event_btnTransactionListEndActionPerformed
 
     private void btnTransactionListDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransactionListDeleteActionPerformed
