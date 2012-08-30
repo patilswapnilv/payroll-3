@@ -119,7 +119,7 @@ public class Login extends javax.swing.JDialog {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         if (txtPassword.getPassword().length == 0) {
-            JOptionPane.showMessageDialog(null, "Sila masukkan password anda", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Sila isikan Kata Laluan anda", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
             return;
         }
         String password = "";
@@ -155,7 +155,7 @@ public class Login extends javax.swing.JDialog {
             System.err.println(ex.getMessage());
         }
 
-        JOptionPane.showMessageDialog(null, "Kata Laluan Salah", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Kata Laluan Salah", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed

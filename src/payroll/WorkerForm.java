@@ -83,7 +83,8 @@ public class WorkerForm extends javax.swing.JDialog {
         btnGroupStatus.add(rbtnInactive);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cipta Rekod Pekerja Baru");
+        setTitle("Cipta / Ubah Rekod Pekerja");
+        setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel1.setText("Kod dan Nama Pekerja");
@@ -232,7 +233,7 @@ public class WorkerForm extends javax.swing.JDialog {
         if (success) {
             Main main = (Main) this.getParent();
             main.load_workers();
-            JOptionPane.showMessageDialog(null, "Rekod Pekerja baru disimpan", "Berjaya!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Rekod Pekerja disimpan", "Berjaya!", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Rekod Pekerja tidak dapat disimpan", "Kesilapan!", JOptionPane.ERROR_MESSAGE);

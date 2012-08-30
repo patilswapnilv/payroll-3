@@ -71,7 +71,8 @@ public class ClientForm extends javax.swing.JDialog {
         buttonGroup1.add(rbtnInactive);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cipta Rekod Pelanggan Baru");
+        setTitle("Cipta / Ubah Pelanggan");
+        setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -192,7 +193,7 @@ public class ClientForm extends javax.swing.JDialog {
         if (success) {
             Main main = (Main) this.getParent();
             main.load_customers();
-            JOptionPane.showMessageDialog(null, "Rekod Pelanggan baru disimpan", "Berjaya!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Rekod Pelanggan disimpan", "Berjaya!", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Rekod Pelanggan tidak dapat disimpan", "Kesilapan!", JOptionPane.ERROR_MESSAGE);

@@ -206,9 +206,9 @@ public class LoanForm extends javax.swing.JDialog {
         String message = "";
 
         if (txtLoanDate.getDate() == null) {
-            message = "Please select the date";
+            message = "Sila Pilih Tarikh.";
         } else if (txtLoanAmount.getText().isEmpty() || ! Common.isDouble(txtLoanAmount.getText())) {
-            message = "Invalid loan amount";
+            message = "Amaun Pinjaman tidak betul.";
         }
 
         if ( ! message.isEmpty()) {
