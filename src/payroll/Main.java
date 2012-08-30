@@ -12,7 +12,6 @@ import java.io.StringReader;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Savepoint;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -76,6 +75,8 @@ public class Main extends javax.swing.JFrame {
     public Hashtable customers_hash = new Hashtable();
     public ArrayList<Worker> workers = new ArrayList<Worker>();
     public ArrayList<Customer> customers = new ArrayList<Customer>();
+    public ArrayList<Worker> workers_all = new ArrayList<Worker>();
+    public ArrayList<Customer> customers_all = new ArrayList<Customer>();
     private ArrayList<Integer> loaded_saving_ids = new ArrayList<Integer>();
     private ArrayList<Integer> loaded_payment_ids = new ArrayList<Integer>();
     private ArrayList<Integer> loaded_transaction_ids = new ArrayList<Integer>();
@@ -120,19 +121,18 @@ public class Main extends javax.swing.JFrame {
         cbxPaymentWorkers.removeAllItems();
         cbxReportWorkers.removeAllItems();
         cbxSavingWorkers.removeAllItems();
-        cbxWorkers.removeAllItems();
 
         cbxPaymentWorkers.addItem(new String());
         cbxReportWorkers.addItem(new String());
         cbxSavingWorkers.addItem(new String());
-        cbxWorkers.addItem(new String());
 
         for (Worker worker : workers) {
             cbxPaymentWorkers.addItem(new String(worker.getCode() + " - " + worker.getName()));
             cbxReportWorkers.addItem(new String(worker.getCode() + " - " + worker.getName()));
             cbxSavingWorkers.addItem(new String(worker.getCode() + " - " + worker.getName()));
-            cbxWorkers.addItem(new String(worker.getCode() + " - " + worker.getName()));
         }
+
+        this.load_workers_all();
         
     }
 
@@ -153,18 +153,62 @@ public class Main extends javax.swing.JFrame {
             System.err.println(ex.getMessage());
         }
 
-        cbxClients.removeAllItems();
         cbxTransactionClients.removeAllItems();
         cbxTransactionListClients.removeAllItems();
 
-        cbxClients.addItem(new String());
         cbxTransactionClients.addItem(new String());
         cbxTransactionListClients.addItem(new String());
 
         for (Customer customer: customers) {
-            cbxClients.addItem(new String(customer.getCode() + " - " + customer.getName()));
             cbxTransactionClients.addItem(new String(customer.getCode() + " - " + customer.getName()));
             cbxTransactionListClients.addItem(new String(customer.getCode() + " - " + customer.getName()));
+        }
+
+        this.load_customers_all();
+    }
+
+    public void load_customers_all() {
+        customers_all.clear();
+        String query = "SELECT * FROM customer ORDER BY code";
+        ResultSet rs = Database.instance().execute(query);
+
+        try {
+            while (rs.next()) {
+                customers_all.add(new Customer(rs.getInt("customer_id"), rs.getString("code"), rs.getString("name"), rs.getBoolean("is_active")));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        cbxClients.removeAllItems();
+        cbxClients.addItem(new String());
+
+        for (Customer customer: customers_all) {
+            cbxClients.addItem(new String(customer.getCode() + " - " + customer.getName()));
+        }
+
+    }
+
+    public void load_workers_all() {
+        workers_all.clear();
+
+        String query = "SELECT * FROM worker ORDER BY code";
+        ResultSet rs = Database.instance().execute(query);
+
+        try {
+            while (rs.next()) {
+                workers_all.add(new Worker(rs.getInt("worker_id"), rs.getString("code"), rs.getString("name"), Common.convertStringToDate(rs.getString("start_date")), Common.convertStringToDate(rs.getString("end_date")), rs.getBoolean("is_active")));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        
+        cbxWorkers.removeAllItems();
+
+        cbxWorkers.addItem(new String());
+
+        for (Worker worker : workers_all) {
+            cbxWorkers.addItem(new String(worker.getCode() + " - " + worker.getName()));
         }
     }
 
@@ -235,6 +279,7 @@ public class Main extends javax.swing.JFrame {
         jTabbedPane3 = new javax.swing.JTabbedPane();
         btnGroupMonthlyReport = new javax.swing.ButtonGroup();
         btnGroupWorkerReportType = new javax.swing.ButtonGroup();
+        groupTransactionType = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -297,6 +342,9 @@ public class Main extends javax.swing.JFrame {
         tblTransactionList = new javax.swing.JTable();
         jLabel38 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        rbtnTransaction = new javax.swing.JRadioButton();
+        rbtnLoan = new javax.swing.JRadioButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -389,8 +437,6 @@ public class Main extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        txtProfileWorkerID = new javax.swing.JTextField();
-        txtProfileWorkerName = new javax.swing.JTextField();
         txtProfileWorkerRegisterDay = new javax.swing.JTextField();
         txtProfileWorkerReturnDay = new javax.swing.JTextField();
         txtProfileWorkerRegisterMonth = new javax.swing.JTextField();
@@ -412,8 +458,6 @@ public class Main extends javax.swing.JFrame {
         btnProfileClientEdit = new javax.swing.JButton();
         btnProfileClientNew = new javax.swing.JButton();
         jLabel27 = new javax.swing.JLabel();
-        txtProfileClientID = new javax.swing.JTextField();
-        txtProfileClientName = new javax.swing.JTextField();
         txtProfileClientStatus = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
         cbxClients = new javax.swing.JComboBox();
@@ -427,7 +471,7 @@ public class Main extends javax.swing.JFrame {
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/payroll/images/icon.png")).getImage());
 
         jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
-        jTabbedPane1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jTabbedPane1.setFont(new java.awt.Font("Arial", 0, 18));
         jTabbedPane1.setName("Payroll Software"); // NOI18N
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -641,7 +685,7 @@ public class Main extends javax.swing.JFrame {
 
         txtTransactionDate.setDateFormatString("dd/MM/yyyy");
         txtTransactionDate.setDate(Calendar.getInstance().getTime());
-        txtTransactionDate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionDate.setFont(new java.awt.Font("Arial", 0, 12));
 
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -745,7 +789,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        tblTransactionInvolvedWorkers.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        tblTransactionInvolvedWorkers.setFont(new java.awt.Font("Arial", 0, 12));
         tblTransactionInvolvedWorkers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -921,12 +965,12 @@ public class Main extends javax.swing.JFrame {
         jLabel37.setText("Petanyaan Transaksi");
 
         txtTransactionListFrom.setDateFormatString("dd/MM/yyyy");
-        txtTransactionListFrom.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionListFrom.setFont(new java.awt.Font("Arial", 0, 12));
 
         txtTransactionListTo.setDateFormatString("dd/MM/yyyy");
-        txtTransactionListTo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionListTo.setFont(new java.awt.Font("Arial", 0, 12));
 
-        jLabel39.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel39.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel39.setText("Hingga");
 
         btnTransactionSave.setText("Cari");
@@ -1011,12 +1055,21 @@ public class Main extends javax.swing.JFrame {
         );
         jPanel28Layout.setVerticalGroup(
             jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
         );
 
         jLabel38.setText("Kod & Name Pelanggan");
 
         jLabel40.setText("Tarikh Tempoh");
+
+        jLabel41.setText("Jenis Transaksi");
+
+        groupTransactionType.add(rbtnTransaction);
+        rbtnTransaction.setSelected(true);
+        rbtnTransaction.setText("Transaksi");
+
+        groupTransactionType.add(rbtnLoan);
+        rbtnLoan.setText("Pinjaman");
 
         javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
         jPanel26.setLayout(jPanel26Layout);
@@ -1025,31 +1078,32 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel26Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel26Layout.createSequentialGroup()
-                        .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel27, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
-                    .addGroup(jPanel26Layout.createSequentialGroup()
-                        .addComponent(jLabel37)
-                        .addContainerGap())
+                    .addComponent(jPanel28, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel37)
                     .addGroup(jPanel26Layout.createSequentialGroup()
                         .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel26Layout.createSequentialGroup()
-                                .addComponent(cbxTransactionListClients, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(324, 324, 324))
-                            .addComponent(btnTransactionSave)
+                            .addComponent(cbxTransactionListClients, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel26Layout.createSequentialGroup()
                                 .addComponent(txtTransactionListFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel39)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtTransactionListTo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(769, Short.MAX_VALUE))))
+                                .addComponent(txtTransactionListTo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel26Layout.createSequentialGroup()
+                        .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnTransactionSave)
+                            .addGroup(jPanel26Layout.createSequentialGroup()
+                                .addComponent(rbtnTransaction)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rbtnLoan)))))
+                .addContainerGap())
         );
         jPanel26Layout.setVerticalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1067,8 +1121,13 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(txtTransactionListFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbtnTransaction, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbtnLoan, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnTransactionSave, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1094,7 +1153,7 @@ public class Main extends javax.swing.JFrame {
         txtSavingDateFrom.setDateFormatString("dd/MM/yyyy");
         txtSavingDateFrom.setFont(new java.awt.Font("Arial", 0, 12));
 
-        jLabel17.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel17.setText("Hingga");
 
         txtSavingDateTo.setDateFormatString("dd/MM/yyyy");
@@ -1554,7 +1613,7 @@ public class Main extends javax.swing.JFrame {
 
         btnGroupMonthlyReport.add(rbtnMonhtlyReportDateRange);
 
-        txtMonthlyReportDateFrom.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtMonthlyReportDateFrom.setFont(new java.awt.Font("Arial", 0, 12));
 
         jLabel30.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel30.setText("Hingga");
@@ -1949,17 +2008,6 @@ public class Main extends javax.swing.JFrame {
         jLabel26.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel26.setText("Status");
 
-        txtProfileWorkerID.setFont(new java.awt.Font("Arial", 0, 12));
-        txtProfileWorkerID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtProfileWorkerIDActionPerformed(evt);
-            }
-        });
-
-        txtProfileWorkerName.setEditable(false);
-        txtProfileWorkerName.setFont(new java.awt.Font("Arial", 0, 12));
-        txtProfileWorkerName.setFocusable(false);
-
         txtProfileWorkerRegisterDay.setEditable(false);
         txtProfileWorkerRegisterDay.setFont(new java.awt.Font("Arial", 0, 12));
         txtProfileWorkerRegisterDay.setFocusable(false);
@@ -2074,16 +2122,11 @@ public class Main extends javax.swing.JFrame {
                                     .addGroup(jPanel17Layout.createSequentialGroup()
                                         .addComponent(txtProfileWorkerRegisterDay, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtProfileWorkerRegisterMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtProfileWorkerID, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel17Layout.createSequentialGroup()
-                                        .addComponent(txtProfileWorkerName, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtProfileWorkerRegisterMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cbxWorkers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtProfileWorkerRegisterYear, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 816, Short.MAX_VALUE))
+                                        .addComponent(txtProfileWorkerRegisterYear, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cbxWorkers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 950, Short.MAX_VALUE))
                     .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel17Layout.createSequentialGroup()
                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2113,8 +2156,6 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtProfileWorkerID, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtProfileWorkerName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxWorkers, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -2202,15 +2243,6 @@ public class Main extends javax.swing.JFrame {
         jLabel27.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel27.setText("Nama Pelanggan");
 
-        txtProfileClientID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtProfileClientIDActionPerformed(evt);
-            }
-        });
-
-        txtProfileClientName.setEditable(false);
-        txtProfileClientName.setFocusable(false);
-
         txtProfileClientStatus.setEditable(false);
         txtProfileClientStatus.setFocusable(false);
 
@@ -2236,14 +2268,9 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addComponent(txtProfileClientID, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtProfileClientName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtProfileClientStatus))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxClients, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbxClients, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtProfileClientStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel14Layout.setVerticalGroup(
@@ -2252,8 +2279,6 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtProfileClientID, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtProfileClientName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxClients, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -2374,48 +2399,6 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnProfileClientEditActionPerformed
 
-    private void txtProfileWorkerIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProfileWorkerIDActionPerformed
-        String worker_code = txtProfileWorkerID.getText();
-
-        String query = "SELECT * FROM worker WHERE code LIKE ? AND is_active = 1 LIMIT 1";
-
-        PreparedStatement ps = Application.db.createPreparedStatement(query);
-        try {
-            ps.setString(1, worker_code + "%");
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
-
-        int worker_id = 0;
-
-        ResultSet rs = Application.db.execute(ps);
-        try {
-            rs.next();
-            worker_id = rs.getInt("worker_id");
-            txtProfileWorkerID.setText(rs.getString("code"));
-            txtProfileWorkerName.setText(rs.getString("name"));
-            Calendar register_date = Calendar.getInstance();
-            register_date.setTime(Common.convertStringToDate(rs.getString("start_date")));
-            txtProfileWorkerRegisterDay.setText("" + register_date.get(Calendar.DAY_OF_MONTH));
-            txtProfileWorkerRegisterMonth.setText("" + (register_date.get(Calendar.MONTH) + 1));
-            txtProfileWorkerRegisterYear.setText("" + register_date.get(Calendar.YEAR));
-            Calendar return_date = Calendar.getInstance();
-            return_date.setTime(Common.convertStringToDate(rs.getString("end_date")));
-            txtProfileWorkerReturnDay.setText("" + return_date.get(Calendar.DAY_OF_MONTH));
-            txtProfileWorkerReturnMonth.setText("" + (return_date.get(Calendar.MONTH) + 1));
-            txtProfileWorkerReturnYear.setText("" + return_date.get(Calendar.YEAR));
-            String status = rs.getBoolean("is_active") ? "Aktif" : "Tidak Aktif";
-            txtProfileWorkerStatus.setText(status);
-            this._current_worker_id = rs.getInt("worker_id");
-            rs.close();
-
-            txtProfileWorkerCurrentSaving.setText(Common.currency(this.getWorkerCurrentSaving(worker_id)));
-        } catch (SQLException ex) {
-            this._reset_worker_form();
-            JOptionPane.showMessageDialog(null, "Tiada Rekod Pekerja ini.", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_txtProfileWorkerIDActionPerformed
-
     private void btnSavingNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSavingNewActionPerformed
         new SavingForm(this, true).setVisible(true);
     }//GEN-LAST:event_btnSavingNewActionPerformed
@@ -2426,7 +2409,7 @@ public class Main extends javax.swing.JFrame {
 
     private void _clearTransactionForm() {
         cbxTransactionClients.setSelectedIndex(0);
-        txtTransactionDate.setDate(null);
+        txtTransactionDate.setDate(Calendar.getInstance().getTime());
         txtTransactionDescription.setText("");
         txtTransactionWeight.setText("");
         txtTransactionPricePerTon.setText("");
@@ -3050,7 +3033,7 @@ public class Main extends javax.swing.JFrame {
         String query = "SELECT DISTINCT id, type, loan_amount, customer_id, description, weight, price_per_ton, wages, kiraan_asing, date, created, normalized_worker_id FROM transactions ";
         query += "INNER JOIN transaction_workers ON transactions.id = transaction_workers.transaction_id ";
         query += "WHERE date >= '" + Common.renderSQLDate((Calendar) dates.get("from")) + "' AND date <= '" + Common.renderSQLDate((Calendar) dates.get("to")) + "' ";
-        query += id.isEmpty() ? "ORDER BY date" : "AND worker_id IN (" + id + ") ORDER BY DATE";
+        query += id.isEmpty() ? "AND type = 1 ORDER BY date" : "AND worker_id IN (" + id + ") ORDER BY DATE";
 
         ResultSet rs = Database.instance().execute(query);
 
@@ -3197,13 +3180,14 @@ public class Main extends javax.swing.JFrame {
         ArrayList<Transaction> transactions = this.getReportTransasctions(selected);
         ArrayList<ReportCalculation> calculations = this.getReportCalculations(selected);
         ArrayList<ReportSalary> salaries = this.getReportSalaries(selected);
+        Hashtable dates = getReportSelectedDateRange();
 
         PrinterJob job = PrinterJob.getPrinterJob();
                 
         PageFormat format = job.defaultPage();
         format.setOrientation(PageFormat.LANDSCAPE);
 
-        job.setPrintable(new ReportPrinter(this, selected, transactions, calculations, savings, salaries), format);
+        job.setPrintable(new ReportPrinter(this, selected, transactions, calculations, savings, salaries, dates), format);
 
         if (job.printDialog() == true) {
             try {
@@ -3215,10 +3199,6 @@ public class Main extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnMonthlyReportPrintActionPerformed
-
-    private void txtProfileClientIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProfileClientIDActionPerformed
-        
-    }//GEN-LAST:event_txtProfileClientIDActionPerformed
 
     private void getSavingDetails(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getSavingDetails
         DefaultTableModel savingTableModel = (DefaultTableModel) tblSaving.getModel();
@@ -3889,25 +3869,19 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPaymentSearchActionPerformed
 
     private void cbxClientsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxClientsItemStateChanged
-        if (cbxClients.getSelectedIndex() == 0 || cbxClients.getItemCount() - 1 != customers.size()) {
-            txtProfileClientID.setText("");
-            txtProfileClientName.setText("");
+        if (cbxClients.getSelectedIndex() == 0 || cbxClients.getItemCount() - 1 != customers_all.size()) {
             txtProfileClientStatus.setText("");
             _current_client_id = 0;
             return;
         }
 
-        Customer client = customers.get(cbxClients.getSelectedIndex() - 1);
-        txtProfileClientID.setText(client.getCode());
-        txtProfileClientName.setText(client.getName());
+        Customer client = customers_all.get(cbxClients.getSelectedIndex() - 1);
         txtProfileClientStatus.setText(client.getStatus() ? "Aktif" : "Tidak Aktif");
         _current_client_id = client.getId();
     }//GEN-LAST:event_cbxClientsItemStateChanged
 
     private void cbxWorkersItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxWorkersItemStateChanged
-        if (cbxWorkers.getSelectedIndex() == 0 || cbxWorkers.getItemCount() - 1 != workers.size()) {
-            txtProfileWorkerID.setText("");
-            txtProfileWorkerName.setText("");
+        if (cbxWorkers.getSelectedIndex() == 0 || cbxWorkers.getItemCount() - 1 != workers_all.size()) {
             txtProfileWorkerRegisterDay.setText("");
             txtProfileWorkerRegisterMonth.setText("");
             txtProfileWorkerRegisterYear.setText("");
@@ -3919,10 +3893,8 @@ public class Main extends javax.swing.JFrame {
             return;
         }
 
-        Worker worker = workers.get(cbxWorkers.getSelectedIndex() - 1);
+        Worker worker = workers_all.get(cbxWorkers.getSelectedIndex() - 1);
 
-        txtProfileWorkerID.setText(worker.getCode());
-        txtProfileWorkerName.setText(worker.getName());
         Calendar register_date = Calendar.getInstance();
         register_date.setTime(worker.getRegisterDate());
         txtProfileWorkerRegisterDay.setText("" + register_date.get(Calendar.DAY_OF_MONTH));
@@ -4036,9 +4008,37 @@ public class Main extends javax.swing.JFrame {
             return;
         }
 
-        String query = "SELECT * FROM transactions WHERE type = " + Transaction.GENERAL + " AND date >= '" + Common.renderSQLDate(txtTransactionListFrom.getDate()) + "' AND date <= '" + Common.renderSQLDate(txtTransactionListTo.getDate()) + "'";
+        int type = 0;
         
-        if (cbxTransactionListClients.getSelectedIndex() > 0) {
+
+        if (rbtnTransaction.isSelected()) {
+            type = Transaction.GENERAL;
+            tableModel = new DefaultTableModel(
+                new Object[][] {},
+                new String[] {
+                    "", "Tarikh", "Name Pelanggan", "Keterangan", "Berat KG", "Harga Diterima Seton", "Jumlah Diterima", "Upah Kerja", "Jumpah Gaji", "Kiraan Asing", "Pekerja Terlibat"
+                }
+            );
+        } else if (rbtnLoan.isSelected()) {
+            type = Transaction.LOAN;
+            tableModel = new DefaultTableModel(
+                new Object[][] {},
+                new String[] {
+                    "", "Tarikh", "Pekerja Terlibat", "Keterangan", "Jumlah Pinjaman"
+                }
+            );
+        }
+
+        tblTransactionList.setModel(tableModel);
+
+        tblTransactionList.getColumnModel().getColumn(0).setPreferredWidth(30);
+        tblTransactionList.getColumnModel().getColumn(1).setPreferredWidth(60);
+        tblTransactionList.getColumnModel().getColumn(2).setPreferredWidth(120);
+        tblTransactionList.getColumnModel().getColumn(3).setPreferredWidth(250);
+
+        String query = "SELECT * FROM transactions WHERE type = " + type + " AND date >= '" + Common.renderSQLDate(txtTransactionListFrom.getDate()) + "' AND date <= '" + Common.renderSQLDate(txtTransactionListTo.getDate()) + "'";
+        
+        if (cbxTransactionListClients.getSelectedIndex() > 0 && rbtnTransaction.isSelected()) {
             query += " AND customer_id = " + customers.get(cbxTransactionListClients.getSelectedIndex() - 1).getId();
         }
 
@@ -4060,19 +4060,31 @@ public class Main extends javax.swing.JFrame {
 
                 transaction.setWorkers(involved_workers);
 
-                Object[] objects = new Object[] {
-                    new Integer(counter++),
-                    new String(Common.renderDisplayDate(transaction.getDate())),
-                    new String(transaction.getCustomer().getCode() + " - " + transaction.getCustomer().getName()),
-                    new String(transaction.getDescription()),
-                    new Double(transaction.getWeight()),
-                    new String(Common.currency(transaction.getPricePerTon())),
-                    new String(Common.currency(transaction.getTotal())),
-                    new String(Common.currency(transaction.getWages())),
-                    new String(Common.currency(transaction.getTotalSalary())),
-                    new String(Common.currency(transaction.getKiraanAsing())),
-                    new String(transaction.getCompiledWorkerCodes())
-                };
+                Object[] objects = null;
+
+                if (type == Transaction.GENERAL) {
+                    objects = new Object[] {
+                        new Integer(counter++),
+                        new String(Common.renderDisplayDate(transaction.getDate())),
+                        new String(transaction.getCustomer().getCode() + " - " + transaction.getCustomer().getName()),
+                        new String(transaction.getDescription()),
+                        new Double(transaction.getWeight()),
+                        new String(Common.currency(transaction.getPricePerTon())),
+                        new String(Common.currency(transaction.getTotal())),
+                        new String(Common.currency(transaction.getWages())),
+                        new String(Common.currency(transaction.getTotalSalary())),
+                        new String(Common.currency(transaction.getKiraanAsing())),
+                        new String(transaction.getCompiledWorkerCodes())
+                    };
+                } else if (type == Transaction.LOAN) {
+                    objects = new Object[] {
+                        new Integer(counter++),
+                        new String(Common.renderDisplayDate(transaction.getDate())),
+                        new String(transaction.getCompiledWorkerCodes()),
+                        new String(transaction.getDescription()),
+                        new String(Common.currency(transaction.getLoanAmount()))
+                    };
+                }
 
                 tableModel.addRow(objects);
                 loaded_transaction_ids.add(rs.getInt("id"));
@@ -4125,7 +4137,6 @@ public class Main extends javax.swing.JFrame {
     
     private void _reset_worker_form() {
         txtProfileWorkerCurrentSaving.setText("");
-        txtProfileWorkerName.setText("");
         txtProfileWorkerRegisterDay.setText("");
         txtProfileWorkerRegisterMonth.setText("");
         txtProfileWorkerRegisterYear.setText("");
@@ -4225,6 +4236,7 @@ public class Main extends javax.swing.JFrame {
     public javax.swing.JCheckBox chkMonthlyReportTotalReceived;
     public javax.swing.JCheckBox chkMonthlyReportWages;
     public javax.swing.JCheckBox chkMonthlyReportWeight;
+    private javax.swing.ButtonGroup groupTransactionType;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -4267,6 +4279,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -4311,9 +4324,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JList listTransactionLoanWorkers;
+    private javax.swing.JRadioButton rbtnLoan;
     private javax.swing.JRadioButton rbtnMonhtlyReportCurrentMonth;
     private javax.swing.JRadioButton rbtnMonhtlyReportDateRange;
     private javax.swing.JRadioButton rbtnMonthlyReportLastMonth;
+    private javax.swing.JRadioButton rbtnTransaction;
     private javax.swing.JRadioButton rbtnWorkerMonthlyIncome;
     private javax.swing.JRadioButton rbtnWorkerReportFull;
     private javax.swing.JRadioButton rbtnWorkerSaving;
@@ -4328,12 +4343,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtPasswordConfirm;
     private com.toedter.calendar.JDateChooser txtPayDateFrom;
     private com.toedter.calendar.JDateChooser txtPayDateTo;
-    private javax.swing.JTextField txtProfileClientID;
-    private javax.swing.JTextField txtProfileClientName;
     private javax.swing.JTextField txtProfileClientStatus;
     private javax.swing.JTextField txtProfileWorkerCurrentSaving;
-    private javax.swing.JTextField txtProfileWorkerID;
-    private javax.swing.JTextField txtProfileWorkerName;
     private javax.swing.JTextField txtProfileWorkerRegisterDay;
     private javax.swing.JTextField txtProfileWorkerRegisterMonth;
     private javax.swing.JTextField txtProfileWorkerRegisterYear;

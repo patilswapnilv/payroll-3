@@ -13,6 +13,8 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Hashtable;
 import payroll.libraries.Common;
 import payroll.model.ReportCalculation;
 import payroll.model.ReportSalary;
@@ -30,6 +32,7 @@ public class ReportPrinter implements Printable {
     private ArrayList<String> headers = new ArrayList<String>();
     private ArrayList<Worker> selected = new ArrayList<Worker>();
     private ArrayList<ReportSalary> salaries = new ArrayList<ReportSalary>();
+    private Hashtable dates = new Hashtable();
     private String query = "";
     private Main parent;
 
@@ -65,13 +68,14 @@ public class ReportPrinter implements Printable {
     int overflowCounter = 0;
     int workerCount = 0;
 
-    public ReportPrinter(Main parent, ArrayList<Worker> selected, ArrayList<Transaction> transactions, ArrayList<ReportCalculation> calculations, ArrayList<ReportSaving> savings, ArrayList<ReportSalary> salaries) {
+    public ReportPrinter(Main parent, ArrayList<Worker> selected, ArrayList<Transaction> transactions, ArrayList<ReportCalculation> calculations, ArrayList<ReportSaving> savings, ArrayList<ReportSalary> salaries, Hashtable dates) {
         this.parent = parent;
         this.transactions = transactions;
         this.selected = selected;
         this.savings = savings;
         this.calculations = calculations;
         this.salaries = salaries;
+        this.dates = dates;
         this.setup();
     }
 
@@ -101,6 +105,11 @@ public class ReportPrinter implements Printable {
         if (printOrNot) {
             System.out.println("Printing...");
             // Initial the position for new page
+            x = 10;
+            y = 40;
+            g.setFont(new Font("Calibri", Font.BOLD, 12));
+            g.drawString("Laporan Bulanan (" + Common.renderDisplayDate((Calendar) dates.get("from")) + " - " + Common.renderDisplayDate((Calendar) dates.get("to")) + ")", x, y);
+            g.setFont(new Font("Calibri", Font.PLAIN, 12));
             x = 20;
             y = 80;
             this.render_header(g);
