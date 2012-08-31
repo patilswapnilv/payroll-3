@@ -37,7 +37,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPane1" min="-2" pref="1000" max="-2" attributes="0"/>
+          <Component id="jTabbedPane1" alignment="0" pref="1000" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -76,25 +76,22 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jButton6" min="-2" pref="150" max="-2" attributes="1"/>
+                          <Component id="jButton3" min="-2" pref="150" max="-2" attributes="1"/>
+                          <Component id="jButton5" alignment="0" min="-2" pref="150" max="-2" attributes="1"/>
+                          <Component id="jButton1" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jButton1" min="-2" pref="120" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jButton2" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="jButton6" min="-2" pref="120" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jButton7" max="32767" attributes="0"/>
+                              <Component id="jButton2" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jButton5" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jButton3" alignment="0" pref="120" max="32767" attributes="0"/>
-                              </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jButton4" max="32767" attributes="0"/>
-                                  <Component id="jButton8" max="32767" attributes="0"/>
+                                  <Component id="jButton4" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <Component id="jButton8" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <Component id="jButton7" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -107,25 +104,28 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jButton1" pref="45" max="32767" attributes="0"/>
-                          <Component id="jButton2" max="32767" attributes="0"/>
+                          <Component id="jButton2" min="-2" pref="40" max="-2" attributes="1"/>
+                          <Component id="jButton1" alignment="0" min="-2" pref="40" max="-2" attributes="1"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jButton3" min="-2" pref="40" max="-2" attributes="1"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButton5" min="-2" pref="40" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jButton4" min="-2" pref="40" max="-2" attributes="1"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButton8" min="-2" pref="40" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jButton3" max="32767" attributes="0"/>
-                          <Component id="jButton4" min="-2" pref="45" max="-2" attributes="0"/>
+                          <Component id="jButton6" min="-2" pref="40" max="-2" attributes="1"/>
+                          <Component id="jButton7" alignment="0" min="-2" pref="40" max="-2" attributes="1"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jButton5" max="32767" attributes="0"/>
-                          <Component id="jButton8" min="-2" pref="46" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jButton6" max="32767" attributes="0"/>
-                          <Component id="jButton7" min="-2" pref="45" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="296" max="32767" attributes="0"/>
+                      <EmptySpace pref="317" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -244,7 +244,7 @@
                           <Component id="jPanel10" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtTransactionDescription" pref="224" max="32767" attributes="0"/>
+                                  <Component id="txtTransactionDescription" min="-2" pref="224" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                           <Component id="jLabel5" max="32767" attributes="0"/>
@@ -258,17 +258,17 @@
                                       </Group>
                                       <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txtTransactionCalculate" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="txtTransactionBalance" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="txtTransactionSalary" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="txtTransactionWages" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="txtTransactionTotalReceived" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="txtTransactionPayPerPerson" max="32767" attributes="0"/>
-                                          <Component id="txtTransactionWeight" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="txtTransactionPricePerTon" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="txtTransactionCalculate" alignment="1" min="-2" pref="87" max="-2" attributes="0"/>
+                                          <Component id="txtTransactionBalance" alignment="1" min="-2" pref="87" max="-2" attributes="0"/>
+                                          <Component id="txtTransactionSalary" alignment="1" min="-2" pref="87" max="-2" attributes="0"/>
+                                          <Component id="txtTransactionWages" alignment="1" min="-2" pref="87" max="-2" attributes="0"/>
+                                          <Component id="txtTransactionTotalReceived" alignment="1" min="-2" pref="87" max="-2" attributes="0"/>
+                                          <Component id="txtTransactionPayPerPerson" min="-2" pref="87" max="-2" attributes="0"/>
+                                          <Component id="txtTransactionWeight" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
+                                          <Component id="txtTransactionPricePerTon" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Component id="jLabel4" alignment="0" pref="224" max="32767" attributes="0"/>
+                                  <Component id="jLabel4" alignment="0" min="-2" pref="224" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Component id="jPanel22" min="-2" max="-2" attributes="0"/>
@@ -566,13 +566,11 @@
                 <Property name="date" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="Calendar.getInstance().getTime()" type="code"/>
                 </Property>
+                <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="12" style="0"/>
                 </Property>
               </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtTransactionDate.setDateFormatString(&quot;dd/MM/yyyy&quot;);"/>
-              </AuxValues>
             </Component>
             <Container class="javax.swing.JPanel" name="jPanel10">
               <Properties>
@@ -877,7 +875,7 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="474" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -1311,13 +1309,11 @@
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="txtSavingDateFrom">
               <Properties>
+                <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="12" style="0"/>
                 </Property>
               </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtSavingDateFrom.setDateFormatString(&quot;dd/MM/yyyy&quot;);"/>
-              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel17">
               <Properties>
@@ -1329,13 +1325,11 @@
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="txtSavingDateTo">
               <Properties>
+                <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="12" style="0"/>
                 </Property>
               </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtSavingDateTo.setDateFormatString(&quot;dd/MM/yyyy&quot;);"/>
-              </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="txtSavingCurrentSaving">
               <Properties>
@@ -1632,13 +1626,11 @@
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="txtPayDateFrom">
               <Properties>
+                <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="12" style="0"/>
                 </Property>
               </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtPayDateFrom.setDateFormatString(&quot;dd/MM/yyyy&quot;);"/>
-              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel22">
               <Properties>
@@ -1650,13 +1642,11 @@
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="txtPayDateTo">
               <Properties>
+                <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="12" style="0"/>
                 </Property>
               </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtPayDateTo.setDateFormatString(&quot;dd/MM/yyyy&quot;);"/>
-              </AuxValues>
             </Component>
             <Container class="javax.swing.JPanel" name="jPanel12">
 
@@ -1846,17 +1836,14 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jTabbedPane4" min="-2" pref="994" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jTabbedPane4" alignment="0" pref="995" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTabbedPane4" max="32767" attributes="0"/>
+                      <Component id="jTabbedPane4" pref="552" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1889,8 +1876,8 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jPanel23" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" attributes="0">
+                                  <Component id="jPanel23" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Component id="jPanel20" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -1899,7 +1886,7 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="11" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2211,6 +2198,7 @@
                         </Component>
                         <Component class="com.toedter.calendar.JDateChooser" name="txtMonthlyReportDateFrom">
                           <Properties>
+                            <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Arial" size="12" style="0"/>
                             </Property>
@@ -2226,6 +2214,7 @@
                         </Component>
                         <Component class="com.toedter.calendar.JDateChooser" name="txtMonthlyReportDateTo">
                           <Properties>
+                            <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Arial" size="12" style="0"/>
                             </Property>
@@ -2246,7 +2235,7 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="512" max="32767" attributes="0"/>
+                                  <EmptySpace pref="514" max="32767" attributes="0"/>
                                   <Component id="btnMonthlyReportGenerate" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnMonthlyReportExport" min="-2" pref="115" max="-2" attributes="0"/>
@@ -2436,11 +2425,11 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jPanel25" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jPanel25" max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="jLabel31" max="32767" attributes="0"/>
                                           <Component id="jLabel33" pref="120" max="32767" attributes="0"/>
@@ -2449,9 +2438,9 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
                                               <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Component id="rbtnWorkerMonthlyIncome" alignment="0" max="32767" attributes="1"/>
-                                                  <Component id="rbtnWorkerSaving" alignment="0" max="32767" attributes="1"/>
-                                                  <Component id="rbtnWorkerReportFull" alignment="0" max="32767" attributes="1"/>
+                                                  <Component id="rbtnWorkerMonthlyIncome" alignment="0" pref="219" max="32767" attributes="1"/>
+                                                  <Component id="rbtnWorkerSaving" alignment="0" pref="219" max="32767" attributes="1"/>
+                                                  <Component id="rbtnWorkerReportFull" alignment="0" pref="219" max="32767" attributes="1"/>
                                               </Group>
                                               <EmptySpace min="-2" pref="637" max="-2" attributes="0"/>
                                           </Group>
@@ -2475,7 +2464,7 @@
                                                       <Component id="jLabel32" min="-2" pref="50" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                              <EmptySpace min="0" pref="605" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -2588,7 +2577,7 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="512" max="32767" attributes="0"/>
+                                  <EmptySpace pref="514" max="32767" attributes="0"/>
                                   <Component id="btnReportWorkerGenerate" min="-2" pref="147" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnReportWorkerExport" min="-2" max="-2" attributes="0"/>
@@ -2764,13 +2753,13 @@
                                               </Group>
                                           </Group>
                                       </Group>
-                                      <EmptySpace pref="680" max="32767" attributes="0"/>
+                                      <EmptySpace pref="690" max="32767" attributes="0"/>
                                   </Group>
                                   <Component id="jPanel15" alignment="0" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="1">
-                                              <Component id="jLabel23" pref="418" max="32767" attributes="0"/>
+                                              <Component id="jLabel23" pref="428" max="32767" attributes="0"/>
                                               <EmptySpace min="-2" pref="466" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="1" attributes="0">
@@ -2789,7 +2778,7 @@
                                                   </Group>
                                                   <Component id="txtProfileWorkerCurrentSaving" max="32767" attributes="0"/>
                                               </Group>
-                                              <EmptySpace min="0" pref="594" max="32767" attributes="0"/>
+                                              <EmptySpace min="0" pref="138" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
@@ -2964,7 +2953,7 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="535" max="32767" attributes="0"/>
+                                  <EmptySpace pref="545" max="32767" attributes="0"/>
                                   <Component id="btnProfileWorkerNew" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnProfileWorkerEdit" min="-2" max="-2" attributes="0"/>

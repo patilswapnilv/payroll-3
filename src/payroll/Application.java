@@ -33,6 +33,7 @@ public class Application {
                 } catch (Exception ex) {
                     System.err.println(ex.getMessage());
                     JOptionPane.showMessageDialog(null, "Unexpected Error occur!!", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    System.exit(1);
                 }
             }
         }));
