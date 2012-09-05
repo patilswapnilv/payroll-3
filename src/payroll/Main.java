@@ -2749,6 +2749,7 @@ public class Main extends javax.swing.JFrame {
 
     private void btnMonthlyReportGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyReportGenerateActionPerformed
         // get selected worker to be display
+        Hashtable dates = this.getReportSelectedDateRange();
         ArrayList<String> columns = this.getReportColumns();
         ArrayList<Worker> selected = this.getReportSelectedWorkers();
         ArrayList<Transaction> transactions = this.getReportTransasctions(selected);
@@ -2790,6 +2791,7 @@ public class Main extends javax.swing.JFrame {
         css += "table tr.salary td { border: 1px solid #333 } ";
         css += "table tr.summary td.blank { border-left: none; border-bottom: none; } ";
         css += "table tr.saving_summary, table tr.saving_summary td { border : 1px solid #333; } ";
+        css += "h3 { font-size: 14px; }";
         // </editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="render transaction content">
@@ -2986,7 +2988,10 @@ public class Main extends javax.swing.JFrame {
 
         css += "</style>";
         html += "<head>" + css + "</head>";
-        html += "<body>" + table + "</body>";
+        html += "<body>";
+        html += "<h3>Laporan Bulanan (" + Common.renderDisplayDate((Calendar) dates.get("from")) + " - " + Common.renderDisplayDate((Calendar) dates.get("to")) + ")</h3>";
+        html += table;
+        html += "</body>";
         html += "</html>";
 
         ReportFrame form = new ReportFrame();
@@ -3544,6 +3549,8 @@ public class Main extends javax.swing.JFrame {
                 // salary
                 ResultSet rs = Database.instance().execute(query);
                 rs.next();
+
+                System.out.println(query);
                 
                 salary  = rs.getDouble("salary");
                 loan  = rs.getDouble("loan");
