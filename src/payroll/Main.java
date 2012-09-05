@@ -3532,13 +3532,14 @@ public class Main extends javax.swing.JFrame {
         Worker selected  = cbxReportWorkers.getSelectedIndex() == 0 ? new Worker() :workers.get(cbxReportWorkers.getSelectedIndex() - 1);
 
         while (year < yearTo || (month <= monthTo && year <= yearTo)) {
-            double salary = 0.0, loan = 0.0, saving = 0.0, withdraw = 0.0;
+            double salary = 0.0, loan = 0.0, saving = 0.0, withdraw = 0.0, payment = 0.0;
 
             try {
                 String query = "SELECT ";
                 query += "(SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = " + selected.getId() + " AND strftime(\"%m\", date) = \"" + (month > 9 ? month : "0" + month) + "\" AND strftime(\"%Y\", date) = \"" + year + "\" AND type = " + WorkerRecord.INCOME + ") AS salary, ";
                 query += "(SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = " + selected.getId() + " AND strftime(\"%m\", date) = \"" + (month > 9 ? month : "0" + month) + "\" AND strftime(\"%Y\", date) = \"" + year + "\" AND type = " + WorkerRecord.LOAN + ") AS loan, ";
                 query += "(SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = " + selected.getId() + " AND strftime(\"%m\", date) = \"" + (month > 9 ? month : "0" + month) + "\" AND strftime(\"%Y\", date) = \"" + year + "\" AND type = " + WorkerRecord.SAVING + ") AS saving, ";
+                query += "(SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = " + selected.getId() + " AND strftime(\"%m\", date) = \"" + (month > 9 ? month : "0" + month) + "\" AND strftime(\"%Y\", date) = \"" + year + "\" AND type = " + WorkerRecord.PAYMENT + ") AS payment, ";
                 query += "(SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = " + selected.getId() + " AND strftime(\"%m\", date) = \"" + (month > 9 ? month : "0" + month) + "\" AND strftime(\"%Y\", date) = \"" + year + "\" AND type = " + WorkerRecord.WITHDRAW + ") AS withdraw";
                 // salary
                 ResultSet rs = Database.instance().execute(query);
@@ -3548,6 +3549,7 @@ public class Main extends javax.swing.JFrame {
                 loan  = rs.getDouble("loan");
                 saving  = rs.getDouble("saving");
                 withdraw  = rs.getDouble("withdraw");
+                payment = rs.getDouble("payment");
 
                 rs.close();
 
@@ -3555,7 +3557,7 @@ public class Main extends javax.swing.JFrame {
                 System.err.println(ex.getMessage());
             }
 
-            reports.add(new WorkerReport(month, year, salary, loan, saving, withdraw));
+            reports.add(new WorkerReport(month, year, salary, loan, saving, withdraw, payment));
 
             month ++;
 

@@ -12,18 +12,23 @@ package payroll.model;
 public class WorkerReport {
 
     private int month, year;
-    private double salary, loan, saving, payment;
+    private double salary, loan, saving, payment, withdraw;
 
     public WorkerReport() {
     }
 
-    public WorkerReport(int month, int year, double salary, double loan, double saving, double payment) {
+    public WorkerReport(int month, int year, double salary, double loan, double saving, double withdraw, double payment) {
         this.month = month;
         this.year = year;
         this.salary = salary;
         this.loan = loan;
         this.saving = saving;
         this.payment = payment;
+        this.withdraw = withdraw;
+    }
+
+    public double getWithdraw() {
+        return withdraw;
     }
 
     public double getLoan() {
@@ -55,7 +60,7 @@ public class WorkerReport {
     }
 
     public double getSavingBalance() {
-        return saving + payment;
+        return getBalance() + saving + payment;
     }
 
     public void setLoan(double loan) {
@@ -80,6 +85,10 @@ public class WorkerReport {
     
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public void setWithdraw(double withdraw) {
+        this.withdraw = withdraw;
     }
 
 }
