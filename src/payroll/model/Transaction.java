@@ -307,6 +307,12 @@ public class Transaction {
     public String getCompiledWorkerCodes() {
         String codes = "";
 
+        for (Worker worker : workers) {
+            codes += ", " + worker.getCode();
+        }
+
+        codes = codes.substring(2, codes.length());
+
         return codes;
     }
 }

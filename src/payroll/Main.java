@@ -358,9 +358,6 @@ public class Main extends javax.swing.JFrame {
         tblTransactionList = new javax.swing.JTable();
         jLabel38 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
-        jLabel41 = new javax.swing.JLabel();
-        rbtnTransaction = new javax.swing.JRadioButton();
-        rbtnLoan = new javax.swing.JRadioButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -495,7 +492,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Arial", 0, 14));
         jButton1.setText("Transaksi");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -503,7 +500,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Arial", 0, 14));
         jButton2.setText("Senarai Transaksi");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -511,7 +508,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Arial", 0, 14));
         jButton3.setText("Simpanan");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -527,7 +524,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton5.setFont(new java.awt.Font("Arial", 0, 14));
         jButton5.setText("Laporan");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -535,7 +532,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton6.setFont(new java.awt.Font("Arial", 0, 14));
         jButton6.setText("Profil");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -570,16 +567,12 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(960, 960, 960))
         );
         jPanel2Layout.setVerticalGroup(
@@ -648,7 +641,7 @@ public class Main extends javax.swing.JFrame {
 
         txtTransactionDescription.setFont(new java.awt.Font("Arial", 0, 12));
 
-        txtTransactionWeight.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionWeight.setFont(new java.awt.Font("Arial", 0, 12));
         txtTransactionWeight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTransactionWeightActionPerformed(evt);
@@ -660,7 +653,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        txtTransactionPricePerTon.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionPricePerTon.setFont(new java.awt.Font("Arial", 0, 12));
         txtTransactionPricePerTon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTransactionPricePerTonActionPerformed(evt);
@@ -673,7 +666,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         txtTransactionTotalReceived.setEditable(false);
-        txtTransactionTotalReceived.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionTotalReceived.setFont(new java.awt.Font("Arial", 0, 12));
         txtTransactionTotalReceived.setFocusable(false);
 
         txtTransactionWages.setFont(new java.awt.Font("Arial", 0, 12));
@@ -714,11 +707,11 @@ public class Main extends javax.swing.JFrame {
 
         txtTransactionDate.setDate(Calendar.getInstance().getTime());
         txtTransactionDate.setDateFormatString("dd/MM/yyyy");
-        txtTransactionDate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionDate.setFont(new java.awt.Font("Arial", 0, 12));
 
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnRecord.setFont(new java.awt.Font("Arial", 0, 14));
+        btnRecord.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnRecord.setText("Rekodkan");
         btnRecord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -995,7 +988,7 @@ public class Main extends javax.swing.JFrame {
         jLabel37.setText("Petanyaan Transaksi");
 
         txtTransactionListFrom.setDateFormatString("dd/MM/yyyy");
-        txtTransactionListFrom.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionListFrom.setFont(new java.awt.Font("Arial", 0, 12));
 
         txtTransactionListTo.setDateFormatString("dd/MM/yyyy");
         txtTransactionListTo.setFont(new java.awt.Font("Arial", 0, 12));
@@ -1003,7 +996,7 @@ public class Main extends javax.swing.JFrame {
         jLabel39.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel39.setText("Hingga");
 
-        btnTransactionSave.setFont(new java.awt.Font("Arial", 0, 12));
+        btnTransactionSave.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnTransactionSave.setText("Cari");
         btnTransactionSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1050,7 +1043,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tblTransactionList.setFont(new java.awt.Font("Arial", 0, 12));
+        tblTransactionList.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tblTransactionList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1060,7 +1053,7 @@ public class Main extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false, false
@@ -1087,7 +1080,7 @@ public class Main extends javax.swing.JFrame {
         );
         jPanel28Layout.setVerticalGroup(
             jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
         );
 
         jLabel38.setFont(new java.awt.Font("Arial", 0, 12));
@@ -1095,18 +1088,6 @@ public class Main extends javax.swing.JFrame {
 
         jLabel40.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel40.setText("Tarikh Tempoh");
-
-        jLabel41.setFont(new java.awt.Font("Arial", 0, 12));
-        jLabel41.setText("Jenis Transaksi");
-
-        groupTransactionType.add(rbtnTransaction);
-        rbtnTransaction.setFont(new java.awt.Font("Arial", 0, 12));
-        rbtnTransaction.setSelected(true);
-        rbtnTransaction.setText("Transaksi");
-
-        groupTransactionType.add(rbtnLoan);
-        rbtnLoan.setFont(new java.awt.Font("Arial", 0, 12));
-        rbtnLoan.setText("Pinjaman");
 
         javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
         jPanel26.setLayout(jPanel26Layout);
@@ -1123,8 +1104,7 @@ public class Main extends javax.swing.JFrame {
                             .addGroup(jPanel26Layout.createSequentialGroup()
                                 .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                                    .addComponent(jLabel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel41, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cbxTransactionListClients, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1134,12 +1114,7 @@ public class Main extends javax.swing.JFrame {
                                         .addComponent(jLabel39)
                                         .addGap(12, 12, 12)
                                         .addComponent(txtTransactionListTo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel26Layout.createSequentialGroup()
-                                        .addComponent(rbtnTransaction)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(rbtnLoan)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnTransactionSave, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(btnTransactionSave, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 474, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -1159,12 +1134,8 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(txtTransactionListFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rbtnTransaction, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rbtnLoan, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTransactionSave, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                .addComponent(btnTransactionSave, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1535,7 +1506,7 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Bayaran Gaji", jPanel11);
 
-        jTabbedPane4.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        jTabbedPane4.setFont(new java.awt.Font("Arial", 0, 15));
         jTabbedPane4.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jTabbedPane4StateChanged(evt);
@@ -3622,7 +3593,7 @@ public class Main extends javax.swing.JFrame {
             return;
         }
 
-        Customer selected = customers.get(cbxTransactionClients.getSelectedIndex() - 1);
+        Customer selected = cbxTransactionClients.getSelectedIndex() > 0 ? customers.get(cbxTransactionClients.getSelectedIndex() - 1) : new Customer();
 
         Transaction transaction = new Transaction();
         transaction.setType(Transaction.GENERAL);
@@ -4052,26 +4023,12 @@ public class Main extends javax.swing.JFrame {
             return;
         }
 
-        int type = 0;
-        
-
-        if (rbtnTransaction.isSelected()) {
-            type = Transaction.GENERAL;
-            tableModel = new DefaultTableModel(
-                new Object[][] {},
-                new String[] {
-                    "", "Tarikh", "Name Pelanggan", "Keterangan", "Berat KG", "Harga Diterima Seton", "Jumlah Diterima", "Upah Kerja", "Jumpah Gaji", "Kiraan Asing", "Pekerja Terlibat"
-                }
-            );
-        } else if (rbtnLoan.isSelected()) {
-            type = Transaction.LOAN;
-            tableModel = new DefaultTableModel(
-                new Object[][] {},
-                new String[] {
-                    "", "Tarikh", "Pekerja Terlibat", "Keterangan", "Jumlah Pinjaman"
-                }
-            );
-        }
+        tableModel = new DefaultTableModel(
+            new Object[][] {},
+            new String[] {
+                "", "Tarikh", "Name Pelanggan", "Keterangan", "Berat KG", "Harga Diterima Seton", "Jumlah Diterima", "Upah Kerja", "Jumpah Gaji", "Kiraan Asing", "Pekerja Terlibat", "Jumlah Pinjaman"
+            }
+        );
 
         tblTransactionList.setModel(tableModel);
 
@@ -4080,9 +4037,9 @@ public class Main extends javax.swing.JFrame {
         tblTransactionList.getColumnModel().getColumn(2).setPreferredWidth(120);
         tblTransactionList.getColumnModel().getColumn(3).setPreferredWidth(250);
 
-        String query = "SELECT * FROM transactions WHERE type = " + type + " AND date >= '" + Common.renderSQLDate(txtTransactionListFrom.getDate()) + "' AND date <= '" + Common.renderSQLDate(txtTransactionListTo.getDate()) + "'";
+        String query = "SELECT * FROM transactions WHERE date >= '" + Common.renderSQLDate(txtTransactionListFrom.getDate()) + "' AND date <= '" + Common.renderSQLDate(txtTransactionListTo.getDate()) + "'";
         
-        if (cbxTransactionListClients.getSelectedIndex() > 0 && rbtnTransaction.isSelected()) {
+        if (cbxTransactionListClients.getSelectedIndex() > 0) {
             query += " AND customer_id = " + customers.get(cbxTransactionListClients.getSelectedIndex() - 1).getId();
         }
 
@@ -4106,29 +4063,20 @@ public class Main extends javax.swing.JFrame {
 
                 Object[] objects = null;
 
-                if (type == Transaction.GENERAL) {
-                    objects = new Object[] {
-                        new Integer(counter++),
-                        new String(Common.renderDisplayDate(transaction.getDate())),
-                        new String(transaction.getCustomer().getCode() + " - " + transaction.getCustomer().getName()),
-                        new String(transaction.getDescription()),
-                        new Double(transaction.getWeight()),
-                        new String(Common.currency(transaction.getPricePerTon())),
-                        new String(Common.currency(transaction.getTotal())),
-                        new String(Common.currency(transaction.getWages())),
-                        new String(Common.currency(transaction.getTotalSalary())),
-                        new String(Common.currency(transaction.getKiraanAsing())),
-                        new String(transaction.getCompiledWorkerCodes())
-                    };
-                } else if (type == Transaction.LOAN) {
-                    objects = new Object[] {
-                        new Integer(counter++),
-                        new String(Common.renderDisplayDate(transaction.getDate())),
-                        new String(transaction.getCompiledWorkerCodes()),
-                        new String(transaction.getDescription()),
-                        new String(Common.currency(transaction.getLoanAmount()))
-                    };
-                }
+                objects = new Object[] {
+                    new Integer(counter++),
+                    new String(Common.renderDisplayDate(transaction.getDate())),
+                    new String(transaction.getCustomerID() == 0 ? "" : transaction.getCustomer().getCode() + " - " + transaction.getCustomer().getName()),
+                    new String(transaction.getDescription()),
+                    new String(transaction.getWeight() == 0.0 ? "" : "" + transaction.getWeight()),
+                    new String(transaction.getPricePerTon() == 0.0 ? "" : Common.currency(transaction.getPricePerTon())),
+                    new String(transaction.getTotal() == 0.0 ? "" : Common.currency(transaction.getTotal())),
+                    new String(transaction.getWages() == 0.0 ? "" : Common.currency(transaction.getWages())),
+                    new String(transaction.getTotalSalary() == 0.0 ? "" : Common.currency(transaction.getTotalSalary())),
+                    new String(transaction.getKiraanAsing() == 0.0 ? "" : Common.currency(transaction.getKiraanAsing())),
+                    new String(transaction.getCompiledWorkerCodes()),
+                    new String(transaction.getLoanAmount() == 0.0 ? "" : Common.currency(transaction.getLoanAmount()))
+                };
 
                 tableModel.addRow(objects);
                 loaded_transaction_ids.add(rs.getInt("id"));
@@ -4197,28 +4145,32 @@ public class Main extends javax.swing.JFrame {
     private boolean _validate_transaction_form() {
         String message = "";
 
-        if (txtTransactionCalculate.getText().isEmpty()) {
+        if (cbxTransactionListClients.getSelectedIndex() == 0 && txtTransactionWeight.getText().isEmpty() && txtTransactionPricePerTon.getText().isEmpty() && txtTransactionWages.getText().isEmpty() && ! txtTransactionDescription.getText().isEmpty()) {
             txtTransactionCalculate.setText("0.00");
-        }
-
-        if (txtTransactionDate.getDate() == null) {
-            message = "Kesilapan Tarikh";
-        } else if (cbxTransactionClients.getSelectedIndex() == 0) {
-            message = "Sila Pilih Pelanggan";
-        } else if (txtTransactionWeight.getText().isEmpty()) {
-            message = "Sila isikan Berat";
-        } else if ( ! Common.isDouble(txtTransactionWeight.getText())) {
-            message = "Kesilapan Berat";
-        } else if (txtTransactionPricePerTon.getText().isEmpty()) {
-            message = "Sila isikan Harga";
-        } else if ( ! Common.isDouble(txtTransactionPricePerTon.getText())) {
-            message = "Kesilapan Harga";
-        } else if (txtTransactionWages.getText().isEmpty()) {
-            message = "Sila isikan Upah Pekerja";
-        } else if ( ! Common.isDouble(txtTransactionWages.getText())) {
-            message = "Kesilapan Upah";
-        } else if ( ! Common.isDouble(txtTransactionCalculate.getText())) {
-            message = "Kesilapan Kiraan Asing";
+            txtTransactionWeight.setText("0");
+            txtTransactionPricePerTon.setText("0.00");
+            txtTransactionWages.setText("0.00");
+            txtTransactionCalculate.setText("0");
+        } else {
+            if (txtTransactionDate.getDate() == null) {
+                message = "Kesilapan Tarikh";
+            } else if (cbxTransactionClients.getSelectedIndex() == 0) {
+                message = "Sila Pilih Pelanggan";
+            } else if (txtTransactionWeight.getText().isEmpty()) {
+                message = "Sila isikan Berat";
+            } else if ( ! Common.isDouble(txtTransactionWeight.getText())) {
+                message = "Kesilapan Berat";
+            } else if (txtTransactionPricePerTon.getText().isEmpty()) {
+                message = "Sila isikan Harga";
+            } else if ( ! Common.isDouble(txtTransactionPricePerTon.getText())) {
+                message = "Kesilapan Harga";
+            } else if (txtTransactionWages.getText().isEmpty()) {
+                message = "Sila isikan Upah Pekerja";
+            } else if ( ! Common.isDouble(txtTransactionWages.getText())) {
+                message = "Kesilapan Upah";
+            } else if ( ! Common.isDouble(txtTransactionCalculate.getText())) {
+                message = "Kesilapan Kiraan Asing";
+            }
         }
 
         int row = tblTransactionInvolvedWorkers.getRowCount();
@@ -4230,7 +4182,7 @@ public class Main extends javax.swing.JFrame {
             }
         }
 
-        if (counter > 0) {
+        if (counter == 0) {
             message = "Sila Pilih Pekerja yang Terlibat";
         }
 
@@ -4341,7 +4293,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -4386,11 +4337,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JList listTransactionLoanWorkers;
-    private javax.swing.JRadioButton rbtnLoan;
     private javax.swing.JRadioButton rbtnMonhtlyReportCurrentMonth;
     private javax.swing.JRadioButton rbtnMonhtlyReportDateRange;
     private javax.swing.JRadioButton rbtnMonthlyReportLastMonth;
-    private javax.swing.JRadioButton rbtnTransaction;
     private javax.swing.JRadioButton rbtnWorkerMonthlyIncome;
     private javax.swing.JRadioButton rbtnWorkerReportFull;
     private javax.swing.JRadioButton rbtnWorkerSaving;
