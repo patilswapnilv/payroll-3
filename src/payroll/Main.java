@@ -2765,7 +2765,7 @@ public class Main extends javax.swing.JFrame {
         String saving_content = "";
         
         // <editor-fold defaultstate="collapsed" desc="render table header">
-        header += "<thead><tr>";
+        header += "<thead><tr valign=\"top\">";
         String rowspan = selected.size() > 0 ? " rowspan=\"2\"" : "";
         for (String column : columns) {
             header += "<td" + rowspan + ">" + column + "</td>";
@@ -2786,8 +2786,8 @@ public class Main extends javax.swing.JFrame {
         css += "table tr td.first { border-left: 1px solid #333; } ";
         css += "table tr td.last { border-right: 1px solid #333; } ";
         css += "table thead tr, table thead td, table tr.summary, table tr.summary td { border: 1px solid #333; } ";
-        css += "table thead tr td { padding: 5px 0; } ";
-        css += "table tr td.worker_transaction { border-left: 1px solid #333 } ";
+        css += "table thead tr td { padding: 5px 20px 5px 5px; } ";
+        css += "table tr td.worker_transaction { border-left: 1px solid #333; } ";
         css += "table tr.salary td { border: 1px solid #333 } ";
         css += "table tr.summary td.blank { border-left: none; border-bottom: none; } ";
         css += "table tr.saving_summary, table tr.saving_summary td { border : 1px solid #333; } ";
