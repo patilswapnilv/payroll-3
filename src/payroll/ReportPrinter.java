@@ -109,7 +109,7 @@ public class ReportPrinter implements Printable {
             y = 40;
             g.setFont(new Font("Calibri", Font.BOLD, 12));
             g.drawString("Laporan Bulanan (" + Common.renderDisplayDate((Calendar) dates.get("from")) + " - " + Common.renderDisplayDate((Calendar) dates.get("to")) + ")", x, y);
-            g.setFont(new Font("Calibri", Font.PLAIN, 12));
+            g.setFont(new Font("Calibri", Font.PLAIN, 9));
             x = 20;
             y = 80;
             this.render_header(g);
@@ -284,7 +284,7 @@ public class ReportPrinter implements Printable {
             }
 
             Transaction transaction = transactions.get(i);
-            g.setFont(new Font("Calibri", Font.PLAIN, 12));
+            g.setFont(new Font("Calibri", Font.PLAIN, 9));
             // draw line on left
             g.drawLine(x - 5, y + 5, x - 5, y - 35);
 
@@ -428,7 +428,7 @@ public class ReportPrinter implements Printable {
 
         int counter = salaries.size();
 
-        g.setFont(new Font("Calibri", Font.PLAIN, 12));
+        g.setFont(new Font("Calibri", Font.PLAIN, 9));
         
         for (int i = salaryIndex; i < counter; i ++) {
             x = 20;
@@ -528,7 +528,7 @@ public class ReportPrinter implements Printable {
             g.setFont(new Font("Calibri", Font.BOLD, 12));
             g.drawString("Simpanan Tetap", x, y);
             y += 20;
-            g.setFont(new Font("Calibri", Font.PLAIN, 12));
+            g.setFont(new Font("Calibri", Font.PLAIN, 9));
 
 
             g.drawLine(x - 5, y - 15, x - 5, y + 30); // left
@@ -541,7 +541,7 @@ public class ReportPrinter implements Printable {
             g.drawLine(15, y - 15, x + size + 5, y - 15); // top
             g.drawLine(15, y + 30, x + size + 5, y + 30); // bottom
         } else {
-            g.setFont(new Font("Calibri", Font.PLAIN, 12));
+            g.setFont(new Font("Calibri", Font.PLAIN, 9));
             x += 60 + 10; // add date size;
             y += 50;
         }
