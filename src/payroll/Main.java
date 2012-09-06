@@ -3173,7 +3173,7 @@ public class Main extends javax.swing.JFrame {
             dateTo.roll(Calendar.MONTH, -1);
         } else {
             dateFrom.setTime(txtMonthlyReportDateFrom.getDate());
-            dateTo.setTime(txtMonthlyReportDateFrom.getDate());
+            dateTo.setTime(txtMonthlyReportDateTo.getDate());
         }
 
         values.put("from", dateFrom);
