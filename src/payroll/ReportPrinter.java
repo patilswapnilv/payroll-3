@@ -237,6 +237,39 @@ public class ReportPrinter implements Printable {
                 x += size + 10;
             }
 
+            if (parent.chkMonthlyReportWages.isSelected()) {
+                g.drawString("Kerja", x, y);
+                g.drawString("Upah", x, y - 15);
+                size = 50;
+                g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
+                g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
+                g.drawLine(x - 5, y + 5, x - 5, y - 35);
+                g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
+                x += size + 10;
+            }
+
+            if (parent.chkMonthlyReportSalary.isSelected()) {
+                g.drawString("Gaji", x, y);
+                g.drawString("Jumlah", x, y - 15);
+                size = 50;
+                g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
+                g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
+                g.drawLine(x - 5, y + 5, x - 5, y - 35);
+                g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
+                x += size + 10;
+            }
+
+            if (parent.chkMonthlyReportBalance.isSelected()) {
+                g.drawString("Baki", x, y);
+                g.drawString("Jumlah", x, y - 15);
+                size = 50;
+                g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
+                g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
+                g.drawLine(x - 5, y + 5, x - 5, y - 35);
+                g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
+                x += size + 10;
+            }
+
             basicColumnSize = x;
         }
 
@@ -342,7 +375,32 @@ public class ReportPrinter implements Printable {
                     x += size + 10;
                     g.drawLine(x - 5, y + 5, x - 5, y - 35);
                 }
+
+                if (parent.chkMonthlyReportWages.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL)
+                        g.drawString("" + Common.currency(transaction.getWages()), x, y);
+                    size = 50;
+                    x += size + 10;
+                    g.drawLine(x - 5, y + 5, x - 5, y - 35);
+                }
+
+                if (parent.chkMonthlyReportSalary.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL)
+                        g.drawString("" + Common.currency(transaction.getTotalSalary()), x, y);
+                    size = 50;
+                    x += size + 10;
+                    g.drawLine(x - 5, y + 5, x - 5, y - 35);
+                }
+
+                if (parent.chkMonthlyReportBalance.isSelected()) {
+                    if (transaction.getType() == Transaction.GENERAL)
+                        g.drawString("" + Common.currency(transaction.getBalance()), x, y);
+                    size = 50;
+                    x += size + 10;
+                    g.drawLine(x - 5, y + 5, x - 5, y - 35);
+                }
             }
+            
             for (int c = workerIndex; c < workerCount; c ++) {
                 size = 180;
                 if (x + size > 780.0) {
@@ -523,7 +581,7 @@ public class ReportPrinter implements Printable {
         
         x = 20;
 
-        if (savingIndex == 0) {
+        if (savingIndex == 0 && printMainColumn) {
             y += 30;
             g.setFont(new Font("Calibri", Font.BOLD, 12));
             g.drawString("Simpanan Tetap", x, y);
@@ -538,8 +596,8 @@ public class ReportPrinter implements Printable {
 
             x += getSavingColspanSize();
 
-            g.drawLine(15, y - 15, x + size + 5, y - 15); // top
-            g.drawLine(15, y + 30, x + size + 5, y + 30); // bottom
+            g.drawLine(15, y - 15, x + size - 5, y - 15); // top
+            g.drawLine(15, y + 30, x + size - 5, y + 30); // bottom
         } else {
             g.setFont(new Font("Calibri", Font.PLAIN, 9));
             x += 60 + 10; // add date size;
@@ -607,6 +665,21 @@ public class ReportPrinter implements Printable {
         }
 
         if (parent.chkMonthlyReportTotalReceived.isSelected()) {
+            size = 50;
+            total += size + 10;
+        }
+
+        if (parent.chkMonthlyReportWages.isSelected()) {
+            size = 50;
+            total += size + 10;
+        }
+
+        if (parent.chkMonthlyReportSalary.isSelected()) {
+            size = 50;
+            total += size + 10;
+        }
+
+        if (parent.chkMonthlyReportBalance.isSelected()) {
             size = 50;
             total += size + 10;
         }
