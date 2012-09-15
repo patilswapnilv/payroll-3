@@ -3784,7 +3784,7 @@ public class Main extends javax.swing.JFrame {
             return;
         }
 
-        String query = "SELECT * FROM workerRecord WHERE type IN (2, 3) AND worker_id = " + selected.getId() + " ";
+        String query = "SELECT * FROM workerRecord WHERE type IN (5, 3) AND worker_id = " + selected.getId() + " ";
 
         if (txtSavingDateFrom.getDate() != null) {
             Calendar calender = Calendar.getInstance();
