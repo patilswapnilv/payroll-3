@@ -94,6 +94,7 @@ public class WorkerReportPrinter implements Printable {
             totalBalance += report.getBalance();
             totalSaving += report.getSaving();
             totalSavingBalance += report.getSavingBalance();
+            totalPayment += report.getPayment();
 
             x = 20;
             g.drawLine(x - 5, y + 5, x - 5, y - 35);
@@ -179,6 +180,16 @@ public class WorkerReportPrinter implements Printable {
         g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
         x += size + 10;
 
+        if (type == WorkerReportFrame.INCOME) {
+            g.drawString("Bayaran Gaji", x, y);
+            size = 60;
+            g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
+            g.drawLine(x - 5, y - 35, x + 5 + size, y - 35);
+            g.drawLine(x - 5, y + 5, x - 5, y - 35);
+            g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 35);
+            x += size + 10;
+        }
+
     }
 
     private void printSavingHeader(Graphics2D g) {
@@ -223,6 +234,12 @@ public class WorkerReportPrinter implements Printable {
         g.drawString(Common.currency(report.getBalance()), x, y);
         size = 60;
         x += size + 10;
+
+        if (type == WorkerReportFrame.INCOME) {
+            g.drawString(Common.currency(report.getPayment()), x, y);
+            size = 60;
+            x += size + 10;
+        }
     }
 
     private void printSavingContent(Graphics2D g, WorkerReport report) {
@@ -255,6 +272,12 @@ public class WorkerReportPrinter implements Printable {
         g.drawString(Common.currency(totalBalance), x, y);
         size = 60;
         x += size + 10;
+
+        if (type == WorkerReportFrame.INCOME) {
+             g.drawString(Common.currency(totalPayment), x, y);
+        size = 60;
+        x += size + 10;
+        }
     }
 
     private void printSavingSummary(Graphics2D g) {

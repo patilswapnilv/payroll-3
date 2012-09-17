@@ -64,7 +64,7 @@ public class WorkerReportFrame extends javax.swing.JFrame {
         tableModel = new DefaultTableModel(
             new Object[][] {},
             new String[] {
-                "Tempoh", "Gaji", "Pinjaman", "Baki 1", "Bayaran", "Baki", "Simpanan"
+                "Tempoh Bulan", "Gaji", "Pinjaman", "Baki 1", "Bayaran Gaji", "Baki", "Simpanan"
             }
         );
         tblReport.setModel(tableModel);
@@ -108,7 +108,7 @@ public class WorkerReportFrame extends javax.swing.JFrame {
         tableModel = new DefaultTableModel(
             new Object[][] {},
             new String[] {
-                "Tempoh", "Gaji", "Pinjaman", "Baki"
+                "Tempoh Bulan", "Gaji", "Pinjaman", "Baki" , "Bayaran Gaji"
             }
         );
         tblReport.setModel(tableModel);
@@ -127,6 +127,7 @@ public class WorkerReportFrame extends javax.swing.JFrame {
                 new String(Common.currency(report.getSalary())),
                 new String(Common.currency(report.getLoan())),
                 new String(Common.currency(report.getBalance())),
+                new String(Common.currency(report.getPayment())),
             };
 
             tableModel.addRow(objects);
@@ -137,7 +138,7 @@ public class WorkerReportFrame extends javax.swing.JFrame {
         tableModel = new DefaultTableModel(
             new Object[][] {},
             new String[] {
-                "Tempoh", "Simpanan", "Bayaran", "Baki"
+                "Tempoh Bulan", "Simpanan", "Bayaran Gaji", "Baki"
             }
         );
         tblReport.setModel(tableModel);

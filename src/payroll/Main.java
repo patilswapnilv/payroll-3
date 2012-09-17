@@ -3403,6 +3403,11 @@ public class Main extends javax.swing.JFrame {
             cell.setCellValue("Pinjaman");
             cell = header.createCell(index++);
             cell.setCellValue("Baki");
+
+            if (type == WorkerReportFrame.INCOME) {
+                cell = header.createCell(index++);
+                cell.setCellValue("Bayaran");
+            }
         }
 
         if (type == WorkerReportFrame.SAVING || type == WorkerReportFrame.FULL) {
@@ -3438,6 +3443,11 @@ public class Main extends javax.swing.JFrame {
                 cell.setCellValue(Common.currency(report.getLoan()));
                 cell = row.createCell(index++);
                 cell.setCellValue(Common.currency(report.getBalance()));
+
+                if (type == WorkerReportFrame.INCOME) {
+                    cell = row.createCell(index++);
+                    cell.setCellValue(Common.currency(report.getPayment()));
+                }
             }
 
             if (type == WorkerReportFrame.SAVING || type == WorkerReportFrame.FULL) {
@@ -3462,6 +3472,11 @@ public class Main extends javax.swing.JFrame {
             cell.setCellValue(Common.currency(totalLoan));
             cell = footer.createCell(index++);
             cell.setCellValue(Common.currency(totalBalance));
+
+            if (type == WorkerReportFrame.INCOME) {
+                cell = footer.createCell(index++);
+                cell.setCellValue(Common.currency(totalPayment));
+            }
         }
 
         if (type == WorkerReportFrame.SAVING || type == WorkerReportFrame.FULL) {
