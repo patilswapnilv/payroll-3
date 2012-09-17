@@ -284,7 +284,7 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="658" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -578,7 +578,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="633" max="32767" attributes="0"/>
                           <Component id="btnRecord" min="-2" pref="103" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txtTransactionNew" min="-2" pref="130" max="-2" attributes="0"/>
@@ -2709,7 +2709,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="1">
-                                              <Component id="jLabel23" pref="418" max="32767" attributes="0"/>
+                                              <Component id="jLabel23" pref="428" max="32767" attributes="0"/>
                                               <EmptySpace min="-2" pref="466" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="1" attributes="0">

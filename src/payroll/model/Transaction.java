@@ -105,7 +105,7 @@ public class Transaction {
 
     public boolean save()
     {
-        String query = "INSERT INTO transactions(type, loan_amount, customer_id, description, weight, price_per_ton, wages, date, normalized_worker_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO transactions(type, loan_amount, customer_id, description, weight, price_per_ton, wages, date, normalized_worker_id, kiraan_asing) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = Database.instance().createPreparedStatement(query);
 
         try {
@@ -118,6 +118,7 @@ public class Transaction {
             ps.setDouble(7, this.getWages());
             ps.setString(8, this.getSQLDate());
             ps.setString(9, this.getNormalizedWorkerID());
+            ps.setDouble(10, this.getKiraanAsing());
 
             id = Database.instance().insert(ps);
 
