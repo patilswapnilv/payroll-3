@@ -1632,7 +1632,7 @@
                             <Column editable="false" title="Keterangan" type="java.lang.String"/>
                             <Column editable="false" title="Baki +" type="java.lang.String"/>
                             <Column editable="false" title="Bayaran -" type="java.lang.String"/>
-                            <Column editable="false" title="Baki" type="java.lang.String"/>
+                            <Column editable="false" title="Simpanan Tetap" type="java.lang.String"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

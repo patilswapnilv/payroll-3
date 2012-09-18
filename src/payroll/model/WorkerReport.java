@@ -60,7 +60,7 @@ public class WorkerReport {
     }
 
     public double getSavingBalance() {
-        return getBalance() + saving + payment;
+        return saving + withdraw;
     }
 
     public void setLoan(double loan) {

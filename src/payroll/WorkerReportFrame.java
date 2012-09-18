@@ -64,20 +64,21 @@ public class WorkerReportFrame extends javax.swing.JFrame {
         tableModel = new DefaultTableModel(
             new Object[][] {},
             new String[] {
-                "Tempoh Bulan", "Gaji", "Pinjaman", "Baki 1", "Bayaran Gaji", "Baki", "Simpanan"
+                "Tempoh Bulan", "Gaji", "Pinjaman", "Baki", "Bayaran Gaji", "Simpanan +", "Simpanan -", "Simpanan Tetap"
             }
         );
         tblReport.setModel(tableModel);
 
-        double totalSalary = 0.0, totalLoan = 0.0, totalBalance = 0.0, totalSaving = 0.0, totalPayment = 0.0, totalSavingBalance = 0.0;
+        double totalSalary = 0.0, totalLoan = 0.0, totalBalance = 0.0, totalSaving = 0.0, totalPayment = 0.0, totalSavingBalance = 0.0, totalWithdraw = 0.0;
 
         for (WorkerReport report : reports) {
             
             totalSalary += report.getSalary();
             totalLoan += report.getLoan();
             totalBalance += report.getBalance();
-            totalSalary += report.getSaving();
+            totalSaving += report.getSaving();
             totalPayment += report.getPayment();
+            totalWithdraw += report.getWithdraw();
             totalSavingBalance += report.getSavingBalance();
             
             Object[] objects = new Object[] {
@@ -86,8 +87,9 @@ public class WorkerReportFrame extends javax.swing.JFrame {
                 new String(Common.currency(report.getLoan())),
                 new String(Common.currency(report.getBalance())),
                 new String(Common.currency(report.getPayment())),
-                new String(Common.currency(report.getSavingBalance())),
-                new String(Common.currency(report.getSaving()))
+                new String(Common.currency(report.getSaving())),
+                new String(Common.currency(report.getWithdraw())),
+                new String(Common.currency(report.getSavingBalance()))
             };
 
             tableModel.addRow(objects);
@@ -99,8 +101,9 @@ public class WorkerReportFrame extends javax.swing.JFrame {
             new String(Common.currency(totalLoan)),
             new String(Common.currency(totalBalance)),
             new String(Common.currency(totalPayment)),
-            new String(Common.currency(totalSavingBalance)),
-            new String(Common.currency(totalSaving))
+            new String(Common.currency(totalSaving)),
+            new String(Common.currency(totalWithdraw)),
+            new String(Common.currency(totalSavingBalance))
         });
     }
 
@@ -113,14 +116,14 @@ public class WorkerReportFrame extends javax.swing.JFrame {
         );
         tblReport.setModel(tableModel);
 
-        double totalSalary = 0.0, totalLoan = 0.0, totalBalance = 0.0;
+        double totalSalary = 0.0, totalLoan = 0.0, totalBalance = 0.0, totalPayment = 0.0;
 
         for (WorkerReport report : reports) {
 
             totalSalary += report.getSalary();
             totalLoan += report.getLoan();
             totalBalance += report.getBalance();
-            totalSalary += report.getSaving();
+            totalPayment += report.getPayment();
 
             Object[] objects = new Object[] {
                 new String(report.getMonth() + "/" + report.getYear()),
@@ -132,33 +135,49 @@ public class WorkerReportFrame extends javax.swing.JFrame {
 
             tableModel.addRow(objects);
         }
+
+        tableModel.addRow(new Object[] {
+            new String("Jumlah"),
+            new String(Common.currency(totalSalary)),
+            new String(Common.currency(totalLoan)),
+            new String(Common.currency(totalBalance)),
+            new String(Common.currency(totalPayment))
+        });
     }
 
     private void saving_setup() {
         tableModel = new DefaultTableModel(
             new Object[][] {},
             new String[] {
-                "Tempoh Bulan", "Simpanan", "Bayaran Gaji", "Baki"
+                "Tempoh Bulan", "Simpanan +", "Simpanan -", "Simpanan Tetap"
             }
         );
         tblReport.setModel(tableModel);
 
-        double totalSaving = 0.0, totalPayment = 0.0, totalSavingBalance = 0.0;
+        double totalSaving = 0.0, totalWithdraw = 0.0, totalSavingBalance = 0.0;
 
         for (WorkerReport report : reports) {
 
-            totalPayment += report.getPayment();
+            totalWithdraw += report.getWithdraw();
             totalSavingBalance += report.getSavingBalance();
+            totalSaving += report.getSaving();
 
             Object[] objects = new Object[] {
                 new String(report.getMonth() + "/" + report.getYear()),
                 new String(Common.currency(report.getSaving())),
-                new String(Common.currency(report.getPayment())),
+                new String(Common.currency(report.getWithdraw())),
                 new String(Common.currency(report.getSavingBalance())),
             };
 
             tableModel.addRow(objects);
         }
+
+        tableModel.addRow(new Object[] {
+            new String("Jumlah"),
+            new String(Common.currency(totalSaving)),
+            new String(Common.currency(totalWithdraw)),
+            new String(Common.currency(totalSavingBalance))
+        });
     }
 
     /** This method is called from within the constructor to
