@@ -162,7 +162,7 @@ public class ReportPrinter implements Printable {
 
     private void render_header(Graphics2D g) {
         int size = 0;
-        g.setFont(new Font("Calibri", Font.BOLD, 12));
+        g.setFont(new Font("Calibri", Font.BOLD, 10));
 
         g.drawString("Tarikh", x, y);
         size = 60;
@@ -317,7 +317,7 @@ public class ReportPrinter implements Printable {
             }
 
             Transaction transaction = transactions.get(i);
-            g.setFont(new Font("Calibri", Font.PLAIN, 9));
+            g.setFont(new Font("Calibri", Font.PLAIN, 8));
             // draw line on left
             g.drawLine(x - 5, y + 5, x - 5, y - 35);
 
@@ -354,7 +354,7 @@ public class ReportPrinter implements Printable {
 
                 if (parent.chkMonthlyReportWeight.isSelected()) {
                     if (transaction.getType() == Transaction.GENERAL)
-                        g.drawString("" + Common.currency(transaction.getWeight()), x, y);
+                        g.drawString("" + ((int) transaction.getWeight()), x, y);
                     size = 60;
                     x += size + 10;
                     g.drawLine(x - 5, y + 5, x - 5, y - 35);

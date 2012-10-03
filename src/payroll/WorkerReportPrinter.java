@@ -66,7 +66,7 @@ public class WorkerReportPrinter implements Printable {
 
             int size = 0;
 
-            g.setFont(new Font("Calibri", Font.BOLD, 12));
+            g.setFont(new Font("Calibri", Font.BOLD, 10));
 
             g.drawString("Tempoh", x, y);
             size = 80;
@@ -89,7 +89,7 @@ public class WorkerReportPrinter implements Printable {
 
             int counter = 0;
 
-            g.setFont(new Font("Calibri", Font.PLAIN, 12));
+            g.setFont(new Font("Calibri", Font.PLAIN, 9));
 
             for (int i = currentIndex; i < itemCount; i ++) {
                 WorkerReport report = reports.get(i);

@@ -7,6 +7,7 @@ package payroll;
 
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import payroll.libraries.Database;
 
 /**
@@ -26,7 +27,17 @@ public class Application {
             public void run() {
                 try {
                     db = Database.instance();
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                    
+                    try {
+                        for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                            if ("Nimbus".equals(info.getName())) {
+                                UIManager.setLookAndFeel(info.getClassName());
+                                break;
+                            }
+                        }
+                    } catch (Exception e) {
+                        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                    }
 
                     //new Login(null, true).setVisible(true);
                     new Main().setVisible(true);

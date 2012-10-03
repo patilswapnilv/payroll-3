@@ -223,4 +223,22 @@ public class WorkerRecord {
         return 0.0;
     }
 
+    public static double getWorkerMonthlySalary(int workerID, Date date ) {
+        double salary = 0.00;
+        Calendar calender = Calendar.getInstance();
+        calender.setTime(date);
+        String query = "SELECT SUM(amount) AS total_salary FROM workerRecord WHERE worker_id = " + workerID + " AND type = 4 AND strftime(\"%m\", date) = " + (calender.get(Calendar.MONTH) + 1);
+
+        ResultSet rs = Database.instance().execute(query);
+        try {
+            rs.next();
+
+            salary = rs.getDouble("total_salary");
+            return salary;
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return 0.0;
+    }
 }
