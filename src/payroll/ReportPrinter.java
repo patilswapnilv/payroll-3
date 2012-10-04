@@ -345,58 +345,58 @@ public class ReportPrinter implements Printable {
                 }
 
                 if (parent.chkMonthlyReportKiraanAsing.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL)
-                        g.drawString("" + Common.currency(transaction.getKiraanAsing()), x, y);
                     size = 50;
                     x += size + 10;
+                    if (transaction.getType() == Transaction.GENERAL)
+                        g.drawString("" + Common.currency(transaction.getKiraanAsing()), x - g.getFontMetrics().stringWidth(Common.currency(transaction.getKiraanAsing())) - 10, y);
                     g.drawLine(x - 5, y + 5, x - 5, y - 35);
                 }
 
                 if (parent.chkMonthlyReportWeight.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL)
-                        g.drawString("" + ((int) transaction.getWeight()), x, y);
                     size = 60;
                     x += size + 10;
+                    if (transaction.getType() == Transaction.GENERAL)
+                        g.drawString("" + ((int) transaction.getWeight()), x - g.getFontMetrics().stringWidth("" + ((int) transaction.getWeight())) - 10, y);
                     g.drawLine(x - 5, y + 5, x - 5, y - 35);
                 }
 
                 if (parent.chkMonthlyReportPricePerTon.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL)
-                        g.drawString("" + Common.currency(transaction.getPricePerTon()), x, y);
                     size = 50;
                     x += size + 10;
+                    if (transaction.getType() == Transaction.GENERAL)
+                        g.drawString("" + Common.currency(transaction.getPricePerTon()), x - g.getFontMetrics().stringWidth(Common.currency(transaction.getPricePerTon())) - 10, y);
                     g.drawLine(x - 5, y + 5, x - 5, y - 35);
                 }
 
                 if (parent.chkMonthlyReportTotalReceived.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL)
-                        g.drawString("" + Common.currency(transaction.getTotal()), x, y);
                     size = 50;
                     x += size + 10;
+                    if (transaction.getType() == Transaction.GENERAL)
+                        g.drawString("" + Common.currency(transaction.getTotal()), x - g.getFontMetrics().stringWidth(Common.currency(transaction.getTotal())) - 10, y);
                     g.drawLine(x - 5, y + 5, x - 5, y - 35);
                 }
 
                 if (parent.chkMonthlyReportWages.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL)
-                        g.drawString("" + Common.currency(transaction.getWages()), x, y);
                     size = 50;
                     x += size + 10;
+                    if (transaction.getType() == Transaction.GENERAL)
+                        g.drawString("" + Common.currency(transaction.getWages()), x - g.getFontMetrics().stringWidth(Common.currency(transaction.getWages())) - 10, y);
                     g.drawLine(x - 5, y + 5, x - 5, y - 35);
                 }
 
                 if (parent.chkMonthlyReportSalary.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL)
-                        g.drawString("" + Common.currency(transaction.getTotalSalary()), x, y);
                     size = 50;
                     x += size + 10;
+                    if (transaction.getType() == Transaction.GENERAL)
+                        g.drawString("" + Common.currency(transaction.getTotalSalary()), x - g.getFontMetrics().stringWidth(Common.currency(transaction.getTotalSalary())) - 10, y);
                     g.drawLine(x - 5, y + 5, x - 5, y - 35);
                 }
 
                 if (parent.chkMonthlyReportBalance.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL)
-                        g.drawString("" + Common.currency(transaction.getBalance()), x, y);
                     size = 50;
                     x += size + 10;
+                    if (transaction.getType() == Transaction.GENERAL)
+                        g.drawString("" + Common.currency(transaction.getBalance()), x - g.getFontMetrics().stringWidth(Common.currency(transaction.getBalance())) - 10, y);
                     g.drawLine(x - 5, y + 5, x - 5, y - 35);
                 }
             }
@@ -414,12 +414,12 @@ public class ReportPrinter implements Printable {
                 if (Common.inArray(workerIds, selected.get(c).getId())) {
                     if (transaction.getType() == Transaction.GENERAL) {
                         calculations.get(c).setSalary(transaction.getWagePerWorker());
-                        g.drawString("" + Common.currency(transaction.getWagePerWorker()), x, y);
-                        g.drawString("" + Common.currency(calculations.get(c).getBalance()), x + 110, y);
+                        g.drawString("" + Common.currency(transaction.getWagePerWorker()), x + 50 - g.getFontMetrics().stringWidth(Common.currency(transaction.getWagePerWorker())) - 10, y);
+                        g.drawString("" + Common.currency(calculations.get(c).getBalance()), x + 190 - g.getFontMetrics().stringWidth(Common.currency(calculations.get(c).getBalance())) - 10, y);
                     } else {
                         calculations.get(c).setLoan(transaction.getLoanAmount());
-                        g.drawString("" +Common.currency( transaction.getLoanAmount()), x + 50, y);
-                        g.drawString("" + Common.currency(calculations.get(c).getBalance()), x + 110, y);
+                        g.drawString("" + Common.currency(transaction.getLoanAmount()), x + 110 - g.getFontMetrics().stringWidth(Common.currency(transaction.getLoanAmount())) - 10, y);
+                        g.drawString("" + Common.currency(calculations.get(c).getBalance()), x + 190 - g.getFontMetrics().stringWidth(Common.currency(calculations.get(c).getBalance())) - 10, y);
                     }
                     
                 }
@@ -460,9 +460,9 @@ public class ReportPrinter implements Printable {
             }
 
             g.setFont(new Font("Calibri", Font.BOLD, 12));
-            g.drawString(Common.currency(calculations.get(i).getSalary()), x, y);
-            g.drawString(Common.currency(calculations.get(i).getLoan()), x + 50, y);
-            g.drawString(Common.currency(calculations.get(i).getBalance()), x + 110, y);
+            g.drawString(Common.currency(calculations.get(i).getSalary()), x + 50 - g.getFontMetrics().stringWidth(Common.currency(calculations.get(i).getSalary())) - 10, y);
+            g.drawString(Common.currency(calculations.get(i).getLoan()), x + 110 - g.getFontMetrics().stringWidth(Common.currency(calculations.get(i).getLoan())) - 10, y);
+            g.drawString(Common.currency(calculations.get(i).getBalance()), x + 190 - g.getFontMetrics().stringWidth(Common.currency(calculations.get(i).getBalance())) - 10, y);
 
             g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
             g.drawLine(x - 5, y + 5, x - 5, y - 35);
@@ -523,9 +523,9 @@ public class ReportPrinter implements Printable {
                 }
 
                 calculations.get(c).setPayment(salaries.get(i).getWorkerSalary(calculations.get(c).getWorkerID()));
-                g.drawString(Common.currency(Math.abs(salaries.get(i).getWorkerSalary(selected.get(c).getId()))), x, y);
                 g.drawLine(x - 5, y + 5, x - 5, y - 15);
                 x += size + 10;
+                g.drawString(Common.currency(Math.abs(salaries.get(i).getWorkerSalary(selected.get(c).getId()))), x - g.getFontMetrics().stringWidth(Common.currency(Math.abs(salaries.get(i).getWorkerSalary(selected.get(c).getId())))) - 10, y);
                 g.drawLine(x - 5, y + 5, x - 5, y - 15);
             }
 
@@ -561,9 +561,9 @@ public class ReportPrinter implements Printable {
                     break;
                 }
 
-                g.drawString(Common.currency(calculations.get(c).getTotalBalance()), x, y);
                 g.drawLine(x - 5, y + 5, x - 5, y - 15);
                 x += size + 10;
+                g.drawString(Common.currency(calculations.get(c).getTotalBalance()), x - g.getFontMetrics().stringWidth(Common.currency(calculations.get(c).getTotalBalance())) - 10, y);
                 g.drawLine(x - 5, y + 5, x - 5, y - 15);
             }
 
@@ -615,14 +615,14 @@ public class ReportPrinter implements Printable {
                 break;
             }
 
-            g.drawString(Common.currency(saving.getPrevious()), x, y);
-            g.drawString(Common.currency(saving.getCurrent()), x, y + 12);
-            g.drawString(Common.currency(saving.getBalance()), x, y + 24);
-
             g.drawLine(x - 5, y - 15, x + size + 5, y - 15); // top
             g.drawLine(x - 5, y + 30, x + size + 5, y + 30); // bottom
 
             x += size + 10;
+
+            g.drawString(Common.currency(saving.getPrevious()), x - g.getFontMetrics().stringWidth(Common.currency(saving.getPrevious())) - 10, y);
+            g.drawString(Common.currency(saving.getCurrent()), x - g.getFontMetrics().stringWidth(Common.currency(saving.getCurrent())) - 10, y + 12);
+            g.drawString(Common.currency(saving.getBalance()), x - g.getFontMetrics().stringWidth(Common.currency(saving.getBalance())) - 10, y + 24);
 
             g.drawLine(x - 5, y - 15, x - 5, y + 30);
 

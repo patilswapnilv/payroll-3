@@ -6,6 +6,7 @@
 package payroll;
 
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
@@ -39,6 +40,8 @@ public class WorkerReportPrinter implements Printable {
 
     private double totalSalary = 0.0, totalLoan = 0.0, totalBalance = 0.0, totalSaving = 0.0, totalPayment = 0.0, totalSavingBalance = 0.0, totalWithdraw = 0.0;
 
+    private FontMetrics fontMetrics;
+    
     public WorkerReportPrinter(int type, Worker worker, ArrayList<WorkerReport> reports) {
         this.reports = reports;
         this.worker = worker;
@@ -227,72 +230,72 @@ public class WorkerReportPrinter implements Printable {
     private void printSalaryContent(Graphics2D g, WorkerReport report) {
         int size = 0;
 
-        g.drawString(Common.currency(report.getSalary()), x, y);
         size = 60;
         x += size + 10;
-
-        g.drawString(Common.currency(report.getLoan()), x, y);
+        g.drawString(Common.currency(report.getSalary()), x - g.getFontMetrics().stringWidth(Common.currency(report.getSalary())) - 10, y);
+        
         size = 60;
         x += size + 10;
-
-        g.drawString(Common.currency(report.getBalance()), x, y);
+        g.drawString(Common.currency(report.getLoan()), x - g.getFontMetrics().stringWidth(Common.currency(report.getLoan())) - 10, y);
+        
         size = 60;
         x += size + 10;
-
-        g.drawString(Common.currency(report.getPayment()), x, y);
+        g.drawString(Common.currency(report.getBalance()), x - g.getFontMetrics().stringWidth(Common.currency(report.getBalance())) - 10, y);
+        
         size = 60;
         x += size + 10;
+        g.drawString(Common.currency(report.getPayment()), x - g.getFontMetrics().stringWidth(Common.currency(report.getPayment())) - 10, y);
     }
 
     private void printSavingContent(Graphics2D g, WorkerReport report) {
         int size = 0;
 
-        g.drawString(Common.currency(report.getSaving()), x, y);
         size = 60;
         x += size + 10;
+        g.drawString(Common.currency(report.getSaving()), x - g.getFontMetrics().stringWidth(Common.currency(report.getSaving())) - 10, y);
 
-        g.drawString(Common.currency(report.getWithdraw()), x, y);
         size = 60;
         x += size + 10;
+        g.drawString(Common.currency(report.getWithdraw()), x - g.getFontMetrics().stringWidth(Common.currency(report.getWithdraw())) - 10, y);
 
-        g.drawString(Common.currency(report.getSavingBalance()), x, y);
         size = 80;
         x += size + 10;
+        g.drawString(Common.currency(report.getSavingBalance()), x - g.getFontMetrics().stringWidth(Common.currency(report.getSavingBalance())) - 10, y);
     }
 
     private void printSalarySummary(Graphics2D g) {
         int size = 0;
 
-        g.drawString(Common.currency(totalSalary), x, y);
         size = 60;
         x += size + 10;
+        g.drawString(Common.currency(totalSalary), x - g.getFontMetrics().stringWidth(Common.currency(totalSalary)) - 10, y);
 
-        g.drawString(Common.currency(totalLoan), x, y);
         size = 60;
         x += size + 10;
+        g.drawString(Common.currency(totalLoan), x - g.getFontMetrics().stringWidth(Common.currency(totalLoan)) - 10, y);
 
-        g.drawString(Common.currency(totalBalance), x, y);
         size = 60;
         x += size + 10;
+        g.drawString(Common.currency(totalBalance), x - g.getFontMetrics().stringWidth(Common.currency(totalBalance)) - 10, y);
 
-        g.drawString(Common.currency(totalPayment), x, y);
         size = 60;
         x += size + 10;
+        g.drawString(Common.currency(totalPayment), x - g.getFontMetrics().stringWidth(Common.currency(totalPayment)) - 10, y);
     }
 
     private void printSavingSummary(Graphics2D g) {
         int size = 0;
         
-        g.drawString(Common.currency(totalSaving), x, y);
         size = 60;
         x += size + 10;
+        g.drawString(Common.currency(totalSaving), x - g.getFontMetrics().stringWidth(Common.currency(totalSaving)) - 10, y);
 
-        g.drawString(Common.currency(totalWithdraw), x, y);
         size = 60;
         x += size + 10;
+        g.drawString(Common.currency(totalWithdraw), x - g.getFontMetrics().stringWidth(Common.currency(totalWithdraw)) - 10, y);
 
-        g.drawString(Common.currency(totalSavingBalance), x, y);
         size = 80;
         x += size + 10;
+        g.drawString(Common.currency(totalSavingBalance), x - g.getFontMetrics().stringWidth(Common.currency(totalSavingBalance)) - 10, y);
     }
 }
