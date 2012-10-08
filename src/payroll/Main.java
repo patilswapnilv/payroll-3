@@ -669,7 +669,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         txtTransactionTotalReceived.setEditable(false);
-        txtTransactionTotalReceived.setFont(new java.awt.Font("Arial", 0, 12));
+        txtTransactionTotalReceived.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtTransactionTotalReceived.setFocusable(false);
 
         txtTransactionWages.setFont(new java.awt.Font("Arial", 0, 12));
@@ -685,7 +685,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         txtTransactionSalary.setEditable(false);
-        txtTransactionSalary.setFont(new java.awt.Font("Arial", 0, 12));
+        txtTransactionSalary.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtTransactionSalary.setFocusable(false);
 
         txtTransactionBalance.setEditable(false);
@@ -804,7 +804,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        cboxTransactionAllWorkers.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cboxTransactionAllWorkers.setFont(new java.awt.Font("Arial", 0, 12));
         cboxTransactionAllWorkers.setText("Semua Pekerja");
         cboxTransactionAllWorkers.setFocusable(false);
         cboxTransactionAllWorkers.addActionListener(new java.awt.event.ActionListener() {
@@ -1707,7 +1707,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnMonthlyReportGenerate.setFont(new java.awt.Font("Arial", 0, 14));
+        btnMonthlyReportGenerate.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnMonthlyReportGenerate.setText("Senarai Transaksi");
         btnMonthlyReportGenerate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2815,20 +2815,20 @@ public class Main extends javax.swing.JFrame {
             int first = 0;
             content += "<tr class=\"content-body\">";
             if (chkMonthlyReportDate.isSelected()) {
-                content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + Common.renderDisplayDate(transaction.getDate()) + "</td>";
+                content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + " style=\"text-align: left; \">" + Common.renderDisplayDate(transaction.getDate()) + "</td>";
 
             }
             if (chkMonthlyReportClientName.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + transaction.getCustomer().getName() + "</td>";
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + " style=\"text-align: left; \">" + transaction.getCustomer().getName() + "</td>";
 
                 } else {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">Pinjaman</td>";
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + " style=\"text-align: left; \">Pinjaman</td>";
 
                 }
             }
             if (chkMonthlyReportDescription.isSelected()) {
-                content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + transaction.getDescription() + "</td>";
+                content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + " style=\"text-align: left; \">" + transaction.getDescription() + "</td>";
 
             }
             if (chkMonthlyReportWeight.isSelected()) {
@@ -2922,9 +2922,9 @@ public class Main extends javax.swing.JFrame {
             content += "<tr class=\"summary\">";
             content += "<td class=\"blank\" colspan=\"" + columns.size() + "\"></td>";
             for (ReportCalculation rc : calculations) {
-                content += "<td>" + Common.currency(rc.getSalary()) + "</td>";
-                content += "<td>" + Common.currency(rc.getLoan()) + "</td>";
-                content += "<td>" + Common.currency(rc.getBalance()) + "</td>";
+                content += "<td style=\"text-align: right; \">" + Common.currency(rc.getSalary()) + "</td>";
+                content += "<td style=\"text-align: right; \">" + Common.currency(rc.getLoan()) + "</td>";
+                content += "<td style=\"text-align: right; \">" + Common.currency(rc.getBalance()) + "</td>";
             }
             content += "</tr>";
         }
@@ -2947,7 +2947,7 @@ public class Main extends javax.swing.JFrame {
 
                 for (ReportCalculation rc : calculations) {
                     rc.setPayment(rs.getWorkerSalary(rc.getWorkerID()));
-                    content += "<td colspan=\"3\">" + Common.currency(Math.abs(rs.getWorkerSalary(rc.getWorkerID()))) + "</td>";
+                    content += "<td colspan=\"3\" style=\"text-align: right; \">" + Common.currency(Math.abs(rs.getWorkerSalary(rc.getWorkerID()))) + "</td>";
                 }
 
                 content += "</tr>";
@@ -2962,7 +2962,7 @@ public class Main extends javax.swing.JFrame {
             content += "<td colspan=\"" + size + "\">Baki</td>";
 
             for (ReportCalculation rc : calculations) {
-                content += "<td colspan=\"3\">" + Common.currency(rc.getTotalBalance()) + "</td>";
+                content += "<td colspan=\"3\" style=\"text-align: right; \">" + Common.currency(rc.getTotalBalance()) + "</td>";
             }
 
             content += "</tr>";
@@ -2986,7 +2986,7 @@ public class Main extends javax.swing.JFrame {
             content += "</td>";
 
             for (ReportSaving saving : savings) {
-                content += "<td colspan=\"3\">";
+                content += "<td colspan=\"3\" style=\"text-align: right; \">";
                 content += Common.currency(saving.getPrevious()) + "<br />";
                 content += Common.currency(saving.getCurrent()) + "<br />";
                 content += Common.currency(saving.getBalance());
