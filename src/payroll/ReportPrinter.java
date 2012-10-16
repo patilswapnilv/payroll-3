@@ -68,6 +68,8 @@ public class ReportPrinter implements Printable {
     int overflowCounter = 0;
     int workerCount = 0;
 
+    int page = 1;
+
     public ReportPrinter(Main parent, ArrayList<Worker> selected, ArrayList<Transaction> transactions, ArrayList<ReportCalculation> calculations, ArrayList<ReportSaving> savings, ArrayList<ReportSalary> salaries, Hashtable dates) {
         this.parent = parent;
         this.transactions = transactions;
@@ -154,7 +156,7 @@ public class ReportPrinter implements Printable {
             }
             
             g.setColor(Color.GRAY);
-            g.drawString("Page " + currentPage, 20, (int) pageFormat.getHeight() - 20);
+            g.drawString("Page " + page++, 20, (int) pageFormat.getHeight() - 20);
         }
 
         return PAGE_EXISTS;
@@ -399,6 +401,8 @@ public class ReportPrinter implements Printable {
                         g.drawString("" + Common.currency(transaction.getBalance()), x - g.getFontMetrics().stringWidth(Common.currency(transaction.getBalance())) - 10, y);
                     g.drawLine(x - 5, y + 5, x - 5, y - 35);
                 }
+
+                totalItemCounter ++;
             }
             
             for (int c = workerIndex; c < workerCount; c ++) {
@@ -437,7 +441,6 @@ public class ReportPrinter implements Printable {
             // increase the row size
             y += 15;
             counter ++;
-            totalItemCounter ++;
         }
 
         return workerIndexLocal;
