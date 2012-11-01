@@ -8,9 +8,6 @@ package payroll.model;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -29,7 +26,7 @@ public class Transaction {
     public static final int LOAN = 2;
 
     private int id, customerID, type;
-    private double weight, pricePerTon, wages, kiraanAsing, loanAmount;
+    private double weight, pricePerTon, pricePerTonTax, wages, kiraanAsing, loanAmount;
     private ArrayList<Worker> workers = new ArrayList<Worker>();
     private Date date, created;
     private String description, normalizedWorkerID;
@@ -43,6 +40,7 @@ public class Transaction {
         this.type = 0;
         this.weight = 0.0;
         this.pricePerTon = 0.0;
+        this.pricePerTonTax = 0.0;
         this.wages = 0.0;
         this.kiraanAsing = 0.0;
         this.loanAmount = 0.0;
@@ -57,12 +55,13 @@ public class Transaction {
         this._load();
     }
 
-    public Transaction(int id, int customerID, int type, double weight, double pricePerTon, double wages, double kiraanAsing, double loanAmount, ArrayList<Worker> workers, Date date, String description, String normalizedWorkerID) {
+    public Transaction(int id, int customerID, int type, double weight, double pricePerTon, double pricePerTonTax, double wages, double kiraanAsing, double loanAmount, ArrayList<Worker> workers, Date date, String description, String normalizedWorkerID) {
         this.id = id;
         this.customerID = customerID;
         this.type = type;
         this.weight = weight;
         this.pricePerTon = pricePerTon;
+        this.pricePerTonTax = pricePerTonTax;
         this.wages = wages;
         this.kiraanAsing = kiraanAsing;
         this.loanAmount = loanAmount;
@@ -88,6 +87,7 @@ public class Transaction {
             this.setNormalizedWorkerID(rs.getString("normalized_worker_id"));
             this.setType(rs.getInt("type"));
             this.setLoanAmount(rs.getDouble("loan_amount"));
+            this.setPricePerTonTax(rs.getDouble("price_per_ton_tax"));
 
             query = "SELECT * FROM worker WHERE worker_id IN (" + rs.getString("normalized_worker_id") + ")";
             rs = Database.instance().execute(query);
@@ -105,7 +105,7 @@ public class Transaction {
 
     public boolean save()
     {
-        String query = "INSERT INTO transactions(type, loan_amount, customer_id, description, weight, price_per_ton, wages, date, normalized_worker_id, kiraan_asing) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO transactions(type, loan_amount, customer_id, description, weight, price_per_ton, wages, date, normalized_worker_id, kiraan_asing, price_per_ton_tax) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = Database.instance().createPreparedStatement(query);
 
         try {
@@ -119,6 +119,7 @@ public class Transaction {
             ps.setString(8, this.getSQLDate());
             ps.setString(9, this.getNormalizedWorkerID());
             ps.setDouble(10, this.getKiraanAsing());
+            ps.setDouble(11, this.getPricePerTonTax());
 
             id = Database.instance().insert(ps);
 
@@ -196,6 +197,10 @@ public class Transaction {
 
     public void setWeight(double weight) {
         this.weight = weight;
+    }
+
+    public void setPricePerTonTax(double pricePerTonTax) {
+        this.pricePerTonTax = pricePerTonTax;
     }
 
     public void setWorkers(ArrayList<Worker> workers) {
@@ -305,6 +310,10 @@ public class Transaction {
     public double getWagePerWorker() {
         int size = workers.size() > 0 ? workers.size() : 1;
         return this.getTotalSalary() / size;
+    }
+
+    public double getPricePerTonTax() {
+        return pricePerTonTax;
     }
 
     public String getCompiledWorkerCodes() {

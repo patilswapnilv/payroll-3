@@ -82,6 +82,7 @@ public class Main extends javax.swing.JFrame {
     private ArrayList<Integer> loaded_saving_ids = new ArrayList<Integer>();
     private ArrayList<Integer> loaded_payment_ids = new ArrayList<Integer>();
     private ArrayList<Integer> loaded_transaction_ids = new ArrayList<Integer>();
+    private ArrayList<Integer> loaded_transaction_tax_ids = new ArrayList<Integer>();
     
     /** Creates new form Main2 */
     public Main() {
@@ -171,13 +172,16 @@ public class Main extends javax.swing.JFrame {
 
         cbxTransactionClients.removeAllItems();
         cbxTransactionListClients.removeAllItems();
+        cbxTransactionListClients1.removeAllItems();
 
         cbxTransactionClients.addItem(new String());
         cbxTransactionListClients.addItem(new String());
+        cbxTransactionListClients1.addItem(new String());
 
         for (Customer customer: customers) {
             cbxTransactionClients.addItem(new String(customer.getCode() + " - " + customer.getName()));
             cbxTransactionListClients.addItem(new String(customer.getCode() + " - " + customer.getName()));
+            cbxTransactionListClients1.addItem(new String(customer.getCode() + " - " + customer.getName()));
         }
 
         this.load_customers_all();
@@ -283,6 +287,28 @@ public class Main extends javax.swing.JFrame {
         tblMonthlyReportWorkers.setRowHeight(25);
     }
 
+    private void _prepare_monthly_report_tab_tax() {
+        DefaultTableModel workersTableModel = (DefaultTableModel) tblMonthlyReportWorkers1.getModel();
+
+        int row = tblMonthlyReportWorkers1.getRowCount();
+
+        for (int i = 0; i < row; i ++) {
+            workersTableModel.removeRow(0);
+        }
+
+        for (Worker worker: workers) {
+            Object[] workerObjects = new Object[] {
+                new Boolean(false),
+                new String(worker.getCode()),
+                new String(worker.getName())
+            };
+
+            workersTableModel.addRow(workerObjects);
+        }
+
+        tblMonthlyReportWorkers1.setRowHeight(25);
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -296,6 +322,7 @@ public class Main extends javax.swing.JFrame {
         btnGroupMonthlyReport = new javax.swing.ButtonGroup();
         btnGroupWorkerReportType = new javax.swing.ButtonGroup();
         groupTransactionType = new javax.swing.ButtonGroup();
+        buttonGroupMonthlyReportTax = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -362,6 +389,21 @@ public class Main extends javax.swing.JFrame {
         tblTransactionList = new javax.swing.JTable();
         jLabel38 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
+        jPanel30 = new javax.swing.JPanel();
+        jLabel42 = new javax.swing.JLabel();
+        txtTransactionListFrom1 = new com.toedter.calendar.JDateChooser();
+        txtTransactionListTo1 = new com.toedter.calendar.JDateChooser();
+        jLabel43 = new javax.swing.JLabel();
+        btnTransactionSave1 = new javax.swing.JButton();
+        cbxTransactionListClients1 = new javax.swing.JComboBox();
+        jPanel31 = new javax.swing.JPanel();
+        btnTransactionListEnd1 = new javax.swing.JButton();
+        btnTransactionListDelete1 = new javax.swing.JButton();
+        jPanel32 = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tblTransactionList1 = new javax.swing.JTable();
+        jLabel44 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -431,6 +473,37 @@ public class Main extends javax.swing.JFrame {
         tblMonthlyReportWorkers = new javax.swing.JTable();
         cboxMonthlyReportAllWorkers = new javax.swing.JCheckBox();
         jLabel34 = new javax.swing.JLabel();
+        jPanel33 = new javax.swing.JPanel();
+        jPanel34 = new javax.swing.JPanel();
+        chkMonthlyReportDate1 = new javax.swing.JCheckBox();
+        chkMonthlyReportClientName1 = new javax.swing.JCheckBox();
+        chkMonthlyReportDescription1 = new javax.swing.JCheckBox();
+        chkMonthlyReportWeight1 = new javax.swing.JCheckBox();
+        chkMonthlyReportPricePerTon1 = new javax.swing.JCheckBox();
+        chkMonthlyReportTotalReceived1 = new javax.swing.JCheckBox();
+        chkMonthlyReportWages1 = new javax.swing.JCheckBox();
+        chkMonthlyReportSalary1 = new javax.swing.JCheckBox();
+        chkMonthlyReportBalance1 = new javax.swing.JCheckBox();
+        chkMonthlyReportKiraanAsing1 = new javax.swing.JCheckBox();
+        chkMonthlyReportSaving1 = new javax.swing.JCheckBox();
+        chkMonthlyReportSalaryPayment1 = new javax.swing.JCheckBox();
+        jPanel35 = new javax.swing.JPanel();
+        rbtnMonhtlyReportCurrentMonth1 = new javax.swing.JRadioButton();
+        rbtnMonthlyReportLastMonth1 = new javax.swing.JRadioButton();
+        rbtnMonhtlyReportDateRange1 = new javax.swing.JRadioButton();
+        txtMonthlyReportDateFrom1 = new com.toedter.calendar.JDateChooser();
+        jLabel46 = new javax.swing.JLabel();
+        txtMonthlyReportDateTo1 = new com.toedter.calendar.JDateChooser();
+        jPanel36 = new javax.swing.JPanel();
+        btnMonthlyReportEnd1 = new javax.swing.JButton();
+        btnMonthlyReportPrint1 = new javax.swing.JButton();
+        btnMonthlyReportExport1 = new javax.swing.JButton();
+        btnMonthlyReportGenerate1 = new javax.swing.JButton();
+        jPanel37 = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        tblMonthlyReportWorkers1 = new javax.swing.JTable();
+        cboxMonthlyReportAllWorkers1 = new javax.swing.JCheckBox();
+        jLabel47 = new javax.swing.JLabel();
         jPanel19 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
@@ -490,7 +563,7 @@ public class Main extends javax.swing.JFrame {
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/payroll/images/icon.png")).getImage());
 
         jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
-        jTabbedPane1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jTabbedPane1.setFont(new java.awt.Font("Arial", 0, 18));
         jTabbedPane1.setName("Payroll Software"); // NOI18N
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -506,7 +579,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Arial", 0, 14));
+        jButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jButton2.setText("Senarai Transaksi");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -614,7 +687,7 @@ public class Main extends javax.swing.JFrame {
 
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnRecord.setFont(new java.awt.Font("Arial", 0, 14));
+        btnRecord.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnRecord.setText("Rekodkan");
         btnRecord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -622,7 +695,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        txtTransactionNew.setFont(new java.awt.Font("Arial", 0, 14));
+        txtTransactionNew.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtTransactionNew.setText("Transaksi Baru");
         txtTransactionNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -705,7 +778,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        cboxTransactionAllWorkers.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cboxTransactionAllWorkers.setFont(new java.awt.Font("Arial", 0, 12));
         cboxTransactionAllWorkers.setText("Semua Pekerja");
         cboxTransactionAllWorkers.setFocusable(false);
         cboxTransactionAllWorkers.addActionListener(new java.awt.event.ActionListener() {
@@ -714,7 +787,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        tblTransactionInvolvedWorkers.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        tblTransactionInvolvedWorkers.setFont(new java.awt.Font("Arial", 0, 12));
         tblTransactionInvolvedWorkers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -779,13 +852,13 @@ public class Main extends javax.swing.JFrame {
         txtTransactionDate.setDateFormatString("dd/MM/yyyy");
         txtTransactionDate.setFont(new java.awt.Font("Arial", 0, 12));
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel2.setText("Tarikh");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel3.setText("Kod & Nama Pelanggan");
 
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel5.setText("Berat KG");
 
         txtTransactionWeight.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -800,10 +873,10 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel6.setText("Harga Diterima Seton");
 
-        txtTransactionPricePerTon.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionPricePerTon.setFont(new java.awt.Font("Arial", 0, 12));
         txtTransactionPricePerTon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTransactionPricePerTonActionPerformed(evt);
@@ -815,17 +888,17 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel7.setText("Jumlah Diterima");
 
         txtTransactionTotalReceived.setEditable(false);
-        txtTransactionTotalReceived.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionTotalReceived.setFont(new java.awt.Font("Arial", 0, 12));
         txtTransactionTotalReceived.setFocusable(false);
 
-        jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel8.setText("Upah Kerja");
 
-        txtTransactionWages.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionWages.setFont(new java.awt.Font("Arial", 0, 12));
         txtTransactionWages.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTransactionWagesActionPerformed(evt);
@@ -837,24 +910,24 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel9.setText("Jumlah Gaji");
 
         txtTransactionSalary.setEditable(false);
-        txtTransactionSalary.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionSalary.setFont(new java.awt.Font("Arial", 0, 12));
         txtTransactionSalary.setFocusable(false);
 
-        jLabel10.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel10.setText("Jumlah Baki");
 
         txtTransactionBalance.setEditable(false);
-        txtTransactionBalance.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionBalance.setFont(new java.awt.Font("Arial", 0, 12));
         txtTransactionBalance.setFocusable(false);
 
-        jLabel11.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel11.setText("Kiraan Asing");
 
-        txtTransactionCalculate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionCalculate.setFont(new java.awt.Font("Arial", 0, 12));
         txtTransactionCalculate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTransactionCalculateActionPerformed(evt);
@@ -866,11 +939,11 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jLabel12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel12.setText("Upah Perseorangan");
 
         txtTransactionPayPerPerson.setEditable(false);
-        txtTransactionPayPerPerson.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionPayPerPerson.setFont(new java.awt.Font("Arial", 0, 12));
         txtTransactionPayPerPerson.setFocusable(false);
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 12));
@@ -878,7 +951,7 @@ public class Main extends javax.swing.JFrame {
 
         txtTransactionDescription.setFont(new java.awt.Font("Arial", 0, 12));
 
-        jLabel41.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel41.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel41.setText("Harga Seton (TAX)");
 
         txtTransactionPricePerTonTax.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -910,13 +983,13 @@ public class Main extends javax.swing.JFrame {
                         .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtTransactionDate, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                                .addComponent(txtTransactionWeight, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtTransactionWeight, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(cbxTransactionClients, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(txtTransactionPricePerTon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtTransactionPricePerTon, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel29Layout.createSequentialGroup()
                         .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTransactionPricePerTonTax, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtTransactionPricePerTonTax, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel29Layout.createSequentialGroup()
                             .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -928,12 +1001,12 @@ public class Main extends javax.swing.JFrame {
                                 .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtTransactionTotalReceived, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtTransactionWages, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtTransactionSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtTransactionBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtTransactionCalculate, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtTransactionPayPerPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtTransactionTotalReceived, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtTransactionWages, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtTransactionSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtTransactionBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtTransactionCalculate, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtTransactionPayPerPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtTransactionDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1038,7 +1111,7 @@ public class Main extends javax.swing.JFrame {
         jLabel39.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel39.setText("Hingga");
 
-        btnTransactionSave.setFont(new java.awt.Font("Arial", 0, 12));
+        btnTransactionSave.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnTransactionSave.setText("Cari");
         btnTransactionSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1048,7 +1121,7 @@ public class Main extends javax.swing.JFrame {
 
         jPanel27.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnTransactionListEnd.setFont(new java.awt.Font("Arial", 0, 14));
+        btnTransactionListEnd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnTransactionListEnd.setText("Tutup");
         btnTransactionListEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1056,7 +1129,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnTransactionListDelete.setFont(new java.awt.Font("Arial", 0, 14));
+        btnTransactionListDelete.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnTransactionListDelete.setText("Batalkan");
         btnTransactionListDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1085,7 +1158,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tblTransactionList.setFont(new java.awt.Font("Arial", 0, 12));
+        tblTransactionList.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tblTransactionList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1185,6 +1258,166 @@ public class Main extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Senarai Transaksi", jPanel26);
+
+        jLabel42.setFont(jLabel42.getFont().deriveFont(jLabel42.getFont().getStyle() | java.awt.Font.BOLD));
+        jLabel42.setText("Petanyaan Transaksi");
+
+        txtTransactionListFrom1.setDateFormatString("dd/MM/yyyy");
+        txtTransactionListFrom1.setFont(new java.awt.Font("Arial", 0, 12));
+
+        txtTransactionListTo1.setDateFormatString("dd/MM/yyyy");
+        txtTransactionListTo1.setFont(new java.awt.Font("Arial", 0, 12));
+
+        jLabel43.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel43.setText("Hingga");
+
+        btnTransactionSave1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnTransactionSave1.setText("Cari");
+        btnTransactionSave1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTransactionSave1ActionPerformed(evt);
+            }
+        });
+
+        jPanel31.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        btnTransactionListEnd1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnTransactionListEnd1.setText("Tutup");
+        btnTransactionListEnd1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTransactionListEnd1ActionPerformed(evt);
+            }
+        });
+
+        btnTransactionListDelete1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnTransactionListDelete1.setText("Batalkan");
+        btnTransactionListDelete1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTransactionListDelete1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel31Layout = new javax.swing.GroupLayout(jPanel31);
+        jPanel31.setLayout(jPanel31Layout);
+        jPanel31Layout.setHorizontalGroup(
+            jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel31Layout.createSequentialGroup()
+                .addContainerGap(800, Short.MAX_VALUE)
+                .addComponent(btnTransactionListDelete1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnTransactionListEnd1)
+                .addContainerGap())
+        );
+        jPanel31Layout.setVerticalGroup(
+            jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel31Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTransactionListEnd1)
+                    .addComponent(btnTransactionListDelete1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        tblTransactionList1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        tblTransactionList1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "", "Tarikh", "Kod & Name Pelanggan", "Keterangan", "Berat KG", "Harga Diterima Seton", "Jumlah Diterima", "Upah Kerja", "Jumlah Gaji", "Kiraan Asing"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane7.setViewportView(tblTransactionList1);
+        tblTransactionList1.getColumnModel().getColumn(0).setResizable(false);
+        tblTransactionList1.getColumnModel().getColumn(0).setPreferredWidth(40);
+        tblTransactionList1.getColumnModel().getColumn(1).setResizable(false);
+
+        javax.swing.GroupLayout jPanel32Layout = new javax.swing.GroupLayout(jPanel32);
+        jPanel32.setLayout(jPanel32Layout);
+        jPanel32Layout.setHorizontalGroup(
+            jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 981, Short.MAX_VALUE)
+        );
+        jPanel32Layout.setVerticalGroup(
+            jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+        );
+
+        jLabel44.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel44.setText("Kod & Nama ");
+
+        jLabel45.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel45.setText("Tarikh Tempoh");
+
+        javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
+        jPanel30.setLayout(jPanel30Layout);
+        jPanel30Layout.setHorizontalGroup(
+            jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel30Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel32, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel30Layout.createSequentialGroup()
+                        .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel42)
+                            .addGroup(jPanel30Layout.createSequentialGroup()
+                                .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel44, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                                    .addComponent(jLabel45, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbxTransactionListClients1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel30Layout.createSequentialGroup()
+                                        .addComponent(txtTransactionListFrom1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel43)
+                                        .addGap(12, 12, 12)
+                                        .addComponent(txtTransactionListTo1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnTransactionSave1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 480, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel30Layout.setVerticalGroup(
+            jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel30Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxTransactionListClients1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTransactionListTo1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTransactionListFrom1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnTransactionSave1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel32, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("Senarai Transaksi (Tax)", jPanel30);
 
         jPanel3.setFont(new java.awt.Font("Arial", 0, 12));
 
@@ -1391,7 +1624,7 @@ public class Main extends javax.swing.JFrame {
         jLabel22.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel22.setText("Hingga");
 
-        tblPay.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        tblPay.setFont(new java.awt.Font("Arial", 0, 12));
         tblPay.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1560,7 +1793,7 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Bayaran Gaji", jPanel11);
 
-        jTabbedPane4.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        jTabbedPane4.setFont(new java.awt.Font("Arial", 0, 15));
         jTabbedPane4.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jTabbedPane4StateChanged(evt);
@@ -1669,7 +1902,6 @@ public class Main extends javax.swing.JFrame {
 
         btnGroupMonthlyReport.add(rbtnMonhtlyReportCurrentMonth);
         rbtnMonhtlyReportCurrentMonth.setFont(new java.awt.Font("Arial", 0, 12));
-        rbtnMonhtlyReportCurrentMonth.setSelected(true);
         rbtnMonhtlyReportCurrentMonth.setText("Bulan Ini");
 
         btnGroupMonthlyReport.add(rbtnMonthlyReportLastMonth);
@@ -1679,13 +1911,13 @@ public class Main extends javax.swing.JFrame {
         btnGroupMonthlyReport.add(rbtnMonhtlyReportDateRange);
 
         txtMonthlyReportDateFrom.setDateFormatString("dd/MM/yyyy");
-        txtMonthlyReportDateFrom.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtMonthlyReportDateFrom.setFont(new java.awt.Font("Arial", 0, 12));
 
         jLabel30.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel30.setText("Hingga");
 
         txtMonthlyReportDateTo.setDateFormatString("dd/MM/yyyy");
-        txtMonthlyReportDateTo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtMonthlyReportDateTo.setFont(new java.awt.Font("Arial", 0, 12));
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
@@ -1887,6 +2119,327 @@ public class Main extends javax.swing.JFrame {
         );
 
         jTabbedPane4.addTab("Laporan Bulanan", jPanel18);
+
+        chkMonthlyReportDate1.setFont(new java.awt.Font("Arial", 0, 12));
+        chkMonthlyReportDate1.setSelected(true);
+        chkMonthlyReportDate1.setText("Tarikh");
+        chkMonthlyReportDate1.setEnabled(false);
+
+        chkMonthlyReportClientName1.setFont(new java.awt.Font("Arial", 0, 12));
+        chkMonthlyReportClientName1.setSelected(true);
+        chkMonthlyReportClientName1.setText("Name Pelanggan");
+
+        chkMonthlyReportDescription1.setFont(new java.awt.Font("Arial", 0, 12));
+        chkMonthlyReportDescription1.setSelected(true);
+        chkMonthlyReportDescription1.setText("Keterangan");
+
+        chkMonthlyReportWeight1.setFont(new java.awt.Font("Arial", 0, 12));
+        chkMonthlyReportWeight1.setSelected(true);
+        chkMonthlyReportWeight1.setText("Berat KG");
+
+        chkMonthlyReportPricePerTon1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        chkMonthlyReportPricePerTon1.setSelected(true);
+        chkMonthlyReportPricePerTon1.setText("Harga Seton (Tax)");
+
+        chkMonthlyReportTotalReceived1.setFont(new java.awt.Font("Arial", 0, 12));
+        chkMonthlyReportTotalReceived1.setSelected(true);
+        chkMonthlyReportTotalReceived1.setText("Jumlah Diterima");
+
+        chkMonthlyReportWages1.setFont(new java.awt.Font("Arial", 0, 12));
+        chkMonthlyReportWages1.setSelected(true);
+        chkMonthlyReportWages1.setText("Upah Kerja");
+
+        chkMonthlyReportSalary1.setFont(new java.awt.Font("Arial", 0, 12));
+        chkMonthlyReportSalary1.setSelected(true);
+        chkMonthlyReportSalary1.setText("Jumlah Gaji");
+
+        chkMonthlyReportBalance1.setFont(new java.awt.Font("Arial", 0, 12));
+        chkMonthlyReportBalance1.setSelected(true);
+        chkMonthlyReportBalance1.setText("Jumlah Baki");
+
+        chkMonthlyReportKiraanAsing1.setFont(new java.awt.Font("Arial", 0, 12));
+        chkMonthlyReportKiraanAsing1.setSelected(true);
+        chkMonthlyReportKiraanAsing1.setText("Kiraan Asing");
+
+        chkMonthlyReportSaving1.setFont(new java.awt.Font("Arial", 0, 12));
+        chkMonthlyReportSaving1.setSelected(true);
+        chkMonthlyReportSaving1.setText("Simpanan Tetap");
+
+        chkMonthlyReportSalaryPayment1.setFont(new java.awt.Font("Arial", 0, 12));
+        chkMonthlyReportSalaryPayment1.setSelected(true);
+        chkMonthlyReportSalaryPayment1.setText("Bayaran Gaji");
+
+        javax.swing.GroupLayout jPanel34Layout = new javax.swing.GroupLayout(jPanel34);
+        jPanel34.setLayout(jPanel34Layout);
+        jPanel34Layout.setHorizontalGroup(
+            jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel34Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(chkMonthlyReportDescription1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(chkMonthlyReportDate1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(chkMonthlyReportClientName1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(chkMonthlyReportWeight1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(chkMonthlyReportPricePerTon1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(chkMonthlyReportTotalReceived1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(chkMonthlyReportWages1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(chkMonthlyReportSalary1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(chkMonthlyReportBalance1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(chkMonthlyReportKiraanAsing1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(chkMonthlyReportSaving1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(chkMonthlyReportSalaryPayment1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel34Layout.setVerticalGroup(
+            jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel34Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(chkMonthlyReportDate1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkMonthlyReportClientName1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkMonthlyReportDescription1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkMonthlyReportWeight1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkMonthlyReportPricePerTon1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkMonthlyReportTotalReceived1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkMonthlyReportWages1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkMonthlyReportSalary1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkMonthlyReportBalance1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkMonthlyReportKiraanAsing1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkMonthlyReportSaving1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkMonthlyReportSalaryPayment1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(135, Short.MAX_VALUE))
+        );
+
+        buttonGroupMonthlyReportTax.add(rbtnMonhtlyReportCurrentMonth1);
+        rbtnMonhtlyReportCurrentMonth1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        rbtnMonhtlyReportCurrentMonth1.setSelected(true);
+        rbtnMonhtlyReportCurrentMonth1.setText("Bulan Ini");
+
+        buttonGroupMonthlyReportTax.add(rbtnMonthlyReportLastMonth1);
+        rbtnMonthlyReportLastMonth1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        rbtnMonthlyReportLastMonth1.setText("Bulan Lepas");
+
+        buttonGroupMonthlyReportTax.add(rbtnMonhtlyReportDateRange1);
+
+        txtMonthlyReportDateFrom1.setDateFormatString("dd/MM/yyyy");
+        txtMonthlyReportDateFrom1.setFont(new java.awt.Font("Arial", 0, 12));
+
+        jLabel46.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel46.setText("Hingga");
+
+        txtMonthlyReportDateTo1.setDateFormatString("dd/MM/yyyy");
+        txtMonthlyReportDateTo1.setFont(new java.awt.Font("Arial", 0, 12));
+
+        javax.swing.GroupLayout jPanel35Layout = new javax.swing.GroupLayout(jPanel35);
+        jPanel35.setLayout(jPanel35Layout);
+        jPanel35Layout.setHorizontalGroup(
+            jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel35Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(rbtnMonhtlyReportCurrentMonth1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                    .addComponent(rbtnMonthlyReportLastMonth1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                    .addGroup(jPanel35Layout.createSequentialGroup()
+                        .addComponent(rbtnMonhtlyReportDateRange1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtMonthlyReportDateFrom1, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel46)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtMonthlyReportDateTo1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)))
+                .addContainerGap())
+        );
+        jPanel35Layout.setVerticalGroup(
+            jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel35Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rbtnMonhtlyReportCurrentMonth1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rbtnMonthlyReportLastMonth1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(rbtnMonhtlyReportDateRange1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtMonthlyReportDateFrom1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMonthlyReportDateTo1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel36.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        btnMonthlyReportEnd1.setFont(new java.awt.Font("Arial", 0, 14));
+        btnMonthlyReportEnd1.setText("Tutup");
+        btnMonthlyReportEnd1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMonthlyReportEnd1ActionPerformed(evt);
+            }
+        });
+
+        btnMonthlyReportPrint1.setFont(new java.awt.Font("Arial", 0, 14));
+        btnMonthlyReportPrint1.setText("Cetakkan");
+        btnMonthlyReportPrint1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMonthlyReportPrint1ActionPerformed(evt);
+            }
+        });
+
+        btnMonthlyReportExport1.setFont(new java.awt.Font("Arial", 0, 14));
+        btnMonthlyReportExport1.setText("Format Excel");
+        btnMonthlyReportExport1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMonthlyReportExport1ActionPerformed(evt);
+            }
+        });
+
+        btnMonthlyReportGenerate1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnMonthlyReportGenerate1.setText("Senarai Transaksi");
+        btnMonthlyReportGenerate1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMonthlyReportGenerate1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel36Layout = new javax.swing.GroupLayout(jPanel36);
+        jPanel36.setLayout(jPanel36Layout);
+        jPanel36Layout.setHorizontalGroup(
+            jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel36Layout.createSequentialGroup()
+                .addContainerGap(498, Short.MAX_VALUE)
+                .addComponent(btnMonthlyReportGenerate1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnMonthlyReportExport1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnMonthlyReportPrint1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnMonthlyReportEnd1)
+                .addContainerGap())
+        );
+        jPanel36Layout.setVerticalGroup(
+            jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel36Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMonthlyReportEnd1)
+                    .addComponent(btnMonthlyReportPrint1)
+                    .addComponent(btnMonthlyReportExport1)
+                    .addComponent(btnMonthlyReportGenerate1))
+                .addContainerGap())
+        );
+
+        tblMonthlyReportWorkers1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        tblMonthlyReportWorkers1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "", "", ""
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Boolean.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblMonthlyReportWorkers1.setFocusable(false);
+        tblMonthlyReportWorkers1.setTableHeader(null);
+        jScrollPane8.setViewportView(tblMonthlyReportWorkers1);
+        tblMonthlyReportWorkers1.getColumnModel().getColumn(0).setResizable(false);
+        tblMonthlyReportWorkers1.getColumnModel().getColumn(0).setPreferredWidth(20);
+        tblMonthlyReportWorkers1.getColumnModel().getColumn(1).setResizable(false);
+        tblMonthlyReportWorkers1.getColumnModel().getColumn(1).setPreferredWidth(50);
+        tblMonthlyReportWorkers1.getColumnModel().getColumn(2).setResizable(false);
+
+        cboxMonthlyReportAllWorkers1.setFont(new java.awt.Font("Arial", 0, 12));
+        cboxMonthlyReportAllWorkers1.setText("Semua Pekerja");
+        cboxMonthlyReportAllWorkers1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboxMonthlyReportAllWorkers1ActionPerformed(evt);
+            }
+        });
+
+        jLabel47.setFont(new java.awt.Font("Arial", 1, 12));
+        jLabel47.setText("Senarai Pekerja");
+        jLabel47.setFocusable(false);
+
+        javax.swing.GroupLayout jPanel37Layout = new javax.swing.GroupLayout(jPanel37);
+        jPanel37.setLayout(jPanel37Layout);
+        jPanel37Layout.setHorizontalGroup(
+            jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel37Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                    .addComponent(cboxMonthlyReportAllWorkers1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                    .addComponent(jLabel47, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel37Layout.setVerticalGroup(
+            jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel37Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cboxMonthlyReportAllWorkers1)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel33Layout = new javax.swing.GroupLayout(jPanel33);
+        jPanel33.setLayout(jPanel33Layout);
+        jPanel33Layout.setHorizontalGroup(
+            jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel33Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel36, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel33Layout.createSequentialGroup()
+                        .addComponent(jPanel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel37, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(133, 133, 133)))
+                .addContainerGap())
+        );
+        jPanel33Layout.setVerticalGroup(
+            jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel33Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel33Layout.createSequentialGroup()
+                        .addComponent(jPanel35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel37, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jTabbedPane4.addTab("Laporan Bulanan (Tax)", jPanel33);
 
         jLabel31.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel31.setText("Nama Pekerja");
@@ -2481,6 +3034,7 @@ public class Main extends javax.swing.JFrame {
         txtTransactionDescription.setText("");
         txtTransactionWeight.setText("");
         txtTransactionPricePerTon.setText("");
+        txtTransactionPricePerTonTax.setText("");
         txtTransactionTotalReceived.setText("");
         txtTransactionWages.setText("");
         txtTransactionSalary.setText("");
@@ -2495,6 +3049,8 @@ public class Main extends javax.swing.JFrame {
             this._prepare_transaction_tab();
         } else if (jTabbedPane1.getSelectedIndex() == 5 && jTabbedPane4.getSelectedIndex() == 0) {
             this._prepare_monthly_report_tab();
+        } else if (jTabbedPane1.getSelectedIndex() == 5 && jTabbedPane4.getSelectedIndex() == 1) {
+            this._prepare_monthly_report_tab_tax();
         }
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
@@ -3110,7 +3666,7 @@ public class Main extends javax.swing.JFrame {
         Hashtable dates = getReportSelectedDateRange();
         String id = Worker.join(selected);
 
-        String query = "SELECT DISTINCT id, type, loan_amount, customer_id, description, weight, price_per_ton, wages, kiraan_asing, date, created, normalized_worker_id FROM transactions ";
+        String query = "SELECT DISTINCT id, type, loan_amount, customer_id, description, weight, price_per_ton, price_per_ton_tax, wages, kiraan_asing, date, created, normalized_worker_id FROM transactions ";
         query += "INNER JOIN transaction_workers ON transactions.id = transaction_workers.transaction_id ";
         query += "WHERE date >= '" + Common.renderSQLDate((Calendar) dates.get("from")) + "' AND date <= '" + Common.renderSQLDate((Calendar) dates.get("to")) + "' ";
         query += id.isEmpty() ? "AND type = 1 ORDER BY date" : "AND worker_id IN (" + id + ") ORDER BY DATE";
@@ -3120,7 +3676,7 @@ public class Main extends javax.swing.JFrame {
         try {
             while (rs.next()) {
                 ArrayList<Worker> involver = Worker.bulk(rs.getString("normalized_worker_id"));
-                transactions.add(new Transaction(rs.getInt("id"), rs.getInt("customer_id"), rs.getInt("type"), rs.getDouble("weight"), rs.getDouble("price_per_ton"), rs.getDouble("wages"), rs.getDouble("kiraan_asing"), rs.getDouble("loan_amount"), involver, Common.convertStringToDate(rs.getString("date")), rs.getString("description"), rs.getString("normalized_worker_id")));
+                transactions.add(new Transaction(rs.getInt("id"), rs.getInt("customer_id"), rs.getInt("type"), rs.getDouble("weight"), rs.getDouble("price_per_ton"), rs.getDouble("price_per_ton_tax"), rs.getDouble("wages"), rs.getDouble("kiraan_asing"), rs.getDouble("loan_amount"), involver, Common.convertStringToDate(rs.getString("date")), rs.getString("description"), rs.getString("normalized_worker_id")));
             }
 
             rs.close();
@@ -4074,19 +4630,19 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        jTabbedPane1.setSelectedIndex(3);
+        jTabbedPane1.setSelectedIndex(4);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        jTabbedPane1.setSelectedIndex(4);
+        jTabbedPane1.setSelectedIndex(5);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        jTabbedPane1.setSelectedIndex(5);
+        jTabbedPane1.setSelectedIndex(6);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        jTabbedPane1.setSelectedIndex(6);
+        jTabbedPane1.setSelectedIndex(7);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -4133,7 +4689,7 @@ public class Main extends javax.swing.JFrame {
         int counter = 1;
         try {
             while (rs.next()) {
-                Transaction transaction = new Transaction(rs.getInt("id"), rs.getInt("customer_id"), rs.getInt("type"), rs.getDouble("weight"), rs.getDouble("price_per_ton"), rs.getDouble("wages"), rs.getDouble("kiraan_asing"), rs.getDouble("loan_amount"), new ArrayList<Worker>(), Common.convertStringToDate(rs.getString("date")), rs.getString("description"), rs.getString("normalized_worker_id"));
+                Transaction transaction = new Transaction(rs.getInt("id"), rs.getInt("customer_id"), rs.getInt("type"), rs.getDouble("weight"), rs.getDouble("price_per_ton"), rs.getDouble("price_per_ton_tax"), rs.getDouble("wages"), rs.getDouble("kiraan_asing"), rs.getDouble("loan_amount"), new ArrayList<Worker>(), Common.convertStringToDate(rs.getString("date")), rs.getString("description"), rs.getString("normalized_worker_id"));
                 ArrayList<Worker> involved_workers = new ArrayList<Worker>();
 
                 String[] ids = rs.getString("normalized_worker_id").split(",");
@@ -4223,6 +4779,451 @@ public class Main extends javax.swing.JFrame {
     private void txtTransactionPricePerTonTaxcalculateTransaction(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTransactionPricePerTonTaxcalculateTransaction
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTransactionPricePerTonTaxcalculateTransaction
+
+    private void btnTransactionSave1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransactionSave1ActionPerformed
+        DefaultTableModel tableModel = (DefaultTableModel) tblTransactionList1.getModel();
+
+        int rowCount = tblTransactionList1.getRowCount();
+        for (int i = 0; i < rowCount; i ++) {
+            tableModel.removeRow(0);
+        }
+
+        loaded_transaction_tax_ids.clear();
+
+        if (txtTransactionListFrom1.getDate() == null || txtTransactionListTo1.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Sila pilih tempoh tarikh.", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        tableModel = new DefaultTableModel(
+            new Object[][] {},
+            new String[] {
+                "", "Tarikh", "Name Pelanggan", "Keterangan", "Berat KG", "Harga Diterima Seton", "Jumlah Diterima", "Upah Kerja", "Jumpah Gaji", "Kiraan Asing", "Pekerja Terlibat", "Jumlah Pinjaman"
+            }
+        );
+
+        tblTransactionList1.setModel(tableModel);
+
+        tblTransactionList1.getColumnModel().getColumn(0).setPreferredWidth(30);
+        tblTransactionList1.getColumnModel().getColumn(1).setPreferredWidth(60);
+        tblTransactionList1.getColumnModel().getColumn(2).setPreferredWidth(120);
+        tblTransactionList1.getColumnModel().getColumn(3).setPreferredWidth(250);
+
+        String query = "SELECT * FROM transactions WHERE date >= '" + Common.renderSQLDate(txtTransactionListFrom1.getDate()) + "' AND date <= '" + Common.renderSQLDate(txtTransactionListTo1.getDate()) + "'";
+
+        if (cbxTransactionListClients1.getSelectedIndex() > 0) {
+            query += " AND customer_id = " + customers.get(cbxTransactionListClients1.getSelectedIndex() - 1).getId();
+        }
+
+        ResultSet rs = Database.instance().execute(query);
+
+        int counter = 1;
+        try {
+            while (rs.next()) {
+                Transaction transaction = new Transaction(rs.getInt("id"), rs.getInt("customer_id"), rs.getInt("type"), rs.getDouble("weight"), rs.getDouble("price_per_ton"), rs.getDouble("price_per_ton_tax"), rs.getDouble("wages"), rs.getDouble("kiraan_asing"), rs.getDouble("loan_amount"), new ArrayList<Worker>(), Common.convertStringToDate(rs.getString("date")), rs.getString("description"), rs.getString("normalized_worker_id"));
+                ArrayList<Worker> involved_workers = new ArrayList<Worker>();
+
+                String[] ids = rs.getString("normalized_worker_id").split(",");
+
+                for (String id : ids) {
+                    if (workers_hash.containsKey(Integer.parseInt(id))) {
+                        involved_workers.add((Worker) workers_hash.get(Integer.parseInt(id)));
+                    }
+                }
+
+                transaction.setWorkers(involved_workers);
+
+                Object[] objects = null;
+
+                objects = new Object[] {
+                    new Integer(counter++),
+                    new String(Common.renderDisplayDate(transaction.getDate())),
+                    new String(transaction.getCustomerID() == 0 ? "" : transaction.getCustomer().getCode() + " - " + transaction.getCustomer().getName()),
+                    new String(transaction.getDescription()),
+                    new String(transaction.getWeight() == 0.0 ? "" : "" + transaction.getWeight()),
+                    new String(transaction.getPricePerTonTax() == 0.0 ? "" : Common.currency(transaction.getPricePerTonTax())),
+                    new String(transaction.getTotal() == 0.0 ? "" : Common.currency(transaction.getTotal())),
+                    new String(transaction.getWages() == 0.0 ? "" : Common.currency(transaction.getWages())),
+                    new String(transaction.getTotalSalary() == 0.0 ? "" : Common.currency(transaction.getTotalSalary())),
+                    new String(transaction.getKiraanAsing() == 0.0 ? "" : Common.currency(transaction.getKiraanAsing())),
+                    new String(transaction.getCompiledWorkerCodes()),
+                    new String(transaction.getLoanAmount() == 0.0 ? "" : Common.currency(transaction.getLoanAmount()))
+                };
+
+                tableModel.addRow(objects);
+                loaded_transaction_tax_ids.add(rs.getInt("id"));
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_btnTransactionSave1ActionPerformed
+
+    private void btnTransactionListEnd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransactionListEnd1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnTransactionListEnd1ActionPerformed
+
+    private void btnTransactionListDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransactionListDelete1ActionPerformed
+        if (tblTransactionList.getSelectedColumnCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Sila pilih dari tabel daftar di atas", "Kesilapan", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (JOptionPane.showConfirmDialog(null, "Anda memastikan batalkan sebanyak " + tblTransactionList.getSelectedRowCount() + " rekod dari tabel daftar di atas?", "", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        String id = "";
+        for (Integer index : tblTransactionList.getSelectedRows()) {
+            id += "," + loaded_transaction_tax_ids.get(index);
+        }
+
+        id = id.substring(1, id.length());
+
+        boolean success = true;
+        Database.instance().begin();
+        String query = "DELETE FROM transactions WHERE id IN (" + id + ")";
+        success = success && Database.instance().update(query);
+        query = "DELETE FROM workerRecord WHERE transaction_id IN (" + id + ")";
+        success = success && Database.instance().update(query);
+        query = "DELETE FROM transaction_workers WHERE transaction_id IN (" + id + ")";
+        success = success && Database.instance().update(query);
+
+
+        if (success && Database.instance().commit()) {
+            JOptionPane.showMessageDialog(null, "Rekod telah dibatal dari sistem", "", JOptionPane.INFORMATION_MESSAGE);
+            btnTransactionSaveActionPerformed(evt);
+        } else {
+            Database.instance().rollback();
+            JOptionPane.showMessageDialog(null, "Tidak dapat membatalkan rekod dari sistem. Sila cuba sebentar lagi.", "", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnTransactionListDelete1ActionPerformed
+
+    private void btnMonthlyReportEnd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyReportEnd1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMonthlyReportEnd1ActionPerformed
+
+    private void btnMonthlyReportPrint1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyReportPrint1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMonthlyReportPrint1ActionPerformed
+
+    private void btnMonthlyReportExport1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyReportExport1ActionPerformed
+        JFileChooser dialog = new JFileChooser();
+        dialog.setFileFilter(new ExtensionFileFilter("Microsoft Excel", "xls"));
+
+        if (dialog.showSaveDialog(this) != JFileChooser.APPROVE_OPTION) {
+            return;
+        }
+
+        File file = dialog.getSelectedFile();
+
+        String filename = file.getPath();
+        if ( ! filename.endsWith(".xls")) {
+            filename += ".xls";
+        }
+
+        if (new File(filename).exists()) {
+            if (JOptionPane.showConfirmDialog(null, "Overwrite the existing file?", "", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) != JOptionPane.YES_OPTION) {
+                return;
+            }
+        }
+
+        ArrayList<String> columns = this.getReportColumns();
+        ArrayList<Worker> selected = this.getReportSelectedWorkers();
+        ArrayList<ReportCalculation> calculations = this.getReportCalculations(selected);
+        ArrayList<Transaction> transactions = this.getReportTransasctions(selected);
+        ArrayList<ReportSalary> salaries = this.getReportSalaries(selected);
+
+        int workerCount = selected.size();
+        int index = 0;
+        int pos = 0;
+
+        for (Worker worker : selected) {
+            calculations.add(new ReportCalculation(worker.getId()));
+        }
+
+        Workbook workbook = new HSSFWorkbook();
+        Sheet sheet = (Sheet) workbook.createSheet("Laporan");
+
+        Row firstHeaderRow = sheet.createRow(0);
+        Row secondHeaderRow = sheet.createRow(1);
+
+        // <editor-fold defaultstate="collapsed" desc="render header">
+        index = 0;
+        for (String column : columns) {
+            sheet.addMergedRegion(new CellRangeAddress(0, 1, pos, pos));
+            Cell cell = firstHeaderRow.createCell(index);
+            cell.setCellValue(column);
+            index++;
+            pos++;
+        }
+
+        for (Worker worker : selected) {
+            sheet.addMergedRegion(new CellRangeAddress(0, 0, pos, pos + 2));
+            Cell cell = firstHeaderRow.createCell(index);
+            cell.setCellValue(worker.getCode() + " " + worker.getName());
+
+            cell = secondHeaderRow.createCell(index);
+            cell.setCellValue("Gaji");
+            cell = secondHeaderRow.createCell(index + 1);
+            cell.setCellValue("Pinjaman");
+            cell = secondHeaderRow.createCell(index + 2);
+            cell.setCellValue("Baki");
+            index += 3;
+            pos += 3;
+        }
+        sheet.createFreezePane(0, 2);
+        // </editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc="render content">
+        int rowIndex = 2;
+        for (Transaction transaction : transactions) {
+            index = 0;
+
+            Row row = sheet.createRow(rowIndex);
+            Cell cell = null;
+
+            cell = row.createCell(index);
+            if (chkMonthlyReportDate.isSelected()) {
+                cell.setCellValue(Common.renderDisplayDate(transaction.getDate()));
+                index++;
+                cell = row.createCell(index);
+            }
+            if (chkMonthlyReportClientName.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    cell.setCellValue(transaction.getCustomer().getName());
+                } else {
+                    cell.setCellValue("Pinjaman");
+                }
+                index++;
+                cell = row.createCell(index);
+            }
+            if (chkMonthlyReportDescription.isSelected()) {
+                cell.setCellValue(transaction.getDescription());
+                index++;
+                cell = row.createCell(index);
+            }
+            if (chkMonthlyReportWeight.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    cell.setCellValue((int) transaction.getWeight());
+
+                }
+                index++;
+                cell = row.createCell(index);
+            }
+            if (chkMonthlyReportPricePerTon.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    cell.setCellValue(Common.currency(transaction.getPricePerTon()));
+
+                }
+                index++;
+                cell = row.createCell(index);
+            }
+            if (chkMonthlyReportTotalReceived.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    cell.setCellValue(Common.currency(transaction.getTotal()));
+
+                }
+                index++;
+                cell = row.createCell(index);
+            }
+            if (chkMonthlyReportWages.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    cell.setCellValue(Common.currency(transaction.getWages()));
+
+                }
+                index++;
+                cell = row.createCell(index);
+            }
+            if (chkMonthlyReportSalary.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    cell.setCellValue(Common.currency(transaction.getTotalSalary()));
+                }
+                index++;
+                cell = row.createCell(index);
+            }
+            if (chkMonthlyReportBalance.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    cell.setCellValue(Common.currency(transaction.getBalance()));
+
+                }
+                index++;
+                cell = row.createCell(index);
+            }
+            if (chkMonthlyReportKiraanAsing.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    cell.setCellValue(Common.currency(transaction.getKiraanAsing()));
+
+                }
+                index++;
+                cell = row.createCell(index);
+            }
+
+            String[] workerIds = transaction.getNormalizedWorkerID().split(",");
+            for (int i = 0; i < workerCount; i++) {
+                if (Common.inArray(workerIds, selected.get(i).getId())) {
+                    if (transaction.getType() == Transaction.GENERAL) {
+                        calculations.get(i).setSalary(transaction.getWagePerWorker());
+                        cell = row.createCell(index++);
+                        cell.setCellValue(Common.currency(transaction.getWagePerWorker()));
+                        cell = row.createCell(index++);
+                        cell = row.createCell(index++);
+                        cell.setCellValue(Common.currency(calculations.get(i).getBalance()));
+                    } else {
+                        calculations.get(i).setLoan(transaction.getLoanAmount());
+                        cell = row.createCell(index++);
+                        cell = row.createCell(index++);
+                        cell.setCellValue(transaction.getLoanAmount());
+                        cell = row.createCell(index++);
+                        cell.setCellValue(Common.currency(calculations.get(i).getBalance()));
+                    }
+                } else {
+                    cell = row.createCell(index++);
+                    cell = row.createCell(index++);
+                    cell = row.createCell(index++);
+                }
+            }
+
+            rowIndex++;
+        }
+        // </editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc="render summary">
+        Row summaryRow = sheet.createRow(rowIndex);
+        index = columns.size();
+
+        sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0, columns.size() - 1));
+
+        for (int i = 0; i < workerCount; i ++) {
+            ReportCalculation calculation = calculations.get(i);
+            Cell cell = summaryRow.createCell(index++);
+            cell.setCellValue(Common.currency(calculation.getSalary()));
+            cell = summaryRow.createCell(index++);
+            cell.setCellValue(Common.currency(calculation.getLoan()));
+            cell = summaryRow.createCell(index++);
+            cell.setCellValue(Common.currency(calculation.getBalance()));
+        }
+        // </editor-fold>
+
+        rowIndex ++;
+
+        if (chkMonthlyReportSalaryPayment.isSelected()) {
+            for (ReportSalary salary : salaries) {
+                index = 0;
+                Row row = sheet.createRow(rowIndex);
+                Cell cell = null;
+
+                if (chkMonthlyReportDate.isSelected()) {
+                    cell = row.createCell(index++);
+                    cell.setCellValue(Common.renderDisplayDate(salary.getDate()));
+                }
+
+                sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, index, columns.size() - 1));
+
+                cell = row.createCell(index);
+                cell.setCellValue("Bayaran Gaji");
+
+                index = columns.size();
+
+                for (int i = 0; i < workerCount; i ++) {
+                    double salaryValue = salary.getWorkerSalary(selected.get(i).getId());
+                    cell = row.createCell(index++);
+                    sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, index - 1, index + 1));
+                    cell.setCellValue(Common.currency(Math.abs(salaryValue)));
+                    calculations.get(i).setPayment(salaryValue);
+
+                    index += 2;
+                }
+                rowIndex++;
+            }
+
+            Row salarySummaryRow = sheet.createRow(rowIndex);
+
+            index = 0;
+
+            if (chkMonthlyReportDate.isSelected()) {
+                index++;
+            }
+
+            salarySummaryRow.createCell(index).setCellValue("Baki");
+
+            index = columns.size();
+
+            for (int i = 0; i < workerCount; i ++) {
+                ReportCalculation calculation = calculations.get(i);
+                Cell cell = salarySummaryRow.createCell(index++);
+                sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, index - 1, index + 1));
+                cell.setCellValue(Common.currency(calculation.getTotalBalance()));
+
+                index += 2;
+            }
+
+            rowIndex ++;
+        }
+
+        if (chkMonthlyReportSaving.isSelected()) {
+            rowIndex ++;
+
+            sheet.createRow(rowIndex++).createCell(0).setCellValue("Simpanan Tetap");
+            Row previousBalanceRow = sheet.createRow(rowIndex);
+            sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0, columns.size() - 1));
+            previousBalanceRow.createCell(0).setCellValue("Baki Bulan Lalu");
+
+            Row currentBalanceRow = sheet.createRow(rowIndex + 1);
+            sheet.addMergedRegion(new CellRangeAddress(rowIndex + 1, rowIndex + 1, 0, columns.size() - 1));
+            currentBalanceRow.createCell(0).setCellValue("Bulan Ini");
+
+            Row balanceRow = sheet.createRow(rowIndex + 2);
+            sheet.addMergedRegion(new CellRangeAddress(rowIndex + 2, rowIndex + 2, 0, columns.size() - 1));
+            balanceRow.createCell(0).setCellValue("Jumlah Baki");
+
+            ArrayList<ReportSaving> savings = this.getReportSavings(selected);
+
+            index = columns.size();
+            for (ReportSaving saving : savings) {
+                sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, index, index + 2));
+                sheet.addMergedRegion(new CellRangeAddress(rowIndex + 1, rowIndex + 1, index, index + 2));
+                sheet.addMergedRegion(new CellRangeAddress(rowIndex + 2, rowIndex + 2, index, index + 2));
+                previousBalanceRow.createCell(index).setCellValue(saving.getPrevious());
+                currentBalanceRow.createCell(index).setCellValue(saving.getCurrent());
+                balanceRow.createCell(index).setCellValue(saving.getBalance());
+
+                index += 3;
+            }
+        }
+
+
+
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(filename);
+            workbook.write(out);
+            out.close();
+            JOptionPane.showMessageDialog(null, "Report generated to " + filename, "", JOptionPane.INFORMATION_MESSAGE);
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "The process cannot access the file because it is being used by another process", "Error", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                out.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnMonthlyReportExport1ActionPerformed
+
+    private void btnMonthlyReportGenerate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyReportGenerate1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMonthlyReportGenerate1ActionPerformed
+
+    private void cboxMonthlyReportAllWorkers1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxMonthlyReportAllWorkers1ActionPerformed
+        boolean selected = cboxMonthlyReportAllWorkers1.isSelected();
+        int row = tblMonthlyReportWorkers1.getRowCount();
+        for (int i = 0; i < row; i ++) {
+            tblMonthlyReportWorkers1.setValueAt(selected, i, 0);
+        }
+    }//GEN-LAST:event_cboxMonthlyReportAllWorkers1ActionPerformed
     
     private void _reset_worker_form() {
         txtProfileWorkerCurrentSaving.setText("");
@@ -4292,9 +5293,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.ButtonGroup btnGroupMonthlyReport;
     private javax.swing.ButtonGroup btnGroupWorkerReportType;
     private javax.swing.JButton btnMonthlyReportEnd;
+    private javax.swing.JButton btnMonthlyReportEnd1;
     private javax.swing.JButton btnMonthlyReportExport;
+    private javax.swing.JButton btnMonthlyReportExport1;
     private javax.swing.JButton btnMonthlyReportGenerate;
+    private javax.swing.JButton btnMonthlyReportGenerate1;
     private javax.swing.JButton btnMonthlyReportPrint;
+    private javax.swing.JButton btnMonthlyReportPrint1;
     private javax.swing.JButton btnPasswordChange;
     private javax.swing.JButton btnPayCancel;
     private javax.swing.JButton btnPayEnd;
@@ -4318,10 +5323,15 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btnSavingNew;
     private javax.swing.JButton btnSavingSearch;
     private javax.swing.JButton btnTransactionListDelete;
+    private javax.swing.JButton btnTransactionListDelete1;
     private javax.swing.JButton btnTransactionListEnd;
+    private javax.swing.JButton btnTransactionListEnd1;
     private javax.swing.JButton btnTransactionNewLoan;
     private javax.swing.JButton btnTransactionSave;
+    private javax.swing.JButton btnTransactionSave1;
+    private javax.swing.ButtonGroup buttonGroupMonthlyReportTax;
     private javax.swing.JCheckBox cboxMonthlyReportAllWorkers;
+    private javax.swing.JCheckBox cboxMonthlyReportAllWorkers1;
     private javax.swing.JCheckBox cboxTransactionAllWorkers;
     private javax.swing.JComboBox cbxClients;
     private javax.swing.JComboBox cbxPaymentWorkers;
@@ -4329,19 +5339,32 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JComboBox cbxSavingWorkers;
     private javax.swing.JComboBox cbxTransactionClients;
     private javax.swing.JComboBox cbxTransactionListClients;
+    private javax.swing.JComboBox cbxTransactionListClients1;
     private javax.swing.JComboBox cbxWorkers;
     public javax.swing.JCheckBox chkMonthlyReportBalance;
+    public javax.swing.JCheckBox chkMonthlyReportBalance1;
     public javax.swing.JCheckBox chkMonthlyReportClientName;
+    public javax.swing.JCheckBox chkMonthlyReportClientName1;
     public javax.swing.JCheckBox chkMonthlyReportDate;
+    public javax.swing.JCheckBox chkMonthlyReportDate1;
     public javax.swing.JCheckBox chkMonthlyReportDescription;
+    public javax.swing.JCheckBox chkMonthlyReportDescription1;
     public javax.swing.JCheckBox chkMonthlyReportKiraanAsing;
+    public javax.swing.JCheckBox chkMonthlyReportKiraanAsing1;
     public javax.swing.JCheckBox chkMonthlyReportPricePerTon;
+    public javax.swing.JCheckBox chkMonthlyReportPricePerTon1;
     public javax.swing.JCheckBox chkMonthlyReportSalary;
+    public javax.swing.JCheckBox chkMonthlyReportSalary1;
     public javax.swing.JCheckBox chkMonthlyReportSalaryPayment;
+    public javax.swing.JCheckBox chkMonthlyReportSalaryPayment1;
     public javax.swing.JCheckBox chkMonthlyReportSaving;
+    public javax.swing.JCheckBox chkMonthlyReportSaving1;
     public javax.swing.JCheckBox chkMonthlyReportTotalReceived;
+    public javax.swing.JCheckBox chkMonthlyReportTotalReceived1;
     public javax.swing.JCheckBox chkMonthlyReportWages;
+    public javax.swing.JCheckBox chkMonthlyReportWages1;
     public javax.swing.JCheckBox chkMonthlyReportWeight;
+    public javax.swing.JCheckBox chkMonthlyReportWeight1;
     private javax.swing.ButtonGroup groupTransactionType;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -4387,6 +5410,12 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -4415,6 +5444,14 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel28;
     private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel30;
+    private javax.swing.JPanel jPanel31;
+    private javax.swing.JPanel jPanel32;
+    private javax.swing.JPanel jPanel33;
+    private javax.swing.JPanel jPanel34;
+    private javax.swing.JPanel jPanel35;
+    private javax.swing.JPanel jPanel36;
+    private javax.swing.JPanel jPanel37;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -4427,24 +5464,33 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JList listTransactionLoanWorkers;
     private javax.swing.JRadioButton rbtnMonhtlyReportCurrentMonth;
+    private javax.swing.JRadioButton rbtnMonhtlyReportCurrentMonth1;
     private javax.swing.JRadioButton rbtnMonhtlyReportDateRange;
+    private javax.swing.JRadioButton rbtnMonhtlyReportDateRange1;
     private javax.swing.JRadioButton rbtnMonthlyReportLastMonth;
+    private javax.swing.JRadioButton rbtnMonthlyReportLastMonth1;
     private javax.swing.JRadioButton rbtnWorkerMonthlyIncome;
     private javax.swing.JRadioButton rbtnWorkerReportFull;
     private javax.swing.JRadioButton rbtnWorkerSaving;
     private javax.swing.JTable tblMonthlyReportWorkers;
+    private javax.swing.JTable tblMonthlyReportWorkers1;
     private javax.swing.JTable tblPay;
     private javax.swing.JTable tblSaving;
     private javax.swing.JTable tblTransactionInvolvedWorkers;
     private javax.swing.JTable tblTransactionList;
+    private javax.swing.JTable tblTransactionList1;
     private com.toedter.calendar.JDateChooser txtMonthlyReportDateFrom;
+    private com.toedter.calendar.JDateChooser txtMonthlyReportDateFrom1;
     private com.toedter.calendar.JDateChooser txtMonthlyReportDateTo;
+    private com.toedter.calendar.JDateChooser txtMonthlyReportDateTo1;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JPasswordField txtPasswordConfirm;
     private com.toedter.calendar.JMonthChooser txtPaymentMonth;
@@ -4473,7 +5519,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField txtTransactionDescription;
     private javax.swing.JButton txtTransactionEnd;
     private com.toedter.calendar.JDateChooser txtTransactionListFrom;
+    private com.toedter.calendar.JDateChooser txtTransactionListFrom1;
     private com.toedter.calendar.JDateChooser txtTransactionListTo;
+    private com.toedter.calendar.JDateChooser txtTransactionListTo1;
     private javax.swing.JButton txtTransactionNew;
     private javax.swing.JTextField txtTransactionPayPerPerson;
     private javax.swing.JTextField txtTransactionPricePerTon;

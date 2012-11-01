@@ -6,6 +6,8 @@
 package payroll;
 
 import java.awt.Color;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -43,6 +45,28 @@ public class Application {
                     
 
                     //new Login(null, true).setVisible(true);
+                    String query = "PRAGMA table_info('transactions')";
+                    ResultSet rs = db.execute(query);
+
+                    try {
+                        boolean found = false;
+                        while (rs.next()) {
+                            if (rs.getString("name").equalsIgnoreCase("price_per_ton_tax")) {
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        if ( ! found) {
+                            query = "ALTER TABLE transactions ADD price_per_ton_tax DOUBLE DEFAULT 0.0 NOT NULL";
+                            db.update(query);
+                        }
+                    } catch (SQLException ex) {
+
+                    }
+
+                    System.exit(0);
+                    
                     new Main().setVisible(true);
                 } catch (Exception ex) {
                     System.err.println(ex.getMessage());
