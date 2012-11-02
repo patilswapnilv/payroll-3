@@ -579,7 +579,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Arial", 0, 14));
         jButton2.setText("Senarai Transaksi");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -687,7 +687,7 @@ public class Main extends javax.swing.JFrame {
 
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnRecord.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnRecord.setFont(new java.awt.Font("Arial", 0, 14));
         btnRecord.setText("Rekodkan");
         btnRecord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -695,7 +695,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        txtTransactionNew.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtTransactionNew.setFont(new java.awt.Font("Arial", 0, 14));
         txtTransactionNew.setText("Transaksi Baru");
         txtTransactionNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -861,7 +861,7 @@ public class Main extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel5.setText("Berat KG");
 
-        txtTransactionWeight.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionWeight.setFont(new java.awt.Font("Arial", 0, 12));
         txtTransactionWeight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTransactionWeightActionPerformed(evt);
@@ -954,7 +954,7 @@ public class Main extends javax.swing.JFrame {
         jLabel41.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel41.setText("Harga Seton (TAX)");
 
-        txtTransactionPricePerTonTax.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionPricePerTonTax.setFont(new java.awt.Font("Arial", 0, 12));
         txtTransactionPricePerTonTax.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTransactionPricePerTonTaxActionPerformed(evt);
@@ -1111,7 +1111,7 @@ public class Main extends javax.swing.JFrame {
         jLabel39.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel39.setText("Hingga");
 
-        btnTransactionSave.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnTransactionSave.setFont(new java.awt.Font("Arial", 0, 12));
         btnTransactionSave.setText("Cari");
         btnTransactionSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1121,7 +1121,7 @@ public class Main extends javax.swing.JFrame {
 
         jPanel27.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnTransactionListEnd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnTransactionListEnd.setFont(new java.awt.Font("Arial", 0, 14));
         btnTransactionListEnd.setText("Tutup");
         btnTransactionListEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1129,7 +1129,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnTransactionListDelete.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnTransactionListDelete.setFont(new java.awt.Font("Arial", 0, 14));
         btnTransactionListDelete.setText("Batalkan");
         btnTransactionListDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1158,7 +1158,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tblTransactionList.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        tblTransactionList.setFont(new java.awt.Font("Arial", 0, 12));
         tblTransactionList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1271,7 +1271,7 @@ public class Main extends javax.swing.JFrame {
         jLabel43.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel43.setText("Hingga");
 
-        btnTransactionSave1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnTransactionSave1.setFont(new java.awt.Font("Arial", 0, 12));
         btnTransactionSave1.setText("Cari");
         btnTransactionSave1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1281,7 +1281,7 @@ public class Main extends javax.swing.JFrame {
 
         jPanel31.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnTransactionListEnd1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnTransactionListEnd1.setFont(new java.awt.Font("Arial", 0, 14));
         btnTransactionListEnd1.setText("Tutup");
         btnTransactionListEnd1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1289,7 +1289,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnTransactionListDelete1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnTransactionListDelete1.setFont(new java.awt.Font("Arial", 0, 14));
         btnTransactionListDelete1.setText("Batalkan");
         btnTransactionListDelete1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1318,7 +1318,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tblTransactionList1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        tblTransactionList1.setFont(new java.awt.Font("Arial", 0, 12));
         tblTransactionList1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1901,11 +1901,12 @@ public class Main extends javax.swing.JFrame {
         );
 
         btnGroupMonthlyReport.add(rbtnMonhtlyReportCurrentMonth);
-        rbtnMonhtlyReportCurrentMonth.setFont(new java.awt.Font("Arial", 0, 12));
+        rbtnMonhtlyReportCurrentMonth.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        rbtnMonhtlyReportCurrentMonth.setSelected(true);
         rbtnMonhtlyReportCurrentMonth.setText("Bulan Ini");
 
         btnGroupMonthlyReport.add(rbtnMonthlyReportLastMonth);
-        rbtnMonthlyReportLastMonth.setFont(new java.awt.Font("Arial", 0, 12));
+        rbtnMonthlyReportLastMonth.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         rbtnMonthlyReportLastMonth.setText("Bulan Lepas");
 
         btnGroupMonthlyReport.add(rbtnMonhtlyReportDateRange);
@@ -2137,7 +2138,7 @@ public class Main extends javax.swing.JFrame {
         chkMonthlyReportWeight1.setSelected(true);
         chkMonthlyReportWeight1.setText("Berat KG");
 
-        chkMonthlyReportPricePerTon1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        chkMonthlyReportPricePerTon1.setFont(new java.awt.Font("Arial", 0, 12));
         chkMonthlyReportPricePerTon1.setSelected(true);
         chkMonthlyReportPricePerTon1.setText("Harga Seton (Tax)");
 
@@ -2295,7 +2296,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnMonthlyReportExport1.setFont(new java.awt.Font("Arial", 0, 14));
+        btnMonthlyReportExport1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnMonthlyReportExport1.setText("Format Excel");
         btnMonthlyReportExport1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2303,7 +2304,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        btnMonthlyReportGenerate1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnMonthlyReportGenerate1.setFont(new java.awt.Font("Arial", 0, 14));
         btnMonthlyReportGenerate1.setText("Senarai Transaksi");
         btnMonthlyReportGenerate1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2338,7 +2339,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tblMonthlyReportWorkers1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        tblMonthlyReportWorkers1.setFont(new java.awt.Font("Arial", 0, 12));
         tblMonthlyReportWorkers1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -4899,11 +4900,33 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTransactionListDelete1ActionPerformed
 
     private void btnMonthlyReportEnd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyReportEnd1ActionPerformed
-        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_btnMonthlyReportEnd1ActionPerformed
 
     private void btnMonthlyReportPrint1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyReportPrint1ActionPerformed
-        // TODO add your handling code here:
+        ArrayList<Worker> selected = this.getReportSelectedWorkers1();
+        ArrayList<ReportSaving> savings = this.getReportSavings1(selected);
+        ArrayList<Transaction> transactions = this.getReportTransasctions1(selected);
+        ArrayList<ReportCalculation> calculations = this.getReportCalculations1(selected);
+        ArrayList<ReportSalary> salaries = this.getReportSalaries1(selected);
+        Hashtable dates = getReportSelectedDateRange1();
+
+        PrinterJob job = PrinterJob.getPrinterJob();
+
+        PageFormat format = job.defaultPage();
+        format.setOrientation(PageFormat.LANDSCAPE);
+
+        job.setPrintable(new ReportPrinter1(this, selected, transactions, calculations, savings, salaries, dates), format);
+
+        if (job.printDialog() == true) {
+            try {
+                HashPrintRequestAttributeSet attr = new HashPrintRequestAttributeSet();
+                attr.add(new MediaPrintableArea(0, 0, 210, 297, MediaPrintableArea.MM));
+                job.print(attr);
+            } catch (PrinterException ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
     }//GEN-LAST:event_btnMonthlyReportPrint1ActionPerformed
 
     private void btnMonthlyReportExport1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyReportExport1ActionPerformed
@@ -4927,11 +4950,11 @@ public class Main extends javax.swing.JFrame {
             }
         }
 
-        ArrayList<String> columns = this.getReportColumns();
-        ArrayList<Worker> selected = this.getReportSelectedWorkers();
-        ArrayList<ReportCalculation> calculations = this.getReportCalculations(selected);
-        ArrayList<Transaction> transactions = this.getReportTransasctions(selected);
-        ArrayList<ReportSalary> salaries = this.getReportSalaries(selected);
+        ArrayList<String> columns = this.getReportColumns1();
+        ArrayList<Worker> selected = this.getReportSelectedWorkers1();
+        ArrayList<ReportCalculation> calculations = this.getReportCalculations1(selected);
+        ArrayList<Transaction> transactions = this.getReportTransasctions1(selected);
+        ArrayList<ReportSalary> salaries = this.getReportSalaries1(selected);
 
         int workerCount = selected.size();
         int index = 0;
@@ -5214,7 +5237,272 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMonthlyReportExport1ActionPerformed
 
     private void btnMonthlyReportGenerate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonthlyReportGenerate1ActionPerformed
-        // TODO add your handling code here:
+        // get selected worker to be display
+        Hashtable dates = this.getReportSelectedDateRange1();
+        ArrayList<String> columns = this.getReportColumns1();
+        ArrayList<Worker> selected = this.getReportSelectedWorkers1();
+        ArrayList<Transaction> transactions = this.getReportTransasctions1(selected);
+        ArrayList<ReportSaving> savings = this.getReportSavings1(selected);
+        ArrayList<ReportCalculation> calculations = this.getReportCalculations1(selected);
+        ArrayList<ReportSalary> salaries = this.getReportSalaries1(selected);
+
+        String html = "<html>";
+        String css = "<style type=\"text/css\">";
+        String table = "<table cellpadding=\"4\" cellspacing=\"0\">";
+        String header = "";
+        String content = "<tbody>";
+        String saving_content = "";
+
+        // <editor-fold defaultstate="collapsed" desc="render table header">
+        header += "<thead><tr valign=\"top\">";
+        String rowspan = selected.size() > 0 ? " rowspan=\"2\"" : "";
+        for (String column : columns) {
+            header += "<td" + rowspan + ">" + column + "</td>";
+        }
+
+        if (selected.size() > 0) {
+            for (Worker worker : selected) {
+                header += "<td colspan=\"3\">" + worker.getCode() + " " + worker.getName() + "</td>";
+            }
+            header += "</tr><tr>" + StringUtils.repeat("<td>Gaji</td><td>Pinjaman</td><td>Baki</td>", selected.size());
+        }
+        header += "</tr>";
+        header += "</thead>";
+        // </editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc="prepare css">
+        css += "table { border-collapse: collapse; font-family: calibri; font-size: 12px; } ";
+        css += "table tr td.first { border-left: 1px solid #333; } ";
+        css += "table tr td.last { border-right: 1px solid #333; } ";
+        css += "table thead tr, table thead td, table tr.summary, table tr.summary td { border: 1px solid #333; } ";
+        css += "table thead tr td { padding: 5px 20px 5px 5px; } ";
+        css += "table tr td.worker_transaction { border-left: 1px solid #333; } ";
+        css += "table tr.salary td { border: 1px solid #333 } ";
+        css += "table tr.summary td.blank { border-left: none; border-bottom: none; } ";
+        css += "table tr.saving_summary, table tr.saving_summary td { border : 1px solid #333; } ";
+        css += "h3 { font-size: 14px; }";
+        css += "table tr.content-body td { text-align: right;}";
+        // </editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc="render transaction content">
+        for (Transaction transaction : transactions) {
+            int first = 0;
+            content += "<tr class=\"content-body\">";
+            if (chkMonthlyReportDate.isSelected()) {
+                content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + " style=\"text-align: left; \">" + Common.renderDisplayDate(transaction.getDate()) + "</td>";
+
+            }
+            if (chkMonthlyReportClientName.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + " style=\"text-align: left; \">" + transaction.getCustomer().getName() + "</td>";
+
+                } else {
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + " style=\"text-align: left; \">Pinjaman</td>";
+
+                }
+            }
+            if (chkMonthlyReportDescription.isSelected()) {
+                content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + " style=\"text-align: left; \">" + transaction.getDescription() + "</td>";
+
+            }
+            if (chkMonthlyReportWeight.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + ((int) transaction.getWeight()) + "</td>";
+                } else {
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
+                }
+            }
+            if (chkMonthlyReportPricePerTon.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + Common.currency(transaction.getPricePerTon()) + "</td>";
+                } else {
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
+                }
+            }
+            if (chkMonthlyReportTotalReceived.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + Common.currency(transaction.getTotal()) + "</td>";
+
+                } else {
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
+
+                }
+            }
+            if (chkMonthlyReportWages.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + Common.currency(transaction.getWages()) + "</td>";
+
+                } else {
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
+
+                }
+            }
+            if (chkMonthlyReportSalary.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + Common.currency(transaction.getTotalSalary()) + "</td>";
+
+                } else {
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
+
+                }
+            }
+            if (chkMonthlyReportBalance.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + Common.currency(transaction.getBalance()) + "</td>";
+
+                } else {
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
+
+                }
+            }
+            if (chkMonthlyReportKiraanAsing.isSelected()) {
+                if (transaction.getType() == Transaction.GENERAL) {
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + transaction.getKiraanAsing() + "</td>";
+
+                } else {
+                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
+
+                }
+            }
+
+            String[] workerIds = transaction.getNormalizedWorkerID().split(",");
+
+            int index = 0;
+            for (Worker worker : selected) {
+                if (Common.inArray(workerIds, worker.getId())) {
+                    if (transaction.getType() == Transaction.GENERAL) {
+                        calculations.get(index).setSalary(transaction.getWagePerWorker());
+                        content += "<td class=\"worker_transaction\">" + Common.currency(transaction.getWagePerWorker()) + "</td>";
+                        content += "<td></td>";
+                        content += "<td" + (index == selected.size() - 1 ? " class=\"last\"" : "") + ">" + Common.currency(calculations.get(index).getBalance()) + "</td>";
+                    } else {
+                        calculations.get(index).setLoan(transaction.getLoanAmount());
+                        content += "<td class=\"worker_transaction\"></td>";
+                        content += "<td>" + Common.currency(transaction.getLoanAmount()) + "</td>";
+                        content += "<td" + (index == selected.size() - 1 ? " class=\"last\"" : "") + ">" + Common.currency(calculations.get(index).getBalance()) + "</td>";
+                    }
+                } else {
+                    content += "<td class=\"worker_transaction\"></td><td></td><td" + (index == selected.size() -1 ? " class=\"last\"" : "") + "></td>";
+                }
+
+                index++;
+            }
+            content += "</tr>";
+        }
+        // </editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc="render transaction worker summary">
+        if (selected.size() > 0) {
+            content += "<tr class=\"summary\">";
+            content += "<td class=\"blank\" colspan=\"" + columns.size() + "\"></td>";
+            for (ReportCalculation rc : calculations) {
+                content += "<td style=\"text-align: right; \">" + Common.currency(rc.getSalary()) + "</td>";
+                content += "<td style=\"text-align: right; \">" + Common.currency(rc.getLoan()) + "</td>";
+                content += "<td style=\"text-align: right; \">" + Common.currency(rc.getBalance()) + "</td>";
+            }
+            content += "</tr>";
+        }
+        // </editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc="render salaries report">
+        if (salaries.size() > 0 && chkMonthlyReportSalaryPayment.isSelected()) {
+            int size = columns.size();
+            for (ReportSalary rs : salaries) {
+                content += "<tr class=\"salary\">";
+
+
+                size = columns.size();
+                if (chkMonthlyReportDate.isSelected()) {
+                    content += "<td>" + Common.renderDisplayDate(rs.getDate()) + "</td>";
+                    size--;
+                }
+
+                content += "<td colspan=\"" + size + "\">Bayaran Gaji</td>";
+
+                for (ReportCalculation rc : calculations) {
+                    rc.setPayment(rs.getWorkerSalary(rc.getWorkerID()));
+                    content += "<td colspan=\"3\" style=\"text-align: right; \">" + Common.currency(Math.abs(rs.getWorkerSalary(rc.getWorkerID()))) + "</td>";
+                }
+
+                content += "</tr>";
+            }
+
+            content += "<tr class=\"salary\">";
+
+            if (chkMonthlyReportDate.isSelected()) {
+                content += "<td>&nbsp;</td>";
+            }
+
+            content += "<td colspan=\"" + size + "\">Baki</td>";
+
+            for (ReportCalculation rc : calculations) {
+                content += "<td colspan=\"3\" style=\"text-align: right; \">" + Common.currency(rc.getTotalBalance()) + "</td>";
+            }
+
+            content += "</tr>";
+
+        }
+        // </editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc="render report saving summary">
+        if (chkMonthlyReportSaving.isSelected() && selected.size() > 0) {
+            content += "<tr><td colspan=\"" + (selected.size() + columns.size()) + "\"><br /><b><u>Simpanan Tetap</u></b></td></tr>";
+
+            /* Baki Lalu */
+            content += "<tr class=\"saving_summary\">";
+
+            int colspan_size = columns.size();
+
+            content += "<td colspan=\"" + colspan_size + "\">";
+            content += "Baki Bulan Lalu<br />";
+            content += "Bulan Ini<br />";
+            content += "Baki";
+            content += "</td>";
+
+            for (ReportSaving saving : savings) {
+                content += "<td colspan=\"3\" style=\"text-align: right; \">";
+                content += Common.currency(saving.getPrevious()) + "<br />";
+                content += Common.currency(saving.getCurrent()) + "<br />";
+                content += Common.currency(saving.getBalance());
+                content += "</td>";
+            }
+
+            content += "</tr>";
+        }
+        // </editor-fold>
+
+        content += "</tbody>";
+
+        table += header + content;
+        table += "</table>";
+
+        css += "</style>";
+        html += "<head>" + css + "</head>";
+        html += "<body>";
+        html += "<h3>Laporan Bulanan (" + Common.renderDisplayDate((Calendar) dates.get("from")) + " - " + Common.renderDisplayDate((Calendar) dates.get("to")) + ")</h3>";
+        html += table;
+        html += "</body>";
+        html += "</html>";
+
+        ReportFrame form = new ReportFrame();
+        UserAgentContext context = new SimpleUserAgentContext();
+        SimpleHtmlRendererContext rcontext = new SimpleHtmlRendererContext(form.html, context);
+        DocumentBuilderImpl dbi = new DocumentBuilderImpl(context);
+        Reader reader = new StringReader(html);
+        Document document = null;
+
+        try {
+            document = dbi.parse(new InputSourceImpl(reader, "127.0.0.1"));
+        } catch (SAXException ex) {
+            System.err.println(ex.getMessage());
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        form.html.setDocument(document, rcontext);
+        form.setVisible(true);
     }//GEN-LAST:event_btnMonthlyReportGenerate1ActionPerformed
 
     private void cboxMonthlyReportAllWorkers1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxMonthlyReportAllWorkers1ActionPerformed
@@ -5257,7 +5545,9 @@ public class Main extends javax.swing.JFrame {
             } else if (txtTransactionPricePerTon.getText().isEmpty()) {
                 message = "Sila isikan Harga";
             } else if ( ! Common.isDouble(txtTransactionPricePerTon.getText())) {
-                message = "Kesilapan Harga";
+                message = "Kesilapan Harga Seton";
+            } else if ( ! Common.isDouble(txtTransactionPricePerTonTax.getText())) {
+                message = "Kesilapan Harga Seton (Tax)";
             } else if (txtTransactionWages.getText().isEmpty()) {
                 message = "Sila isikan Upah Pekerja";
             } else if ( ! Common.isDouble(txtTransactionWages.getText())) {
@@ -5287,6 +5577,173 @@ public class Main extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, message, "Kesilapan!", JOptionPane.WARNING_MESSAGE);
         
         return false;
+    }
+
+    private ArrayList<String> getReportColumns1() {
+        ArrayList<String> headers = new ArrayList<String>();
+
+        if (chkMonthlyReportDate1.isSelected()) headers.add("Tarikh");
+        if (chkMonthlyReportClientName1.isSelected()) headers.add("Nama Pelanggan");
+        if (chkMonthlyReportDescription1.isSelected()) headers.add("Keterangan");
+        if (chkMonthlyReportWeight1.isSelected()) headers.add("Berat KG");
+        if (chkMonthlyReportPricePerTon1.isSelected()) headers.add("Harga Seton (TAX)");
+        if (chkMonthlyReportTotalReceived1.isSelected()) headers.add("Jumlah Diterima");
+        if (chkMonthlyReportWages1.isSelected()) headers.add("Upah Kerja");
+        if (chkMonthlyReportSalary1.isSelected()) headers.add("Jumlah Gaji");
+        if (chkMonthlyReportBalance1.isSelected()) headers.add("Jumlah Baki");
+        if (chkMonthlyReportKiraanAsing1.isSelected()) headers.add("Kiraan Asing");
+
+        return headers;
+    }
+
+    private ArrayList<Worker> getReportSelectedWorkers1() {
+        ArrayList<Worker> selected = new ArrayList<Worker>();
+        int row = tblMonthlyReportWorkers1.getRowCount();
+
+        for (int i = 0; i < row; i ++) {
+            if (Boolean.parseBoolean(tblMonthlyReportWorkers1.getValueAt(i, 0).toString())) {
+                selected.add(workers.get(i));
+            }
+        }
+
+        return selected;
+    }
+
+    private ArrayList<Transaction> getReportTransasctions1(ArrayList<Worker> selected) {
+        ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+        Hashtable dates = getReportSelectedDateRange1();
+        String id = Worker.join(selected);
+
+        String query = "SELECT DISTINCT id, type, loan_amount, customer_id, description, weight, price_per_ton, price_per_ton_tax, wages, kiraan_asing, date, created, normalized_worker_id FROM transactions ";
+        query += "INNER JOIN transaction_workers ON transactions.id = transaction_workers.transaction_id ";
+        query += "WHERE date >= '" + Common.renderSQLDate((Calendar) dates.get("from")) + "' AND date <= '" + Common.renderSQLDate((Calendar) dates.get("to")) + "' ";
+        query += id.isEmpty() ? "AND type = 1 ORDER BY date" : "AND worker_id IN (" + id + ") ORDER BY DATE";
+
+        ResultSet rs = Database.instance().execute(query);
+
+        try {
+            while (rs.next()) {
+                ArrayList<Worker> involver = Worker.bulk(rs.getString("normalized_worker_id"));
+                transactions.add(new Transaction(rs.getInt("id"), rs.getInt("customer_id"), rs.getInt("type"), rs.getDouble("weight"), rs.getDouble("price_per_ton"), rs.getDouble("price_per_ton_tax"), rs.getDouble("wages"), rs.getDouble("kiraan_asing"), rs.getDouble("loan_amount"), involver, Common.convertStringToDate(rs.getString("date")), rs.getString("description"), rs.getString("normalized_worker_id")));
+            }
+
+            rs.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return transactions;
+    }
+
+    private ArrayList<ReportCalculation> getReportCalculations1(ArrayList<Worker> selected) {
+        ArrayList<ReportCalculation> calculations = new ArrayList<ReportCalculation>();
+
+        for (Worker worker : selected) {
+            calculations.add(new ReportCalculation(worker.getId()));
+        }
+
+        return calculations;
+    }
+
+    private ArrayList<ReportSalary> getReportSalaries1(ArrayList<Worker> selected) {
+        ArrayList<ReportSalary> salaries = new ArrayList<ReportSalary>();
+        Hashtable dates = this.getReportSelectedDateRange1();
+
+        String id = "";
+        for (Worker worker : selected) {
+            id += worker.getId() + ",";
+        }
+
+        id = id.isEmpty() ? "0" : id.substring(0, id.length() - 1);
+
+        String query = "SELECT worker_id, date, amount FROM workerRecord WHERE worker_id IN (" + id + ") AND type = " + WorkerRecord.PAYMENT + " ";
+        query += "AND date >= '" + Common.renderSQLDate((Calendar) dates.get("from")) + "' ";
+        query += "AND date <= '" + Common.renderSQLDate((Calendar) dates.get("to")) + "' ";
+        query += "ORDER BY date";
+
+        ResultSet rs = Database.instance().execute(query);
+
+        try {
+            String date = "";
+            ReportSalary salary = null;
+
+            while (rs.next()) {
+
+                if ( ! date.equals(rs.getString("date"))) {
+                    date = rs.getString("date");
+
+                    if (salary != null) {
+                        salaries.add(salary);
+                    }
+
+                    salary = new ReportSalary(workers, Common.convertStringToDate(rs.getString("date")));
+                }
+
+                salary.setWorkerSalary(rs.getInt("worker_id"), rs.getDouble("amount"));
+            }
+
+            if (salary != null) salaries.add(salary);
+
+            rs.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return salaries;
+    }
+
+    private Hashtable getReportSelectedDateRange1() {
+        Hashtable values = new Hashtable();
+
+        Calendar dateFrom = Calendar.getInstance(), dateTo = Calendar.getInstance();
+
+        if (rbtnMonhtlyReportCurrentMonth1.isSelected()) {
+            dateFrom.set(Calendar.DAY_OF_MONTH, 1);
+            dateTo.set(Calendar.DAY_OF_MONTH, dateTo.getActualMaximum(Calendar.DAY_OF_MONTH));
+        } else if (rbtnMonthlyReportLastMonth1.isSelected()) {
+            dateFrom.set(Calendar.DAY_OF_MONTH, 1);
+            dateTo.set(Calendar.DAY_OF_MONTH, dateTo.getActualMaximum(Calendar.DAY_OF_MONTH));
+            dateFrom.roll(Calendar.MONTH, -1);
+            dateTo.roll(Calendar.MONTH, -1);
+        } else {
+            dateFrom.setTime(txtMonthlyReportDateFrom1.getDate());
+            dateTo.setTime(txtMonthlyReportDateTo1.getDate());
+        }
+
+        values.put("from", dateFrom);
+        values.put("to", dateTo);
+
+        return values;
+    }
+
+    private ArrayList<ReportSaving> getReportSavings1(ArrayList<Worker> selected) {
+        ArrayList<ReportSaving> saving = new ArrayList<ReportSaving>();
+        Hashtable dates = this.getReportSelectedDateRange1();
+
+        if ( ! chkMonthlyReportSaving1.isSelected()) {
+            return saving;
+        }
+
+        String query = "";
+        ResultSet rs = null;
+        for (Worker worker : selected) {
+            try {
+                query = "SELECT ";
+                query += "(SELECT SUM(amount) FROM workerRecord WHERE worker_id = " + worker.getId() + " AND date < '" + Common.renderSQLDate((Calendar) dates.get("from")) + "' AND type IN (" + WorkerRecord.SAVING + "," + WorkerRecord.WITHDRAW + ")) AS previous, ";
+                query += "(SELECT SUM(amount) FROM workerRecord WHERE worker_id = " + worker.getId() + " AND date >= '" + Common.renderSQLDate((Calendar) dates.get("from")) + "' AND date <= '" + Common.renderSQLDate((Calendar) dates.get("to")) + "' AND type IN (" + WorkerRecord.SAVING + "," + WorkerRecord.WITHDRAW + ")) AS current ";
+
+                rs = Database.instance().execute(query);
+                rs.next();
+
+                saving.add(new ReportSaving(rs.getDouble("previous"), rs.getDouble("current"), worker));
+                rs.close();
+            } catch(SQLException ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
+
+        return saving;
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
