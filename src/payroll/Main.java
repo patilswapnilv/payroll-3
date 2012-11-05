@@ -3046,9 +3046,9 @@ public class Main extends javax.swing.JFrame {
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         if (jTabbedPane1.getSelectedIndex() == 1) {
             this._prepare_transaction_tab();
-        } else if (jTabbedPane1.getSelectedIndex() == 5 && jTabbedPane4.getSelectedIndex() == 0) {
+        } else if (jTabbedPane1.getSelectedIndex() == 6 && jTabbedPane4.getSelectedIndex() == 0) {
             this._prepare_monthly_report_tab();
-        } else if (jTabbedPane1.getSelectedIndex() == 5 && jTabbedPane4.getSelectedIndex() == 1) {
+        } else if (jTabbedPane1.getSelectedIndex() == 6 && jTabbedPane4.getSelectedIndex() == 1) {
             this._prepare_monthly_report_tab_tax();
         }
     }//GEN-LAST:event_jTabbedPane1StateChanged
@@ -4808,7 +4808,7 @@ public class Main extends javax.swing.JFrame {
         tblTransactionList1.getColumnModel().getColumn(2).setPreferredWidth(120);
         tblTransactionList1.getColumnModel().getColumn(3).setPreferredWidth(250);
 
-        String query = "SELECT * FROM transactions WHERE date >= '" + Common.renderSQLDate(txtTransactionListFrom1.getDate()) + "' AND date <= '" + Common.renderSQLDate(txtTransactionListTo1.getDate()) + "'";
+        String query = "SELECT * FROM transactions WHERE date >= '" + Common.renderSQLDate(txtTransactionListFrom1.getDate()) + "' AND date <= '" + Common.renderSQLDate(txtTransactionListTo1.getDate()) + "' AND price_per_ton_tax > 0";
 
         if (cbxTransactionListClients1.getSelectedIndex() > 0) {
             query += " AND customer_id = " + customers.get(cbxTransactionListClients1.getSelectedIndex() - 1).getId();
