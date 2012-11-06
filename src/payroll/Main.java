@@ -1324,7 +1324,7 @@ public class Main extends javax.swing.JFrame {
 
             },
             new String [] {
-                "", "Tarikh", "Kod & Name Pelanggan", "Keterangan", "Berat KG", "Harga Diterima Seton", "Jumlah Diterima", "Upah Kerja", "Jumlah Gaji", "Kiraan Asing"
+                "", "Tarikh", "Kod & Name Pelanggan", "Keterangan", "Berat KG", "Harga Seton (Tax)", "Jumlah Diterima", "Upah Kerja", "Jumlah Gaji", "Kiraan Asing"
             }
         ) {
             Class[] types = new Class [] {
@@ -1615,7 +1615,7 @@ public class Main extends javax.swing.JFrame {
         jLabel18.setFont(jLabel18.getFont().deriveFont(jLabel18.getFont().getStyle() | java.awt.Font.BOLD));
         jLabel18.setText("Bayaran Gaji");
 
-        jLabel19.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel19.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel19.setText("Nama Pekerja");
 
         jLabel20.setFont(new java.awt.Font("Arial", 0, 12));
@@ -1624,7 +1624,7 @@ public class Main extends javax.swing.JFrame {
         jLabel22.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel22.setText("Hingga");
 
-        tblPay.setFont(new java.awt.Font("Arial", 0, 12));
+        tblPay.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tblPay.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1695,7 +1695,7 @@ public class Main extends javax.swing.JFrame {
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                .addContainerGap(658, Short.MAX_VALUE)
+                .addContainerGap(664, Short.MAX_VALUE)
                 .addComponent(btnPayNew, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPayCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1730,19 +1730,22 @@ public class Main extends javax.swing.JFrame {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+            .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                        .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel11Layout.createSequentialGroup()
                                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-                                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
+                                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cbxPaymentWorkers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1758,11 +1761,7 @@ public class Main extends javax.swing.JFrame {
                                         .addComponent(txtPaymentYearTo, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(btnPaymentSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(339, 339, 339))))
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addContainerGap(345, Short.MAX_VALUE))))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1783,9 +1782,9 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(txtPaymentMonth, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, Short.MAX_VALUE)
-                        .addComponent(txtPaymentYear, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)))
+                        .addComponent(txtPaymentYear, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(9, 9, 9)
-                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -2222,12 +2221,12 @@ public class Main extends javax.swing.JFrame {
         );
 
         buttonGroupMonthlyReportTax.add(rbtnMonhtlyReportCurrentMonth1);
-        rbtnMonhtlyReportCurrentMonth1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        rbtnMonhtlyReportCurrentMonth1.setFont(new java.awt.Font("Arial", 0, 12));
         rbtnMonhtlyReportCurrentMonth1.setSelected(true);
         rbtnMonhtlyReportCurrentMonth1.setText("Bulan Ini");
 
         buttonGroupMonthlyReportTax.add(rbtnMonthlyReportLastMonth1);
-        rbtnMonthlyReportLastMonth1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        rbtnMonthlyReportLastMonth1.setFont(new java.awt.Font("Arial", 0, 12));
         rbtnMonthlyReportLastMonth1.setText("Bulan Lepas");
 
         buttonGroupMonthlyReportTax.add(rbtnMonhtlyReportDateRange1);
@@ -2987,11 +2986,11 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1006, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1006, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
         );
 
         pack();
@@ -3048,9 +3047,9 @@ public class Main extends javax.swing.JFrame {
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         if (jTabbedPane1.getSelectedIndex() == 1) {
             this._prepare_transaction_tab();
-        } else if (jTabbedPane1.getSelectedIndex() == 5 && jTabbedPane4.getSelectedIndex() == 0) {
+        } else if (jTabbedPane1.getSelectedIndex() == 6 && jTabbedPane4.getSelectedIndex() == 0) {
             this._prepare_monthly_report_tab();
-        } else if (jTabbedPane1.getSelectedIndex() == 5 && jTabbedPane4.getSelectedIndex() == 1) {
+        } else if (jTabbedPane1.getSelectedIndex() == 6 && jTabbedPane4.getSelectedIndex() == 1) {
             this._prepare_monthly_report_tab_tax();
         }
     }//GEN-LAST:event_jTabbedPane1StateChanged
@@ -4810,7 +4809,7 @@ public class Main extends javax.swing.JFrame {
         tblTransactionList1.getColumnModel().getColumn(2).setPreferredWidth(120);
         tblTransactionList1.getColumnModel().getColumn(3).setPreferredWidth(250);
 
-        String query = "SELECT * FROM transactions WHERE date >= '" + Common.renderSQLDate(txtTransactionListFrom1.getDate()) + "' AND date <= '" + Common.renderSQLDate(txtTransactionListTo1.getDate()) + "'";
+        String query = "SELECT * FROM transactions WHERE date >= '" + Common.renderSQLDate(txtTransactionListFrom1.getDate()) + "' AND date <= '" + Common.renderSQLDate(txtTransactionListTo1.getDate()) + "' AND price_per_ton_tax > 0";
 
         if (cbxTransactionListClients1.getSelectedIndex() > 0) {
             query += " AND customer_id = " + customers.get(cbxTransactionListClients1.getSelectedIndex() - 1).getId();

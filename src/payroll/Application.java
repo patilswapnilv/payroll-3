@@ -62,10 +62,8 @@ public class Application {
                             db.update(query);
                         }
                     } catch (SQLException ex) {
-
+                        throw ex;
                     }
-
-                    System.exit(0);
                     
                     new Main().setVisible(true);
                 } catch (Exception ex) {
