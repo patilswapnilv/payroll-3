@@ -116,6 +116,8 @@ public class Main extends javax.swing.JFrame {
         txtSavingDateTo.setDate(dateTo.getTime());
         txtMonthlyReportDateFrom.setDate(dateFrom.getTime());
         txtMonthlyReportDateTo.setDate(dateTo.getTime());
+        txtMonthlyReportDateFrom1.setDate(dateFrom.getTime());
+        txtMonthlyReportDateTo1.setDate(dateTo.getTime());
 
         new Login(this, true).setVisible(true);
     }
@@ -4253,7 +4255,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRecordActionPerformed
 
     private void calculateTransaction(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_calculateTransaction
-        if (txtTransactionPricePerTon.getText().isEmpty() || txtTransactionWeight.getText().isEmpty() || ! Common.isDouble(txtTransactionPricePerTon.getText()) || ! Common.isDouble(txtTransactionWeight.getText())) {
+        if ((txtTransactionPricePerTon.getText().isEmpty() && txtTransactionPricePerTonTax.getText().isEmpty()) || txtTransactionWeight.getText().isEmpty() || ( ! Common.isDouble(txtTransactionPricePerTon.getText()) && ! Common.isDouble(txtTransactionPricePerTonTax.getText())) || ! Common.isDouble(txtTransactionWeight.getText())) {
             return;
         }
 
@@ -4262,11 +4264,12 @@ public class Main extends javax.swing.JFrame {
             kiraanAsing = Double.parseDouble(txtTransactionCalculate.getText());
         }
 
-        double weight = Double.parseDouble(txtTransactionWeight.getText()), price_per_ton = Double.parseDouble(txtTransactionPricePerTon.getText());
+        double weight = Double.parseDouble(txtTransactionWeight.getText()), price_per_ton = 0.0;
 
-        System.out.println(price_per_ton);
-        if (price_per_ton == 0.0) {
+        if ( ! txtTransactionPricePerTonTax.getText().isEmpty() && Common.isDouble(txtTransactionPricePerTonTax.getText())) {
             price_per_ton = Double.parseDouble(txtTransactionPricePerTonTax.getText());
+        } else if ( ! txtTransactionPricePerTon.getText().isEmpty() && Common.isDouble(txtTransactionPricePerTon.getText())) {
+            price_per_ton = Double.parseDouble(txtTransactionPricePerTon.getText());
         }
         
         double total = ((weight / 1000) * price_per_ton) + (kiraanAsing * price_per_ton);
