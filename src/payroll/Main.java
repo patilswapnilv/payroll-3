@@ -958,7 +958,7 @@ public class Main extends javax.swing.JFrame {
         jLabel41.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel41.setText("Harga Seton (TAX)");
 
-        txtTransactionPricePerTonTax.setFont(new java.awt.Font("Arial", 0, 12));
+        txtTransactionPricePerTonTax.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtTransactionPricePerTonTax.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTransactionPricePerTonTaxActionPerformed(evt);
@@ -4271,7 +4271,7 @@ public class Main extends javax.swing.JFrame {
         } else if ( ! txtTransactionPricePerTon.getText().isEmpty() && Common.isDouble(txtTransactionPricePerTon.getText())) {
             price_per_ton = Double.parseDouble(txtTransactionPricePerTon.getText());
         }
-        
+
         double total = ((weight / 1000) * price_per_ton) + (kiraanAsing * price_per_ton);
 
         txtTransactionTotalReceived.setText(Common.currency(total));
