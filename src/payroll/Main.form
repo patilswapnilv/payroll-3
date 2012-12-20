@@ -238,11 +238,11 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jPanel10" alignment="0" max="32767" attributes="1"/>
                           <Component id="jLabel1" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jPanel29" min="-2" max="-2" attributes="1"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jPanel29" max="32767" attributes="1"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jPanel22" min="-2" max="-2" attributes="1"/>
-                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -257,9 +257,9 @@
                       <Component id="jLabel1" min="-2" pref="20" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jPanel29" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jPanel22" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jPanel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                          <Component id="jPanel22" min="-2" max="-2" attributes="0"/>
+                          <Component id="jPanel29" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
@@ -548,17 +548,13 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="txtTransactionDate" alignment="0" pref="140" max="32767" attributes="1"/>
-                                          <Component id="txtTransactionWeight" alignment="0" min="-2" pref="120" max="-2" attributes="1"/>
+                                          <Component id="txtTransactionWeight" alignment="0" min="-2" pref="95" max="-2" attributes="1"/>
                                           <Component id="cbxTransactionClients" alignment="0" max="32767" attributes="1"/>
                                       </Group>
-                                      <Component id="txtTransactionPricePerTon" min="-2" pref="120" max="-2" attributes="0"/>
+                                      <Component id="txtTransactionPricePerTon" min="-2" pref="95" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel41" min="-2" pref="150" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtTransactionPricePerTonTax" min="-2" pref="120" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabel41" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                               <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
                                       <Group type="103" groupAlignment="1" attributes="0">
@@ -571,12 +567,31 @@
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txtTransactionTotalReceived" min="-2" pref="120" max="-2" attributes="0"/>
-                                          <Component id="txtTransactionWages" min="-2" pref="120" max="-2" attributes="0"/>
-                                          <Component id="txtTransactionSalary" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                                          <Component id="txtTransactionBalance" min="-2" pref="120" max="-2" attributes="0"/>
-                                          <Component id="txtTransactionCalculate" min="-2" pref="120" max="-2" attributes="0"/>
-                                          <Component id="txtTransactionPayPerPerson" min="-2" pref="120" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="txtTransactionSalary" min="-2" pref="95" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txtTransactionSalary1" pref="100" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="txtTransactionBalance" min="-2" pref="95" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txtTransactionBalance1" pref="100" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="txtTransactionPayPerPerson" min="-2" pref="95" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txtTransactionPayPerPerson1" pref="100" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Component id="txtTransactionWages" alignment="0" pref="201" max="32767" attributes="0"/>
+                                          <Component id="txtTransactionCalculate" alignment="0" pref="201" max="32767" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="txtTransactionTotalReceived" min="-2" pref="95" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="txtTransactionPricePerTonTax" alignment="0" pref="100" max="32767" attributes="0"/>
+                                                  <Component id="txtTransactionTotalReceived1" alignment="0" pref="100" max="32767" attributes="0"/>
+                                              </Group>
+                                          </Group>
                                       </Group>
                                   </Group>
                                   <Component id="jLabel4" alignment="0" max="32767" attributes="1"/>
@@ -619,6 +634,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel7" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               <Component id="txtTransactionTotalReceived" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="txtTransactionTotalReceived1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -629,11 +645,13 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel9" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               <Component id="txtTransactionSalary" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="txtTransactionSalary1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel10" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               <Component id="txtTransactionBalance" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="txtTransactionBalance1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -644,6 +662,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel12" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               <Component id="txtTransactionPayPerPerson" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="txtTransactionPayPerPerson1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel4" min="-2" pref="25" max="-2" attributes="0"/>
@@ -866,6 +885,42 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTransactionPricePerTonTaxActionPerformed"/>
                     <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="calculateTransaction"/>
                   </Events>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtTransactionTotalReceived1">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="12" style="0"/>
+                    </Property>
+                    <Property name="focusable" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtTransactionSalary1">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="12" style="0"/>
+                    </Property>
+                    <Property name="focusable" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtTransactionBalance1">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="12" style="0"/>
+                    </Property>
+                    <Property name="focusable" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtTransactionPayPerPerson1">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="12" style="0"/>
+                    </Property>
+                    <Property name="focusable" type="boolean" value="false"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>

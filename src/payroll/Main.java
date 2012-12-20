@@ -378,6 +378,10 @@ public class Main extends javax.swing.JFrame {
         txtTransactionDescription = new javax.swing.JTextField();
         jLabel41 = new javax.swing.JLabel();
         txtTransactionPricePerTonTax = new javax.swing.JTextField();
+        txtTransactionTotalReceived1 = new javax.swing.JTextField();
+        txtTransactionSalary1 = new javax.swing.JTextField();
+        txtTransactionBalance1 = new javax.swing.JTextField();
+        txtTransactionPayPerPerson1 = new javax.swing.JTextField();
         jPanel26 = new javax.swing.JPanel();
         jLabel37 = new javax.swing.JLabel();
         txtTransactionListFrom = new com.toedter.calendar.JDateChooser();
@@ -567,7 +571,7 @@ public class Main extends javax.swing.JFrame {
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/payroll/images/icon.png")).getImage());
 
         jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
-        jTabbedPane1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jTabbedPane1.setFont(new java.awt.Font("Arial", 0, 18));
         jTabbedPane1.setName("Payroll Software"); // NOI18N
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -865,7 +869,7 @@ public class Main extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel5.setText("Berat KG");
 
-        txtTransactionWeight.setFont(new java.awt.Font("Arial", 0, 12));
+        txtTransactionWeight.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtTransactionWeight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTransactionWeightActionPerformed(evt);
@@ -896,13 +900,13 @@ public class Main extends javax.swing.JFrame {
         jLabel7.setText("Jumlah Diterima");
 
         txtTransactionTotalReceived.setEditable(false);
-        txtTransactionTotalReceived.setFont(new java.awt.Font("Arial", 0, 12));
+        txtTransactionTotalReceived.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtTransactionTotalReceived.setFocusable(false);
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel8.setText("Upah Kerja");
 
-        txtTransactionWages.setFont(new java.awt.Font("Arial", 0, 12));
+        txtTransactionWages.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtTransactionWages.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTransactionWagesActionPerformed(evt);
@@ -918,20 +922,20 @@ public class Main extends javax.swing.JFrame {
         jLabel9.setText("Jumlah Gaji");
 
         txtTransactionSalary.setEditable(false);
-        txtTransactionSalary.setFont(new java.awt.Font("Arial", 0, 12));
+        txtTransactionSalary.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtTransactionSalary.setFocusable(false);
 
         jLabel10.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel10.setText("Jumlah Baki");
 
         txtTransactionBalance.setEditable(false);
-        txtTransactionBalance.setFont(new java.awt.Font("Arial", 0, 12));
+        txtTransactionBalance.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtTransactionBalance.setFocusable(false);
 
         jLabel11.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel11.setText("Kiraan Asing");
 
-        txtTransactionCalculate.setFont(new java.awt.Font("Arial", 0, 12));
+        txtTransactionCalculate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtTransactionCalculate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTransactionCalculateActionPerformed(evt);
@@ -947,7 +951,7 @@ public class Main extends javax.swing.JFrame {
         jLabel12.setText("Upah Perseorangan");
 
         txtTransactionPayPerPerson.setEditable(false);
-        txtTransactionPayPerPerson.setFont(new java.awt.Font("Arial", 0, 12));
+        txtTransactionPayPerPerson.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtTransactionPayPerPerson.setFocusable(false);
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 12));
@@ -970,6 +974,22 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        txtTransactionTotalReceived1.setEditable(false);
+        txtTransactionTotalReceived1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionTotalReceived1.setFocusable(false);
+
+        txtTransactionSalary1.setEditable(false);
+        txtTransactionSalary1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionSalary1.setFocusable(false);
+
+        txtTransactionBalance1.setEditable(false);
+        txtTransactionBalance1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionBalance1.setFocusable(false);
+
+        txtTransactionPayPerPerson1.setEditable(false);
+        txtTransactionPayPerPerson1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionPayPerPerson1.setFocusable(false);
+
         javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
         jPanel29.setLayout(jPanel29Layout);
         jPanel29Layout.setHorizontalGroup(
@@ -987,13 +1007,10 @@ public class Main extends javax.swing.JFrame {
                         .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtTransactionDate, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                                .addComponent(txtTransactionWeight, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtTransactionWeight, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(cbxTransactionClients, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(txtTransactionPricePerTon, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel29Layout.createSequentialGroup()
-                        .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTransactionPricePerTonTax, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtTransactionPricePerTon, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel29Layout.createSequentialGroup()
                             .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1005,12 +1022,26 @@ public class Main extends javax.swing.JFrame {
                                 .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtTransactionTotalReceived, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtTransactionWages, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtTransactionSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtTransactionBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtTransactionCalculate, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtTransactionPayPerPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel29Layout.createSequentialGroup()
+                                    .addComponent(txtTransactionSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtTransactionSalary1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                                .addGroup(jPanel29Layout.createSequentialGroup()
+                                    .addComponent(txtTransactionBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtTransactionBalance1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                                .addGroup(jPanel29Layout.createSequentialGroup()
+                                    .addComponent(txtTransactionPayPerPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtTransactionPayPerPerson1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                                .addComponent(txtTransactionWages, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                                .addComponent(txtTransactionCalculate, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                                .addGroup(jPanel29Layout.createSequentialGroup()
+                                    .addComponent(txtTransactionTotalReceived, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtTransactionPricePerTonTax, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                        .addComponent(txtTransactionTotalReceived1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))))
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtTransactionDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1041,7 +1072,8 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTransactionTotalReceived, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTransactionTotalReceived, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTransactionTotalReceived1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1049,11 +1081,13 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTransactionSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTransactionSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTransactionSalary1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTransactionBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTransactionBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTransactionBalance1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1061,7 +1095,8 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTransactionPayPerPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTransactionPayPerPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTransactionPayPerPerson1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1078,11 +1113,11 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -1093,9 +1128,9 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -1107,10 +1142,10 @@ public class Main extends javax.swing.JFrame {
         jLabel37.setText("Petanyaan Transaksi");
 
         txtTransactionListFrom.setDateFormatString("dd/MM/yyyy");
-        txtTransactionListFrom.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionListFrom.setFont(new java.awt.Font("Arial", 0, 12));
 
         txtTransactionListTo.setDateFormatString("dd/MM/yyyy");
-        txtTransactionListTo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTransactionListTo.setFont(new java.awt.Font("Arial", 0, 12));
 
         jLabel39.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel39.setText("Hingga");
@@ -3039,6 +3074,12 @@ public class Main extends javax.swing.JFrame {
         txtTransactionBalance.setText("");
         txtTransactionCalculate.setText("");
         txtTransactionPayPerPerson.setText("");
+
+        txtTransactionBalance1.setText("");
+        txtTransactionTotalReceived1.setText("");
+        txtTransactionSalary1.setText("");
+        txtTransactionPayPerPerson1.setText("");
+
         this._prepare_transaction_tab();
     }
 
@@ -4264,17 +4305,20 @@ public class Main extends javax.swing.JFrame {
             kiraanAsing = Double.parseDouble(txtTransactionCalculate.getText());
         }
 
-        double weight = Double.parseDouble(txtTransactionWeight.getText()), price_per_ton = 0.0;
+        double weight = Double.parseDouble(txtTransactionWeight.getText()), price_per_ton = 0.0, price_per_ton_tax = 0.0;
 
         if ( ! txtTransactionPricePerTonTax.getText().isEmpty() && Common.isDouble(txtTransactionPricePerTonTax.getText())) {
-            price_per_ton = Double.parseDouble(txtTransactionPricePerTonTax.getText());
-        } else if ( ! txtTransactionPricePerTon.getText().isEmpty() && Common.isDouble(txtTransactionPricePerTon.getText())) {
+            price_per_ton_tax = Double.parseDouble(txtTransactionPricePerTonTax.getText());
+        }
+        if ( ! txtTransactionPricePerTon.getText().isEmpty() && Common.isDouble(txtTransactionPricePerTon.getText())) {
             price_per_ton = Double.parseDouble(txtTransactionPricePerTon.getText());
         }
 
         double total = ((weight / 1000) * price_per_ton) + (kiraanAsing * price_per_ton);
+        double total_tax = ((weight / 1000) * price_per_ton_tax) + (kiraanAsing * price_per_ton_tax);
 
         txtTransactionTotalReceived.setText(Common.currency(total));
+        txtTransactionTotalReceived1.setText(Common.currency(total_tax));
 
         if (txtTransactionWages.getText().isEmpty() || ! Common.isDouble(txtTransactionWages.getText())) {
             return;
@@ -4286,6 +4330,13 @@ public class Main extends javax.swing.JFrame {
         txtTransactionSalary.setText(Common.currency(salary));
 
         txtTransactionBalance.setText(Common.currency(total - salary));
+        if (total_tax > 0) {
+            txtTransactionBalance1.setText(Common.currency(total_tax - salary));
+            txtTransactionSalary1.setText(Common.currency(salary));
+        } else {
+            txtTransactionBalance1.setText(Common.currency(0));
+            txtTransactionSalary1.setText(Common.currency(0));
+        }
 
         int worker_count = 0;
         int row = tblTransactionInvolvedWorkers.getRowCount();
@@ -4297,6 +4348,13 @@ public class Main extends javax.swing.JFrame {
 
         worker_count = worker_count > 0 ? worker_count : 1;
         txtTransactionPayPerPerson.setText(Common.currency(salary / worker_count));
+
+        if (total_tax > 0) {
+            txtTransactionPayPerPerson1.setText(Common.currency(salary / worker_count));
+        } else {
+            txtTransactionPayPerPerson1.setText(Common.currency(0));
+        }
+        
     }//GEN-LAST:event_calculateTransaction
 
 
@@ -5979,6 +6037,7 @@ public class Main extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser txtSavingDateFrom;
     private com.toedter.calendar.JDateChooser txtSavingDateTo;
     private javax.swing.JTextField txtTransactionBalance;
+    private javax.swing.JTextField txtTransactionBalance1;
     private javax.swing.JTextField txtTransactionCalculate;
     private com.toedter.calendar.JDateChooser txtTransactionDate;
     private javax.swing.JTextField txtTransactionDescription;
@@ -5989,10 +6048,13 @@ public class Main extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser txtTransactionListTo1;
     private javax.swing.JButton txtTransactionNew;
     private javax.swing.JTextField txtTransactionPayPerPerson;
+    private javax.swing.JTextField txtTransactionPayPerPerson1;
     private javax.swing.JTextField txtTransactionPricePerTon;
     private javax.swing.JTextField txtTransactionPricePerTonTax;
     private javax.swing.JTextField txtTransactionSalary;
+    private javax.swing.JTextField txtTransactionSalary1;
     private javax.swing.JTextField txtTransactionTotalReceived;
+    private javax.swing.JTextField txtTransactionTotalReceived1;
     private javax.swing.JTextField txtTransactionWages;
     private javax.swing.JTextField txtTransactionWeight;
     // End of variables declaration//GEN-END:variables
