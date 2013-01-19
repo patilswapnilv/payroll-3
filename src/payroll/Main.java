@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -3842,7 +3843,8 @@ public class Main extends javax.swing.JFrame {
         ArrayList<String> columns = this.getReportColumns();
         ArrayList<Worker> selected = this.getReportSelectedWorkers();
         ArrayList<Transaction> transactions = this.getReportTransasctions(selected);
-        ArrayList<ReportSaving> savings = this.getReportSavings(selected);
+        ArrayList<ReportSaving> savingSummary = this.getReportSavings(selected);
+        Hashtable<String, Saving> savings = this.getSavings(selected);
         ArrayList<ReportCalculation> calculations = this.getReportCalculations(selected);
         ArrayList<ReportSalary> salaries = this.getReportSalaries(selected);
 
@@ -4055,19 +4057,27 @@ public class Main extends javax.swing.JFrame {
 
             content += "<td colspan=\"" + colspan_size + "\">";
             content += "Baki Bulan Lalu<br />";
-            content += "Bulan Ini<br />";
-            content += "Baki";
             content += "</td>";
 
-            for (ReportSaving saving : savings) {
+            for (ReportSaving saving : savingSummary) {
                 content += "<td colspan=\"3\" style=\"text-align: right; \">";
-                content += Common.currency(saving.getPrevious()) + "<br />";
-                content += Common.currency(saving.getCurrent()) + "<br />";
-                content += Common.currency(saving.getBalance());
+                content += Common.currency(saving.getPrevious());
                 content += "</td>";
             }
-
             content += "</tr>";
+
+            Enumeration e = savings.keys();
+            while (e.hasMoreElements()) {
+                String key = (String) e.nextElement();
+                content += "<tr>";
+                content += "<td colspan=\"" + colspan_size + "\">" + Common.renderDisplayDate(Common.convertStringToDate(key)) + "</td>";
+                Saving saving = savings.get(key);
+
+                for (Worker worker: selected) {
+                    content += "<td colspan=\"3\" style=\"text-align: right; \">" + saving.getSaving(worker.getId()) + "</td>";
+                }
+                content += "</tr>";
+            }
         }
         // </editor-fold>
         
@@ -4143,7 +4153,7 @@ public class Main extends javax.swing.JFrame {
         String query = "SELECT DISTINCT id, type, loan_amount, customer_id, description, weight, price_per_ton, price_per_ton_tax, wages, kiraan_asing, date, created, normalized_worker_id FROM transactions ";
         query += "INNER JOIN transaction_workers ON transactions.id = transaction_workers.transaction_id ";
         query += "WHERE date >= '" + Common.renderSQLDate((Calendar) dates.get("from")) + "' AND date <= '" + Common.renderSQLDate((Calendar) dates.get("to")) + "' ";
-        query += id.isEmpty() ? "AND type = 1 ORDER BY date" : "AND worker_id IN (" + id + ") AND price_per_ton > 0 ORDER BY DATE";
+        query += id.isEmpty() ? "AND type = 1 ORDER BY date" : "AND worker_id IN (" + id + ") AND (price_per_ton > 0 OR loan_amount > 0) ORDER BY DATE";
 
         ResultSet rs = Database.instance().execute(query);
 
@@ -4171,6 +4181,44 @@ public class Main extends javax.swing.JFrame {
         return calculations;
     }
 
+    private Hashtable<String, Saving> getSavings(ArrayList<Worker> selected) {
+        Hashtable<String, Saving> savings = new Hashtable<String, Saving>();
+        Hashtable dates = this.getReportSelectedDateRange();
+        
+        if ( ! chkMonthlyReportSalary.isSelected()) {
+            return savings;
+        }
+
+        String query = "";
+        ResultSet rs = null;
+        String date = "0000-00-00";
+        for (Worker worker: selected) {
+            try {
+                query = "SELECT date, amount FROM workerRecord WHERE worker_id = " + worker.getId() + " AND date >= '" + Common.renderSQLDate((Calendar) dates.get("from")) + "' AND date <= '" + Common.renderSQLDate((Calendar) dates.get("to")) + "' AND type IN (" + WorkerRecord.SAVING + "," + WorkerRecord.WITHDRAW + ") ORDER BY date";
+
+                rs = Database.instance().execute(query);
+                Saving saving = new Saving();
+
+                while (rs.next()) {
+                    if ( ! date.equals(rs.getString("date"))) {
+                        if ( ! saving.isEmpty()) {
+                            savings.put(date, saving);
+                        }
+
+                        date = rs.getString("date");
+                        saving = new Saving();
+                    }
+                    
+                    saving.addSaving(worker.getId(), rs.getDouble("amount"));
+                }
+            } catch (SQLException ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
+
+        return savings;
+    }
+
     private ArrayList<ReportSaving> getReportSavings(ArrayList<Worker> selected) {
         ArrayList<ReportSaving> saving = new ArrayList<ReportSaving>();
         Hashtable dates = this.getReportSelectedDateRange();
@@ -4184,13 +4232,15 @@ public class Main extends javax.swing.JFrame {
         for (Worker worker : selected) {
             try {
                 query = "SELECT ";
-                query += "(SELECT SUM(amount) FROM workerRecord WHERE worker_id = " + worker.getId() + " AND date < '" + Common.renderSQLDate((Calendar) dates.get("from")) + "' AND type IN (" + WorkerRecord.SAVING + "," + WorkerRecord.WITHDRAW + ")) AS previous, ";
-                query += "(SELECT SUM(amount) FROM workerRecord WHERE worker_id = " + worker.getId() + " AND date >= '" + Common.renderSQLDate((Calendar) dates.get("from")) + "' AND date <= '" + Common.renderSQLDate((Calendar) dates.get("to")) + "' AND type IN (" + WorkerRecord.SAVING + "," + WorkerRecord.WITHDRAW + ")) AS current ";
+                query += "(SELECT SUM(amount) FROM workerRecord WHERE worker_id = " + worker.getId() + " AND date < '" + Common.renderSQLDate((Calendar) dates.get("from")) + "' AND type IN (" + WorkerRecord.SAVING + "," + WorkerRecord.WITHDRAW + ")) AS previous ";
+                //query += "(SELECT SUM(amount) FROM workerRecord WHERE worker_id = " + worker.getId() + " AND date >= '" + Common.renderSQLDate((Calendar) dates.get("from")) + "' AND date <= '" + Common.renderSQLDate((Calendar) dates.get("to")) + "' AND type IN (" + WorkerRecord.SAVING + "," + WorkerRecord.WITHDRAW + ")) AS current ";
 
                 rs = Database.instance().execute(query);
                 rs.next();
 
-                saving.add(new ReportSaving(rs.getDouble("previous"), rs.getDouble("current"), worker));
+                ReportSaving reportSaving = new ReportSaving(rs.getDouble("previous"), worker);
+
+                saving.add(reportSaving);
                 rs.close();
             } catch(SQLException ex) {
                 System.err.println(ex.getMessage());
@@ -6238,7 +6288,7 @@ public class Main extends javax.swing.JFrame {
         String query = "SELECT DISTINCT id, type, loan_amount, customer_id, description, weight, price_per_ton, wages_tax, kiraan_asing, date, created, normalized_worker_id FROM transactions ";
         query += "INNER JOIN transaction_workers ON transactions.id = transaction_workers.transaction_id ";
         query += "WHERE date >= '" + Common.renderSQLDate((Calendar) dates.get("from")) + "' AND date <= '" + Common.renderSQLDate((Calendar) dates.get("to")) + "' ";
-        query += id.isEmpty() ? "AND type = 1 ORDER BY date" : "AND worker_id IN (" + id + ") AND price_per_ton_tax > 0 ORDER BY DATE";
+        query += id.isEmpty() ? "AND type = 1 ORDER BY date" : "AND worker_id IN (" + id + ") AND (price_per_ton_tax > 0 OR loan_amount > 0) ORDER BY DATE";
 
         ResultSet rs = Database.instance().execute(query);
 
@@ -6356,7 +6406,7 @@ public class Main extends javax.swing.JFrame {
                 rs = Database.instance().execute(query);
                 rs.next();
 
-                saving.add(new ReportSaving(rs.getDouble("previous"), rs.getDouble("current"), worker));
+                saving.add(new ReportSaving(rs.getDouble("previous"), worker));
                 rs.close();
             } catch(SQLException ex) {
                 System.err.println(ex.getMessage());
