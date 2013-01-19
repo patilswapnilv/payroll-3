@@ -51,14 +51,15 @@ public class Application {
                     try {
                         boolean found = false;
                         while (rs.next()) {
-                            if (rs.getString("name").equalsIgnoreCase("price_per_ton_tax")) {
+                            if (rs.getString("name").equalsIgnoreCase("wages_tax")) {
                                 found = true;
                                 break;
                             }
                         }
 
+
                         if ( ! found) {
-                            query = "ALTER TABLE transactions ADD price_per_ton_tax DOUBLE DEFAULT 0.0 NOT NULL";
+                            query = "ALTER TABLE transactions ADD wages_tax DOUBLE DEFAULT 0.0 NOT NULL";
                             db.update(query);
                         }
                     } catch (SQLException ex) {
@@ -68,6 +69,7 @@ public class Application {
                     new Main().setVisible(true);
                 } catch (Exception ex) {
                     System.err.println(ex.getMessage());
+                    ex.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Unexpected Error occur!!", "ERROR", JOptionPane.ERROR_MESSAGE);
                     System.exit(1);
                 }

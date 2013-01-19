@@ -76,28 +76,28 @@ public class SavingForm extends javax.swing.JDialog {
         setTitle("Simpanan Tetap");
         setFocusable(false);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("Pekerja");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("Tarikh");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("Amaun Simpanan [ + ]");
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("Keterangan");
 
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setText("Amaun Bayaran [ - ]");
 
         txtSavingDate.setDateFormatString("dd/MM/yyyy");
         txtSavingDate.setDate(Calendar.getInstance().getTime());
-        txtSavingDate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtSavingDate.setFont(new java.awt.Font("Arial", 0, 12));
 
-        txtSavingAmount.setFont(new java.awt.Font("Arial", 0, 12));
+        txtSavingAmount.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        txtPayAmount.setFont(new java.awt.Font("Arial", 0, 12));
+        txtPayAmount.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -139,9 +139,11 @@ public class SavingForm extends javax.swing.JDialog {
         );
 
         txtDescription.setColumns(20);
-        txtDescription.setFont(new java.awt.Font("Arial", 0, 12));
+        txtDescription.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtDescription.setRows(5);
         jScrollPane1.setViewportView(txtDescription);
+
+        cbxSalaryWorkers.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -153,11 +155,11 @@ public class SavingForm extends javax.swing.JDialog {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbxSalaryWorkers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

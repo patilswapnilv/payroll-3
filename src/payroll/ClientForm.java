@@ -76,7 +76,7 @@ public class ClientForm extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnEnd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnEnd.setFont(new java.awt.Font("Arial", 0, 14));
         btnEnd.setText("Tutup");
         btnEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,7 +84,7 @@ public class ClientForm extends javax.swing.JDialog {
             }
         });
 
-        btnSave.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnSave.setFont(new java.awt.Font("Arial", 0, 14));
         btnSave.setText("Rekodkan");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,21 +113,21 @@ public class ClientForm extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("Kod dan Nama Pekerja");
 
-        txtClientID.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtClientID.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        txtClientName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtClientName.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        rbtnInactive.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        rbtnInactive.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         rbtnInactive.setText("Tiada Aktif");
 
         rbtnActive.setSelected(true);
-        rbtnActive.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        rbtnActive.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         rbtnActive.setText("Aktif");
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("Status");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

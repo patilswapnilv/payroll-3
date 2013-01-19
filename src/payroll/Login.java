@@ -52,7 +52,7 @@ public class Login extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Payroll Software");
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("Kata Laluan");
 
         txtPassword.setFont(new java.awt.Font("Arial", 0, 12));
@@ -62,7 +62,7 @@ public class Login extends javax.swing.JDialog {
             }
         });
 
-        btnLogin.setFont(new java.awt.Font("Arial", 0, 14));
+        btnLogin.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,7 +70,7 @@ public class Login extends javax.swing.JDialog {
             }
         });
 
-        btnEnd.setFont(new java.awt.Font("Arial", 0, 14));
+        btnEnd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnEnd.setText("Tutup");
         btnEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,9 +90,9 @@ public class Login extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 56, Short.MAX_VALUE)
+                        .addGap(0, 47, Short.MAX_VALUE)
                         .addComponent(btnEnd))
-                    .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
+                    .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
