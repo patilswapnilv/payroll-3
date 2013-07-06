@@ -132,6 +132,7 @@ public class Transaction {
                     record.setDate(this.getDate());
                     record.setAmount(this.getWagePerWorker());
                     record.setTransactionID(id);
+                    record.setDescription(this.getDescription());
                     if (this.getType() == Transaction.GENERAL)
                         record.setType(WorkerRecord.INCOME);
                     else {

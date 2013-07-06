@@ -13,8 +13,10 @@ package payroll;
 //import java.sql.PreparedStatement;
 //import java.sql.ResultSet;
 //import java.sql.SQLException;
+import com.toedter.calendar.JDateChooser;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import payroll.model.Worker;
 import payroll.model.WorkerRecord;
@@ -93,7 +95,12 @@ public class SavingForm extends javax.swing.JDialog {
 
         txtSavingDate.setDateFormatString("dd/MM/yyyy");
         txtSavingDate.setDate(Calendar.getInstance().getTime());
-        txtSavingDate.setFont(new java.awt.Font("Arial", 0, 12));
+        txtSavingDate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtSavingDate.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtSavingDatePropertyChange(evt);
+            }
+        });
 
         txtSavingAmount.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
@@ -101,7 +108,7 @@ public class SavingForm extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnEnd.setFont(new java.awt.Font("Arial", 0, 14));
+        btnEnd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnEnd.setText("Tutup");
         btnEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,7 +116,7 @@ public class SavingForm extends javax.swing.JDialog {
             }
         });
 
-        btnSave.setFont(new java.awt.Font("Arial", 0, 14));
+        btnSave.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnSave.setText("Rekodkan");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,8 +205,8 @@ public class SavingForm extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-438)/2, (screenSize.height-334)/2, 438, 334);
+        setSize(new java.awt.Dimension(438, 334));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndActionPerformed
@@ -237,6 +244,23 @@ public class SavingForm extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void txtSavingDatePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtSavingDatePropertyChange
+        if (evt.getNewValue() instanceof Date) {
+            Date date = (Date) evt.getNewValue();
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+
+            if (calendar.get(Calendar.YEAR) <= 2000) {
+                int year = calendar.get(Calendar.YEAR) + 2000;
+                calendar.set(Calendar.YEAR, year);
+            }
+
+            JDateChooser dateChooser = (JDateChooser) evt.getSource();
+            dateChooser.setDate(calendar.getTime());
+        }
+    }//GEN-LAST:event_txtSavingDatePropertyChange
 
     private boolean _check()
     {

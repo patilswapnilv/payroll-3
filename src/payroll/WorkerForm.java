@@ -11,9 +11,12 @@
 
 package payroll;
 
+import com.toedter.calendar.JDateChooser;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import payroll.model.Worker;
 
@@ -96,12 +99,22 @@ public class WorkerForm extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("Tarikh Bermula");
 
-        txtRegisterDate.setFont(new java.awt.Font("Arial", 0, 12));
+        txtRegisterDate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtRegisterDate.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dateChange(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("Tarikh Tamat");
 
-        txtReturnDate.setFont(new java.awt.Font("Arial", 0, 12));
+        txtReturnDate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtReturnDate.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dateChange(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("Status");
@@ -115,7 +128,7 @@ public class WorkerForm extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnEnd.setFont(new java.awt.Font("Arial", 0, 14));
+        btnEnd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnEnd.setText("Tutup");
         btnEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,7 +136,7 @@ public class WorkerForm extends javax.swing.JDialog {
             }
         });
 
-        btnSave.setFont(new java.awt.Font("Arial", 0, 14));
+        btnSave.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnSave.setText("Rekodkan");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,8 +222,8 @@ public class WorkerForm extends javax.swing.JDialog {
         txtRegisterDate.setDateFormatString("dd/MM/yyyy");
         txtReturnDate.setDateFormatString("dd/MM/yyyy");
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-463)/2, (screenSize.height-247)/2, 463, 247);
+        setSize(new java.awt.Dimension(463, 247));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndActionPerformed
@@ -239,6 +252,23 @@ public class WorkerForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Rekod Pekerja tidak dapat disimpan", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void dateChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateChange
+        if (evt.getNewValue() instanceof Date) {
+            Date date = (Date) evt.getNewValue();
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+
+            if (calendar.get(Calendar.YEAR) <= 2000) {
+                int year = calendar.get(Calendar.YEAR) + 2000;
+                calendar.set(Calendar.YEAR, year);
+            }
+
+            JDateChooser dateChooser = (JDateChooser) evt.getSource();
+            dateChooser.setDate(calendar.getTime());
+        }
+    }//GEN-LAST:event_dateChange
 
 
     private boolean _check()

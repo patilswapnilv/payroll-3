@@ -19,7 +19,7 @@ public class ReportSaving {
         this.worker = new Worker();
     }
 
-    public ReportSaving(double previous, Worker worker) {
+    public ReportSaving(double previous, double current, Worker worker) {
         this.previous = previous;
         this.current = current;
         this.worker = worker;

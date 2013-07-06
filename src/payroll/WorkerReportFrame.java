@@ -222,8 +222,8 @@ public class WorkerReportFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-1016)/2, (screenSize.height-638)/2, 1016, 638);
+        setSize(new java.awt.Dimension(1016, 638));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
 

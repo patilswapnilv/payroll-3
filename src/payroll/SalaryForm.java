@@ -11,10 +11,13 @@
 
 package payroll;
 
+import com.toedter.calendar.JDateChooser;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import payroll.model.Worker;
 import payroll.model.WorkerRecord;
@@ -68,7 +71,7 @@ public class SalaryForm extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnEnd.setFont(new java.awt.Font("Arial", 0, 14));
+        btnEnd.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnEnd.setText("Tutup");
         btnEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,7 +79,7 @@ public class SalaryForm extends javax.swing.JDialog {
             }
         });
 
-        btnSave.setFont(new java.awt.Font("Arial", 0, 14));
+        btnSave.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnSave.setText("Rekodkan");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,6 +118,12 @@ public class SalaryForm extends javax.swing.JDialog {
         jLabel3.setText("Amaun Bayaran [ - ]");
 
         txtDate.setDateFormatString("dd/MM/yyyy");
+        txtDate.setDate(Calendar.getInstance().getTime());
+        txtDate.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtDatePropertyChange(evt);
+            }
+        });
 
         txtTotalPay.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
@@ -160,8 +169,8 @@ public class SalaryForm extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-482)/2, (screenSize.height-216)/2, 482, 216);
+        setSize(new java.awt.Dimension(482, 216));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndActionPerformed
@@ -192,6 +201,23 @@ public class SalaryForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Rekod Transaksi tidak dapat ditambah", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void txtDatePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtDatePropertyChange
+        if (evt.getNewValue() instanceof Date) {
+            Date date = (Date) evt.getNewValue();
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+
+            if (calendar.get(Calendar.YEAR) <= 2000) {
+                int year = calendar.get(Calendar.YEAR) + 2000;
+                calendar.set(Calendar.YEAR, year);
+            }
+
+            JDateChooser dateChooser = (JDateChooser) evt.getSource();
+            dateChooser.setDate(calendar.getTime());
+        }
+    }//GEN-LAST:event_txtDatePropertyChange
 
     private boolean _check()
     {

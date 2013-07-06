@@ -241,4 +241,24 @@ public class WorkerRecord {
 
         return 0.0;
     }
+
+    public void getTransactionByWorkingId(int workerID) {
+        String query = "SELECT * FROM workerRecord WHERE worker_id = " + workerID;
+        ResultSet rs = Database.instance().execute(query);
+
+        try {
+            rs.next();
+            this.setCreated(Common.convertStringToDate(rs.getString("created")));
+            this.setWorkerID(rs.getInt("worker_id"));
+            this.setDate(Common.convertStringToDate(rs.getString("date")));
+            this.setDescription(rs.getString("description"));
+            this.setAmount(rs.getDouble("amount"));
+            this.setType(rs.getInt("type"));
+            this.setTransactionID(rs.getInt("transaction_id"));
+            this._loaded = true;
+        } catch (SQLException ex) {
+            Logger.getLogger(WorkerRecord.class.getName()).log(Level.SEVERE, null, ex);
+        }       
+      //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
