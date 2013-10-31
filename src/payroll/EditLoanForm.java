@@ -7,27 +7,60 @@
 package payroll;
 
 import com.toedter.calendar.JDateChooser;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import payroll.libraries.Common;
-import payroll.model.Transaction;
+import payroll.libraries.Database;
 import payroll.model.Worker;
 
-public class LoanForm extends javax.swing.JDialog {
+public class EditLoanForm extends javax.swing.JDialog {
 
-    private Worker worker;
+    private ArrayList<Worker> workers = new ArrayList<Worker>();
 
     /**
      * Creates new form LoadForm
      */
-    public LoanForm(java.awt.Frame parent, boolean modal, Worker worker) {
+    public EditLoanForm(Main parent, boolean modal, Integer loanID)
+            throws SQLException, ParseException {
+
         super(parent, modal);
         initComponents();
-        this.worker = worker;
 
-        txtWorkerCode.setText(worker.getCode());
-        txtWorkerName.setText(worker.getName());
+        workers = parent.workers;
+
+        String query = "SELECT * FROM workerRecord WHERE id = " + loanID;
+
+        ResultSet rs = Database.instance().execute(query);
+        while (rs.next()) {
+            this.workerRecordID.setText(loanID.toString());
+
+            Integer workerID = rs.getInt("worker_id");
+            for (Worker worker : workers) {
+                if (worker.getId() == workerID) {
+                    this.workerDetails.setText(worker.getCode() + " - "
+                            + worker.getName());
+                }
+            }
+
+            String savingDate = rs.getString("date");
+            Date date = new SimpleDateFormat("yyyy-MM-dd",
+                    Locale.ENGLISH).parse(savingDate);
+            this.txtLoanDate.setDate(date);
+
+            String desc = rs.getString("description");
+            this.txtLoanDescription.setText(desc);
+
+            float saving = 0 - rs.getFloat("amount");
+            this.txtLoanAmount.setText(Float.toString(saving));
+        }
     }
 
     /**
@@ -39,12 +72,9 @@ public class LoanForm extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtWorkerCode = new javax.swing.JTextField();
-        txtWorkerName = new javax.swing.JTextField();
         txtLoanDate = new com.toedter.calendar.JDateChooser();
         txtLoanAmount = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
@@ -52,12 +82,13 @@ public class LoanForm extends javax.swing.JDialog {
         btnSave = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtLoanDescription = new javax.swing.JTextArea();
+        jLabel6 = new javax.swing.JLabel();
+        workerRecordID = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        workerDetails = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Pinjaman");
-
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel1.setText("Kod dan Nama Pekerja");
+        setTitle("Ubah Pinjaman");
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("Tarikh");
@@ -67,12 +98,6 @@ public class LoanForm extends javax.swing.JDialog {
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("Keterangan");
-
-        txtWorkerCode.setEditable(false);
-        txtWorkerCode.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-
-        txtWorkerName.setEditable(false);
-        txtWorkerName.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         txtLoanDate.setDateFormatString("dd/MM/yyyy");
         txtLoanDate.setDate(Calendar.getInstance().getTime());
@@ -96,7 +121,7 @@ public class LoanForm extends javax.swing.JDialog {
         });
 
         btnSave.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnSave.setText("Rekodkan");
+        btnSave.setText("Ubah");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
@@ -129,39 +154,61 @@ public class LoanForm extends javax.swing.JDialog {
         txtLoanDescription.setRows(5);
         jScrollPane1.setViewportView(txtLoanDescription);
 
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel6.setText("No. Rekod");
+
+        workerRecordID.setEditable(false);
+        workerRecordID.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel7.setText("Pekerja");
+
+        workerDetails.setEditable(false);
+        workerDetails.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtLoanDate, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
+                        .addGap(4, 4, 4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(workerDetails)
+                            .addComponent(workerRecordID)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtWorkerCode, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtWorkerName, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(4, 4, 4))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtLoanDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtLoanAmount)
-                            .addComponent(jScrollPane1))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtWorkerCode, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtWorkerName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel6)
+                    .addComponent(workerRecordID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(workerDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -170,18 +217,18 @@ public class LoanForm extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtLoanAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(15, 15, 15)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(509, 356));
+        getAccessibleContext().setAccessibleName("Ubah Pinjaman");
+
+        setSize(new java.awt.Dimension(481, 376));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -194,21 +241,39 @@ public class LoanForm extends javax.swing.JDialog {
             return;
         }
 
-        Transaction transaction = new Transaction();
-        transaction.setType(Transaction.LOAN);
-        transaction.setDate(txtLoanDate.getDate());
-        transaction.setLoanAmount(Double.parseDouble(txtLoanAmount.getText()));
-        transaction.setDescription(txtLoanDescription.getText());
-        transaction.addWorker(worker);
-        if (transaction.save()) {
-            JOptionPane.showMessageDialog(null, "Transaksi Direkodkan", "Berjaya!",
-                    JOptionPane.INFORMATION_MESSAGE);
-            this.dispose();
-            return;
+        Date savingDate = new java.sql.Date(txtLoanDate.getDate().getTime());
+        String desc = this.txtLoanDescription.getText();
+
+        double amount;
+        amount = 0;
+        if (!txtLoanAmount.getText().isEmpty()) {
+            amount = 0 - Double.parseDouble(txtLoanAmount.getText());
         }
 
-        JOptionPane.showMessageDialog(null, "Transaksi ini tidak dapat direkodkan",
-                "Kesilapan!", JOptionPane.ERROR_MESSAGE);
+        String query = "UPDATE workerRecord SET "
+                + "date = ?, amount = ?, description = ?"
+                + "WHERE id = "
+                + Integer.parseInt(this.workerRecordID.getText());
+
+        PreparedStatement ps = Database.instance().createPreparedStatement(query);
+        try {
+            ps.setString(1, savingDate.toString());
+            ps.setDouble(2, amount);
+            ps.setString(3, desc);
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        if (Database.instance().update(ps)) {
+            JOptionPane.showMessageDialog(null, "Rekod Pinjaman diubah.",
+                    "Berjaya!", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Rekod Pinjaman tidak dapat diubah.", "Kesilapan!",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
+        this.dispose();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void txtLoanDatePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtLoanDatePropertyChange
@@ -233,12 +298,14 @@ public class LoanForm extends javax.swing.JDialog {
 
         if (txtLoanDate.getDate() == null) {
             message = "Sila Pilih Tarikh.";
-        } else if (txtLoanAmount.getText().isEmpty() || !Common.isDouble(txtLoanAmount.getText())) {
+        } else if (txtLoanAmount.getText().isEmpty() || !Common.isDouble(
+                txtLoanAmount.getText())) {
             message = "Amaun Pinjaman tidak betul.";
         }
 
         if (!message.isEmpty()) {
-            JOptionPane.showMessageDialog(null, message, "Kesilapan!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, message, "Kesilapan!",
+                    JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
@@ -247,16 +314,17 @@ public class LoanForm extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnd;
     private javax.swing.JButton btnSave;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtLoanAmount;
     private com.toedter.calendar.JDateChooser txtLoanDate;
     private javax.swing.JTextArea txtLoanDescription;
-    private javax.swing.JTextField txtWorkerCode;
-    private javax.swing.JTextField txtWorkerName;
+    private javax.swing.JTextField workerDetails;
+    private javax.swing.JTextField workerRecordID;
     // End of variables declaration//GEN-END:variables
 }

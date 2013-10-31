@@ -1,8 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * To change this template, choose Tools | Templates and open the template in
+ * the editor.
  */
-
 package payroll;
 
 import java.awt.Color;
@@ -22,10 +21,6 @@ import payroll.model.ReportSaving;
 import payroll.model.Transaction;
 import payroll.model.Worker;
 
-/**
- *
- * @author Edward
- */
 public class ReportPrinter implements Printable {
 
     ArrayList<ReportCalculation> calculations = new ArrayList<ReportCalculation>();
@@ -35,10 +30,8 @@ public class ReportPrinter implements Printable {
     private Hashtable dates = new Hashtable();
     private String query = "";
     private Main parent;
-
     private ArrayList<Transaction> transactions = new ArrayList<Transaction>();
     private ArrayList<ReportSaving> savings = new ArrayList<ReportSaving>();
-
     final int printCap = 28;
     private int printerPointer = 0;
     private int pagesNeeded = 1;
@@ -48,29 +41,30 @@ public class ReportPrinter implements Printable {
     private int itemCount = 0;
     private int x = 0;
     private int y = 0;
-
     boolean printOrNot = true;
-
     int workerIndex = 0;
     int transactionIndex = 0;
     int savingIndex = 0;
     int salaryIndex = 0;
-
-    //---------------------------------
     boolean printMainColumn = true;
     boolean printOverflowColumn = false;
     boolean isOverflow = false;
     boolean printSummary = true;
     boolean printSalary = false;
-    boolean printSaving = false;;
-
+    boolean printSaving = false;
     int basicColumnSize = 0;
     int overflowCounter = 0;
     int workerCount = 0;
-
     int page = 1;
+    String fontFamily = "Calibri";
+    int fontSize = 8;
 
-    public ReportPrinter(Main parent, ArrayList<Worker> selected, ArrayList<Transaction> transactions, ArrayList<ReportCalculation> calculations, ArrayList<ReportSaving> savings, ArrayList<ReportSalary> salaries, Hashtable dates) {
+    public ReportPrinter(Main parent, ArrayList<Worker> selected,
+            ArrayList<Transaction> transactions,
+            ArrayList<ReportCalculation> calculations,
+            ArrayList<ReportSaving> savings,
+            ArrayList<ReportSalary> salaries, Hashtable dates) {
+
         this.parent = parent;
         this.transactions = transactions;
         this.selected = selected;
@@ -92,7 +86,8 @@ public class ReportPrinter implements Printable {
         System.out.println("Page needed: " + pagesNeeded);
     }
 
-    public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
+    public int print(Graphics graphics, PageFormat pageFormat,
+            int pageIndex) throws PrinterException {
         Graphics2D g = (Graphics2D) graphics;
         g.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
         int size = 0;
@@ -109,8 +104,11 @@ public class ReportPrinter implements Printable {
             // Initial the position for new page
             x = 10;
             y = 40;
-            g.setFont(new Font("Calibri", Font.BOLD, 12));
-            g.drawString("Laporan Bulanan (" + Common.renderDisplayDate((Calendar) dates.get("from")) + " - " + Common.renderDisplayDate((Calendar) dates.get("to")) + ")", x, y);
+            g.setFont(new Font(fontFamily, Font.BOLD, 12));
+            g.drawString("Laporan Bulanan (" + Common.renderDisplayDate(
+                    (Calendar) dates.get("from")) + " - "
+                    + Common.renderDisplayDate((Calendar) dates.get("to"))
+                    + ")", x, y);
             g.setFont(new Font("Calibri", Font.PLAIN, 9));
             x = 20;
             y = 80;
@@ -129,11 +127,11 @@ public class ReportPrinter implements Printable {
                     this.render_salaries(g);
                     printSaving = true;
                 }
-                
+
                 if (printSaving) {
                     if (savings.size() > 0 && parent.chkMonthlyReportSaving.isSelected()) {
                         if (y + 60 > 580) {
-                            pagesNeeded ++;
+                            pagesNeeded++;
                         } else {
                             render_savings(g);
                         }
@@ -144,7 +142,7 @@ public class ReportPrinter implements Printable {
             workerIndex = workerLocalIndex;
 
             if (isOverflow && printOverflowColumn == false) {
-                currentPage ++;
+                currentPage++;
                 printOverflowColumn = true;
                 printMainColumn = false;
             } else if (isOverflow && printOverflowColumn) {
@@ -152,11 +150,12 @@ public class ReportPrinter implements Printable {
                 printOverflowColumn = false;
                 workerIndex = 0;
             } else {
-                currentPage ++;
+                currentPage++;
             }
-            
+
             g.setColor(Color.GRAY);
-            g.drawString("Page " + page++, 20, (int) pageFormat.getHeight() - 20);
+            g.drawString("Page " + page++, 20,
+                    (int) pageFormat.getHeight() - 20);
         }
 
         return PAGE_EXISTS;
@@ -164,7 +163,7 @@ public class ReportPrinter implements Printable {
 
     private void render_header(Graphics2D g) {
         int size = 0;
-        g.setFont(new Font("Calibri", Font.BOLD, 10));
+        g.setFont(new Font(fontFamily, Font.BOLD, 10));
 
         g.drawString("Tarikh", x, y);
         size = 60;
@@ -275,20 +274,20 @@ public class ReportPrinter implements Printable {
             basicColumnSize = x;
         }
 
-        for (int i = workerIndex; i < workerCount; i ++) {
+        for (int i = workerIndex; i < workerCount; i++) {
             size = 180;
             if (x + size > 780.0) {
                 isOverflow = true;
                 printOverflowColumn = false;
-                pagesNeeded ++;
+                pagesNeeded++;
                 break;
             }
 
-            g.drawString(selected.get(i).getCode() + " " + selected.get(i).getName(), x, y - 18);
+            g.drawString(selected.get(i).getCode() + " "
+                    + selected.get(i).getName(), x, y - 18);
             g.drawString("Gaji", x, y);
             g.drawString("Pinjaman", x + 50, y);
             g.drawString("Baki", x + 110, y);
-
 
             g.drawLine(x - 5 + 50, y + 5, x - 5 + 50, y - 15);
             g.drawLine(x - 5 + 110, y + 5, x - 5 + 110, y - 15);
@@ -301,7 +300,7 @@ public class ReportPrinter implements Printable {
             x += size + 10;
 
         }
-        
+
         y += 20;
     }
 
@@ -309,17 +308,19 @@ public class ReportPrinter implements Printable {
         int size = 0;
         int counter = 0;
         int workerIndexLocal = 0;
-        for (int i = transactionIndex; i < itemCount; i ++) {
+        for (int i = transactionIndex; i < itemCount; i++) {
             // reset position
             x = 20;
 
             if (counter > printCap) {
-                if (isOverflow == false || (isOverflow && printOverflowColumn)) transactionIndex = i;
+                if (isOverflow == false || (isOverflow && printOverflowColumn)) {
+                    transactionIndex = i;
+                }
                 break;
             }
 
             Transaction transaction = transactions.get(i);
-            g.setFont(new Font("Calibri", Font.PLAIN, 8));
+            g.setFont(new Font(fontFamily, Font.PLAIN, 8));
             // draw line on left
             g.drawLine(x - 5, y + 5, x - 5, y - 35);
 
@@ -327,13 +328,14 @@ public class ReportPrinter implements Printable {
             size = 60;
             x += size + 10;
             g.drawLine(x - 5, y + 5, x - 5, y - 35);
-            
+
             if (printMainColumn) {
                 if (parent.chkMonthlyReportClientName.isSelected()) {
-                    if (transaction.getType() == Transaction.GENERAL)
+                    if (transaction.getType() == Transaction.GENERAL) {
                         g.drawString(transaction.getCustomer().getName(), x, y);
-                    else
+                    } else {
                         g.drawString("Pinjaman", x, y);
+                    }
                     size = 80;
                     x += size + 10;
                     g.drawLine(x - 5, y + 5, x - 5, y - 35);
@@ -349,63 +351,87 @@ public class ReportPrinter implements Printable {
                 if (parent.chkMonthlyReportKiraanAsing.isSelected()) {
                     size = 50;
                     x += size + 10;
-                    if (transaction.getType() == Transaction.GENERAL)
-                        g.drawString("" + Common.currency(transaction.getKiraanAsing()), x - g.getFontMetrics().stringWidth(Common.currency(transaction.getKiraanAsing())) - 10, y);
+                    if (transaction.getType() == Transaction.GENERAL) {
+                        g.drawString("" + Common.currency(transaction.getKiraanAsing()),
+                                x - g.getFontMetrics().stringWidth(
+                                Common.currency(transaction.getKiraanAsing())) - 10, y);
+                    }
                     g.drawLine(x - 5, y + 5, x - 5, y - 35);
                 }
 
                 if (parent.chkMonthlyReportWeight.isSelected()) {
                     size = 60;
                     x += size + 10;
-                    if (transaction.getType() == Transaction.GENERAL)
-                        g.drawString("" + ((int) transaction.getWeight()), x - g.getFontMetrics().stringWidth("" + ((int) transaction.getWeight())) - 10, y);
+                    if (transaction.getType() == Transaction.GENERAL) {
+                        g.drawString("" + ((int) transaction.getWeight()),
+                                x - g.getFontMetrics().stringWidth(""
+                                + ((int) transaction.getWeight())) - 10, y);
+                    }
                     g.drawLine(x - 5, y + 5, x - 5, y - 35);
                 }
 
                 if (parent.chkMonthlyReportPricePerTon.isSelected()) {
                     size = 50;
                     x += size + 10;
-                    if (transaction.getType() == Transaction.GENERAL)
-                        g.drawString("" + Common.currency(transaction.getPricePerTon()), x - g.getFontMetrics().stringWidth(Common.currency(transaction.getPricePerTon())) - 10, y);
+                    if (transaction.getType() == Transaction.GENERAL) {
+                        g.drawString("" + Common.currency(transaction.getPricePerTon()),
+                                x - g.getFontMetrics().stringWidth(
+                                Common.currency(transaction.getPricePerTon()))
+                                - 10, y);
+                    }
                     g.drawLine(x - 5, y + 5, x - 5, y - 35);
                 }
 
                 if (parent.chkMonthlyReportTotalReceived.isSelected()) {
                     size = 50;
                     x += size + 10;
-                    if (transaction.getType() == Transaction.GENERAL)
-                        g.drawString("" + Common.currency(transaction.getTotal()), x - g.getFontMetrics().stringWidth(Common.currency(transaction.getTotal())) - 10, y);
+                    if (transaction.getType() == Transaction.GENERAL) {
+                        g.drawString("" + Common.currency(transaction.getTotal()),
+                                x - g.getFontMetrics().stringWidth(
+                                Common.currency(transaction.getTotal())) - 10, y);
+                    }
                     g.drawLine(x - 5, y + 5, x - 5, y - 35);
                 }
 
                 if (parent.chkMonthlyReportWages.isSelected()) {
                     size = 50;
                     x += size + 10;
-                    if (transaction.getType() == Transaction.GENERAL)
-                        g.drawString("" + Common.currency(transaction.getWages()), x - g.getFontMetrics().stringWidth(Common.currency(transaction.getWages())) - 10, y);
+                    if (transaction.getType() == Transaction.GENERAL) {
+                        g.drawString("" + Common.currency(
+                                transaction.getWages()), x
+                                - g.getFontMetrics().stringWidth(
+                                Common.currency(transaction.getWages())) - 10, y);
+                    }
                     g.drawLine(x - 5, y + 5, x - 5, y - 35);
                 }
 
                 if (parent.chkMonthlyReportSalary.isSelected()) {
                     size = 50;
                     x += size + 10;
-                    if (transaction.getType() == Transaction.GENERAL)
-                        g.drawString("" + Common.currency(transaction.getTotalSalary()), x - g.getFontMetrics().stringWidth(Common.currency(transaction.getTotalSalary())) - 10, y);
+                    if (transaction.getType() == Transaction.GENERAL) {
+                        g.drawString("" + Common.currency(
+                                transaction.getTotalSalary()),
+                                x - g.getFontMetrics().stringWidth(
+                                Common.currency(transaction.getTotalSalary())) - 10, y);
+                    }
                     g.drawLine(x - 5, y + 5, x - 5, y - 35);
                 }
 
                 if (parent.chkMonthlyReportBalance.isSelected()) {
                     size = 50;
                     x += size + 10;
-                    if (transaction.getType() == Transaction.GENERAL)
-                        g.drawString("" + Common.currency(transaction.getBalance()), x - g.getFontMetrics().stringWidth(Common.currency(transaction.getBalance())) - 10, y);
+                    if (transaction.getType() == Transaction.GENERAL) {
+                        g.drawString("" + Common.currency(transaction.getBalance()),
+                                x - g.getFontMetrics().stringWidth(
+                                Common.currency(transaction.getBalance())) - 10, y);
+                    }
                     g.drawLine(x - 5, y + 5, x - 5, y - 35);
                 }
 
-                totalItemCounter ++;
+                totalItemCounter++;
             }
-            
-            for (int c = workerIndex; c < workerCount; c ++) {
+
+            for (int c = workerIndex; c < workerCount; c++) {
                 size = 180;
                 if (x + size > 780.0) {
                     workerIndexLocal = c;
@@ -418,19 +444,26 @@ public class ReportPrinter implements Printable {
                 if (Common.inArray(workerIds, selected.get(c).getId())) {
                     if (transaction.getType() == Transaction.GENERAL) {
                         calculations.get(c).setSalary(transaction.getWagePerWorker());
-                        g.drawString("" + Common.currency(transaction.getWagePerWorker()), x + 50 - g.getFontMetrics().stringWidth(Common.currency(transaction.getWagePerWorker())) - 10, y);
-                        g.drawString("" + Common.currency(calculations.get(c).getBalance()), x + 190 - g.getFontMetrics().stringWidth(Common.currency(calculations.get(c).getBalance())) - 10, y);
+                        g.drawString("" + Common.currency(transaction.getWagePerWorker()),
+                                x + 50 - g.getFontMetrics().stringWidth(
+                                Common.currency(transaction.getWagePerWorker())) - 10, y);
+                        g.drawString("" + Common.currency(calculations.get(c).getBalance()),
+                                x + 190 - g.getFontMetrics().stringWidth(
+                                Common.currency(calculations.get(c).getBalance())) - 10, y);
                     } else {
                         calculations.get(c).setLoan(transaction.getLoanAmount());
-                        g.drawString("" + Common.currency(transaction.getLoanAmount()), x + 110 - g.getFontMetrics().stringWidth(Common.currency(transaction.getLoanAmount())) - 10, y);
-                        g.drawString("" + Common.currency(calculations.get(c).getBalance()), x + 190 - g.getFontMetrics().stringWidth(Common.currency(calculations.get(c).getBalance())) - 10, y);
+                        g.drawString("" + Common.currency(transaction.getLoanAmount()),
+                                x + 110 - g.getFontMetrics().stringWidth(
+                                Common.currency(transaction.getLoanAmount())) - 10, y);
+                        g.drawString("" + Common.currency(calculations.get(c).getBalance()),
+                                x + 190 - g.getFontMetrics().stringWidth(
+                                Common.currency(calculations.get(c).getBalance())) - 10, y);
                     }
-                    
                 }
 
                 g.drawLine(x + 50 - 5, y + 5, x + 50 - 5, y - 35);
                 g.drawLine(x + 110 - 5, y + 5, x + 110 - 5, y - 35);
-                
+
                 x += size + 10;
 
                 g.drawLine(x - 5, y + 5, x - 5, y - 35);
@@ -440,7 +473,7 @@ public class ReportPrinter implements Printable {
             g.drawLine(x - 5, y + 5, x - 5, y - 35);
             // increase the row size
             y += 15;
-            counter ++;
+            counter++;
         }
 
         return workerIndexLocal;
@@ -456,16 +489,22 @@ public class ReportPrinter implements Printable {
 
         size = 180;
         y += 5;
-        for (int i = workerIndex; i < workerCount; i ++) {
+        for (int i = workerIndex; i < workerCount; i++) {
             if (x + size > 780.0) {
                 printSummary = true;
                 break;
             }
 
-            g.setFont(new Font("Calibri", Font.BOLD, 12));
-            g.drawString(Common.currency(calculations.get(i).getSalary()), x + 50 - g.getFontMetrics().stringWidth(Common.currency(calculations.get(i).getSalary())) - 10, y);
-            g.drawString(Common.currency(calculations.get(i).getLoan()), x + 110 - g.getFontMetrics().stringWidth(Common.currency(calculations.get(i).getLoan())) - 10, y);
-            g.drawString(Common.currency(calculations.get(i).getBalance()), x + 190 - g.getFontMetrics().stringWidth(Common.currency(calculations.get(i).getBalance())) - 10, y);
+            g.setFont(new Font(fontFamily, Font.BOLD, 12));
+            g.drawString(Common.currency(calculations.get(i).getSalary()),
+                    x + 50 - g.getFontMetrics().stringWidth(
+                    Common.currency(calculations.get(i).getSalary())) - 10, y);
+            g.drawString(Common.currency(calculations.get(i).getLoan()),
+                    x + 110 - g.getFontMetrics().stringWidth(
+                    Common.currency(calculations.get(i).getLoan())) - 10, y);
+            g.drawString(Common.currency(calculations.get(i).getBalance()),
+                    x + 190 - g.getFontMetrics().stringWidth(
+                    Common.currency(calculations.get(i).getBalance())) - 10, y);
 
             g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
             g.drawLine(x - 5, y + 5, x - 5, y - 35);
@@ -482,42 +521,43 @@ public class ReportPrinter implements Printable {
         if (salaries.size() == 0) {
             return;
         }
-        
+
         int size = 0;
         size = 180;
         int initial_y_axis = y;
 
         int counter = salaries.size();
 
-        g.setFont(new Font("Calibri", Font.PLAIN, 9));
-        
-        for (int i = salaryIndex; i < counter; i ++) {
+        g.setFont(new Font(fontFamily, Font.PLAIN, 9));
+
+        for (int i = salaryIndex; i < counter; i++) {
             x = 20;
 
             g.drawLine(x - 5, y + 5, x - 5, y - 15);
-            
-            if ( y + 40 > 580) {
+
+            if (y + 40 > 580) {
                 salaryIndex = i;
-                pagesNeeded ++;
+                pagesNeeded++;
                 printSalary = true;
                 break;
             }
 
-            if (printMainColumn)  {
+            if (printMainColumn) {
                 size = 60;
-                g.drawString(Common.renderDisplayDate(salaries.get(i).getDate()), x, y);
+                g.drawString(Common.renderDisplayDate(
+                        salaries.get(i).getDate()), x, y);
                 x += size + 10;
                 g.drawLine(x - 5, y + 5, x - 5, y - 15);
-                
+
                 g.drawString("Bayaran Gaji", x, y);
                 g.drawLine(x - 5, y + 5, x - 5, y - 15);
-                
+
                 x = basicColumnSize;
             } else {
                 x += 60 + 10; // add date field size
             }
 
-            for (int c = workerIndex; c < workerCount; c ++) {
+            for (int c = workerIndex; c < workerCount; c++) {
                 size = 180;
 
                 if (x + size > 780) {
@@ -525,10 +565,15 @@ public class ReportPrinter implements Printable {
                     break;
                 }
 
-                calculations.get(c).setPayment(salaries.get(i).getWorkerSalary(calculations.get(c).getWorkerID()));
+                calculations.get(c).setPayment(salaries.get(i).getWorkerSalary(
+                        calculations.get(c).getWorkerID()));
                 g.drawLine(x - 5, y + 5, x - 5, y - 15);
                 x += size + 10;
-                g.drawString(Common.currency(Math.abs(salaries.get(i).getWorkerSalary(selected.get(c).getId()))), x - g.getFontMetrics().stringWidth(Common.currency(Math.abs(salaries.get(i).getWorkerSalary(selected.get(c).getId())))) - 10, y);
+                g.drawString(Common.currency(Math.abs(
+                        salaries.get(i).getWorkerSalary(selected.get(c).getId()))),
+                        x - g.getFontMetrics().stringWidth(Common.currency(
+                        Math.abs(salaries.get(i).getWorkerSalary(
+                        selected.get(c).getId())))) - 10, y);
                 g.drawLine(x - 5, y + 5, x - 5, y - 15);
             }
 
@@ -537,11 +582,11 @@ public class ReportPrinter implements Printable {
             printSalary = false;
         }
 
-        if ( ! printSalary) {
+        if (!printSalary) {
             x = 20;
             g.drawLine(x - 5, y + 5, x - 5, y - 15);
 
-            if (printMainColumn)  {
+            if (printMainColumn) {
                 if (parent.chkMonthlyReportDate.isSelected()) {
                     size = 60;
                     x += size + 10;
@@ -556,7 +601,7 @@ public class ReportPrinter implements Printable {
                 x += 60 + 10; // add date size
             }
 
-            for (int c = workerIndex; c < workerCount; c ++) {
+            for (int c = workerIndex; c < workerCount; c++) {
                 size = 180;
 
                 if (x + size > 780) {
@@ -566,7 +611,9 @@ public class ReportPrinter implements Printable {
 
                 g.drawLine(x - 5, y + 5, x - 5, y - 15);
                 x += size + 10;
-                g.drawString(Common.currency(calculations.get(c).getTotalBalance()), x - g.getFontMetrics().stringWidth(Common.currency(calculations.get(c).getTotalBalance())) - 10, y);
+                g.drawString(Common.currency(calculations.get(c).getTotalBalance()),
+                        x - g.getFontMetrics().stringWidth(Common.currency(
+                        calculations.get(c).getTotalBalance())) - 10, y);
                 g.drawLine(x - 5, y + 5, x - 5, y - 15);
             }
 
@@ -576,21 +623,20 @@ public class ReportPrinter implements Printable {
 
         g.drawLine(15, initial_y_axis - 15, x - 5, initial_y_axis - 15);
         g.drawLine(15, y - 7, x - 5, y - 7);
-        
+
     }
 
     private void render_savings(Graphics2D g) {
         int size = 0;
-        
+
         x = 20;
 
         if (savingIndex == 0 && printMainColumn) {
             y += 30;
-            g.setFont(new Font("Calibri", Font.BOLD, 12));
+            g.setFont(new Font(fontFamily, Font.BOLD, 12));
             g.drawString("Simpanan Tetap", x, y);
             y += 20;
-            g.setFont(new Font("Calibri", Font.PLAIN, 9));
-
+            g.setFont(new Font(fontFamily, Font.PLAIN, 9));
 
             g.drawLine(x - 5, y - 15, x - 5, y + 30); // left
             g.drawString("Baki Bulan Lalu", x, y);
@@ -602,15 +648,15 @@ public class ReportPrinter implements Printable {
             g.drawLine(15, y - 15, x + size - 5, y - 15); // top
             g.drawLine(15, y + 30, x + size - 5, y + 30); // bottom
         } else {
-            g.setFont(new Font("Calibri", Font.PLAIN, 9));
+            g.setFont(new Font(fontFamily, Font.PLAIN, 9));
             x += 60 + 10; // add date size;
             y += 50;
         }
 
         int count = savings.size();
-        for (int i = savingIndex; i < count; i ++) {
+        for (int i = savingIndex; i < count; i++) {
             ReportSaving saving = savings.get(i);
-            
+
             g.drawLine(x - 5, y - 15, x - 5, y + 30);
             size = 180;
             if (x + size > 780.0) {
@@ -623,15 +669,19 @@ public class ReportPrinter implements Printable {
 
             x += size + 10;
 
-            g.drawString(Common.currency(saving.getPrevious()), x - g.getFontMetrics().stringWidth(Common.currency(saving.getPrevious())) - 10, y);
-            g.drawString(Common.currency(saving.getCurrent()), x - g.getFontMetrics().stringWidth(Common.currency(saving.getCurrent())) - 10, y + 12);
-            g.drawString(Common.currency(saving.getBalance()), x - g.getFontMetrics().stringWidth(Common.currency(saving.getBalance())) - 10, y + 24);
+            g.drawString(Common.currency(saving.getPrevious()),
+                    x - g.getFontMetrics().stringWidth(
+                    Common.currency(saving.getPrevious())) - 10, y);
+            g.drawString(Common.currency(saving.getCurrent()),
+                    x - g.getFontMetrics().stringWidth(
+                    Common.currency(saving.getCurrent())) - 10, y + 12);
+            g.drawString(Common.currency(saving.getBalance()),
+                    x - g.getFontMetrics().stringWidth(
+                    Common.currency(saving.getBalance())) - 10, y + 24);
 
             g.drawLine(x - 5, y - 15, x - 5, y + 30);
 
-
         }
-        
     }
 
     private int getSavingColspanSize() {

@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package payroll.libraries;
 
 import java.security.MessageDigest;
@@ -14,10 +13,10 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- *
  * @author Edward
  */
 public class Common {
+
     public static boolean isDouble(String value) {
         try {
             Double.parseDouble(value);
@@ -33,7 +32,7 @@ public class Common {
     }
 
     public static boolean inArray(String[] haystack, String needle) {
-        for (int i = 0; i < haystack.length ; i ++) {
+        for (int i = 0; i < haystack.length; i++) {
             if (haystack[i].equals(needle)) {
                 return true;
             }
@@ -43,7 +42,7 @@ public class Common {
     }
 
     public static boolean inArray(String[] haystack, int needle) {
-        for (int i = 0; i < haystack.length ; i ++) {
+        for (int i = 0; i < haystack.length; i++) {
             if (haystack[i].equals("" + needle)) {
                 return true;
             }
@@ -94,30 +93,26 @@ public class Common {
         }
     }
 
-    public static String md5(byte[] defaultBytes)
-    {
+    public static String md5(byte[] defaultBytes) {
         StringBuffer hexString = new StringBuffer();
-        try
-        {
+        try {
             MessageDigest algorithm = MessageDigest.getInstance("MD5");
             algorithm.reset();
             algorithm.update(defaultBytes);
             byte messageDigest[] = algorithm.digest();
 
 
-            for(int i = 0; i < messageDigest.length;i ++)
-            {
-                String hex=Integer.toHexString(0xFF & messageDigest[i]);
-                if(hex.length() == 1)
+            for (int i = 0; i < messageDigest.length; i++) {
+                String hex = Integer.toHexString(0xFF & messageDigest[i]);
+                if (hex.length() == 1) {
                     hexString.append('0');
+                }
                 hexString.append(hex);
             }
-        }
-        catch(NoSuchAlgorithmException ex)
-        {
+        } catch (NoSuchAlgorithmException ex) {
             System.err.println(ex.getMessage());
         }
-        
+
         return hexString.toString();
     }
 }

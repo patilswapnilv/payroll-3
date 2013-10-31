@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package payroll.libraries;
 
 import java.sql.DriverManager;
@@ -10,10 +9,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Savepoint;
+//import java.sql.Savepoint;
 import java.sql.Statement;
-import java.util.List;
-import java.util.Map;
+//import java.util.List;
+//import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,22 +20,21 @@ import java.util.logging.Logger;
  *
  * @author edward
  */
-public class Database
-{
+public class Database {
+
     private Connection connection = null;
     private static Database _instance;
 
     public static Database instance() {
-        if ( Database._instance instanceof Database == false) {
+        if (Database._instance instanceof Database == false) {
             Database._instance = new Database();
         }
 
-        
+
         return Database._instance;
     }
 
-    public Database()
-    {
+    public Database() {
         try {
             Class.forName("org.sqlite.JDBC");
         } catch (ClassNotFoundException ex) {
@@ -49,8 +47,7 @@ public class Database
         }
     }
 
-    public void disconnect()
-    {
+    public void disconnect() {
         if (isConnected()) {
             try {
                 connection.close();
@@ -60,17 +57,15 @@ public class Database
         }
     }
 
-    public boolean isConnected()
-    {
+    public boolean isConnected() {
         try {
-            return ! connection.isClosed();
+            return !connection.isClosed();
         } catch (Exception ex) {
             return false;
         }
     }
 
-    public ResultSet execute(String query)
-    {
+    public ResultSet execute(String query) {
         ResultSet result = null;
 
         try {
@@ -83,8 +78,7 @@ public class Database
         return result;
     }
 
-    public ResultSet execute(PreparedStatement ps)
-    {
+    public ResultSet execute(PreparedStatement ps) {
         ResultSet result = null;
 
         try {
@@ -97,8 +91,7 @@ public class Database
         return result;
     }
 
-    public boolean update(String query)
-    {
+    public boolean update(String query) {
         try {
             Statement statement = connection.createStatement();
             boolean updated = statement.executeUpdate(query) > 0;
@@ -112,8 +105,7 @@ public class Database
         return false;
     }
 
-    public boolean update(PreparedStatement ps)
-    {
+    public boolean update(PreparedStatement ps) {
         try {
             boolean updated = ps.executeUpdate() > 0;
             ps.close();
@@ -127,8 +119,7 @@ public class Database
         return false;
     }
 
-    public int insert(String query)
-    {
+    public int insert(String query) {
         try {
             Statement statement = connection.createStatement();
             if (statement.executeUpdate(query) > 0) {
@@ -143,8 +134,7 @@ public class Database
         return 0;
     }
 
-    public int insert(PreparedStatement ps)
-    {
+    public int insert(PreparedStatement ps) {
         try {
             if (ps.executeUpdate() > 0) {
                 ps.close();
@@ -158,8 +148,7 @@ public class Database
         return 0;
     }
 
-    public int last_insert_id()
-    {
+    public int last_insert_id() {
         ResultSet rs = this.execute("SELECT last_insert_rowid()");
         try {
             rs.next();
@@ -175,8 +164,7 @@ public class Database
 
     }
 
-    public PreparedStatement createPreparedStatement(String sql)
-    {
+    public PreparedStatement createPreparedStatement(String sql) {
         try {
             return connection.prepareStatement(sql);
         } catch (SQLException ex) {
@@ -185,8 +173,7 @@ public class Database
         }
     }
 
-    public void begin()
-    {
+    public void begin() {
         try {
             connection.setAutoCommit(false);
         } catch (SQLException ex) {
@@ -196,14 +183,10 @@ public class Database
             } catch (SQLException ex1) {
                 Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex1);
             }
-
         }
-
-        
     }
 
-    public boolean commit()
-    {
+    public boolean commit() {
         try {
             connection.commit();
             connection.setAutoCommit(true);

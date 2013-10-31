@@ -244,12 +244,15 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jPanel10" alignment="0" max="32767" attributes="1"/>
-                          <Component id="jLabel1" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel1" min="-2" pref="200" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jPanel29" min="-2" max="-2" attributes="1"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jPanel29" max="32767" attributes="1"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jPanel22" min="-2" max="-2" attributes="1"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
                               <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -303,7 +306,7 @@
                           <Component id="txtTransactionNew" min="-2" pref="130" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="txtTransactionEnd" min="-2" pref="83" max="-2" attributes="0"/>
-                          <EmptySpace pref="463" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -368,9 +371,13 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane4" alignment="0" pref="277" max="32767" attributes="1"/>
-                              <Component id="jLabel36" alignment="0" pref="277" max="32767" attributes="1"/>
-                              <Component id="btnTransactionNewLoan" alignment="0" pref="277" max="32767" attributes="1"/>
+                              <Component id="jScrollPane4" alignment="0" pref="326" max="32767" attributes="1"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabel54" min="-2" pref="72" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jLabel36" pref="248" max="32767" attributes="1"/>
+                              </Group>
+                              <Component id="btnTransactionNewLoan" alignment="0" pref="326" max="32767" attributes="1"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -380,7 +387,10 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel36" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabel36" pref="20" max="32767" attributes="0"/>
+                              <Component id="jLabel54" max="32767" attributes="0"/>
+                          </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane4" min="-2" pref="337" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -430,6 +440,14 @@
                       <Font name="Arial" size="12" style="1"/>
                     </Property>
                     <Property name="focusable" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel54">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="14" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Pinjaman"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -532,7 +550,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel29">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial" size="12" style="1"/>
+                      <Font name="Arial" size="14" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Pekerja Terlibat"/>
                     <Property name="focusable" type="boolean" value="false"/>
@@ -557,44 +575,15 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtTransactionDate" alignment="0" pref="201" max="32767" attributes="1"/>
-                                      <Component id="cbxTransactionClients" alignment="0" pref="201" max="32767" attributes="1"/>
-                                      <Component id="txtTransactionPricePerTon" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
-                                      <Component id="txtTransactionWeight" alignment="0" min="-2" pref="95" max="-2" attributes="1"/>
+                                      <Component id="txtTransactionDate" alignment="0" max="32767" attributes="1"/>
+                                      <Component id="cbxTransactionClients" alignment="0" max="32767" attributes="1"/>
+                                      <Component id="txtTransactionWeight" alignment="0" max="32767" attributes="1"/>
+                                      <Component id="txtTransactionPricePerTon" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel12" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                          <Component id="jLabel11" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                          <Component id="jLabel10" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                          <Component id="jLabel9" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                          <Component id="jLabel41" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="txtTransactionBalance" min="-2" pref="95" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="txtTransactionBalance1" pref="100" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="txtTransactionPayPerPerson" min="-2" pref="95" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="txtTransactionPayPerPerson1" pref="100" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Component id="txtTransactionCalculate" alignment="0" pref="201" max="32767" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="txtTransactionSalary" min="-2" pref="95" max="-2" attributes="1"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="txtTransactionSalary1" pref="100" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Component id="txtTransactionWagesTax" alignment="1" min="-2" pref="100" max="-2" attributes="1"/>
-                                      </Group>
-                                  </Group>
-                                  <Component id="jLabel4" alignment="0" max="32767" attributes="1"/>
-                                  <Component id="txtTransactionDescription" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabel4" min="-2" pref="230" max="-2" attributes="1"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
@@ -602,13 +591,47 @@
                                       <Component id="jLabel7" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="txtTransactionTotalReceived" pref="95" max="32767" attributes="1"/>
-                                      <Component id="txtTransactionWages" alignment="0" pref="95" max="32767" attributes="1"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="txtTransactionTotalReceived" max="32767" attributes="1"/>
+                                      <Group type="102" attributes="0">
+                                          <Component id="txtTransactionWages" min="-2" pref="148" max="-2" attributes="1"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel12" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <Component id="jLabel11" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <Component id="jLabel10" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <Component id="jLabel9" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <Component id="jLabel41" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="txtTransactionPayPerPerson" min="-2" pref="148" max="-2" attributes="0"/>
+                                          <EmptySpace pref="45" max="32767" attributes="0"/>
+                                          <Component id="txtTransactionPayPerPerson1" min="-2" pref="150" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="txtTransactionCalculate" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="txtTransactionSalary" pref="148" max="32767" attributes="1"/>
+                                              <Component id="txtTransactionBalance" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="separate" max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="txtTransactionSalary1" alignment="1" pref="150" max="32767" attributes="0"/>
+                                              <Component id="txtTransactionBalance1" alignment="1" max="32767" attributes="0"/>
+                                              <Component id="txtTransactionWagesTax" max="32767" attributes="1"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <Component id="txtTransactionDescription" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -960,8 +983,7 @@
                                           <Component id="jLabel40" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="cbxTransactionListClients" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="txtTransactionListFrom" min="-2" pref="150" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -970,10 +992,11 @@
                                               <Component id="txtTransactionListTo" min="-2" pref="140" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="btnTransactionSave" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
+                                          <Component id="cbxTransactionListClients" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="763" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="773" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -1078,7 +1101,9 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="-2" pref="557" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="501" max="-2" attributes="0"/>
+                          <Component id="ubahTransaksi" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnTransactionListDelete" min="-2" pref="92" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnTransactionListEnd" min="-2" max="-2" attributes="0"/>
@@ -1093,6 +1118,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnTransactionListEnd" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnTransactionListDelete" alignment="3" max="32767" attributes="1"/>
+                              <Component id="ubahTransaksi" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -1122,6 +1148,17 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTransactionListDeleteActionPerformed"/>
                   </Events>
                 </Component>
+                <Component class="javax.swing.JButton" name="ubahTransaksi">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="14" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Ubah"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ubahTransaksiActionPerformed"/>
+                  </Events>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="jPanel28">
@@ -1129,7 +1166,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane6" alignment="0" pref="1268" max="32767" attributes="0"/>
+                      <Component id="jScrollPane6" alignment="0" pref="1278" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -1272,8 +1309,7 @@
                                           <Component id="jLabel45" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="cbxTransactionListClients1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="txtTransactionListFrom1" min="-2" pref="150" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -1282,10 +1318,11 @@
                                               <Component id="txtTransactionListTo1" min="-2" pref="140" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="btnTransactionSave1" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
+                                          <Component id="cbxTransactionListClients1" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="763" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="773" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -1441,7 +1478,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane7" alignment="0" pref="1268" max="32767" attributes="0"/>
+                      <Component id="jScrollPane7" alignment="0" pref="1278" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -1579,36 +1616,38 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jPanel8" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jPanel9" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="jLabel13" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="jLabel14" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jLabel16" pref="160" max="32767" attributes="1"/>
                                           <Component id="jLabel15" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jLabel16" alignment="0" pref="140" max="32767" attributes="1"/>
+                                          <Component id="jLabel14" alignment="0" max="32767" attributes="0"/>
                                       </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="cbxSavingWorkers" min="-2" max="-2" attributes="0"/>
                                           <Group type="102" attributes="0">
-                                              <Component id="txtSavingDateFrom" min="-2" pref="150" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtSavingCurrentSaving" min="-2" pref="355" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="txtSavingDateTo" min="-2" pref="140" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="txtSavingCurrentSaving" min="-2" pref="363" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                               <Component id="btnSavingSearch" min="-2" pref="66" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="cbxSavingWorkers" alignment="0" max="32767" attributes="0"/>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="txtSavingDateFrom" min="-2" pref="150" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="txtSavingDateTo" min="-2" pref="140" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="685" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jPanel9" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -1620,26 +1659,28 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel13" min="-2" pref="20" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel14" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="cbxSavingWorkers" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel15" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Component id="jLabel17" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Component id="txtSavingDateTo" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel14" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Component id="cbxSavingWorkers" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel16" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Component id="txtSavingCurrentSaving" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Component id="btnSavingSearch" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabel15" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="txtSavingDateFrom" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel17" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="txtSavingDateTo" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="txtSavingDateFrom" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="txtSavingCurrentSaving" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="btnSavingSearch" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jLabel16" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jPanel8" max="32767" attributes="0"/>
@@ -1729,7 +1770,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" pref="1268" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" pref="1278" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -1820,8 +1861,10 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="-2" pref="428" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="385" max="-2" attributes="0"/>
                           <Component id="btnSavingNew" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="EditSimpanan" min="-2" pref="82" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnSavingCancel" min="-2" pref="92" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -1838,6 +1881,7 @@
                               <Component id="btnSavingEnd" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnSavingCancel" alignment="3" max="32767" attributes="1"/>
                               <Component id="btnSavingNew" alignment="3" min="-2" max="-2" attributes="1"/>
+                              <Component id="EditSimpanan" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -1876,6 +1920,17 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSavingNewActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="EditSimpanan">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="14" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Ubah"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EditSimpananActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -1925,9 +1980,8 @@
                                   <Component id="jLabel50" alignment="0" pref="140" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cbxLoanWorkers" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <Component id="txtLoanDateFrom" min="-2" pref="150" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel51" min="-2" max="-2" attributes="0"/>
@@ -1936,10 +1990,11 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btnLoanSearch" min="-2" pref="66" max="-2" attributes="0"/>
                                   </Group>
+                                  <Component id="cbxLoanWorkers" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="jPanel41" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jScrollPane9" alignment="0" pref="1268" max="32767" attributes="0"/>
+                          <Component id="jScrollPane9" alignment="0" pref="1278" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -2064,10 +2119,12 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
+                          <Component id="editPinjaman" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnLoanCancel" min="-2" pref="92" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnLoanEnd" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="550" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="515" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2078,6 +2135,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnLoanEnd" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnLoanCancel" alignment="3" max="32767" attributes="1"/>
+                              <Component id="editPinjaman" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -2105,6 +2163,17 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoanCancelActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="editPinjaman">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial" size="14" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Ubah"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editPinjamanActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -2289,7 +2358,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane2" alignment="0" pref="1268" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" alignment="0" pref="1278" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -2546,9 +2615,9 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
                                               <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Component id="rbtnWorkerMonthlyIncome" alignment="0" pref="512" max="32767" attributes="1"/>
-                                                  <Component id="rbtnWorkerSaving" alignment="0" pref="512" max="32767" attributes="1"/>
-                                                  <Component id="rbtnWorkerReportFull" alignment="0" pref="512" max="32767" attributes="1"/>
+                                                  <Component id="rbtnWorkerMonthlyIncome" alignment="0" pref="522" max="32767" attributes="1"/>
+                                                  <Component id="rbtnWorkerSaving" alignment="0" pref="522" max="32767" attributes="1"/>
+                                                  <Component id="rbtnWorkerReportFull" alignment="0" pref="522" max="32767" attributes="1"/>
                                               </Group>
                                               <EmptySpace min="-2" pref="637" max="-2" attributes="0"/>
                                           </Group>
@@ -2572,7 +2641,7 @@
                                                       <Component id="jLabel32" min="-2" pref="50" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
-                                              <EmptySpace min="0" pref="898" max="32767" attributes="0"/>
+                                              <EmptySpace min="0" pref="908" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -3108,7 +3177,7 @@
                                   <Component id="btnSavingReportPrint" min="-2" pref="101" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnSavingReportEnd" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="422" max="32767" attributes="0"/>
+                                  <EmptySpace pref="432" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -4549,12 +4618,12 @@
                                               </Group>
                                           </Group>
                                       </Group>
-                                      <EmptySpace pref="983" max="32767" attributes="0"/>
+                                      <EmptySpace pref="993" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="1">
-                                              <Component id="jLabel23" pref="721" max="32767" attributes="0"/>
+                                              <Component id="jLabel23" pref="731" max="32767" attributes="0"/>
                                               <EmptySpace min="-2" pref="466" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="1" attributes="0">
@@ -4573,7 +4642,7 @@
                                                   </Group>
                                                   <Component id="txtProfileWorkerCurrentSaving" max="32767" attributes="0"/>
                                               </Group>
-                                              <EmptySpace min="0" pref="431" max="32767" attributes="0"/>
+                                              <EmptySpace min="0" pref="907" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
@@ -5035,7 +5104,7 @@
                           <Component id="txtPasswordConfirm" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                           <Component id="txtPassword" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="1009" max="32767" attributes="0"/>
+                      <EmptySpace pref="1019" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

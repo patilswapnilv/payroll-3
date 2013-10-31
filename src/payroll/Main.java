@@ -1,7 +1,6 @@
 package payroll;
 
 import com.toedter.calendar.JDateChooser;
-//import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.print.PageFormat;
 import java.awt.print.PrinterException;
@@ -15,13 +14,12 @@ import java.io.StringReader;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-//import java.util.Enumeration;
 import java.util.Hashtable;
-//import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.print.attribute.HashPrintRequestAttributeSet;
@@ -29,7 +27,6 @@ import javax.print.attribute.standard.MediaPrintableArea;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-//import javax.swing.SwingUtilities;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
@@ -45,7 +42,6 @@ import org.lobobrowser.html.parser.DocumentBuilderImpl;
 import org.lobobrowser.html.parser.InputSourceImpl;
 import org.lobobrowser.html.test.SimpleHtmlRendererContext;
 import org.lobobrowser.html.test.SimpleUserAgentContext;
-//import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 import payroll.libraries.Common;
@@ -59,17 +55,13 @@ import payroll.model.Transaction;
 import payroll.model.Worker;
 import payroll.model.WorkerRecord;
 import payroll.model.WorkerReport;
-//import sun.font.Font2D;
 
-/** To change this template, choose Tools | Templates
- *  and open the template in the editor.
+/**
+ * To change this template, choose Tools | Templates and open the template in
+ * the editor.
+ *
+ * Main2.java Created on Jul 17, 2012, 11:44:34 PM
  */
-
-/** Main2.java
- *  Created on Jul 17, 2012, 11:44:34 PM
- */
-
-/** @author edward */
 public class Main extends javax.swing.JFrame {
 
     private int _current_worker_id = 0;
@@ -85,8 +77,10 @@ public class Main extends javax.swing.JFrame {
     private ArrayList<Integer> loaded_payment_ids = new ArrayList<Integer>();
     private ArrayList<Integer> loaded_transaction_ids = new ArrayList<Integer>();
     private ArrayList<Integer> loaded_transaction_tax_ids = new ArrayList<Integer>();
-    
-    /** Creates new form Main2 */
+
+    /**
+     * Creates new form Main
+     */
     public Main() {
         initComponents();
 
@@ -169,7 +163,7 @@ public class Main extends javax.swing.JFrame {
         }
 
         this.load_workers_all();
-        
+
     }
 
     public void load_customers() {
@@ -197,7 +191,7 @@ public class Main extends javax.swing.JFrame {
         cbxTransactionListClients.addItem(new String());
         cbxTransactionListClients1.addItem(new String());
 
-        for (Customer customer: customers) {
+        for (Customer customer : customers) {
             cbxTransactionClients.addItem(new String(customer.getCode() + " - " + customer.getName()));
             cbxTransactionListClients.addItem(new String(customer.getCode() + " - " + customer.getName()));
             cbxTransactionListClients1.addItem(new String(customer.getCode() + " - " + customer.getName()));
@@ -222,10 +216,9 @@ public class Main extends javax.swing.JFrame {
         cbxClients.removeAllItems();
         cbxClients.addItem(new String());
 
-        for (Customer customer: customers_all) {
+        for (Customer customer : customers_all) {
             cbxClients.addItem(new String(customer.getCode() + " - " + customer.getName()));
         }
-
     }
 
     public void load_workers_all() {
@@ -241,7 +234,7 @@ public class Main extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-        
+
         cbxWorkers.removeAllItems();
 
         cbxWorkers.addItem(new String());
@@ -264,15 +257,15 @@ public class Main extends javax.swing.JFrame {
         };
 
         tblTransactionInvolvedWorkers.getModel().addTableModelListener(tableModelListener);
-        
+
         listTransactionLoanWorkers.removeAll();
 
-        for (int i = 0; i < row; i ++) {
+        for (int i = 0; i < row; i++) {
             involveWorkerTableModel.removeRow(0);
         }
 
         for (Worker worker : workers) {
-            Object[] workerObjects = new Object[] {
+            Object[] workerObjects = new Object[]{
                 new Boolean(false),
                 new String(worker.getCode()),
                 new String(worker.getName())
@@ -289,12 +282,12 @@ public class Main extends javax.swing.JFrame {
 
         int row = tblMonthlyReportWorkers.getRowCount();
 
-        for (int i = 0; i < row; i ++) {
+        for (int i = 0; i < row; i++) {
             workersTableModel.removeRow(0);
         }
 
-        for (Worker worker: workers) {
-            Object[] workerObjects = new Object[] {
+        for (Worker worker : workers) {
+            Object[] workerObjects = new Object[]{
                 new Boolean(false),
                 new String(worker.getCode()),
                 new String(worker.getName())
@@ -311,12 +304,12 @@ public class Main extends javax.swing.JFrame {
 
         int row = tblMonthlyReportWorkers1.getRowCount();
 
-        for (int i = 0; i < row; i ++) {
+        for (int i = 0; i < row; i++) {
             workersTableModel.removeRow(0);
         }
 
-        for (Worker worker: workers) {
-            Object[] workerObjects = new Object[] {
+        for (Worker worker : workers) {
+            Object[] workerObjects = new Object[]{
                 new Boolean(false),
                 new String(worker.getCode()),
                 new String(worker.getName())
@@ -333,12 +326,12 @@ public class Main extends javax.swing.JFrame {
 
         int row = tblSavingReportWorkers.getRowCount();
 
-        for (int i = 0; i < row; i ++) {
+        for (int i = 0; i < row; i++) {
             workersTableModel.removeRow(0);
         }
 
-        for (Worker worker: workers) {
-            Object[] workerObjects = new Object[] {
+        for (Worker worker : workers) {
+            Object[] workerObjects = new Object[]{
                 new Boolean(false),
                 new String(worker.getCode()),
                 new String(worker.getName())
@@ -350,10 +343,10 @@ public class Main extends javax.swing.JFrame {
         tblSavingReportWorkers.setRowHeight(25);
     }
 
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -386,6 +379,7 @@ public class Main extends javax.swing.JFrame {
         listTransactionLoanWorkers = new javax.swing.JList();
         btnTransactionNewLoan = new javax.swing.JButton();
         jLabel36 = new javax.swing.JLabel();
+        jLabel54 = new javax.swing.JLabel();
         jPanel22 = new javax.swing.JPanel();
         cboxTransactionAllWorkers = new javax.swing.JCheckBox();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -429,6 +423,7 @@ public class Main extends javax.swing.JFrame {
         jPanel27 = new javax.swing.JPanel();
         btnTransactionListEnd = new javax.swing.JButton();
         btnTransactionListDelete = new javax.swing.JButton();
+        ubahTransaksi = new javax.swing.JButton();
         jPanel28 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tblTransactionList = new javax.swing.JTable();
@@ -465,6 +460,7 @@ public class Main extends javax.swing.JFrame {
         btnSavingEnd = new javax.swing.JButton();
         btnSavingCancel = new javax.swing.JButton();
         btnSavingNew = new javax.swing.JButton();
+        EditSimpanan = new javax.swing.JButton();
         cbxSavingWorkers = new javax.swing.JComboBox();
         btnSavingSearch = new javax.swing.JButton();
         jPanel39 = new javax.swing.JPanel();
@@ -479,6 +475,7 @@ public class Main extends javax.swing.JFrame {
         jPanel41 = new javax.swing.JPanel();
         btnLoanEnd = new javax.swing.JButton();
         btnLoanCancel = new javax.swing.JButton();
+        editPinjaman = new javax.swing.JButton();
         jScrollPane9 = new javax.swing.JScrollPane();
         tblLoan = new javax.swing.JTable();
         jPanel11 = new javax.swing.JPanel();
@@ -799,7 +796,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(txtTransactionNew, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtTransactionEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(463, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -831,6 +828,9 @@ public class Main extends javax.swing.JFrame {
         jLabel36.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel36.setFocusable(false);
 
+        jLabel54.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel54.setText("Pinjaman");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -838,16 +838,21 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
-                    .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
-                    .addComponent(btnTransactionNewLoan, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel54, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
+                    .addComponent(btnTransactionNewLoan, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+                    .addComponent(jLabel54, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -899,7 +904,7 @@ public class Main extends javax.swing.JFrame {
         tblTransactionInvolvedWorkers.getColumnModel().getColumn(1).setPreferredWidth(50);
         tblTransactionInvolvedWorkers.getColumnModel().getColumn(2).setResizable(false);
 
-        jLabel29.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel29.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel29.setText("Pekerja Terlibat");
         jLabel29.setFocusable(false);
 
@@ -1081,45 +1086,48 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTransactionDate, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                            .addComponent(cbxTransactionClients, 0, 201, Short.MAX_VALUE)
-                            .addComponent(txtTransactionPricePerTon, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTransactionWeight, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel29Layout.createSequentialGroup()
-                            .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel29Layout.createSequentialGroup()
-                                    .addComponent(txtTransactionBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtTransactionBalance1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel29Layout.createSequentialGroup()
-                                    .addComponent(txtTransactionPayPerPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtTransactionPayPerPerson1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-                                .addComponent(txtTransactionCalculate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel29Layout.createSequentialGroup()
-                                    .addComponent(txtTransactionSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtTransactionSalary1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-                                .addComponent(txtTransactionWagesTax, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtTransactionDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtTransactionDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbxTransactionClients, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtTransactionWeight)
+                            .addComponent(txtTransactionPricePerTon)))
+                    .addGroup(jPanel29Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel29Layout.createSequentialGroup()
                         .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtTransactionTotalReceived, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                            .addComponent(txtTransactionWages, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))))
-                .addGap(18, 18, 18))
+                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTransactionTotalReceived)
+                            .addGroup(jPanel29Layout.createSequentialGroup()
+                                .addComponent(txtTransactionWages, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel29Layout.createSequentialGroup()
+                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel29Layout.createSequentialGroup()
+                                .addComponent(txtTransactionPayPerPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                                .addComponent(txtTransactionPayPerPerson1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtTransactionCalculate)
+                            .addGroup(jPanel29Layout.createSequentialGroup()
+                                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtTransactionSalary, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                                    .addComponent(txtTransactionBalance))
+                                .addGap(18, 18, Short.MAX_VALUE)
+                                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtTransactionSalary1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                    .addComponent(txtTransactionBalance1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtTransactionWagesTax)))))
+                    .addComponent(txtTransactionDescription))
+                .addContainerGap())
         );
         jPanel29Layout.setVerticalGroup(
             jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1186,12 +1194,14 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(104, 104, 104)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -1260,12 +1270,22 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        ubahTransaksi.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        ubahTransaksi.setText("Ubah");
+        ubahTransaksi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ubahTransaksiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
         jPanel27.setLayout(jPanel27Layout);
         jPanel27Layout.setHorizontalGroup(
             jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel27Layout.createSequentialGroup()
-                .addGap(557, 557, 557)
+                .addGap(501, 501, 501)
+                .addComponent(ubahTransaksi)
+                .addGap(18, 18, 18)
                 .addComponent(btnTransactionListDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnTransactionListEnd)
@@ -1277,7 +1297,8 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTransactionListEnd)
-                    .addComponent(btnTransactionListDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnTransactionListDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ubahTransaksi))
                 .addContainerGap())
         );
 
@@ -1314,7 +1335,7 @@ public class Main extends javax.swing.JFrame {
         jPanel28.setLayout(jPanel28Layout);
         jPanel28Layout.setHorizontalGroup(
             jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1268, Short.MAX_VALUE)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1278, Short.MAX_VALUE)
         );
         jPanel28Layout.setVerticalGroup(
             jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1344,16 +1365,16 @@ public class Main extends javax.swing.JFrame {
                                     .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                                     .addComponent(jLabel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbxTransactionListClients, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel26Layout.createSequentialGroup()
                                         .addComponent(txtTransactionListFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel39)
                                         .addGap(12, 12, 12)
                                         .addComponent(txtTransactionListTo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(btnTransactionSave, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 763, Short.MAX_VALUE)))
+                                    .addComponent(btnTransactionSave, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbxTransactionListClients, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 773, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel26Layout.setVerticalGroup(
@@ -1484,7 +1505,7 @@ public class Main extends javax.swing.JFrame {
         jPanel32.setLayout(jPanel32Layout);
         jPanel32Layout.setHorizontalGroup(
             jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 1268, Short.MAX_VALUE)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 1278, Short.MAX_VALUE)
         );
         jPanel32Layout.setVerticalGroup(
             jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1514,16 +1535,16 @@ public class Main extends javax.swing.JFrame {
                                     .addComponent(jLabel44, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                                     .addComponent(jLabel45, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbxTransactionListClients1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel30Layout.createSequentialGroup()
                                         .addComponent(txtTransactionListFrom1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel43)
                                         .addGap(12, 12, 12)
                                         .addComponent(txtTransactionListTo1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(btnTransactionSave1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 763, Short.MAX_VALUE)))
+                                    .addComponent(btnTransactionSave1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbxTransactionListClients1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 773, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel30Layout.setVerticalGroup(
@@ -1626,7 +1647,7 @@ public class Main extends javax.swing.JFrame {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1268, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1278, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1659,13 +1680,23 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        EditSimpanan.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        EditSimpanan.setText("Ubah");
+        EditSimpanan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditSimpananActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addGap(428, 428, 428)
+                .addGap(385, 385, 385)
                 .addComponent(btnSavingNew)
+                .addGap(18, 18, 18)
+                .addComponent(EditSimpanan, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSavingCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -1679,7 +1710,8 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSavingEnd)
                     .addComponent(btnSavingCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSavingNew))
+                    .addComponent(btnSavingNew)
+                    .addComponent(EditSimpanan))
                 .addContainerGap())
         );
 
@@ -1701,29 +1733,30 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbxSavingWorkers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(txtSavingDateFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel17)
+                                        .addComponent(txtSavingCurrentSaving, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(txtSavingDateTo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(txtSavingCurrentSaving, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnSavingSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 685, Short.MAX_VALUE))
-                    .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(btnSavingSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(cbxSavingWorkers, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                            .addComponent(txtSavingDateFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jLabel17)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(txtSavingDateTo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -1732,22 +1765,23 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxSavingWorkers, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSavingDateTo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSavingCurrentSaving, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSavingSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(txtSavingDateFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbxSavingWorkers, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSavingDateTo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSavingDateFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtSavingCurrentSaving, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSavingSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1813,16 +1847,26 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        editPinjaman.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        editPinjaman.setText("Ubah");
+        editPinjaman.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editPinjamanActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel41Layout = new javax.swing.GroupLayout(jPanel41);
         jPanel41.setLayout(jPanel41Layout);
         jPanel41Layout.setHorizontalGroup(
             jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel41Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(editPinjaman)
+                .addGap(18, 18, 18)
                 .addComponent(btnLoanCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnLoanEnd)
-                .addGap(550, 550, 550))
+                .addGap(515, 515, 515))
         );
         jPanel41Layout.setVerticalGroup(
             jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1830,7 +1874,8 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLoanEnd)
-                    .addComponent(btnLoanCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnLoanCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(editPinjaman))
                 .addContainerGap())
         );
 
@@ -1874,8 +1919,7 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(jLabel49, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                             .addComponent(jLabel50, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbxLoanWorkers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel39Layout.createSequentialGroup()
                                 .addComponent(txtLoanDateFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1883,9 +1927,10 @@ public class Main extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(txtLoanDateTo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnLoanSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(btnLoanSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbxLoanWorkers, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jPanel41, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 1268, Short.MAX_VALUE))
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 1278, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel39Layout.setVerticalGroup(
@@ -1960,7 +2005,7 @@ public class Main extends javax.swing.JFrame {
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1268, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1278, Short.MAX_VALUE)
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2209,9 +2254,9 @@ public class Main extends javax.swing.JFrame {
                         .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel19Layout.createSequentialGroup()
                                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(rbtnWorkerMonthlyIncome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
-                                    .addComponent(rbtnWorkerSaving, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
-                                    .addComponent(rbtnWorkerReportFull, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE))
+                                    .addComponent(rbtnWorkerMonthlyIncome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
+                                    .addComponent(rbtnWorkerSaving, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
+                                    .addComponent(rbtnWorkerReportFull, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE))
                                 .addGap(637, 637, 637))
                             .addGroup(jPanel19Layout.createSequentialGroup()
                                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2228,7 +2273,7 @@ public class Main extends javax.swing.JFrame {
                                                 .addComponent(txtReportWorkerYear, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGap(18, 18, 18)
                                         .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 898, Short.MAX_VALUE))))))
+                                .addGap(0, 908, Short.MAX_VALUE))))))
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2404,7 +2449,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cboxMonthlyReportAllWorkers2)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         jPanel43.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -2454,7 +2499,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(btnSavingReportPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSavingReportEnd)
-                .addContainerGap(422, Short.MAX_VALUE))
+                .addContainerGap(432, Short.MAX_VALUE))
         );
         jPanel43Layout.setVerticalGroup(
             jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3379,11 +3424,11 @@ public class Main extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtProfileWorkerRegisterYear, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(cbxWorkers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(983, Short.MAX_VALUE))
+                        .addContainerGap(993, Short.MAX_VALUE))
                     .addGroup(jPanel17Layout.createSequentialGroup()
                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel17Layout.createSequentialGroup()
-                                .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE)
+                                .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
                                 .addGap(466, 466, 466))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
                                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -3398,7 +3443,7 @@ public class Main extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtProfileWorkerReturnYear, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(txtProfileWorkerCurrentSaving))
-                                .addGap(0, 431, Short.MAX_VALUE)))
+                                .addGap(0, 907, Short.MAX_VALUE)))
                         .addGap(86, 86, 86))))
         );
         jPanel17Layout.setVerticalGroup(
@@ -3596,7 +3641,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(btnPasswordChange, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPasswordConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(1009, Short.MAX_VALUE))
+                .addContainerGap(1019, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3639,7 +3684,6 @@ public class Main extends javax.swing.JFrame {
         if (this._current_worker_id > 0) {
             new WorkerForm(this, true, this._current_worker_id).setVisible(true);
         } else {
-            
         }
     }//GEN-LAST:event_btnProfileWorkerEditActionPerformed
 
@@ -3651,7 +3695,6 @@ public class Main extends javax.swing.JFrame {
         if (this._current_client_id > 0) {
             new ClientForm(this, true, this._current_client_id).setVisible(true);
         } else {
-
         }
     }//GEN-LAST:event_btnProfileClientEditActionPerformed
 
@@ -3707,7 +3750,7 @@ public class Main extends javax.swing.JFrame {
         File file = dialog.getSelectedFile();
 
         String filename = file.getPath();
-        if ( ! filename.endsWith(".xls")) {
+        if (!filename.endsWith(".xls")) {
             filename += ".xls";
         }
 
@@ -3878,14 +3921,14 @@ public class Main extends javax.swing.JFrame {
             rowIndex++;
         }
         // </editor-fold>
-        
+
         // <editor-fold defaultstate="collapsed" desc="render summary">
         Row summaryRow = sheet.createRow(rowIndex);
         index = columns.size();
 
         sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0, columns.size() - 1));
 
-        for (int i = 0; i < workerCount; i ++) {
+        for (int i = 0; i < workerCount; i++) {
             ReportCalculation calculation = calculations.get(i);
             Cell cell = summaryRow.createCell(index++);
             cell.setCellValue(Common.currency(calculation.getSalary()));
@@ -3896,7 +3939,7 @@ public class Main extends javax.swing.JFrame {
         }
         // </editor-fold>
 
-        rowIndex ++;
+        rowIndex++;
 
         if (chkMonthlyReportSalaryPayment.isSelected()) {
             for (ReportSalary salary : salaries) {
@@ -3916,7 +3959,7 @@ public class Main extends javax.swing.JFrame {
 
                 index = columns.size();
 
-                for (int i = 0; i < workerCount; i ++) {
+                for (int i = 0; i < workerCount; i++) {
                     double salaryValue = salary.getWorkerSalary(selected.get(i).getId());
                     cell = row.createCell(index++);
                     sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, index - 1, index + 1));
@@ -3940,7 +3983,7 @@ public class Main extends javax.swing.JFrame {
 
             index = columns.size();
 
-            for (int i = 0; i < workerCount; i ++) {
+            for (int i = 0; i < workerCount; i++) {
                 ReportCalculation calculation = calculations.get(i);
                 Cell cell = salarySummaryRow.createCell(index++);
                 sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, index - 1, index + 1));
@@ -3949,11 +3992,11 @@ public class Main extends javax.swing.JFrame {
                 index += 2;
             }
 
-            rowIndex ++;
+            rowIndex++;
         }
 
         if (chkMonthlyReportSaving.isSelected()) {
-            rowIndex ++;
+            rowIndex++;
 
             sheet.createRow(rowIndex++).createCell(0).setCellValue("Simpanan Tetap");
             Row previousBalanceRow = sheet.createRow(rowIndex);
@@ -3983,8 +4026,8 @@ public class Main extends javax.swing.JFrame {
             }
         }
 
-        
-        
+
+
         FileOutputStream out = null;
         try {
             out = new FileOutputStream(filename);
@@ -4022,7 +4065,7 @@ public class Main extends javax.swing.JFrame {
         String header = "";
         String content = "<tbody>";
         String saving_content = "";
-        
+
         // <editor-fold defaultstate="collapsed" desc="render table header">
         header += "<thead><tr valign=\"top\">";
         String rowspan = selected.size() > 0 ? " rowspan=\"2\"" : "";
@@ -4059,87 +4102,87 @@ public class Main extends javax.swing.JFrame {
             int first = 0;
             content += "<tr class=\"content-body\">";
             if (chkMonthlyReportDate.isSelected()) {
-                content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + " style=\"text-align: left; \">" + 
-                        Common.renderDisplayDate(transaction.getDate()) + "</td>";
+                content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + " style=\"text-align: left; \">"
+                        + Common.renderDisplayDate(transaction.getDate()) + "</td>";
             }
 
             if (chkMonthlyReportClientName.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + " style=\"text-align: left; \">" + 
-                        transaction.getCustomer().getName() + "</td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + " style=\"text-align: left; \">"
+                            + transaction.getCustomer().getName() + "</td>";
 
                 } else {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + 
-                        " style=\"text-align: left; \">Pinjaman</td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "")
+                            + " style=\"text-align: left; \">Pinjaman</td>";
 
                 }
             }
             if (chkMonthlyReportDescription.isSelected()) {
-                content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + " style=\"text-align: left; \">" + 
-                            transaction.getDescription() + "</td>";
+                content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + " style=\"text-align: left; \">"
+                        + transaction.getDescription() + "</td>";
 
             }
             if (chkMonthlyReportWeight.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + 
-                                ((int) transaction.getWeight()) + "</td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + ">"
+                            + ((int) transaction.getWeight()) + "</td>";
                 } else {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + "></td>";
                 }
             }
-            
+
             if (chkMonthlyReportPricePerTon.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + 
-                                Common.currency(transaction.getPricePerTon()) + "</td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + ">"
+                            + Common.currency(transaction.getPricePerTon()) + "</td>";
                 } else {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + "></td>";
                 }
             }
-            
+
             if (chkMonthlyReportTotalReceived.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + 
-                               Common.currency(transaction.getTotal()) + "</td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + ">"
+                            + Common.currency(transaction.getTotal()) + "</td>";
                 } else {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + "></td>";
                 }
             }
-            
+
             if (chkMonthlyReportWages.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + 
-                               Common.currency(transaction.getWages()) + "</td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + ">"
+                            + Common.currency(transaction.getWages()) + "</td>";
                 } else {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + "></td>";
 
                 }
             }
-            
+
             if (chkMonthlyReportSalary.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" +
-                               Common.currency(transaction.getTotalSalary()) + "</td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + ">"
+                            + Common.currency(transaction.getTotalSalary()) + "</td>";
                 } else {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + "></td>";
                 }
             }
-            
+
             if (chkMonthlyReportBalance.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + 
-                               Common.currency(transaction.getBalance()) + "</td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + ">"
+                            + Common.currency(transaction.getBalance()) + "</td>";
                 } else {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + "></td>";
                 }
             }
-            
+
             if (chkMonthlyReportKiraanAsing.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" + 
-                               transaction.getKiraanAsing() + "</td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + ">"
+                            + transaction.getKiraanAsing() + "</td>";
                 } else {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + "></td>";
                 }
             }
 
@@ -4151,20 +4194,20 @@ public class Main extends javax.swing.JFrame {
                 if (Common.inArray(workerIds, worker.getId())) {
                     if (transaction.getType() == Transaction.GENERAL) {
                         calculations.get(index).setSalary(transaction.getWagePerWorker());
-                        content += "<td class=\"worker_transaction\">" + 
-                                   Common.currency(transaction.getWagePerWorker()) + "</td>";
-                        content += "<td class=\"worker_savings\">" +
-                                   Common.currency(transaction.getLoanAmount()) + "</td>";
-                        content += "<td" + (index == selected.size() - 1 ? " class=\"last\"" : "") + ">" + 
-                                   Common.currency(calculations.get(index).getBalance()) + "</td>";
+                        content += "<td class=\"worker_transaction\">"
+                                + Common.currency(transaction.getWagePerWorker()) + "</td>";
+                        content += "<td class=\"worker_savings\">"
+                                + Common.currency(transaction.getLoanAmount()) + "</td>";
+                        content += "<td" + (index == selected.size() - 1 ? " class=\"last\"" : "") + ">"
+                                + Common.currency(calculations.get(index).getBalance()) + "</td>";
                     } else {
                         calculations.get(index).setLoan(transaction.getLoanAmount());
                         content += "<td class=\"worker_transaction\">0.00</td>";
                         content += "<td>" + Common.currency(transaction.getLoanAmount()) + "</td>";
                         content += "<td" + (index == selected.size() - 1 ? " class=\"last\"" : "") + ">" + Common.currency(calculations.get(index).getBalance()) + "</td>";
-                    }                    
+                    }
                 } else {
-                    content += "<td class=\"worker_transaction\"></td><td></td><td" + (index == selected.size() -1 ? " class=\"last\"" : "") + "></td>";
+                    content += "<td class=\"worker_transaction\"></td><td></td><td" + (index == selected.size() - 1 ? " class=\"last\"" : "") + "></td>";
                 }
 
                 index++;
@@ -4252,7 +4295,7 @@ public class Main extends javax.swing.JFrame {
             content += "</tr>";
         }
         // </editor-fold>
-        
+
         content += "</tbody>";
 
         table += header + content;
@@ -4282,24 +4325,44 @@ public class Main extends javax.swing.JFrame {
             System.err.println(ex.getMessage());
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         form.html.setDocument(document, rcontext);
         form.setVisible(true);
     }//GEN-LAST:event_btnMonthlyReportGenerateActionPerformed
 
     private ArrayList<String> getReportColumns() {
         ArrayList<String> headers = new ArrayList<String>();
-        
-        if (chkMonthlyReportDate.isSelected()) headers.add("Tarikh");
-        if (chkMonthlyReportClientName.isSelected()) headers.add("Nama Pelanggan");
-        if (chkMonthlyReportDescription.isSelected()) headers.add("Keterangan");
-        if (chkMonthlyReportWeight.isSelected()) headers.add("Berat KG");
-        if (chkMonthlyReportPricePerTon.isSelected()) headers.add("Harga Diterima Seton");
-        if (chkMonthlyReportTotalReceived.isSelected()) headers.add("Jumlah Diterima");
-        if (chkMonthlyReportWages.isSelected()) headers.add("Upah Kerja");
-        if (chkMonthlyReportSalary.isSelected()) headers.add("Jumlah Gaji");
-        if (chkMonthlyReportBalance.isSelected()) headers.add("Jumlah Baki");
-        if (chkMonthlyReportKiraanAsing.isSelected()) headers.add("Kiraan Asing");
+
+        if (chkMonthlyReportDate.isSelected()) {
+            headers.add("Tarikh");
+        }
+        if (chkMonthlyReportClientName.isSelected()) {
+            headers.add("Nama Pelanggan");
+        }
+        if (chkMonthlyReportDescription.isSelected()) {
+            headers.add("Keterangan");
+        }
+        if (chkMonthlyReportWeight.isSelected()) {
+            headers.add("Berat KG");
+        }
+        if (chkMonthlyReportPricePerTon.isSelected()) {
+            headers.add("Harga Diterima Seton");
+        }
+        if (chkMonthlyReportTotalReceived.isSelected()) {
+            headers.add("Jumlah Diterima");
+        }
+        if (chkMonthlyReportWages.isSelected()) {
+            headers.add("Upah Kerja");
+        }
+        if (chkMonthlyReportSalary.isSelected()) {
+            headers.add("Jumlah Gaji");
+        }
+        if (chkMonthlyReportBalance.isSelected()) {
+            headers.add("Jumlah Baki");
+        }
+        if (chkMonthlyReportKiraanAsing.isSelected()) {
+            headers.add("Kiraan Asing");
+        }
 
         return headers;
     }
@@ -4308,12 +4371,12 @@ public class Main extends javax.swing.JFrame {
         ArrayList<Worker> selected = new ArrayList<Worker>();
         int row = tblMonthlyReportWorkers.getRowCount();
 
-        for (int i = 0; i < row; i ++) {
+        for (int i = 0; i < row; i++) {
             if (Boolean.parseBoolean(tblMonthlyReportWorkers.getValueAt(i, 0).toString())) {
                 selected.add(workers.get(i));
             }
         }
-        
+
         return selected;
     }
 
@@ -4349,7 +4412,7 @@ public class Main extends javax.swing.JFrame {
         for (Worker worker : selected) {
             calculations.add(new ReportCalculation(worker.getId()));
         }
-        
+
         return calculations;
     }
 
@@ -4357,7 +4420,7 @@ public class Main extends javax.swing.JFrame {
         ArrayList<ReportSaving> saving = new ArrayList<ReportSaving>();
         Hashtable dates = this.getReportSelectedDateRange();
 
-        if ( ! chkMonthlyReportSaving.isSelected()) {
+        if (!chkMonthlyReportSaving.isSelected()) {
             return saving;
         }
 
@@ -4374,7 +4437,7 @@ public class Main extends javax.swing.JFrame {
 
                 saving.add(new ReportSaving(rs.getDouble("previous"), rs.getDouble("current"), worker));
                 rs.close();
-            } catch(SQLException ex) {
+            } catch (SQLException ex) {
                 System.err.println(ex.getMessage());
             }
         }
@@ -4404,23 +4467,25 @@ public class Main extends javax.swing.JFrame {
         try {
             String date = "";
             ReportSalary salary = null;
-            
+
             while (rs.next()) {
-                
-                if ( ! date.equals(rs.getString("date"))) {
+
+                if (!date.equals(rs.getString("date"))) {
                     date = rs.getString("date");
 
                     if (salary != null) {
                         salaries.add(salary);
                     }
-                    
+
                     salary = new ReportSalary(workers, Common.convertStringToDate(rs.getString("date")));
                 }
 
                 salary.setWorkerSalary(rs.getInt("worker_id"), rs.getDouble("amount"));
             }
 
-            if (salary != null) salaries.add(salary);
+            if (salary != null) {
+                salaries.add(salary);
+            }
 
             rs.close();
         } catch (SQLException ex) {
@@ -4457,7 +4522,7 @@ public class Main extends javax.swing.JFrame {
     private void cboxMonthlyReportAllWorkersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxMonthlyReportAllWorkersActionPerformed
         boolean selected = cboxMonthlyReportAllWorkers.isSelected();
         int row = tblMonthlyReportWorkers.getRowCount();
-        for (int i = 0; i < row; i ++) {
+        for (int i = 0; i < row; i++) {
             tblMonthlyReportWorkers.setValueAt(selected, i, 0);
         }
     }//GEN-LAST:event_cboxMonthlyReportAllWorkersActionPerformed
@@ -4475,9 +4540,9 @@ public class Main extends javax.swing.JFrame {
         Hashtable dates = getReportSelectedDateRange();
 
         PrinterJob job = PrinterJob.getPrinterJob();
-                
+
         PageFormat format = job.defaultPage();
-        format.setOrientation(PageFormat.LANDSCAPE);
+        format.setOrientation(PageFormat.PORTRAIT);
 
         job.setPrintable(new ReportPrinter(this, selected, transactions, calculations, savings, salaries, dates), format);
 
@@ -4497,11 +4562,11 @@ public class Main extends javax.swing.JFrame {
 
         int rowCount = tblSaving.getRowCount();
 
-        for (int i = 0; i < rowCount; i ++) {
+        for (int i = 0; i < rowCount; i++) {
             savingTableModel.removeRow(0);
         }
-        
-        
+
+
 
         if (cbxSavingWorkers.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Sila pilih pekerja.", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
@@ -4536,7 +4601,7 @@ public class Main extends javax.swing.JFrame {
                 WorkerRecord record = new WorkerRecord(results.getInt("id"), results.getInt("worker_id"), results.getInt("type"), results.getDouble("amount"), results.getString("description"), Common.convertStringToDate(results.getString("date")));
                 balance += record.getAmount();
 
-                Object[] objects = new Object[] {
+                Object[] objects = new Object[]{
                     new Integer(counter + 1),
                     new String(Common.renderDisplayDate(record.getDate())),
                     new String(record.getDescription()),
@@ -4546,7 +4611,7 @@ public class Main extends javax.swing.JFrame {
                 };
 
                 savingTableModel.addRow(objects);
-                counter ++;
+                counter++;
             }
             results.close();
         } catch (SQLException ex) {
@@ -4577,8 +4642,8 @@ public class Main extends javax.swing.JFrame {
         int yearFrom = txtReportWorkerYear.getYear();
         int yearTo = txtReportWorkerYearTo.getYear();
 
-        
-        
+
+
         if (cbxReportWorkers.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Sila Pilih Pekerja", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
             return;
@@ -4588,10 +4653,10 @@ public class Main extends javax.swing.JFrame {
         }
 
         Worker selected = workers.get(cbxReportWorkers.getSelectedIndex() - 1);
-        
+
         PrinterJob job = PrinterJob.getPrinterJob();
         PageFormat format = job.defaultPage();
-        format.setOrientation(PageFormat.LANDSCAPE);
+        format.setOrientation(PageFormat.PORTRAIT);
 
         int type = WorkerReportFrame.FULL;
         ArrayList<WorkerReport> reports = getWorkerReports();
@@ -4642,7 +4707,7 @@ public class Main extends javax.swing.JFrame {
 
         String filename = file.getPath();
 
-        if ( ! filename.endsWith(".xls")) {
+        if (!filename.endsWith(".xls")) {
             filename += ".xls";
         }
 
@@ -4660,10 +4725,10 @@ public class Main extends javax.swing.JFrame {
         } else if (rbtnWorkerMonthlyIncome.isSelected()) {
             type = WorkerReportFrame.INCOME;
         }
-        
+
         int index = 0;
         int pos = 0;
-        
+
         Workbook workbook = new HSSFWorkbook();
         Sheet sheet = (Sheet) workbook.createSheet("Laporan");
 
@@ -4692,12 +4757,12 @@ public class Main extends javax.swing.JFrame {
             cell.setCellValue("Simpanana Tetap");
         }
 
-        pos ++;
+        pos++;
         double totalSalary = 0.0, totalLoan = 0.0, totalBalance = 0.0, totalSaving = 0.0, totalPayment = 0.0, totalSavingBalance = 0.0, totalWithdraw = 0.0;
-        
+
         for (WorkerReport report : reports) {
             Row row = sheet.createRow(pos++);
-            
+
             index = 0;
             totalSalary += report.getSalary();
             totalLoan += report.getLoan();
@@ -4733,7 +4798,7 @@ public class Main extends javax.swing.JFrame {
 
         index = 0;
         Row footer = sheet.createRow(pos++);
-        cell = footer.createCell(index ++);
+        cell = footer.createCell(index++);
         cell.setCellValue("Jumlah");
 
         if (type == WorkerReportFrame.INCOME || type == WorkerReportFrame.FULL) {
@@ -4783,14 +4848,14 @@ public class Main extends javax.swing.JFrame {
         int monthTo = txtReportWorkerMonthTo.getMonth() + 1;
         int yearFrom = txtReportWorkerYear.getYear();
         int yearTo = txtReportWorkerYearTo.getYear();
-        
+
         if (cbxReportWorkers.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Silih Pilih Pekerja", "Kesilapan!",
-                JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.ERROR_MESSAGE);
             return;
         } else if (monthTo < monthFrom && yearTo <= yearFrom) {
             JOptionPane.showMessageDialog(null, "Terdapat Kesilapan Tempoh Tarikh", "Kesilapan!",
-                JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -4817,7 +4882,7 @@ public class Main extends javax.swing.JFrame {
         int yearTo = txtReportWorkerYearTo.getYear();
         int month = monthFrom, year = yearFrom;
 
-        Worker selected  = cbxReportWorkers.getSelectedIndex() == 0 ? new Worker() :workers.get(cbxReportWorkers.getSelectedIndex() - 1);
+        Worker selected = cbxReportWorkers.getSelectedIndex() == 0 ? new Worker() : workers.get(cbxReportWorkers.getSelectedIndex() - 1);
 
         while (year < yearTo || (month <= monthTo && year <= yearTo)) {
             double salary = 0.0, loan = 0.0, saving = 0.0, withdraw = 0.0, payment = 0.0;
@@ -4832,11 +4897,11 @@ public class Main extends javax.swing.JFrame {
                 // salary
                 ResultSet rs = Database.instance().execute(query);
                 rs.next();
-                
-                salary  = rs.getDouble("salary");
-                loan  = rs.getDouble("loan");
-                saving  = rs.getDouble("saving");
-                withdraw  = rs.getDouble("withdraw");
+
+                salary = rs.getDouble("salary");
+                loan = rs.getDouble("loan");
+                saving = rs.getDouble("saving");
+                withdraw = rs.getDouble("withdraw");
                 payment = rs.getDouble("payment");
 
                 rs.close();
@@ -4847,154 +4912,23 @@ public class Main extends javax.swing.JFrame {
 
             reports.add(new WorkerReport(month, year, salary, loan, saving, withdraw, payment));
 
-            month ++;
+            month++;
 
             if (month > 12) {
                 month = 1;
-                year ++;
+                year++;
             }
         }
 
         return reports;
     }
-    
-    private void btnTransactionNewLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransactionNewLoanActionPerformed
-        if (listTransactionLoanWorkers.getSelectedIndex() < 0) {
-            return;
-        }
-
-        int index = listTransactionLoanWorkers.getSelectedIndex();
-        Worker worker = workers.get(index);
-        new LoanForm(this, true, worker).setVisible(true);
-    }//GEN-LAST:event_btnTransactionNewLoanActionPerformed
-
-    private void cboxTransactionAllWorkersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxTransactionAllWorkersActionPerformed
-        boolean selected = cboxTransactionAllWorkers.isSelected();
-        int row = tblTransactionInvolvedWorkers.getRowCount();
-        for (int i = 0; i < row; i ++) {
-            tblTransactionInvolvedWorkers.setValueAt(selected, i, 0);
-        }
-    }//GEN-LAST:event_cboxTransactionAllWorkersActionPerformed
-
-    private void btnRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecordActionPerformed
-        if ( ! this._validate_transaction_form()) {
-            return;
-        } else if (JOptionPane.showConfirmDialog(null, "Anda pasti merekodkan transaksi baru? Transaksi direkodkan tidak boleh dibatalkan.", "", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) != JOptionPane.YES_OPTION) {
-            return;
-        }
-
-        Customer selected = cbxTransactionClients.getSelectedIndex() > 0 ? customers.get(cbxTransactionClients.getSelectedIndex() - 1) : new Customer();
-
-        Transaction transaction = new Transaction();
-        transaction.setType(Transaction.GENERAL);
-        transaction.setCustomerID(selected.getId());
-        transaction.setDescription(txtTransactionDescription.getText());
-        transaction.setWeight(Double.parseDouble(txtTransactionWeight.getText()));
-        transaction.setPricePerTon(Double.parseDouble(txtTransactionPricePerTon.getText()));
-        transaction.setWages(Double.parseDouble(txtTransactionWages.getText()));
-        transaction.setDate(txtTransactionDate.getDate());
-        transaction.setKiraanAsing(Double.parseDouble(txtTransactionCalculate.getText()));
-        transaction.setWagesTax(Double.parseDouble(txtTransactionWagesTax.getText()));
-
-        int row = tblTransactionInvolvedWorkers.getRowCount();
-
-        for (int i = 0; i < row; i ++) {
-            if (Boolean.parseBoolean(tblTransactionInvolvedWorkers.getValueAt(i, 0).toString()) == true) {
-                transaction.addWorker(workers.get(i));
-            }
-        }
-
-        if (transaction.save()) {
-            JOptionPane.showMessageDialog(null, "Transaksi berjaya direkodkan.", "Berjaya!",
-                JOptionPane.INFORMATION_MESSAGE);
-            this._clearTransactionForm();
-        } else {
-            JOptionPane.showMessageDialog(null, "Transaksi tidak dapat direkodkan.", "Kesilapan!",
-                JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_btnRecordActionPerformed
-
-    private void calculateTransaction(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_calculateTransaction
-        if (txtTransactionPricePerTon.getText().isEmpty() || txtTransactionWeight.getText().isEmpty() ||  ! Common.isDouble(txtTransactionPricePerTon.getText()) || ! Common.isDouble(txtTransactionWeight.getText())) {
-            return;
-        }
-
-        double kiraanAsing = 0.0;
-        if (Common.isDouble(txtTransactionCalculate.getText())) {
-            kiraanAsing = Double.parseDouble(txtTransactionCalculate.getText());
-        }
-
-        double weight = Double.parseDouble(txtTransactionWeight.getText()), price_per_ton = 0.0;
-
-        if ( ! txtTransactionPricePerTon.getText().isEmpty() && Common.isDouble(txtTransactionPricePerTon.getText())) {
-            price_per_ton = Double.parseDouble(txtTransactionPricePerTon.getText());
-        }
-
-        double total = ((weight / 1000) * price_per_ton) + (kiraanAsing * price_per_ton);
-
-        txtTransactionTotalReceived.setText(Common.currency(total));
-
-//        if (txtTransactionWages.getText().isEmpty()) {
-//            txtTransactionWages.setText("0.00");
-//        }
-//
-//        if (txtTransactionWagesTax.getText().isEmpty()) {
-//            txtTransactionWagesTax.setText("0.00");
-//        }
-        
-        if ((txtTransactionWages.getText().isEmpty() || ! Common.isDouble(txtTransactionWages.getText())) && (txtTransactionWagesTax.getText().isEmpty() || ! Common.isDouble(txtTransactionWagesTax.getText()))) {
-            return;
-        }
-
-        double wages = 0.0, wages_tax = 0.0, salary = 0.0, salary_tax;
-
-        if ( ! txtTransactionWages.getText().isEmpty() && Common.isDouble(txtTransactionWages.getText())) {
-            wages = Double.parseDouble(txtTransactionWages.getText());
-        }
-
-        if ( ! txtTransactionWagesTax.getText().isEmpty() && Common.isDouble(txtTransactionWagesTax.getText())) {
-            wages_tax = Double.parseDouble(txtTransactionWagesTax.getText());
-        }
-
-        salary = ((weight / 1000) * wages) + (kiraanAsing * wages);
-        salary_tax = ((weight / 1000) * wages_tax) + (kiraanAsing * wages_tax);
-        txtTransactionSalary.setText(Common.currency(salary));
-
-        txtTransactionBalance.setText(Common.currency(total - salary));
-        if (salary_tax > 0) {
-            txtTransactionBalance1.setText(Common.currency(total - salary_tax));
-            txtTransactionSalary1.setText(Common.currency(salary_tax));
-        } else {
-            txtTransactionBalance1.setText(Common.currency(0));
-            txtTransactionSalary1.setText(Common.currency(0));
-        }
-
-        int worker_count = 0;
-        int row = tblTransactionInvolvedWorkers.getRowCount();
-        for (int i = 0; i < row; i ++) {
-            if (Boolean.parseBoolean(tblTransactionInvolvedWorkers.getValueAt(i, 0).toString()) == true) {
-                worker_count ++;
-            }
-        }
-
-        worker_count = worker_count > 0 ? worker_count : 1;
-        txtTransactionPayPerPerson.setText(Common.currency(salary / worker_count));
-
-        if (salary_tax > 0) {
-            txtTransactionPayPerPerson1.setText(Common.currency(salary_tax / worker_count));
-        } else {
-            txtTransactionPayPerPerson1.setText(Common.currency(0));
-        }
-        
-    }//GEN-LAST:event_calculateTransaction
-
 
     private void btnPasswordChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasswordChangeActionPerformed
         String password = "";
         char[] passwords = txtPassword.getPassword(), confirms = txtPasswordConfirm.getPassword();
 
 
-        if ( ! Arrays.equals(passwords, confirms)) {
+        if (!Arrays.equals(passwords, confirms)) {
             JOptionPane.showMessageDialog(null, "Kata Laluan tidak betul.", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -5012,7 +4946,7 @@ public class Main extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-        
+
         if (Database.instance().update(ps)) {
             JOptionPane.showMessageDialog(null, "Kata Laluan berjaya ditukar.", "Berjaya!", JOptionPane.INFORMATION_MESSAGE);
             txtPassword.setText("");
@@ -5030,10 +4964,6 @@ public class Main extends javax.swing.JFrame {
     private void txtPasswordConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordConfirmActionPerformed
         btnPasswordChangeActionPerformed(evt);
     }//GEN-LAST:event_txtPasswordConfirmActionPerformed
-
-    private void txtTransactionEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTransactionEndActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_txtTransactionEndActionPerformed
 
     private void btnSavingEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSavingEndActionPerformed
         System.exit(0);
@@ -5059,36 +4989,12 @@ public class Main extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnProfileClientEndActionPerformed
 
-    private void txtTransactionWeightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTransactionWeightActionPerformed
-        if (txtTransactionWeight.getText().isEmpty()) txtTransactionWeight.setText("0.00");
-        calculateTransaction(null);
-    }//GEN-LAST:event_txtTransactionWeightActionPerformed
-
-    private void txtTransactionPricePerTonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTransactionPricePerTonActionPerformed
-        if (txtTransactionPricePerTon.getText().isEmpty()) txtTransactionPricePerTon.setText("0.00");
-        calculateTransaction(null);
-    }//GEN-LAST:event_txtTransactionPricePerTonActionPerformed
-
-    private void txtTransactionWagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTransactionWagesActionPerformed
-        if (txtTransactionWages.getText().isEmpty()) txtTransactionWages.setText("0.00");
-        calculateTransaction(null);
-    }//GEN-LAST:event_txtTransactionWagesActionPerformed
-
-    private void txtTransactionCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTransactionCalculateActionPerformed
-        if (txtTransactionCalculate.getText().isEmpty()) txtTransactionCalculate.setText("0.00");
-        calculateTransaction(null);
-    }//GEN-LAST:event_txtTransactionCalculateActionPerformed
-
-    private void txtTransactionNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTransactionNewActionPerformed
-        this._clearTransactionForm();
-    }//GEN-LAST:event_txtTransactionNewActionPerformed
-
     private void btnSavingSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSavingSearchActionPerformed
         DefaultTableModel savingTableModel = (DefaultTableModel) tblSaving.getModel();
 
         int rowCount = tblSaving.getRowCount();
 
-        for (int i = 0; i < rowCount; i ++) {
+        for (int i = 0; i < rowCount; i++) {
             savingTableModel.removeRow(0);
         }
 
@@ -5124,15 +5030,15 @@ public class Main extends javax.swing.JFrame {
 
         try {
             while (results.next()) {
-                WorkerRecord record = new WorkerRecord(results.getInt("id"), results.getInt("worker_id"), 
-                                        results.getInt("type"), results.getDouble("amount"),
-                                        results.getString("description"),
-                                        Common.convertStringToDate(results.getString("date")));
+                WorkerRecord record = new WorkerRecord(results.getInt("id"), results.getInt("worker_id"),
+                        results.getInt("type"), results.getDouble("amount"),
+                        results.getString("description"),
+                        Common.convertStringToDate(results.getString("date")));
                 balance += record.getAmount();
 
                 loaded_saving_ids.add(record.getId());
 
-                Object[] objects = new Object[] {
+                Object[] objects = new Object[]{
                     new Integer(counter + 1),
                     new String(Common.renderDisplayDate(record.getDate())),
                     new String(record.getDescription()),
@@ -5142,7 +5048,7 @@ public class Main extends javax.swing.JFrame {
                 };
 
                 savingTableModel.addRow(objects);
-                counter ++;
+                counter++;
             }
             results.close();
         } catch (SQLException ex) {
@@ -5157,12 +5063,12 @@ public class Main extends javax.swing.JFrame {
 
         int rowCount = tblPay.getRowCount();
 
-        for (int i = 0; i < rowCount; i ++) {
+        for (int i = 0; i < rowCount; i++) {
             paymentTableModel.removeRow(0);
         }
 
         Worker selected = cbxPaymentWorkers.getSelectedIndex() == 0 ? null : workers.get(cbxPaymentWorkers.getSelectedIndex() - 1);
-        
+
         if (selected == null) {
             JOptionPane.showMessageDialog(null, "Sila pilih Pekerja", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
             return;
@@ -5179,16 +5085,23 @@ public class Main extends javax.swing.JFrame {
         double salary = 0.0, loan = 0.0, saving = 0.0, withdraw = 0.0, payment = 0.0;
 
         try {
-            String query = "SELECT amount, type, date FROM workerRecord WHERE worker_id = " + selected.getId() + " AND date >= \"" + yearFrom + "-" + (monthFrom > 9 ? monthFrom : "0" + monthFrom) + "01\" AND date <= \"" + yearTo + "-" + (monthTo > 9 ? monthTo : "0" + monthTo) + "-32\" AND type IN (" + WorkerRecord.INCOME + "," + WorkerRecord.LOAN + "," + WorkerRecord.SAVING + "," + WorkerRecord.PAYMENT + ") ORDER BY date";
+            String query = "SELECT amount, type, date FROM workerRecord WHERE worker_id = "
+                    + selected.getId() + " AND date >= \"" + yearFrom + "-"
+                    + (monthFrom > 9 ? monthFrom : "0" + monthFrom)
+                    + "01\" AND date <= \"" + yearTo
+                    + "-" + (monthTo > 9 ? monthTo : "0" + monthTo)
+                    + "-32\" AND type IN (" + WorkerRecord.INCOME + ","
+                    + WorkerRecord.LOAN + "," + WorkerRecord.SAVING + ","
+                    + WorkerRecord.PAYMENT + ") ORDER BY date";
 
-            System.out.println(query);
+//            System.out.println(query);
             ResultSet rs = Database.instance().execute(query);
             while (rs.next()) {
                 int type = rs.getInt("type");
 
 
-                salary  = 0.0;
-                saving  = 0.0;
+                salary = 0.0;
+                saving = 0.0;
                 payment = 0.0;
 
                 if (type == WorkerRecord.INCOME || type == WorkerRecord.LOAN) {
@@ -5199,7 +5112,7 @@ public class Main extends javax.swing.JFrame {
                     payment = rs.getDouble("amount");
                 }
 
-                Object[] objects = new Object[] {
+                Object[] objects = new Object[]{
                     new Integer(counter++),
                     new String(Common.renderDisplayDate(Common.convertStringToDate(rs.getString("date")))),
                     new String("Gaji"),
@@ -5264,11 +5177,17 @@ public class Main extends javax.swing.JFrame {
 
     private void btnSavingCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSavingCancelActionPerformed
         if (tblSaving.getSelectedRowCount() == 0) {
-            JOptionPane.showMessageDialog(null, "Sila pilih dari tabel daftar di atas", "Kesilapan", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,
+                    "Sila pilih dari tabel daftar di atas", "Kesilapan",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        if (JOptionPane.showConfirmDialog(null, "Anda memastikan batalkan sebanyak " + tblSaving.getSelectedRowCount() + " rekod dari tabel daftar di atas?", "", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+        if (JOptionPane.showConfirmDialog(null,
+                "Anda memastikan batalkan sebanyak "
+                + tblSaving.getSelectedRowCount()
+                + " rekod dari tabel daftar di atas?", "",
+                JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
             return;
         }
 
@@ -5282,20 +5201,27 @@ public class Main extends javax.swing.JFrame {
         String query = "DELETE FROM workerRecord WHERE id IN (" + id + ")";
 
         if (Database.instance().update(query)) {
-            JOptionPane.showMessageDialog(null, "Rekod telah dibatal dari sistem", "", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null,
+                    "Rekod telah dibatal dari sistem", "",
+                    JOptionPane.INFORMATION_MESSAGE);
             btnSavingSearchActionPerformed(evt);
         } else {
-            JOptionPane.showMessageDialog(null, "Tidak dapat membatalkan rekod dari sistem. Sila cuba sebentar lagi.", "", JOptionPane.ERROR_MESSAGE);
+            String msg = "Tidak dapat membatalkan rekod dari sistem.";
+            JOptionPane.showMessageDialog(null, msg,
+                    "", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSavingCancelActionPerformed
 
     private void btnPayCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayCancelActionPerformed
         if (tblPay.getSelectedColumnCount() == 0) {
-            JOptionPane.showMessageDialog(null, "Sila pilih dari tabel daftar di atas", "Kesilapan", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Sila pilih dari tabel daftar di atas",
+                    "Kesilapan", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        if (JOptionPane.showConfirmDialog(null, "Anda memastikan batalkan sebanyak " + tblPay.getSelectedRowCount() + " rekod dari tabel daftar di atas?", "", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+        if (JOptionPane.showConfirmDialog(null, "Anda memastikan batalkan sebanyak "
+                + tblPay.getSelectedRowCount() + " rekod dari tabel daftar di atas?",
+                "", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
             return;
         }
 
@@ -5303,19 +5229,19 @@ public class Main extends javax.swing.JFrame {
         for (Integer index : tblPay.getSelectedRows()) {
             String date = tblPay.getValueAt(index, 1).toString();
             String[] dates = date.split("/");
-            selected.add(new Integer[] {Integer.parseInt(dates[0]), Integer.parseInt(dates[1])});
+            selected.add(new Integer[]{Integer.parseInt(dates[0]), Integer.parseInt(dates[1])});
         }
 
         for (Integer[] dates : selected) {
             String query = "DELETE FROM workerRecord WHERE strftime(\"%m\", date) = \"" + (dates[0] > 9 ? dates[0] : "0" + dates[0]) + "\" AND strftime(\"%Y\", date) = \"" + dates[1] + "\" AND type = " + WorkerRecord.PAYMENT;
-            if ( ! Database.instance().update(query)) {
+            if (!Database.instance().update(query)) {
                 JOptionPane.showMessageDialog(null, "Tidak dapat membatalkan rekod dari sistem. Sila cuba sebentar lagi.", "", JOptionPane.ERROR_MESSAGE);
                 btnPaymentSearchActionPerformed(evt);
                 return;
             }
         }
-        
-        JOptionPane.showMessageDialog(null, "Rekod telah dibatal dari sistem", "", JOptionPane.INFORMATION_MESSAGE);
+
+        JOptionPane.showMessageDialog(null, "Rekod telatblTransactionInvolvedWorkers.getColumnModel().getColumn(0).setPreferredWidth(20);h dibatal dari sistem", "", JOptionPane.INFORMATION_MESSAGE);
         btnPaymentSearchActionPerformed(evt);
     }//GEN-LAST:event_btnPayCancelActionPerformed
 
@@ -5351,23 +5277,22 @@ public class Main extends javax.swing.JFrame {
         DefaultTableModel tableModel = (DefaultTableModel) tblTransactionList.getModel();
 
         int rowCount = tblTransactionList.getRowCount();
-        for (int i = 0; i < rowCount; i ++) {
+        for (int i = 0; i < rowCount; i++) {
             tableModel.removeRow(0);
         }
 
         loaded_transaction_ids.clear();
-        
+
         if (txtTransactionListFrom.getDate() == null || txtTransactionListTo.getDate() == null) {
             JOptionPane.showMessageDialog(null, "Sila pilih tempoh tarikh.", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         tableModel = new DefaultTableModel(
-            new Object[][] {},
-            new String[] {
-                "", "Tarikh", "Name Pelanggan", "Keterangan", "Berat KG", "Harga Diterima Seton", "Jumlah Diterima", "Upah Kerja", "Jumlah Gaji", "Kiraan Asing", "Pekerja Terlibat", "Jumlah Pinjaman"
-            }
-        );
+                new Object[][]{},
+                new String[]{
+            "", "Tarikh", "Name Pelanggan", "Keterangan", "Berat KG", "Harga Diterima Seton", "Jumlah Diterima", "Upah Kerja", "Jumlah Gaji", "Kiraan Asing", "Pekerja Terlibat", "Jumlah Pinjaman"
+        });
 
         tblTransactionList.setModel(tableModel);
 
@@ -5376,11 +5301,18 @@ public class Main extends javax.swing.JFrame {
         tblTransactionList.getColumnModel().getColumn(2).setPreferredWidth(120);
         tblTransactionList.getColumnModel().getColumn(3).setPreferredWidth(250);
 
-        String query = "SELECT * FROM transactions WHERE date >= '" + Common.renderSQLDate(txtTransactionListFrom.getDate()) + "' AND date <= '" + Common.renderSQLDate(txtTransactionListTo.getDate()) + "' AND wages > 0";
-        
+        String query = "SELECT * FROM transactions WHERE date >= '"
+                + Common.renderSQLDate(txtTransactionListFrom.getDate())
+                + "' AND date <= '"
+                + Common.renderSQLDate(txtTransactionListTo.getDate())
+                + "' AND wages > 0";
+
         if (cbxTransactionListClients.getSelectedIndex() > 0) {
-            query += " AND customer_id = " + customers.get(cbxTransactionListClients.getSelectedIndex() - 1).getId();
+            query += " AND customer_id = "
+                    + customers.get(cbxTransactionListClients.getSelectedIndex() - 1).getId();
         }
+
+        query += " ORDER BY date DESC";
 
         System.out.println(query);
 
@@ -5404,7 +5336,7 @@ public class Main extends javax.swing.JFrame {
 
                 Object[] objects = null;
 
-                objects = new Object[] {
+                objects = new Object[]{
                     new Integer(counter++),
                     new String(Common.renderDisplayDate(transaction.getDate())),
                     new String(transaction.getCustomerID() == 0 ? "" : transaction.getCustomer().getCode() + " - " + transaction.getCustomer().getName()),
@@ -5425,7 +5357,7 @@ public class Main extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-        
+
     }//GEN-LAST:event_btnTransactionSaveActionPerformed
 
     private void btnTransactionListEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransactionListEndActionPerformed
@@ -5434,11 +5366,15 @@ public class Main extends javax.swing.JFrame {
 
     private void btnTransactionListDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransactionListDeleteActionPerformed
         if (tblTransactionList.getSelectedColumnCount() == 0) {
-            JOptionPane.showMessageDialog(null, "Sila pilih dari tabel daftar di atas", "Kesilapan", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Sila pilih dari tabel daftar di atas",
+                    "Kesilapan", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        if (JOptionPane.showConfirmDialog(null, "Anda memastikan batalkan sebanyak " + tblTransactionList.getSelectedRowCount() + " rekod dari tabel daftar di atas?", "", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+        if (JOptionPane.showConfirmDialog(null, "Anda memastikan batalkan sebanyak "
+                + tblTransactionList.getSelectedRowCount()
+                + " rekod dari tabel daftar di atas?", "",
+                JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
             return;
         }
 
@@ -5457,14 +5393,17 @@ public class Main extends javax.swing.JFrame {
         success = success && Database.instance().update(query);
         query = "DELETE FROM transaction_workers WHERE transaction_id IN (" + id + ")";
         success = success && Database.instance().update(query);
-        
+
 
         if (success && Database.instance().commit()) {
-            JOptionPane.showMessageDialog(null, "Rekod telah dibatal dari sistem", "", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Rekod telah dibatal dari sistem",
+                    "", JOptionPane.INFORMATION_MESSAGE);
             btnTransactionSaveActionPerformed(evt);
         } else {
             Database.instance().rollback();
-            JOptionPane.showMessageDialog(null, "Tidak dapat membatalkan rekod dari sistem. Sila cuba sebentar lagi.", "", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,
+                    "Tidak dapat membatalkan rekod dari sistem. Sila cuba sebentar lagi.",
+                    "", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnTransactionListDeleteActionPerformed
 
@@ -5476,7 +5415,7 @@ public class Main extends javax.swing.JFrame {
         DefaultTableModel tableModel = (DefaultTableModel) tblTransactionList1.getModel();
 
         int rowCount = tblTransactionList1.getRowCount();
-        for (int i = 0; i < rowCount; i ++) {
+        for (int i = 0; i < rowCount; i++) {
             tableModel.removeRow(0);
         }
 
@@ -5488,11 +5427,10 @@ public class Main extends javax.swing.JFrame {
         }
 
         tableModel = new DefaultTableModel(
-            new Object[][] {},
-            new String[] {
-                "", "Tarikh", "Name Pelanggan", "Keterangan", "Berat KG", "Harga Diterima Seton", "Jumlah Diterima", "Upah Kerja", "Jumlah Gaji", "Kiraan Asing", "Pekerja Terlibat", "Jumlah Pinjaman"
-            }
-        );
+                new Object[][]{},
+                new String[]{
+            "", "Tarikh", "Name Pelanggan", "Keterangan", "Berat KG", "Harga Diterima Seton", "Jumlah Diterima", "Upah Kerja", "Jumlah Gaji", "Kiraan Asing", "Pekerja Terlibat", "Jumlah Pinjaman"
+        });
 
         tblTransactionList1.setModel(tableModel);
 
@@ -5501,7 +5439,11 @@ public class Main extends javax.swing.JFrame {
         tblTransactionList1.getColumnModel().getColumn(2).setPreferredWidth(120);
         tblTransactionList1.getColumnModel().getColumn(3).setPreferredWidth(250);
 
-        String query = "SELECT * FROM transactions WHERE date >= '" + Common.renderSQLDate(txtTransactionListFrom1.getDate()) + "' AND date <= '" + Common.renderSQLDate(txtTransactionListTo1.getDate()) + "' AND wages_tax > 0";
+        String query = "SELECT * FROM transactions WHERE date >= '"
+                + Common.renderSQLDate(txtTransactionListFrom1.getDate())
+                + "' AND date <= '"
+                + Common.renderSQLDate(txtTransactionListTo1.getDate())
+                + "' AND wages_tax > 0";
 
         if (cbxTransactionListClients1.getSelectedIndex() > 0) {
             query += " AND customer_id = " + customers.get(cbxTransactionListClients1.getSelectedIndex() - 1).getId();
@@ -5527,7 +5469,7 @@ public class Main extends javax.swing.JFrame {
 
                 Object[] objects = null;
 
-                objects = new Object[] {
+                objects = new Object[]{
                     new Integer(counter++),
                     new String(Common.renderDisplayDate(transaction.getDate())),
                     new String(transaction.getCustomerID() == 0 ? "" : transaction.getCustomer().getCode() + " - " + transaction.getCustomer().getName()),
@@ -5582,11 +5524,14 @@ public class Main extends javax.swing.JFrame {
 
 
         if (success && Database.instance().commit()) {
-            JOptionPane.showMessageDialog(null, "Rekod telah dibatal dari sistem", "", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Rekod telah dibatal dari sistem",
+                    "", JOptionPane.INFORMATION_MESSAGE);
             btnTransactionSaveActionPerformed(evt);
         } else {
             Database.instance().rollback();
-            JOptionPane.showMessageDialog(null, "Tidak dapat membatalkan rekod dari sistem. Sila cuba sebentar lagi.", "", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,
+                    "Tidak dapat membatalkan rekod dari sistem. Sila cuba sebentar lagi.",
+                    "", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnTransactionListDelete1ActionPerformed
 
@@ -5631,7 +5576,7 @@ public class Main extends javax.swing.JFrame {
         File file = dialog.getSelectedFile();
 
         String filename = file.getPath();
-        if ( ! filename.endsWith(".xls")) {
+        if (!filename.endsWith(".xls")) {
             filename += ".xls";
         }
 
@@ -5807,7 +5752,7 @@ public class Main extends javax.swing.JFrame {
 
         sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0, columns.size() - 1));
 
-        for (int i = 0; i < workerCount; i ++) {
+        for (int i = 0; i < workerCount; i++) {
             ReportCalculation calculation = calculations.get(i);
             Cell cell = summaryRow.createCell(index++);
             cell.setCellValue(Common.currency(calculation.getSalary()));
@@ -5818,7 +5763,7 @@ public class Main extends javax.swing.JFrame {
         }
         // </editor-fold>
 
-        rowIndex ++;
+        rowIndex++;
 
         if (chkMonthlyReportSalaryPayment.isSelected()) {
             for (ReportSalary salary : salaries) {
@@ -5838,7 +5783,7 @@ public class Main extends javax.swing.JFrame {
 
                 index = columns.size();
 
-                for (int i = 0; i < workerCount; i ++) {
+                for (int i = 0; i < workerCount; i++) {
                     double salaryValue = salary.getWorkerSalary(selected.get(i).getId());
                     cell = row.createCell(index++);
                     sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, index - 1, index + 1));
@@ -5862,7 +5807,7 @@ public class Main extends javax.swing.JFrame {
 
             index = columns.size();
 
-            for (int i = 0; i < workerCount; i ++) {
+            for (int i = 0; i < workerCount; i++) {
                 ReportCalculation calculation = calculations.get(i);
                 Cell cell = salarySummaryRow.createCell(index++);
                 sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, index - 1, index + 1));
@@ -5871,11 +5816,11 @@ public class Main extends javax.swing.JFrame {
                 index += 2;
             }
 
-            rowIndex ++;
+            rowIndex++;
         }
 
         if (chkMonthlyReportSaving.isSelected()) {
-            rowIndex ++;
+            rowIndex++;
 
             sheet.createRow(rowIndex++).createCell(0).setCellValue("Simpanan Tetap");
             Row previousBalanceRow = sheet.createRow(rowIndex);
@@ -5936,7 +5881,7 @@ public class Main extends javax.swing.JFrame {
         ArrayList<ReportSaving> savings = this.getReportSavings1(selected);
         ArrayList<ReportCalculation> calculations = this.getReportCalculations1(selected);
         ArrayList<ReportSalary> salaries = this.getReportSalaries1(selected);
-                
+
         String html = "<html>";
         String css = "<style type=\"text/css\">";
         String table = "<table cellpadding=\"4\" cellspacing=\"0\">";
@@ -5980,86 +5925,86 @@ public class Main extends javax.swing.JFrame {
             int first = 0;
             content += "<tr class=\"content-body\">";
             if (chkMonthlyReportDate.isSelected()) {
-                content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") +
-                           " style=\"text-align: left; \">" +
-                           Common.renderDisplayDate(transaction.getDate()) + "</td>";
+                content += "<td" + (first++ == 0 ? " class=\"first\"" : "")
+                        + " style=\"text-align: left; \">"
+                        + Common.renderDisplayDate(transaction.getDate()) + "</td>";
             }
             if (chkMonthlyReportClientName.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") +
-                               " style=\"text-align: left; \">" + 
-                               transaction.getCustomer().getName() + "</td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "")
+                            + " style=\"text-align: left; \">"
+                            + transaction.getCustomer().getName() + "</td>";
                 } else {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") +
-                               " style=\"text-align: left; \">Pinjaman</td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "")
+                            + " style=\"text-align: left; \">Pinjaman</td>";
                 }
             }
-            
+
             if (chkMonthlyReportDescription.isSelected()) {
-                content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") +
-                           " style=\"text-align: left; \">" +
-                           transaction.getDescription() + "</td>";
+                content += "<td" + (first++ == 0 ? " class=\"first\"" : "")
+                        + " style=\"text-align: left; \">"
+                        + transaction.getDescription() + "</td>";
             }
-            
+
             if (chkMonthlyReportWeight.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" +
-                               ((int) transaction.getWeight()) + "</td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + ">"
+                            + ((int) transaction.getWeight()) + "</td>";
                 } else {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + "></td>";
                 }
             }
             if (chkMonthlyReportPricePerTon.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" +
-                               Common.currency(transaction.getPricePerTon()) + "</td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + ">"
+                            + Common.currency(transaction.getPricePerTon()) + "</td>";
                 } else {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + "></td>";
                 }
             }
-            
+
             if (chkMonthlyReportTotalReceived.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" +
-                               Common.currency(transaction.getTotal()) + "</td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + ">"
+                            + Common.currency(transaction.getTotal()) + "</td>";
                 } else {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + "></td>";
                 }
             }
-            
+
             if (chkMonthlyReportWages.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" +
-                               Common.currency(transaction.getWages()) + "</td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + ">"
+                            + Common.currency(transaction.getWages()) + "</td>";
                 } else {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + "></td>";
                 }
             }
-            
+
             if (chkMonthlyReportSalary.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" +
-                               Common.currency(transaction.getTotalSalary()) + "</td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + ">"
+                            + Common.currency(transaction.getTotalSalary()) + "</td>";
                 } else {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + "></td>";
                 }
             }
-            
+
             if (chkMonthlyReportBalance.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" +
-                               Common.currency(transaction.getBalance()) + "</td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + ">"
+                            + Common.currency(transaction.getBalance()) + "</td>";
                 } else {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + "></td>";
                 }
             }
-            
+
             if (chkMonthlyReportKiraanAsing.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + ">" +
-                               transaction.getKiraanAsing() + "</td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + ">"
+                            + transaction.getKiraanAsing() + "</td>";
                 } else {
-                    content += "<td" + (first ++ == 0 ? " class=\"first\"" : "") + "></td>";
+                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + "></td>";
                 }
             }
 
@@ -6070,11 +6015,11 @@ public class Main extends javax.swing.JFrame {
                 if (Common.inArray(workerIds, worker.getId())) {
                     if (transaction.getType() == Transaction.GENERAL) {
                         calculations.get(index).setSalary(transaction.getWagePerWorker());
-                        content += "<td class=\"worker_transaction\">" +
-                                   Common.currency(transaction.getWagePerWorker()) + "</td>";
+                        content += "<td class=\"worker_transaction\">"
+                                + Common.currency(transaction.getWagePerWorker()) + "</td>";
                         content += "<td>" + Common.currency(calculations.get(index).getLoan()) + "</td>";
-                        content += "<td" + (index == selected.size() - 1 ? " class=\"last\"" : "") +
-                                   ">" + Common.currency(calculations.get(index).getBalance()) + "</td>";
+                        content += "<td" + (index == selected.size() - 1 ? " class=\"last\"" : "")
+                                + ">" + Common.currency(calculations.get(index).getBalance()) + "</td>";
                     } else {
                         calculations.get(index).setLoan(transaction.getLoanAmount());
                         content += "<td class=\"worker_transaction\"></td>";
@@ -6082,7 +6027,7 @@ public class Main extends javax.swing.JFrame {
                         content += "<td" + (index == selected.size() - 1 ? " class=\"last\"" : "") + ">" + Common.currency(calculations.get(index).getBalance()) + "</td>";
                     }
                 } else {
-                    content += "<td class=\"worker_transaction\"></td><td></td><td" + (index == selected.size() -1 ? " class=\"last\"" : "") + "></td>";
+                    content += "<td class=\"worker_transaction\"></td><td></td><td" + (index == selected.size() - 1 ? " class=\"last\"" : "") + "></td>";
                 }
 
                 index++;
@@ -6208,21 +6153,17 @@ public class Main extends javax.swing.JFrame {
     private void cboxMonthlyReportAllWorkers1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxMonthlyReportAllWorkers1ActionPerformed
         boolean selected = cboxMonthlyReportAllWorkers1.isSelected();
         int row = tblMonthlyReportWorkers1.getRowCount();
-        for (int i = 0; i < row; i ++) {
+        for (int i = 0; i < row; i++) {
             tblMonthlyReportWorkers1.setValueAt(selected, i, 0);
         }
     }//GEN-LAST:event_cboxMonthlyReportAllWorkers1ActionPerformed
-
-    private void txtTransactionWagesTaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTransactionWagesTaxActionPerformed
-        calculateTransaction(null);
-    }//GEN-LAST:event_txtTransactionWagesTaxActionPerformed
 
     private void btnLoanSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanSearchActionPerformed
         DefaultTableModel loanTableModel = (DefaultTableModel) tblLoan.getModel();
 
         int rowCount = tblLoan.getRowCount();
 
-        for (int i = 0; i < rowCount; i ++) {
+        for (int i = 0; i < rowCount; i++) {
             loanTableModel.removeRow(0);
         }
 
@@ -6262,15 +6203,14 @@ public class Main extends javax.swing.JFrame {
                 WorkerRecord record = new WorkerRecord(results.getInt("id"), results.getInt("worker_id"), results.getInt("type"), results.getDouble("amount"), results.getString("description"), Common.convertStringToDate(results.getString("date")));
                 loaded_loan_ids.add(record.getId());
 
-                Object[] objects = new Object[] {
+                Object[] objects = new Object[]{
                     new Integer(counter + 1),
                     new String(Common.renderDisplayDate(record.getDate())),
                     new String(record.getDescription()),
-                    new String(Common.currency(record.getAmount())),
-                };
+                    new String(Common.currency(record.getAmount())),};
 
                 loanTableModel.addRow(objects);
-                counter ++;
+                counter++;
             }
             results.close();
         } catch (SQLException ex) {
@@ -6284,11 +6224,14 @@ public class Main extends javax.swing.JFrame {
 
     private void btnLoanCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanCancelActionPerformed
         if (tblLoan.getSelectedRowCount() == 0) {
-            JOptionPane.showMessageDialog(null, "Sila pilih dari tabel daftar di atas", "Kesilapan", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Sila pilih dari tabel daftar di atas",
+                    "Kesilapan", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        if (JOptionPane.showConfirmDialog(null, "Anda memastikan batalkan sebanyak " + tblLoan.getSelectedRowCount() + " rekod dari tabel daftar di atas?", "", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+        if (JOptionPane.showConfirmDialog(null, "Anda memastikan batalkan sebanyak "
+                + tblLoan.getSelectedRowCount() + " rekod dari tabel daftar di atas?",
+                "", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
             return;
         }
 
@@ -6302,17 +6245,21 @@ public class Main extends javax.swing.JFrame {
         String query = "DELETE FROM workerRecord WHERE id IN (" + id + ")";
 
         if (Database.instance().update(query)) {
-            JOptionPane.showMessageDialog(null, "Rekod telah dibatal dari sistem", "", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Rekod telah dibatal dari sistem",
+                    "", JOptionPane.INFORMATION_MESSAGE);
             btnLoanSearchActionPerformed(evt);
         } else {
-            JOptionPane.showMessageDialog(null, "Tidak dapat membatalkan rekod dari sistem. Sila cuba sebentar lagi.", "", JOptionPane.ERROR_MESSAGE);
+            String error_msg = "Tidak dapat membatalkan rekod dari sistem. "
+                    + "Sila cuba sebentar lagi.";
+            JOptionPane.showMessageDialog(null, error_msg, "",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnLoanCancelActionPerformed
 
     private void cboxMonthlyReportAllWorkers2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxMonthlyReportAllWorkers2ActionPerformed
         boolean selected = cboxMonthlyReportAllWorkers2.isSelected();
         int row = tblSavingReportWorkers.getRowCount();
-        for (int i = 0; i < row; i ++) {
+        for (int i = 0; i < row; i++) {
             tblSavingReportWorkers.setValueAt(selected, i, 0);
         }
     }//GEN-LAST:event_cboxMonthlyReportAllWorkers2ActionPerformed
@@ -6369,7 +6316,7 @@ public class Main extends javax.swing.JFrame {
 
         String filename = file.getPath();
 
-        if ( ! filename.endsWith(".xls")) {
+        if (!filename.endsWith(".xls")) {
             filename += ".xls";
         }
 
@@ -6388,7 +6335,7 @@ public class Main extends javax.swing.JFrame {
         for (Worker worker : selected) {
             Cell cell = header.createCell(index);
             cell.setCellValue(worker.getCode() + " " + worker.getName());
-            index ++;
+            index++;
         }
 
         Row row_balance = sheet.createRow(1);
@@ -6406,7 +6353,7 @@ public class Main extends javax.swing.JFrame {
             Cell cell = row_balance.createCell(index);
             cell.setCellValue(Common.currency(amount));
 
-            index ++;
+            index++;
         }
 
         int rowIndex = 2;
@@ -6442,12 +6389,12 @@ public class Main extends javax.swing.JFrame {
 
                         cell.setCellValue(Common.currency(amount));
                         total += amount;
-                        counter ++;
+                        counter++;
                     }
                 }
 
                 totals.put(worker.getId(), total);
-                index ++;
+                index++;
             }
 
             rowIndex = subRowIndex;
@@ -6471,7 +6418,7 @@ public class Main extends javax.swing.JFrame {
 
             cell.setCellValue(Common.currency(previous_total + current_total));
         }
-        
+
         FileOutputStream out = null;
 
         try {
@@ -6507,14 +6454,14 @@ public class Main extends javax.swing.JFrame {
         Hashtable previous = this.getSavingReportPreviousBalance(selected);
         int savings_counter = Integer.parseInt(savings.remove("count").toString());
 
-        String html = "<html>" +
-                "<head>" +
-                "<style>" +
-                "table tr td { border: 1px solid #ccc; vertical-align: top; }" +
-                "table tbody tr td.currency {text-align: right;}" +
-                "</style>" +
-                "</head>" +
-                "<body>";
+        String html = "<html>"
+                + "<head>"
+                + "<style>"
+                + "table tr td { border: 1px solid #ccc; vertical-align: top; }"
+                + "table tbody tr td.currency {text-align: right;}"
+                + "</style>"
+                + "</head>"
+                + "<body>";
 
         html += "<h3>Laporan Simpanan (" + Common.renderDisplayDate((Calendar) dates.get("from")) + " - " + Common.renderDisplayDate((Calendar) dates.get("to")) + ")</h3>";
         html += "<table width=\"100%\">";
@@ -6536,7 +6483,7 @@ public class Main extends javax.swing.JFrame {
             }
 
 
-            
+
             html += "<td class=\"currency\">" + Common.currency(amount) + "</td>";
         }
 
@@ -6561,7 +6508,7 @@ public class Main extends javax.swing.JFrame {
                 }
 
                 html += "<td class=\"currency\">";
-                
+
                 if (worker_entries != null) {
                     for (Double amount : worker_entries) {
                         if (counter > 0) {
@@ -6570,7 +6517,7 @@ public class Main extends javax.swing.JFrame {
 
                         html += Common.currency(amount);
                         total += amount;
-                        counter ++;
+                        counter++;
                     }
                 }
                 html += "</td>";
@@ -6582,8 +6529,8 @@ public class Main extends javax.swing.JFrame {
         }
 
         html += "<tr><td>Baki</td>";
-        
-        for (Worker worker: selected) {
+
+        for (Worker worker : selected) {
             double previous_total = 0.0, current_total = 0.0;
 
             if (previous.get(worker.getId()) != null) {
@@ -6596,7 +6543,7 @@ public class Main extends javax.swing.JFrame {
 
             html += "<td class=\"currency\">" + Common.currency(previous_total + current_total) + "</td>";
         }
-        
+
         html += "</tr>";
 
 
@@ -6639,12 +6586,274 @@ public class Main extends javax.swing.JFrame {
             dateChooser.setDate(calendar.getTime());
         }
     }//GEN-LAST:event_dateChange
-    
+
+    private void EditSimpananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditSimpananActionPerformed
+        String msg = "Sila pilih 1 rekod simpanan untuk diubah";
+        if (tblSaving.getSelectedRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, msg, "Kesilapan",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if (tblSaving.getSelectedRowCount() > 1) {
+            JOptionPane.showMessageDialog(null, msg, "Kesilapan",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+
+            Integer id = 0;
+            for (Integer index : tblSaving.getSelectedRows()) {
+                id = loaded_saving_ids.get(index);
+            }
+
+            try {
+                new EditSavingForm(this, true, id).setVisible(true);
+            } catch (SQLException ex) {
+                msg = "Database error: " + ex.toString();
+                JOptionPane.showMessageDialog(null, msg, "Kesilapan",
+                        JOptionPane.ERROR_MESSAGE);
+            } catch (ParseException ex) {
+                msg = "Error: " + ex.toString();
+                JOptionPane.showMessageDialog(null, msg, "Kesilapan",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_EditSimpananActionPerformed
+
+    private void editPinjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPinjamanActionPerformed
+        String msg = "Sila pilih 1 rekod pinjaman untuk diubah";
+        if (tblLoan.getSelectedRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, msg, "Kesilapan",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if (tblLoan.getSelectedRowCount() > 1) {
+            JOptionPane.showMessageDialog(null, msg, "Kesilapan",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+
+            Integer id = 0;
+            for (Integer index : tblLoan.getSelectedRows()) {
+                id = loaded_loan_ids.get(index);
+            }
+
+            try {
+                new EditLoanForm(this, true, id).setVisible(true);
+            } catch (SQLException ex) {
+                msg = "Database error: " + ex.toString();
+                JOptionPane.showMessageDialog(null, msg, "Kesilapan",
+                        JOptionPane.ERROR_MESSAGE);
+            } catch (ParseException ex) {
+                msg = "Error: " + ex.toString();
+                JOptionPane.showMessageDialog(null, msg, "Kesilapan",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_editPinjamanActionPerformed
+
+    private void calculateTransaction(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_calculateTransaction
+        if (txtTransactionPricePerTon.getText().isEmpty() || txtTransactionWeight.getText().isEmpty() || !Common.isDouble(txtTransactionPricePerTon.getText()) || !Common.isDouble(txtTransactionWeight.getText())) {
+            return;
+        }
+
+        double kiraanAsing = 0.0;
+        if (Common.isDouble(txtTransactionCalculate.getText())) {
+            kiraanAsing = Double.parseDouble(txtTransactionCalculate.getText());
+        }
+
+        double weight = Double.parseDouble(txtTransactionWeight.getText()), price_per_ton = 0.0;
+
+        if (!txtTransactionPricePerTon.getText().isEmpty() && Common.isDouble(txtTransactionPricePerTon.getText())) {
+            price_per_ton = Double.parseDouble(txtTransactionPricePerTon.getText());
+        }
+
+        double total = ((weight / 1000) * price_per_ton) + (kiraanAsing * price_per_ton);
+
+        txtTransactionTotalReceived.setText(Common.currency(total));
+
+        //        if (txtTransactionWages.getText().isEmpty()) {
+        //            txtTransactionWages.setText("0.00");
+        //        }
+        //
+        //        if (txtTransactionWagesTax.getText().isEmpty()) {
+        //            txtTransactionWagesTax.setText("0.00");
+        //        }
+
+        if ((txtTransactionWages.getText().isEmpty() || !Common.isDouble(txtTransactionWages.getText())) && (txtTransactionWagesTax.getText().isEmpty() || !Common.isDouble(txtTransactionWagesTax.getText()))) {
+            return;
+        }
+
+        double wages = 0.0, wages_tax = 0.0, salary = 0.0, salary_tax;
+
+        if (!txtTransactionWages.getText().isEmpty() && Common.isDouble(txtTransactionWages.getText())) {
+            wages = Double.parseDouble(txtTransactionWages.getText());
+        }
+
+        if (!txtTransactionWagesTax.getText().isEmpty() && Common.isDouble(txtTransactionWagesTax.getText())) {
+            wages_tax = Double.parseDouble(txtTransactionWagesTax.getText());
+        }
+
+        salary = ((weight / 1000) * wages) + (kiraanAsing * wages);
+        salary_tax = ((weight / 1000) * wages_tax) + (kiraanAsing * wages_tax);
+        txtTransactionSalary.setText(Common.currency(salary));
+
+        txtTransactionBalance.setText(Common.currency(total - salary));
+        if (salary_tax > 0) {
+            txtTransactionBalance1.setText(Common.currency(total - salary_tax));
+            txtTransactionSalary1.setText(Common.currency(salary_tax));
+        } else {
+            txtTransactionBalance1.setText(Common.currency(0));
+            txtTransactionSalary1.setText(Common.currency(0));
+        }
+
+        int worker_count = 0;
+        int row = tblTransactionInvolvedWorkers.getRowCount();
+        for (int i = 0; i < row; i++) {
+            if (Boolean.parseBoolean(tblTransactionInvolvedWorkers.getValueAt(i, 0).toString()) == true) {
+                worker_count++;
+            }
+        }
+
+        worker_count = worker_count > 0 ? worker_count : 1;
+        txtTransactionPayPerPerson.setText(Common.currency(salary / worker_count));
+
+        if (salary_tax > 0) {
+            txtTransactionPayPerPerson1.setText(Common.currency(salary_tax / worker_count));
+        } else {
+            txtTransactionPayPerPerson1.setText(Common.currency(0));
+        }
+    }//GEN-LAST:event_calculateTransaction
+
+    private void txtTransactionWagesTaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTransactionWagesTaxActionPerformed
+        calculateTransaction(null);
+    }//GEN-LAST:event_txtTransactionWagesTaxActionPerformed
+
+    private void txtTransactionCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTransactionCalculateActionPerformed
+        if (txtTransactionCalculate.getText().isEmpty()) {
+            txtTransactionCalculate.setText("0.00");
+        }
+        calculateTransaction(null);
+    }//GEN-LAST:event_txtTransactionCalculateActionPerformed
+
+    private void txtTransactionWagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTransactionWagesActionPerformed
+        if (txtTransactionWages.getText().isEmpty()) {
+            txtTransactionWages.setText("0.00");
+        }
+        calculateTransaction(null);
+    }//GEN-LAST:event_txtTransactionWagesActionPerformed
+
+    private void txtTransactionPricePerTonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTransactionPricePerTonActionPerformed
+        if (txtTransactionPricePerTon.getText().isEmpty()) {
+            txtTransactionPricePerTon.setText("0.00");
+        }
+        calculateTransaction(null);
+    }//GEN-LAST:event_txtTransactionPricePerTonActionPerformed
+
+    private void txtTransactionWeightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTransactionWeightActionPerformed
+        if (txtTransactionWeight.getText().isEmpty()) {
+            txtTransactionWeight.setText("0.00");
+        }
+        calculateTransaction(null);
+    }//GEN-LAST:event_txtTransactionWeightActionPerformed
+
+    private void cboxTransactionAllWorkersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxTransactionAllWorkersActionPerformed
+        boolean selected = cboxTransactionAllWorkers.isSelected();
+        int row = tblTransactionInvolvedWorkers.getRowCount();
+        for (int i = 0; i < row; i++) {
+            tblTransactionInvolvedWorkers.setValueAt(selected, i, 0);
+        }
+    }//GEN-LAST:event_cboxTransactionAllWorkersActionPerformed
+
+    private void btnTransactionNewLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransactionNewLoanActionPerformed
+        if (listTransactionLoanWorkers.getSelectedIndex() < 0) {
+            return;
+        }
+
+        int index = listTransactionLoanWorkers.getSelectedIndex();
+        Worker worker = workers.get(index);
+        new LoanForm(this, true, worker).setVisible(true);
+    }//GEN-LAST:event_btnTransactionNewLoanActionPerformed
+
+    private void txtTransactionEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTransactionEndActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_txtTransactionEndActionPerformed
+
+    private void txtTransactionNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTransactionNewActionPerformed
+        this._clearTransactionForm();
+    }//GEN-LAST:event_txtTransactionNewActionPerformed
+
+    private void btnRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecordActionPerformed
+        if (!this._validate_transaction_form()) {
+            return;
+        } else if (JOptionPane.showConfirmDialog(null,
+                "Anda pasti merekodkan transaksi baru? Transaksi direkodkan tidak boleh dibatalkan.",
+                "", JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE) != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        Customer selected = cbxTransactionClients.getSelectedIndex() > 0 ? customers.get(cbxTransactionClients.getSelectedIndex() - 1) : new Customer();
+
+        Transaction transaction = new Transaction();
+        transaction.setType(Transaction.GENERAL);
+        transaction.setCustomerID(selected.getId());
+        transaction.setDescription(txtTransactionDescription.getText());
+        transaction.setWeight(Double.parseDouble(txtTransactionWeight.getText()));
+        transaction.setPricePerTon(Double.parseDouble(txtTransactionPricePerTon.getText()));
+        transaction.setWages(Double.parseDouble(txtTransactionWages.getText()));
+        transaction.setDate(txtTransactionDate.getDate());
+        transaction.setKiraanAsing(Double.parseDouble(txtTransactionCalculate.getText()));
+        transaction.setWagesTax(Double.parseDouble(txtTransactionWagesTax.getText()));
+
+        int row = tblTransactionInvolvedWorkers.getRowCount();
+
+        for (int i = 0; i < row; i++) {
+            if (Boolean.parseBoolean(tblTransactionInvolvedWorkers.getValueAt(i,
+                    0).toString()) == true) {
+                transaction.addWorker(workers.get(i));
+            }
+        }
+
+        if (transaction.save()) {
+            JOptionPane.showMessageDialog(null,
+                    "Transaksi berjaya direkodkan.", "Berjaya!",
+                    JOptionPane.INFORMATION_MESSAGE);
+            this._clearTransactionForm();
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Transaksi tidak dapat direkodkan.", "Kesilapan!",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnRecordActionPerformed
+
+    private void ubahTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubahTransaksiActionPerformed
+        String msg = "Sila pilih 1 rekod Transaksi untuk diubah";
+        if (tblTransactionList.getSelectedRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, msg, "Kesilapan",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if (tblTransactionList.getSelectedRowCount() > 1) {
+            JOptionPane.showMessageDialog(null, msg, "Kesilapan",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+
+            Integer id = 0;
+            for (Integer index : tblTransactionList.getSelectedRows()) {
+                id = loaded_transaction_ids.get(index);
+            }
+
+            try {
+                new EditTransaksiForm(this, true, id).setVisible(true);
+            } catch (SQLException ex) {
+                msg = "Database error: " + ex.toString();
+                JOptionPane.showMessageDialog(null, msg, "Kesilapan",
+                        JOptionPane.ERROR_MESSAGE);
+            } catch (ParseException ex) {
+                msg = "Error: " + ex.toString();
+                JOptionPane.showMessageDialog(null, msg, "Kesilapan",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_ubahTransaksiActionPerformed
+
     private ArrayList<Worker> getSavingReportSelectedWorker() {
         ArrayList<Worker> selected = new ArrayList<Worker>();
         int row = tblSavingReportWorkers.getRowCount();
 
-        for (int i = 0; i < row; i ++) {
+        for (int i = 0; i < row; i++) {
             if (Boolean.parseBoolean(tblSavingReportWorkers.getValueAt(i, 0).toString())) {
                 selected.add(workers.get(i));
             }
@@ -6662,30 +6871,36 @@ public class Main extends javax.swing.JFrame {
 
         ResultSet rs = null;
         try {
-            query = "SELECT SUM(amount) as previous, worker_id FROM workerRecord WHERE date < '" + Common.renderSQLDate((Calendar) dates.get("from")) + "' AND type IN (" + WorkerRecord.SAVING + "," + WorkerRecord.WITHDRAW + ") AND worker_id IN (" + id + ") GROUP BY worker_id";
+            query = "SELECT SUM(amount) as previous, worker_id FROM workerRecord WHERE date < '"
+                    + Common.renderSQLDate((Calendar) dates.get("from"))
+                    + "' AND type IN (" + WorkerRecord.SAVING + ","
+                    + WorkerRecord.WITHDRAW + ") AND worker_id IN ("
+                    + id + ") GROUP BY worker_id";
 
             rs = Database.instance().execute(query);
 
             while (rs.next()) {
                 savings.put(rs.getInt("worker_id"), rs.getDouble("previous"));
             }
-            
+
             rs.close();
-        } catch(SQLException ex) {
+        } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
 
         return savings;
     }
-    
+
     private Hashtable getSavingReportEntries(ArrayList<Worker> workers) {
         Hashtable dates = this.getSavingReportSelectedDateRange();
         Hashtable records = new Hashtable();
         String id = Worker.join(workers);
 
         String query = "SELECT * FROM workerRecord WHERE type = 3 ";
-        query += "AND date >= '" + Common.renderSQLDate((Calendar) dates.get("from")) + "' AND date <= '" + Common.renderSQLDate((Calendar) dates.get("to")) + "' ";
-        query += workers.isEmpty() ? "ORDER BY date ASC" : "AND worker_id IN (" + id + ") ORDER BY date ASC";
+        query += "AND date >= '" + Common.renderSQLDate((Calendar) dates.get("from"))
+                + "' AND date <= '" + Common.renderSQLDate((Calendar) dates.get("to")) + "' ";
+        query += workers.isEmpty() ? "ORDER BY date ASC" : "AND worker_id IN ("
+                + id + ") ORDER BY date ASC";
 
         int counter = 0;
         try {
@@ -6707,7 +6922,7 @@ public class Main extends javax.swing.JFrame {
                 worker_entry.add(rs.getDouble("amount"));
                 entry.put(rs.getInt("worker_id"), worker_entry);
                 records.put(rs.getString("date"), entry);
-                counter ++;
+                counter++;
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -6760,7 +6975,11 @@ public class Main extends javax.swing.JFrame {
             txtTransactionPricePerTon.setText("0.00");
         }
 
-        if (cbxTransactionListClients.getSelectedIndex() == 0 && txtTransactionWeight.getText().isEmpty() && txtTransactionPricePerTon.getText().isEmpty() && txtTransactionWages.getText().isEmpty() && ! txtTransactionDescription.getText().isEmpty()) {
+        if (cbxTransactionListClients.getSelectedIndex() == 0
+                && txtTransactionWeight.getText().isEmpty()
+                && txtTransactionPricePerTon.getText().isEmpty()
+                && txtTransactionWages.getText().isEmpty()
+                && !txtTransactionDescription.getText().isEmpty()) {
             txtTransactionCalculate.setText("0.00");
             txtTransactionWeight.setText("0");
             txtTransactionPricePerTon.setText("0.00");
@@ -6773,27 +6992,29 @@ public class Main extends javax.swing.JFrame {
                 message = "Sila Pilih Pelanggan";
             } else if (txtTransactionWeight.getText().isEmpty()) {
                 message = "Sila isikan Berat";
-            } else if ( ! Common.isDouble(txtTransactionWeight.getText())) {
+            } else if (!Common.isDouble(txtTransactionWeight.getText())) {
                 message = "Kesilapan Berat";
             } else if (txtTransactionPricePerTon.getText().isEmpty()) {
                 message = "Sila isikan Harga";
-            } else if ( ! Common.isDouble(txtTransactionPricePerTon.getText())) {
+            } else if (!Common.isDouble(txtTransactionPricePerTon.getText())) {
                 message = "Kesilapan Harga Seton";
             } else if (txtTransactionWages.getText().isEmpty()) {
                 message = "Sila isikan Upah Pekerja";
-            } else if ( ! Common.isDouble(txtTransactionWages.getText())) {
+            } else if (!Common.isDouble(txtTransactionWages.getText())) {
                 message = "Kesilapan Upah";
-            } else if ( ! Common.isDouble(txtTransactionCalculate.getText())) {
+            } else if (!Common.isDouble(txtTransactionCalculate.getText())) {
                 message = "Kesilapan Kiraan Asing";
+            } else if (!Common.isDouble(txtTransactionWagesTax.getText())) {
+                message = "Kesilapan Upah Kerja (Tax) atau tiada 0";
             }
         }
 
         int row = tblTransactionInvolvedWorkers.getRowCount();
         int counter = 0;
-        
-        for (int i = 0; i < row; i ++) {
+
+        for (int i = 0; i < row; i++) {
             if (Boolean.parseBoolean(tblTransactionInvolvedWorkers.getValueAt(i, 0).toString()) == true) {
-                counter ++;
+                counter++;
             }
         }
 
@@ -6804,25 +7025,46 @@ public class Main extends javax.swing.JFrame {
         if (message.isEmpty()) {
             return true;
         }
-        
-        JOptionPane.showMessageDialog(null, message, "Kesilapan!", JOptionPane.WARNING_MESSAGE);
-        
+
+        JOptionPane.showMessageDialog(null, message, "Kesilapan!",
+                JOptionPane.WARNING_MESSAGE);
+
         return false;
     }
 
     private ArrayList<String> getReportColumns1() {
         ArrayList<String> headers = new ArrayList<String>();
 
-        if (chkMonthlyReportDate1.isSelected()) headers.add("Tarikh");
-        if (chkMonthlyReportClientName1.isSelected()) headers.add("Nama Pelanggan");
-        if (chkMonthlyReportDescription1.isSelected()) headers.add("Keterangan");
-        if (chkMonthlyReportWeight1.isSelected()) headers.add("Berat KG");
-        if (chkMonthlyReportPricePerTon1.isSelected()) headers.add("Harga Seton (TAX)");
-        if (chkMonthlyReportTotalReceived1.isSelected()) headers.add("Jumlah Diterima");
-        if (chkMonthlyReportWages1.isSelected()) headers.add("Upah Kerja");
-        if (chkMonthlyReportSalary1.isSelected()) headers.add("Jumlah Gaji");
-        if (chkMonthlyReportBalance1.isSelected()) headers.add("Jumlah Baki");
-        if (chkMonthlyReportKiraanAsing1.isSelected()) headers.add("Kiraan Asing");
+        if (chkMonthlyReportDate1.isSelected()) {
+            headers.add("Tarikh");
+        }
+        if (chkMonthlyReportClientName1.isSelected()) {
+            headers.add("Nama Pelanggan");
+        }
+        if (chkMonthlyReportDescription1.isSelected()) {
+            headers.add("Keterangan");
+        }
+        if (chkMonthlyReportWeight1.isSelected()) {
+            headers.add("Berat KG");
+        }
+        if (chkMonthlyReportPricePerTon1.isSelected()) {
+            headers.add("Harga Seton (TAX)");
+        }
+        if (chkMonthlyReportTotalReceived1.isSelected()) {
+            headers.add("Jumlah Diterima");
+        }
+        if (chkMonthlyReportWages1.isSelected()) {
+            headers.add("Upah Kerja");
+        }
+        if (chkMonthlyReportSalary1.isSelected()) {
+            headers.add("Jumlah Gaji");
+        }
+        if (chkMonthlyReportBalance1.isSelected()) {
+            headers.add("Jumlah Baki");
+        }
+        if (chkMonthlyReportKiraanAsing1.isSelected()) {
+            headers.add("Kiraan Asing");
+        }
 
         return headers;
     }
@@ -6831,7 +7073,7 @@ public class Main extends javax.swing.JFrame {
         ArrayList<Worker> selected = new ArrayList<Worker>();
         int row = tblMonthlyReportWorkers1.getRowCount();
 
-        for (int i = 0; i < row; i ++) {
+        for (int i = 0; i < row; i++) {
             if (Boolean.parseBoolean(tblMonthlyReportWorkers1.getValueAt(i, 0).toString())) {
                 selected.add(workers.get(i));
             }
@@ -6855,7 +7097,13 @@ public class Main extends javax.swing.JFrame {
         try {
             while (rs.next()) {
                 ArrayList<Worker> involver = Worker.bulk(rs.getString("normalized_worker_id"));
-                transactions.add(new Transaction(rs.getInt("id"), rs.getInt("customer_id"), rs.getInt("type"), rs.getDouble("weight"), rs.getDouble("price_per_ton"), rs.getDouble("wages_tax"), rs.getDouble("wages_tax"), rs.getDouble("kiraan_asing"), rs.getDouble("loan_amount"), involver, Common.convertStringToDate(rs.getString("date")), rs.getString("description"), rs.getString("normalized_worker_id")));
+                transactions.add(new Transaction(rs.getInt("id"),
+                        rs.getInt("customer_id"), rs.getInt("type"),
+                        rs.getDouble("weight"), rs.getDouble("price_per_ton"),
+                        rs.getDouble("wages_tax"), rs.getDouble("wages_tax"),
+                        rs.getDouble("kiraan_asing"), rs.getDouble("loan_amount"),
+                        involver, Common.convertStringToDate(rs.getString("date")),
+                        rs.getString("description"), rs.getString("normalized_worker_id")));
             }
 
             rs.close();
@@ -6868,9 +7116,9 @@ public class Main extends javax.swing.JFrame {
 
     private ArrayList<ReportCalculation> getReportCalculations1(ArrayList<Worker> selected) {
         ArrayList<ReportCalculation> calculations = new ArrayList<ReportCalculation>();
-        
+
         for (Worker worker : selected) {
-           // ReportCalculation repCalc = new ReportCalculation(worker.getId());
+            // ReportCalculation repCalc = new ReportCalculation(worker.getId());
             //calculations.add(repCalc.getCalculationbyWorkingId(worker.getId()));
             calculations.add(new ReportCalculation(worker.getId()));
         }
@@ -6889,7 +7137,8 @@ public class Main extends javax.swing.JFrame {
 
         id = id.isEmpty() ? "0" : id.substring(0, id.length() - 1);
 
-        String query = "SELECT worker_id, date, amount FROM workerRecord WHERE worker_id IN (" + id + ") AND type = " + WorkerRecord.PAYMENT + " ";
+        String query = "SELECT worker_id, date, amount FROM workerRecord WHERE worker_id IN ("
+                + id + ") AND type = " + WorkerRecord.PAYMENT + " ";
         query += "AND date >= '" + Common.renderSQLDate((Calendar) dates.get("from")) + "' ";
         query += "AND date <= '" + Common.renderSQLDate((Calendar) dates.get("to")) + "' ";
         query += "ORDER BY date";
@@ -6902,20 +7151,24 @@ public class Main extends javax.swing.JFrame {
 
             while (rs.next()) {
 
-                if ( ! date.equals(rs.getString("date"))) {
+                if (!date.equals(rs.getString("date"))) {
                     date = rs.getString("date");
 
                     if (salary != null) {
                         salaries.add(salary);
                     }
 
-                    salary = new ReportSalary(workers, Common.convertStringToDate(rs.getString("date")));
+                    salary = new ReportSalary(workers,
+                            Common.convertStringToDate(rs.getString("date")));
                 }
 
-                salary.setWorkerSalary(rs.getInt("worker_id"), rs.getDouble("amount"));
+                salary.setWorkerSalary(rs.getInt("worker_id"),
+                        rs.getDouble("amount"));
             }
 
-            if (salary != null) salaries.add(salary);
+            if (salary != null) {
+                salaries.add(salary);
+            }
 
             rs.close();
         } catch (SQLException ex) {
@@ -6953,7 +7206,7 @@ public class Main extends javax.swing.JFrame {
         ArrayList<ReportSaving> saving = new ArrayList<ReportSaving>();
         Hashtable dates = this.getReportSelectedDateRange1();
 
-        if ( ! chkMonthlyReportSaving1.isSelected()) {
+        if (!chkMonthlyReportSaving1.isSelected()) {
             return saving;
         }
 
@@ -6962,15 +7215,25 @@ public class Main extends javax.swing.JFrame {
         for (Worker worker : selected) {
             try {
                 query = "SELECT ";
-                query += "(SELECT SUM(amount) FROM workerRecord WHERE worker_id = " + worker.getId() + " AND date < '" + Common.renderSQLDate((Calendar) dates.get("from")) + "' AND type IN (" + WorkerRecord.SAVING + "," + WorkerRecord.WITHDRAW + ")) AS previous, ";
-                query += "(SELECT SUM(amount) FROM workerRecord WHERE worker_id = " + worker.getId() + " AND date >= '" + Common.renderSQLDate((Calendar) dates.get("from")) + "' AND date <= '" + Common.renderSQLDate((Calendar) dates.get("to")) + "' AND type IN (" + WorkerRecord.SAVING + "," + WorkerRecord.WITHDRAW + ")) AS current ";
+                query += "(SELECT SUM(amount) FROM workerRecord WHERE worker_id = "
+                        + worker.getId() + " AND date < '"
+                        + Common.renderSQLDate((Calendar) dates.get("from"))
+                        + "' AND type IN (" + WorkerRecord.SAVING + ","
+                        + WorkerRecord.WITHDRAW + ")) AS previous, ";
+                query += "(SELECT SUM(amount) FROM workerRecord WHERE worker_id = "
+                        + worker.getId() + " AND date >= '"
+                        + Common.renderSQLDate((Calendar) dates.get("from"))
+                        + "' AND date <= '" + Common.renderSQLDate((Calendar) dates.get("to"))
+                        + "' AND type IN (" + WorkerRecord.SAVING + ","
+                        + WorkerRecord.WITHDRAW + ")) AS current ";
 
                 rs = Database.instance().execute(query);
                 rs.next();
 
-                saving.add(new ReportSaving(rs.getDouble("previous"), rs.getDouble("current"), worker));
+                saving.add(new ReportSaving(rs.getDouble("previous"),
+                        rs.getDouble("current"), worker));
                 rs.close();
-            } catch(SQLException ex) {
+            } catch (SQLException ex) {
                 System.err.println(ex.getMessage());
             }
         }
@@ -6978,8 +7241,8 @@ public class Main extends javax.swing.JFrame {
         return saving;
 
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton EditSimpanan;
     private javax.swing.ButtonGroup btnGroupMonthlyReport;
     private javax.swing.ButtonGroup btnGroupSavingReport;
     private javax.swing.ButtonGroup btnGroupWorkerReportType;
@@ -7065,6 +7328,7 @@ public class Main extends javax.swing.JFrame {
     public javax.swing.JCheckBox chkMonthlyReportWages1;
     public javax.swing.JCheckBox chkMonthlyReportWeight;
     public javax.swing.JCheckBox chkMonthlyReportWeight1;
+    private javax.swing.JButton editPinjaman;
     private javax.swing.ButtonGroup groupTransactionType;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -7123,6 +7387,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -7256,6 +7521,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField txtTransactionWages;
     private javax.swing.JTextField txtTransactionWagesTax;
     private javax.swing.JTextField txtTransactionWeight;
+    private javax.swing.JButton ubahTransaksi;
     // End of variables declaration//GEN-END:variables
-
 }

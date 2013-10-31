@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import payroll.Application;
-import payroll.Main;
+//import payroll.Main;
 import payroll.libraries.Common;
 import payroll.libraries.Database;
 
@@ -194,4 +194,19 @@ public class Worker {
 
         return workers;
     }
+    
+    public static String getCode(String id) {
+        String query = "SELECT code FROM worker WHERE worker_id = " + id;
+        ResultSet rs = Database.instance().execute(query);
+        String code = null;
+        try {
+            while (rs.next()) {        
+                code = rs.getString("code");
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }                
+        return code;
+    }
+    
 }
