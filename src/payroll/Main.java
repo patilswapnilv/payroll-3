@@ -132,12 +132,17 @@ public class Main extends javax.swing.JFrame {
         workers.clear();
         workers_hash.clear();
 
-        String query = "SELECT * FROM worker WHERE is_active = 1 ORDER BY code";
+        String query = new StringBuilder().append(
+                "SELECT * FROM worker WHERE is_active = 1 ORDER BY code").toString();
         ResultSet rs = Database.instance().execute(query);
 
         try {
             while (rs.next()) {
-                Worker worker = new Worker(rs.getInt("worker_id"), rs.getString("code"), rs.getString("name"), Common.convertStringToDate(rs.getString("start_date")), Common.convertStringToDate(rs.getString("end_date")), rs.getBoolean("is_active"));
+                Worker worker = new Worker(rs.getInt("worker_id"),
+                        rs.getString("code"), rs.getString("name"),
+                        Common.convertStringToDate(rs.getString("start_date")),
+                        Common.convertStringToDate(rs.getString("end_date")),
+                        rs.getBoolean("is_active"));
                 workers.add(worker);
                 workers_hash.put(worker.getId(), worker);
             }
@@ -156,14 +161,17 @@ public class Main extends javax.swing.JFrame {
         cbxLoanWorkers.addItem(new String());
 
         for (Worker worker : workers) {
-            cbxPaymentWorkers.addItem(new String(worker.getCode() + " - " + worker.getName()));
-            cbxReportWorkers.addItem(new String(worker.getCode() + " - " + worker.getName()));
-            cbxSavingWorkers.addItem(new String(worker.getCode() + " - " + worker.getName()));
-            cbxLoanWorkers.addItem(new String(worker.getCode() + " - " + worker.getName()));
+            cbxPaymentWorkers.addItem(new StringBuilder().append(
+                    worker.getCode() + " - " + worker.getName()).toString());
+            cbxReportWorkers.addItem(new StringBuilder().append(worker.getCode()
+                    + " - " + worker.getName()).toString());
+            cbxSavingWorkers.addItem(new StringBuilder().append(worker.getCode()
+                    + " - " + worker.getName()).toString());
+            cbxLoanWorkers.addItem(new StringBuilder().append(worker.getCode()
+                    + " - " + worker.getName()).toString());
         }
 
         this.load_workers_all();
-
     }
 
     public void load_customers() {
@@ -175,7 +183,9 @@ public class Main extends javax.swing.JFrame {
 
         try {
             while (rs.next()) {
-                Customer customer = new Customer(rs.getInt("customer_id"), rs.getString("code"), rs.getString("name"), rs.getBoolean("is_active"));
+                Customer customer = new Customer(rs.getInt("customer_id"),
+                        rs.getString("code"), rs.getString("name"),
+                        rs.getBoolean("is_active"));
                 customers.add(customer);
                 customers_hash.put(customer.getId(), customer);
             }
@@ -192,9 +202,12 @@ public class Main extends javax.swing.JFrame {
         cbxTransactionListClients1.addItem(new String());
 
         for (Customer customer : customers) {
-            cbxTransactionClients.addItem(new String(customer.getCode() + " - " + customer.getName()));
-            cbxTransactionListClients.addItem(new String(customer.getCode() + " - " + customer.getName()));
-            cbxTransactionListClients1.addItem(new String(customer.getCode() + " - " + customer.getName()));
+            cbxTransactionClients.addItem(new String(customer.getCode()
+                    + " - " + customer.getName()));
+            cbxTransactionListClients.addItem(new String(customer.getCode()
+                    + " - " + customer.getName()));
+            cbxTransactionListClients1.addItem(new String(customer.getCode()
+                    + " - " + customer.getName()));
         }
 
         this.load_customers_all();
@@ -207,7 +220,9 @@ public class Main extends javax.swing.JFrame {
 
         try {
             while (rs.next()) {
-                customers_all.add(new Customer(rs.getInt("customer_id"), rs.getString("code"), rs.getString("name"), rs.getBoolean("is_active")));
+                customers_all.add(new Customer(rs.getInt("customer_id"),
+                        rs.getString("code"), rs.getString("name"),
+                        rs.getBoolean("is_active")));
             }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -896,13 +911,15 @@ public class Main extends javax.swing.JFrame {
             }
         });
         tblTransactionInvolvedWorkers.setFocusable(false);
-        tblTransactionInvolvedWorkers.setTableHeader(null);
+        tblTransactionInvolvedWorkers.setRequestFocusEnabled(false);
         jScrollPane3.setViewportView(tblTransactionInvolvedWorkers);
-        tblTransactionInvolvedWorkers.getColumnModel().getColumn(0).setResizable(false);
-        tblTransactionInvolvedWorkers.getColumnModel().getColumn(0).setPreferredWidth(20);
-        tblTransactionInvolvedWorkers.getColumnModel().getColumn(1).setResizable(false);
-        tblTransactionInvolvedWorkers.getColumnModel().getColumn(1).setPreferredWidth(50);
-        tblTransactionInvolvedWorkers.getColumnModel().getColumn(2).setResizable(false);
+        if (tblTransactionInvolvedWorkers.getColumnModel().getColumnCount() > 0) {
+            tblTransactionInvolvedWorkers.getColumnModel().getColumn(0).setResizable(false);
+            tblTransactionInvolvedWorkers.getColumnModel().getColumn(0).setPreferredWidth(20);
+            tblTransactionInvolvedWorkers.getColumnModel().getColumn(1).setResizable(false);
+            tblTransactionInvolvedWorkers.getColumnModel().getColumn(1).setPreferredWidth(50);
+            tblTransactionInvolvedWorkers.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         jLabel29.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel29.setText("Pekerja Terlibat");
@@ -1327,9 +1344,11 @@ public class Main extends javax.swing.JFrame {
             }
         });
         jScrollPane6.setViewportView(tblTransactionList);
-        tblTransactionList.getColumnModel().getColumn(0).setResizable(false);
-        tblTransactionList.getColumnModel().getColumn(0).setPreferredWidth(40);
-        tblTransactionList.getColumnModel().getColumn(1).setResizable(false);
+        if (tblTransactionList.getColumnModel().getColumnCount() > 0) {
+            tblTransactionList.getColumnModel().getColumn(0).setResizable(false);
+            tblTransactionList.getColumnModel().getColumn(0).setPreferredWidth(40);
+            tblTransactionList.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
         jPanel28.setLayout(jPanel28Layout);
@@ -1497,9 +1516,11 @@ public class Main extends javax.swing.JFrame {
             }
         });
         jScrollPane7.setViewportView(tblTransactionList1);
-        tblTransactionList1.getColumnModel().getColumn(0).setResizable(false);
-        tblTransactionList1.getColumnModel().getColumn(0).setPreferredWidth(40);
-        tblTransactionList1.getColumnModel().getColumn(1).setResizable(false);
+        if (tblTransactionList1.getColumnModel().getColumnCount() > 0) {
+            tblTransactionList1.getColumnModel().getColumn(0).setResizable(false);
+            tblTransactionList1.getColumnModel().getColumn(0).setPreferredWidth(40);
+            tblTransactionList1.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel32Layout = new javax.swing.GroupLayout(jPanel32);
         jPanel32.setLayout(jPanel32Layout);
@@ -1640,8 +1661,10 @@ public class Main extends javax.swing.JFrame {
         });
         tblSaving.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         jScrollPane1.setViewportView(tblSaving);
-        tblSaving.getColumnModel().getColumn(4).setHeaderValue("Bayaran -");
-        tblSaving.getColumnModel().getColumn(5).setHeaderValue("Baki");
+        if (tblSaving.getColumnModel().getColumnCount() > 0) {
+            tblSaving.getColumnModel().getColumn(4).setHeaderValue("Bayaran -");
+            tblSaving.getColumnModel().getColumn(5).setHeaderValue("Baki");
+        }
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -1998,8 +2021,10 @@ public class Main extends javax.swing.JFrame {
         });
         tblPay.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         jScrollPane2.setViewportView(tblPay);
-        tblPay.getColumnModel().getColumn(0).setResizable(false);
-        tblPay.getColumnModel().getColumn(0).setPreferredWidth(25);
+        if (tblPay.getColumnModel().getColumnCount() > 0) {
+            tblPay.getColumnModel().getColumn(0).setResizable(false);
+            tblPay.getColumnModel().getColumn(0).setPreferredWidth(25);
+        }
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -2408,11 +2433,13 @@ public class Main extends javax.swing.JFrame {
         tblSavingReportWorkers.setFocusable(false);
         tblSavingReportWorkers.setTableHeader(null);
         jScrollPane10.setViewportView(tblSavingReportWorkers);
-        tblSavingReportWorkers.getColumnModel().getColumn(0).setResizable(false);
-        tblSavingReportWorkers.getColumnModel().getColumn(0).setPreferredWidth(20);
-        tblSavingReportWorkers.getColumnModel().getColumn(1).setResizable(false);
-        tblSavingReportWorkers.getColumnModel().getColumn(1).setPreferredWidth(50);
-        tblSavingReportWorkers.getColumnModel().getColumn(2).setResizable(false);
+        if (tblSavingReportWorkers.getColumnModel().getColumnCount() > 0) {
+            tblSavingReportWorkers.getColumnModel().getColumn(0).setResizable(false);
+            tblSavingReportWorkers.getColumnModel().getColumn(0).setPreferredWidth(20);
+            tblSavingReportWorkers.getColumnModel().getColumn(1).setResizable(false);
+            tblSavingReportWorkers.getColumnModel().getColumn(1).setPreferredWidth(50);
+            tblSavingReportWorkers.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         cboxMonthlyReportAllWorkers2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         cboxMonthlyReportAllWorkers2.setText("Semua Pekerja");
@@ -2828,11 +2855,13 @@ public class Main extends javax.swing.JFrame {
         tblMonthlyReportWorkers.setFocusable(false);
         tblMonthlyReportWorkers.setTableHeader(null);
         jScrollPane5.setViewportView(tblMonthlyReportWorkers);
-        tblMonthlyReportWorkers.getColumnModel().getColumn(0).setResizable(false);
-        tblMonthlyReportWorkers.getColumnModel().getColumn(0).setPreferredWidth(20);
-        tblMonthlyReportWorkers.getColumnModel().getColumn(1).setResizable(false);
-        tblMonthlyReportWorkers.getColumnModel().getColumn(1).setPreferredWidth(50);
-        tblMonthlyReportWorkers.getColumnModel().getColumn(2).setResizable(false);
+        if (tblMonthlyReportWorkers.getColumnModel().getColumnCount() > 0) {
+            tblMonthlyReportWorkers.getColumnModel().getColumn(0).setResizable(false);
+            tblMonthlyReportWorkers.getColumnModel().getColumn(0).setPreferredWidth(20);
+            tblMonthlyReportWorkers.getColumnModel().getColumn(1).setResizable(false);
+            tblMonthlyReportWorkers.getColumnModel().getColumn(1).setPreferredWidth(50);
+            tblMonthlyReportWorkers.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         cboxMonthlyReportAllWorkers.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         cboxMonthlyReportAllWorkers.setText("Semua Pekerja");
@@ -3191,11 +3220,13 @@ public class Main extends javax.swing.JFrame {
         tblMonthlyReportWorkers1.setFocusable(false);
         tblMonthlyReportWorkers1.setTableHeader(null);
         jScrollPane8.setViewportView(tblMonthlyReportWorkers1);
-        tblMonthlyReportWorkers1.getColumnModel().getColumn(0).setResizable(false);
-        tblMonthlyReportWorkers1.getColumnModel().getColumn(0).setPreferredWidth(20);
-        tblMonthlyReportWorkers1.getColumnModel().getColumn(1).setResizable(false);
-        tblMonthlyReportWorkers1.getColumnModel().getColumn(1).setPreferredWidth(50);
-        tblMonthlyReportWorkers1.getColumnModel().getColumn(2).setResizable(false);
+        if (tblMonthlyReportWorkers1.getColumnModel().getColumnCount() > 0) {
+            tblMonthlyReportWorkers1.getColumnModel().getColumn(0).setResizable(false);
+            tblMonthlyReportWorkers1.getColumnModel().getColumn(0).setPreferredWidth(20);
+            tblMonthlyReportWorkers1.getColumnModel().getColumn(1).setResizable(false);
+            tblMonthlyReportWorkers1.getColumnModel().getColumn(1).setPreferredWidth(50);
+            tblMonthlyReportWorkers1.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         cboxMonthlyReportAllWorkers1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         cboxMonthlyReportAllWorkers1.setText("Semua Pekerja");
@@ -3751,11 +3782,14 @@ public class Main extends javax.swing.JFrame {
 
         String filename = file.getPath();
         if (!filename.endsWith(".xls")) {
-            filename += ".xls";
+            filename = new StringBuilder().append(filename + ".xls").toString();
         }
 
         if (new File(filename).exists()) {
-            if (JOptionPane.showConfirmDialog(null, "Overwrite the existing file?", "", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) != JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null,
+                    "Overwrite the existing file?", "",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE) != JOptionPane.YES_OPTION) {
                 return;
             }
         }
@@ -3952,7 +3986,8 @@ public class Main extends javax.swing.JFrame {
                     cell.setCellValue(Common.renderDisplayDate(salary.getDate()));
                 }
 
-                sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, index, columns.size() - 1));
+                sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex,
+                        index, columns.size() - 1));
 
                 cell = row.createCell(index);
                 cell.setCellValue("Bayaran Gaji");
@@ -3960,9 +3995,11 @@ public class Main extends javax.swing.JFrame {
                 index = columns.size();
 
                 for (int i = 0; i < workerCount; i++) {
-                    double salaryValue = salary.getWorkerSalary(selected.get(i).getId());
+                    double salaryValue = salary.getWorkerSalary(
+                            selected.get(i).getId());
                     cell = row.createCell(index++);
-                    sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, index - 1, index + 1));
+                    sheet.addMergedRegion(new CellRangeAddress(rowIndex,
+                            rowIndex, index - 1, index + 1));
                     cell.setCellValue(Common.currency(Math.abs(salaryValue)));
                     calculations.get(i).setPayment(salaryValue);
 
@@ -3986,7 +4023,8 @@ public class Main extends javax.swing.JFrame {
             for (int i = 0; i < workerCount; i++) {
                 ReportCalculation calculation = calculations.get(i);
                 Cell cell = salarySummaryRow.createCell(index++);
-                sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, index - 1, index + 1));
+                sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex,
+                        index - 1, index + 1));
                 cell.setCellValue(Common.currency(calculation.getTotalBalance()));
 
                 index += 2;
@@ -4000,24 +4038,30 @@ public class Main extends javax.swing.JFrame {
 
             sheet.createRow(rowIndex++).createCell(0).setCellValue("Simpanan Tetap");
             Row previousBalanceRow = sheet.createRow(rowIndex);
-            sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0, columns.size() - 1));
+            sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0,
+                    columns.size() - 1));
             previousBalanceRow.createCell(0).setCellValue("Baki Bulan Lalu");
 
             Row currentBalanceRow = sheet.createRow(rowIndex + 1);
-            sheet.addMergedRegion(new CellRangeAddress(rowIndex + 1, rowIndex + 1, 0, columns.size() - 1));
+            sheet.addMergedRegion(new CellRangeAddress(rowIndex + 1,
+                    rowIndex + 1, 0, columns.size() - 1));
             currentBalanceRow.createCell(0).setCellValue("Bulan Ini");
 
             Row balanceRow = sheet.createRow(rowIndex + 2);
-            sheet.addMergedRegion(new CellRangeAddress(rowIndex + 2, rowIndex + 2, 0, columns.size() - 1));
+            sheet.addMergedRegion(new CellRangeAddress(rowIndex + 2,
+                    rowIndex + 2, 0, columns.size() - 1));
             balanceRow.createCell(0).setCellValue("Jumlah Baki");
 
             ArrayList<ReportSaving> savings = this.getReportSavings(selected);
 
             index = columns.size();
             for (ReportSaving saving : savings) {
-                sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, index, index + 2));
-                sheet.addMergedRegion(new CellRangeAddress(rowIndex + 1, rowIndex + 1, index, index + 2));
-                sheet.addMergedRegion(new CellRangeAddress(rowIndex + 2, rowIndex + 2, index, index + 2));
+                sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex,
+                        index, index + 2));
+                sheet.addMergedRegion(new CellRangeAddress(rowIndex + 1,
+                        rowIndex + 1, index, index + 2));
+                sheet.addMergedRegion(new CellRangeAddress(rowIndex + 2,
+                        rowIndex + 2, index, index + 2));
                 previousBalanceRow.createCell(index).setCellValue(saving.getPrevious());
                 currentBalanceRow.createCell(index).setCellValue(saving.getCurrent());
                 balanceRow.createCell(index).setCellValue(saving.getBalance());
@@ -4026,16 +4070,19 @@ public class Main extends javax.swing.JFrame {
             }
         }
 
-
-
         FileOutputStream out = null;
         try {
             out = new FileOutputStream(filename);
             workbook.write(out);
             out.close();
-            JOptionPane.showMessageDialog(null, "Report generated to " + filename, "", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, new StringBuilder().append(
+                    "Report generated to " + filename).toString(), "",
+                    JOptionPane.INFORMATION_MESSAGE);
         } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "The process cannot access the file because it is being used by another process", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,
+                    "The process cannot access the file because it is being "
+                    + "used by another process", "Error",
+                    JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -4043,7 +4090,8 @@ public class Main extends javax.swing.JFrame {
             try {
                 out.close();
             } catch (IOException ex) {
-                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null,
+                        ex);
             }
         }
 
@@ -4067,122 +4115,163 @@ public class Main extends javax.swing.JFrame {
         String saving_content = "";
 
         // <editor-fold defaultstate="collapsed" desc="render table header">
-        header += "<thead><tr valign=\"top\">";
+        header = new StringBuilder().append(header
+                + "<thead><tr valign=\"top\">").toString();
         String rowspan = selected.size() > 0 ? " rowspan=\"2\"" : "";
         for (String column : columns) {
-            header += "<td" + rowspan + ">" + column + "</td>";
+            header = new StringBuilder().append(header + "<td" + rowspan + ">"
+                    + column + "</td>").toString();
         }
 
         if (selected.size() > 0) {
             for (Worker worker : selected) {
-                header += "<td colspan=\"3\">" + worker.getCode() + " " + worker.getName() + "</td>";
+                header = new StringBuilder().append(header
+                        + "<td colspan=\"3\">" + worker.getCode() + " "
+                        + worker.getName() + "</td>").toString();
             }
-            header += "</tr><tr>" + StringUtils.repeat("<td>Gaji</td><td>Pinjaman</td><td>Baki</td>", selected.size());
+            header = new StringBuilder().append(header + "</tr><tr>"
+                    + StringUtils.repeat("<td>Gaji</td><td>Pinjaman</td><td>Baki</td>",
+                            selected.size())).toString();
         }
-        header += "</tr>";
-        header += "</thead>";
+        header = new StringBuilder().append(header + "</tr></thead>").toString();
         // </editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="prepare css">
-        css += "table { border-collapse: collapse; font-family: calibri; font-size: 12px; } ";
-        css += "table tr td.first { border-left: 1px solid #333; } ";
-        css += "table tr td.last { border-right: 1px solid #333; } ";
-        css += "table thead tr, table thead td, table tr.summary, table tr.summary td { border: 1px solid #333; } ";
-        css += "table thead tr td { padding: 5px 20px 5px 5px; } ";
-        css += "table tr td.worker_transaction { border-left: 1px solid #333; } ";
-        css += "table tr.salary td { border: 1px solid #333 } ";
-        css += "table tr.summary td.blank { border-left: none; border-bottom: none; } ";
-        css += "table tr.saving_summary, table tr.saving_summary td { border : 1px solid #333; } ";
-        css += "h3 { font-size: 14px; }";
-        css += "table tr.content-body td { text-align: right;}";
+        css = new StringBuilder().append(css
+                + "table { border-collapse: collapse; font-family: calibri; font-size: 12px; } "
+                + "table tr td.first { border-left: 1px solid #333; } "
+                + "table tr td.last { border-right: 1px solid #333; } "
+                + "table thead tr, table thead td, table tr.summary, table tr.summary td { border: 1px solid #333; } "
+                + "table thead tr td { padding: 5px 20px 5px 5px; } "
+                + "table tr td.worker_transaction { border-left: 1px solid #333; } "
+                + "table tr.salary td { border: 1px solid #333 } "
+                + "table tr.summary td.blank { border-left: none; border-bottom: none; } "
+                + "table tr.saving_summary, table tr.saving_summary td { border : 1px solid #333; } "
+                + "h3 { font-size: 14px; }"
+                + "table tr.content-body td { text-align: right;}").toString();
         // </editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="render transaction content">
         for (Transaction transaction : transactions) {
             int first = 0;
-            content += "<tr class=\"content-body\">";
+            content = new StringBuilder().append(content
+                    + "<tr class=\"content-body\">").toString();
             if (chkMonthlyReportDate.isSelected()) {
-                content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + " style=\"text-align: left; \">"
-                        + Common.renderDisplayDate(transaction.getDate()) + "</td>";
+                content = new StringBuilder().append(content + "<td"
+                        + (first++ == 0 ? " class=\"first\"" : "")
+                        + " style=\"text-align: left; \">"
+                        + Common.renderDisplayDate(transaction.getDate())
+                        + "</td>").toString();
             }
 
             if (chkMonthlyReportClientName.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + " style=\"text-align: left; \">"
-                            + transaction.getCustomer().getName() + "</td>";
+                    content = new StringBuilder().append(content + "<td"
+                            + (first++ == 0 ? " class=\"first\"" : "")
+                            + " style=\"text-align: left; \">"
+                            + transaction.getCustomer().getName()
+                            + "</td>").toString();
 
                 } else {
-                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "")
-                            + " style=\"text-align: left; \">Pinjaman</td>";
+                    content = new StringBuilder().append(content + "<td"
+                            + (first++ == 0 ? " class=\"first\"" : "")
+                            + " style=\"text-align: left; \">Pinjaman</td>").toString();
 
                 }
             }
             if (chkMonthlyReportDescription.isSelected()) {
-                content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + " style=\"text-align: left; \">"
-                        + transaction.getDescription() + "</td>";
+                content = new StringBuilder().append(content + "<td"
+                        + (first++ == 0 ? " class=\"first\"" : "")
+                        + " style=\"text-align: left; \">"
+                        + transaction.getDescription() + "</td>").toString();
 
             }
             if (chkMonthlyReportWeight.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + ">"
-                            + ((int) transaction.getWeight()) + "</td>";
+                    content = new StringBuilder().append(content + "<td"
+                            + (first++ == 0 ? " class=\"first\"" : "") + ">"
+                            + ((int) transaction.getWeight()) + "</td>").toString();
                 } else {
-                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + "></td>";
+                    content = new StringBuilder().append(content + "<td"
+                            + (first++ == 0 ? " class=\"first\"" : "")
+                            + "></td>").toString();
                 }
             }
 
             if (chkMonthlyReportPricePerTon.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + ">"
-                            + Common.currency(transaction.getPricePerTon()) + "</td>";
+                    content = new StringBuilder().append(content + "<td"
+                            + (first++ == 0 ? " class=\"first\"" : "") + ">"
+                            + Common.currency(transaction.getPricePerTon())
+                            + "</td>").toString();
                 } else {
-                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + "></td>";
+                    content = new StringBuilder().append(content + "<td"
+                            + (first++ == 0 ? " class=\"first\"" : "")
+                            + "></td>").toString();
                 }
             }
 
             if (chkMonthlyReportTotalReceived.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + ">"
-                            + Common.currency(transaction.getTotal()) + "</td>";
+                    content = new StringBuilder().append(content + "<td"
+                            + (first++ == 0 ? " class=\"first\"" : "") + ">"
+                            + Common.currency(transaction.getTotal())
+                            + "</td>").toString();
                 } else {
-                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + "></td>";
+                    content = new StringBuilder().append(content + "<td"
+                            + (first++ == 0 ? " class=\"first\"" : "")
+                            + "></td>").toString();
                 }
             }
 
             if (chkMonthlyReportWages.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + ">"
-                            + Common.currency(transaction.getWages()) + "</td>";
+                    content = new StringBuilder().append(content + "<td"
+                            + (first++ == 0 ? " class=\"first\"" : "") + ">"
+                            + Common.currency(transaction.getWages())
+                            + "</td>").toString();
                 } else {
-                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + "></td>";
-
+                    content = new StringBuilder().append(content + "<td"
+                            + (first++ == 0 ? " class=\"first\"" : "")
+                            + "></td>").toString();
                 }
             }
 
             if (chkMonthlyReportSalary.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + ">"
-                            + Common.currency(transaction.getTotalSalary()) + "</td>";
+                    content = new StringBuilder().append(content + "<td"
+                            + (first++ == 0 ? " class=\"first\"" : "") + ">"
+                            + Common.currency(transaction.getTotalSalary())
+                            + "</td>").toString();
                 } else {
-                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + "></td>";
+                    content = new StringBuilder().append(content + "<td"
+                            + (first++ == 0 ? " class=\"first\"" : "")
+                            + "></td>").toString();
                 }
             }
 
             if (chkMonthlyReportBalance.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + ">"
-                            + Common.currency(transaction.getBalance()) + "</td>";
+                    content = new StringBuilder().append(content + "<td"
+                            + (first++ == 0 ? " class=\"first\"" : "") + ">"
+                            + Common.currency(transaction.getBalance())
+                            + "</td>").toString();
                 } else {
-                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + "></td>";
+                    content = new StringBuilder().append(content + "<td"
+                            + (first++ == 0 ? " class=\"first\"" : "")
+                            + "></td>").toString();
                 }
             }
 
             if (chkMonthlyReportKiraanAsing.isSelected()) {
                 if (transaction.getType() == Transaction.GENERAL) {
-                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + ">"
-                            + transaction.getKiraanAsing() + "</td>";
+                    content = new StringBuilder().append(content + "<td"
+                            + (first++ == 0 ? " class=\"first\"" : "") + ">"
+                            + transaction.getKiraanAsing() + "</td>").toString();
                 } else {
-                    content += "<td" + (first++ == 0 ? " class=\"first\"" : "") + "></td>";
+                    content = new StringBuilder().append(content + "<td"
+                            + (first++ == 0 ? " class=\"first\"" : "")
+                            + "></td>").toString();
                 }
             }
 
@@ -4194,25 +4283,35 @@ public class Main extends javax.swing.JFrame {
                 if (Common.inArray(workerIds, worker.getId())) {
                     if (transaction.getType() == Transaction.GENERAL) {
                         calculations.get(index).setSalary(transaction.getWagePerWorker());
-                        content += "<td class=\"worker_transaction\">"
-                                + Common.currency(transaction.getWagePerWorker()) + "</td>";
-                        content += "<td class=\"worker_savings\">"
-                                + Common.currency(transaction.getLoanAmount()) + "</td>";
-                        content += "<td" + (index == selected.size() - 1 ? " class=\"last\"" : "") + ">"
-                                + Common.currency(calculations.get(index).getBalance()) + "</td>";
+                        content = new StringBuilder().append(content
+                                + "<td class=\"worker_transaction\">"
+                                + Common.currency(transaction.getWagePerWorker())
+                                + "</td>" + "<td class=\"worker_savings\">"
+                                + Common.currency(transaction.getLoanAmount())
+                                + "</td><td"
+                                + (index == selected.size() - 1 ? " class=\"last\"" : "")
+                                + ">" + Common.currency(calculations.get(index).getBalance())
+                                + "</td>").toString();
                     } else {
                         calculations.get(index).setLoan(transaction.getLoanAmount());
-                        content += "<td class=\"worker_transaction\">0.00</td>";
-                        content += "<td>" + Common.currency(transaction.getLoanAmount()) + "</td>";
-                        content += "<td" + (index == selected.size() - 1 ? " class=\"last\"" : "") + ">" + Common.currency(calculations.get(index).getBalance()) + "</td>";
+                        content = new StringBuilder().append(content
+                                + "<td class=\"worker_transaction\">0.00</td>"
+                                + "<td>" + Common.currency(transaction.getLoanAmount())
+                                + "</td><td"
+                                + (index == selected.size() - 1 ? " class=\"last\"" : "")
+                                + ">" + Common.currency(calculations.get(index).getBalance())
+                                + "</td>").toString();
                     }
                 } else {
-                    content += "<td class=\"worker_transaction\"></td><td></td><td" + (index == selected.size() - 1 ? " class=\"last\"" : "") + "></td>";
+                    content = new StringBuilder().append(content
+                            + "<td class=\"worker_transaction\"></td><td></td><td"
+                            + (index == selected.size() - 1 ? " class=\"last\"" : "")
+                            + "></td>").toString();
                 }
 
                 index++;
             }
-            content += "</tr>";
+            content = new StringBuilder().append(content + "</tr>").toString();
         }
         // </editor-fold>
 
@@ -4234,7 +4333,6 @@ public class Main extends javax.swing.JFrame {
             int size = columns.size();
             for (ReportSalary rs : salaries) {
                 content += "<tr class=\"salary\">";
-
 
                 size = columns.size();
                 if (chkMonthlyReportDate.isSelected()) {
@@ -4296,18 +4394,19 @@ public class Main extends javax.swing.JFrame {
         }
         // </editor-fold>
 
-        content += "</tbody>";
+        content = new StringBuilder().append(content + "</tbody>").toString();
 
-        table += header + content;
-        table += "</table>";
+        table = new StringBuilder().append(table + header + content + "</table>").toString();
+//        table += "</table>";
 
-        css += "</style>";
-        html += "<head>" + css + "</head>";
-        html += "<body>";
-        html += "<h3>Laporan Bulanan (" + Common.renderDisplayDate((Calendar) dates.get("from")) + " - " + Common.renderDisplayDate((Calendar) dates.get("to")) + ")</h3>";
-        html += table;
-        html += "</body>";
-        html += "</html>";
+        css = new StringBuilder().append(css).append("</style>").toString();
+        html = new StringBuilder().append(html + "<head>" + css + "</head>" + "<body>").toString();
+//        html += "<body>";
+        html = new StringBuilder().append(html + "<h3>Laporan Bulanan ("
+                + Common.renderDisplayDate((Calendar) dates.get("from")) + " - "
+                + Common.renderDisplayDate((Calendar) dates.get("to"))
+                + ")</h3>" + table + "</body></html>").toString();
+        html += table + "</body>" + "</html>";
 
         ReportFrame form = new ReportFrame();
         UserAgentContext context = new SimpleUserAgentContext();
@@ -4566,8 +4665,6 @@ public class Main extends javax.swing.JFrame {
             savingTableModel.removeRow(0);
         }
 
-
-
         if (cbxSavingWorkers.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Sila pilih pekerja.", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
             return;
@@ -4641,8 +4738,6 @@ public class Main extends javax.swing.JFrame {
         int monthTo = txtReportWorkerMonthTo.getMonth() + 1;
         int yearFrom = txtReportWorkerYear.getYear();
         int yearTo = txtReportWorkerYearTo.getYear();
-
-
 
         if (cbxReportWorkers.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Sila Pilih Pekerja", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
@@ -4821,7 +4916,6 @@ public class Main extends javax.swing.JFrame {
             cell.setCellValue(Common.currency(totalSavingBalance));
         }
 
-
         FileOutputStream out = null;
 
         try {
@@ -4888,12 +4982,34 @@ public class Main extends javax.swing.JFrame {
             double salary = 0.0, loan = 0.0, saving = 0.0, withdraw = 0.0, payment = 0.0;
 
             try {
-                String query = "SELECT ";
-                query += "(SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = " + selected.getId() + " AND strftime(\"%m\", date) = \"" + (month > 9 ? month : "0" + month) + "\" AND strftime(\"%Y\", date) = \"" + year + "\" AND type = " + WorkerRecord.INCOME + ") AS salary, ";
-                query += "(SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = " + selected.getId() + " AND strftime(\"%m\", date) = \"" + (month > 9 ? month : "0" + month) + "\" AND strftime(\"%Y\", date) = \"" + year + "\" AND type = " + WorkerRecord.LOAN + ") AS loan, ";
-                query += "(SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = " + selected.getId() + " AND strftime(\"%m\", date) = \"" + (month > 9 ? month : "0" + month) + "\" AND strftime(\"%Y\", date) = \"" + year + "\" AND type = " + WorkerRecord.SAVING + ") AS saving, ";
-                query += "(SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = " + selected.getId() + " AND strftime(\"%m\", date) = \"" + (month > 9 ? month : "0" + month) + "\" AND strftime(\"%Y\", date) = \"" + year + "\" AND type = " + WorkerRecord.PAYMENT + ") AS payment, ";
-                query += "(SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = " + selected.getId() + " AND strftime(\"%m\", date) = \"" + (month > 9 ? month : "0" + month) + "\" AND strftime(\"%Y\", date) = \"" + year + "\" AND type = " + WorkerRecord.WITHDRAW + ") AS withdraw";
+                String query = new StringBuilder().append("SELECT "
+                        + "(SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = "
+                        + selected.getId() + " AND strftime(\"%m\", date) = \""
+                        + (month > 9 ? month : "0" + month)
+                        + "\" AND strftime(\"%Y\", date) = \"" + year
+                        + "\" AND type = " + WorkerRecord.INCOME + ") AS salary, "
+                        + "(SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = "
+                        + selected.getId() + " AND strftime(\"%m\", date) = \""
+                        + (month > 9 ? month : "0" + month)
+                        + "\" AND strftime(\"%Y\", date) = \"" + year
+                        + "\" AND type = " + WorkerRecord.LOAN + ") AS loan, "
+                        + "(SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = "
+                        + selected.getId() + " AND strftime(\"%m\", date) = \""
+                        + (month > 9 ? month : "0" + month)
+                        + "\" AND strftime(\"%Y\", date) = \"" + year
+                        + "\" AND type = " + WorkerRecord.SAVING + ") AS saving, "
+                        + "(SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = "
+                        + selected.getId() + " AND strftime(\"%m\", date) = \""
+                        + (month > 9 ? month : "0" + month)
+                        + "\" AND strftime(\"%Y\", date) = \"" + year
+                        + "\" AND type = " + WorkerRecord.PAYMENT + ") AS payment, "
+                        + "(SELECT SUM(amount) AS amount FROM workerRecord WHERE worker_id = "
+                        + selected.getId() + " AND strftime(\"%m\", date) = \""
+                        + (month > 9 ? month : "0" + month)
+                        + "\" AND strftime(\"%Y\", date) = \"" + year
+                        + "\" AND type = " + WorkerRecord.WITHDRAW
+                        + ") AS withdraw").toString();
+
                 // salary
                 ResultSet rs = Database.instance().execute(query);
                 rs.next();
@@ -4910,7 +5026,8 @@ public class Main extends javax.swing.JFrame {
                 System.err.println(ex.getMessage());
             }
 
-            reports.add(new WorkerReport(month, year, salary, loan, saving, withdraw, payment));
+            reports.add(new WorkerReport(month, year, salary, loan, saving,
+                    withdraw, payment));
 
             month++;
 
@@ -4925,11 +5042,12 @@ public class Main extends javax.swing.JFrame {
 
     private void btnPasswordChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasswordChangeActionPerformed
         String password = "";
-        char[] passwords = txtPassword.getPassword(), confirms = txtPasswordConfirm.getPassword();
-
+        char[] passwords = txtPassword.getPassword(),
+                confirms = txtPasswordConfirm.getPassword();
 
         if (!Arrays.equals(passwords, confirms)) {
-            JOptionPane.showMessageDialog(null, "Kata Laluan tidak betul.", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Kata Laluan tidak betul.",
+                    "Kesilapan!", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -4938,7 +5056,9 @@ public class Main extends javax.swing.JFrame {
         }
 
         password = Common.md5(password.getBytes());
-        String query = "UPDATE accesses SET access_key = ? WHERE id = " + Application.id;
+        String query = new StringBuilder().append(
+                "UPDATE accesses SET access_key = ? WHERE id = "
+                + Application.id).toString();
         PreparedStatement ps = Database.instance().createPreparedStatement(query);
 
         try {
@@ -4948,11 +5068,13 @@ public class Main extends javax.swing.JFrame {
         }
 
         if (Database.instance().update(ps)) {
-            JOptionPane.showMessageDialog(null, "Kata Laluan berjaya ditukar.", "Berjaya!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Kata Laluan berjaya ditukar.",
+                    "Berjaya!", JOptionPane.INFORMATION_MESSAGE);
             txtPassword.setText("");
             txtPasswordConfirm.setText("");
         } else {
-            JOptionPane.showMessageDialog(null, "Kata Laluan tidak dapat ditukar.", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Kata Laluan tidak dapat ditukar.",
+                    "Kesilapan!", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_btnPasswordChangeActionPerformed
@@ -5000,28 +5122,35 @@ public class Main extends javax.swing.JFrame {
 
         loaded_saving_ids.clear();
 
-        Worker selected = cbxSavingWorkers.getSelectedIndex() == 0 ? null : workers.get(cbxSavingWorkers.getSelectedIndex() - 1);
+        Worker selected = cbxSavingWorkers.getSelectedIndex() == 0 ? null : workers.get(
+                cbxSavingWorkers.getSelectedIndex() - 1);
 
         if (selected == null) {
-            JOptionPane.showMessageDialog(null, "Sila pilih Pekerja.", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Sila pilih Pekerja.",
+                    "Kesilapan!", JOptionPane.ERROR_MESSAGE);
             return;
         } else if (txtSavingDateFrom.getDate() == null || txtSavingDateTo.getDate() == null) {
-            JOptionPane.showMessageDialog(null, "Sila pilih tempoh tarikh.", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Sila pilih tempoh tarikh.",
+                    "Kesilapan!", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        String query = "SELECT * FROM workerRecord WHERE type IN (5, 3) AND worker_id = " + selected.getId() + " ";
+        String query = new StringBuilder().append(
+                "SELECT * FROM workerRecord WHERE type IN (5, 3) AND worker_id = "
+                + selected.getId() + " ").toString();
 
         if (txtSavingDateFrom.getDate() != null) {
             Calendar calender = Calendar.getInstance();
             calender.setTime(txtSavingDateFrom.getDate());
-            query += "AND date >= \"" + Common.renderSQLDate(calender) + "\" ";
+            query = new StringBuilder().append(query + " AND date >= \""
+                    + Common.renderSQLDate(calender) + "\" ").toString();
         }
 
         if (txtSavingDateTo.getDate() != null) {
             Calendar calender = Calendar.getInstance();
             calender.setTime(txtSavingDateTo.getDate());
-            query += "AND date <= \"" + Common.renderSQLDate(calender) + "\" ";
+            query = new StringBuilder().append(query + " AND date <= \""
+                    + Common.renderSQLDate(calender) + "\" ").toString();
         }
 
         ResultSet results = Database.instance().execute(query);
@@ -5030,7 +5159,8 @@ public class Main extends javax.swing.JFrame {
 
         try {
             while (results.next()) {
-                WorkerRecord record = new WorkerRecord(results.getInt("id"), results.getInt("worker_id"),
+                WorkerRecord record = new WorkerRecord(results.getInt("id"),
+                        results.getInt("worker_id"),
                         results.getInt("type"), results.getDouble("amount"),
                         results.getString("description"),
                         Common.convertStringToDate(results.getString("date")));
@@ -5055,7 +5185,8 @@ public class Main extends javax.swing.JFrame {
             System.err.println(ex.getMessage());
         }
 
-        txtSavingCurrentSaving.setText(Common.currency(this.getWorkerCurrentSaving(selected.getId())));
+        txtSavingCurrentSaving.setText(Common.currency(
+                this.getWorkerCurrentSaving(selected.getId())));
     }//GEN-LAST:event_btnSavingSearchActionPerformed
 
     private void btnPaymentSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPaymentSearchActionPerformed
@@ -5067,10 +5198,12 @@ public class Main extends javax.swing.JFrame {
             paymentTableModel.removeRow(0);
         }
 
-        Worker selected = cbxPaymentWorkers.getSelectedIndex() == 0 ? null : workers.get(cbxPaymentWorkers.getSelectedIndex() - 1);
+        Worker selected = cbxPaymentWorkers.getSelectedIndex() == 0 ? null : workers.get(
+                cbxPaymentWorkers.getSelectedIndex() - 1);
 
         if (selected == null) {
-            JOptionPane.showMessageDialog(null, "Sila pilih Pekerja", "Kesilapan!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Sila pilih Pekerja",
+                    "Kesilapan!", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -5085,20 +5218,19 @@ public class Main extends javax.swing.JFrame {
         double salary = 0.0, loan = 0.0, saving = 0.0, withdraw = 0.0, payment = 0.0;
 
         try {
-            String query = "SELECT amount, type, date FROM workerRecord WHERE worker_id = "
+            String query = new StringBuilder().append(
+                    "SELECT amount, type, date FROM workerRecord WHERE worker_id = "
                     + selected.getId() + " AND date >= \"" + yearFrom + "-"
                     + (monthFrom > 9 ? monthFrom : "0" + monthFrom)
                     + "01\" AND date <= \"" + yearTo
                     + "-" + (monthTo > 9 ? monthTo : "0" + monthTo)
                     + "-32\" AND type IN (" + WorkerRecord.INCOME + ","
                     + WorkerRecord.LOAN + "," + WorkerRecord.SAVING + ","
-                    + WorkerRecord.PAYMENT + ") ORDER BY date";
+                    + WorkerRecord.PAYMENT + ") ORDER BY date").toString();
 
-//            System.out.println(query);
             ResultSet rs = Database.instance().execute(query);
             while (rs.next()) {
                 int type = rs.getInt("type");
-
 
                 salary = 0.0;
                 saving = 0.0;
@@ -5114,7 +5246,8 @@ public class Main extends javax.swing.JFrame {
 
                 Object[] objects = new Object[]{
                     new Integer(counter++),
-                    new String(Common.renderDisplayDate(Common.convertStringToDate(rs.getString("date")))),
+                    new String(Common.renderDisplayDate(
+                    Common.convertStringToDate(rs.getString("date")))),
                     new String("Gaji"),
                     new String(Common.currency(salary)),
                     new String(Common.currency(payment)),
@@ -5122,7 +5255,6 @@ public class Main extends javax.swing.JFrame {
                 };
 
                 paymentTableModel.addRow(objects);
-
             }
 
             rs.close();
@@ -5161,18 +5293,25 @@ public class Main extends javax.swing.JFrame {
 
         Calendar register_date = Calendar.getInstance();
         register_date.setTime(worker.getRegisterDate());
-        txtProfileWorkerRegisterDay.setText("" + register_date.get(Calendar.DAY_OF_MONTH));
-        txtProfileWorkerRegisterMonth.setText("" + (register_date.get(Calendar.MONTH) + 1));
-        txtProfileWorkerRegisterYear.setText("" + register_date.get(Calendar.YEAR));
+        txtProfileWorkerRegisterDay.setText(new StringBuilder().append(""
+                + register_date.get(Calendar.DAY_OF_MONTH)).toString());
+        txtProfileWorkerRegisterMonth.setText(new StringBuilder().append(""
+                + (register_date.get(Calendar.MONTH) + 1)).toString());
+        txtProfileWorkerRegisterYear.setText(new StringBuilder().append(""
+                + register_date.get(Calendar.YEAR)).toString());
         Calendar return_date = Calendar.getInstance();
         return_date.setTime(worker.getReturnDate());
-        txtProfileWorkerReturnDay.setText("" + return_date.get(Calendar.DAY_OF_MONTH));
-        txtProfileWorkerReturnMonth.setText("" + (return_date.get(Calendar.MONTH) + 1));
-        txtProfileWorkerReturnYear.setText("" + return_date.get(Calendar.YEAR));
+        txtProfileWorkerReturnDay.setText(new StringBuilder().append(""
+                + return_date.get(Calendar.DAY_OF_MONTH)).toString());
+        txtProfileWorkerReturnMonth.setText(new StringBuilder().append(""
+                + (return_date.get(Calendar.MONTH) + 1)).toString());
+        txtProfileWorkerReturnYear.setText(new StringBuilder().append(""
+                + return_date.get(Calendar.YEAR)).toString());
         txtProfileWorkerStatus.setText(worker.getStatus() ? "Aktif" : "Tidak Aktif");
         this._current_worker_id = worker.getId();
 
-        txtProfileWorkerCurrentSaving.setText(Common.currency(this.getWorkerCurrentSaving(worker.getId())));
+        txtProfileWorkerCurrentSaving.setText(Common.currency(
+                this.getWorkerCurrentSaving(worker.getId())));
     }//GEN-LAST:event_cbxWorkersItemStateChanged
 
     private void btnSavingCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSavingCancelActionPerformed
@@ -5184,9 +5323,9 @@ public class Main extends javax.swing.JFrame {
         }
 
         if (JOptionPane.showConfirmDialog(null,
-                "Anda memastikan batalkan sebanyak "
-                + tblSaving.getSelectedRowCount()
-                + " rekod dari tabel daftar di atas?", "",
+                new StringBuilder().append("Anda memastikan batalkan sebanyak "
+                        + tblSaving.getSelectedRowCount()
+                        + " rekod dari tabel daftar di atas?").toString(), "",
                 JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
             return;
         }
@@ -5198,7 +5337,8 @@ public class Main extends javax.swing.JFrame {
 
         id = id.substring(1, id.length());
 
-        String query = "DELETE FROM workerRecord WHERE id IN (" + id + ")";
+        String query = new StringBuilder().append(
+                "DELETE FROM workerRecord WHERE id IN (" + id + ")").toString();
 
         if (Database.instance().update(query)) {
             JOptionPane.showMessageDialog(null,
@@ -5214,7 +5354,8 @@ public class Main extends javax.swing.JFrame {
 
     private void btnPayCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayCancelActionPerformed
         if (tblPay.getSelectedColumnCount() == 0) {
-            JOptionPane.showMessageDialog(null, "Sila pilih dari tabel daftar di atas",
+            JOptionPane.showMessageDialog(null,
+                    "Sila pilih dari tabel daftar di atas",
                     "Kesilapan", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -5291,8 +5432,8 @@ public class Main extends javax.swing.JFrame {
         tableModel = new DefaultTableModel(
                 new Object[][]{},
                 new String[]{
-            "", "Tarikh", "Name Pelanggan", "Keterangan", "Berat KG", "Harga Diterima Seton", "Jumlah Diterima", "Upah Kerja", "Jumlah Gaji", "Kiraan Asing", "Pekerja Terlibat", "Jumlah Pinjaman"
-        });
+                    "", "Tarikh", "Name Pelanggan", "Keterangan", "Berat KG", "Harga Diterima Seton", "Jumlah Diterima", "Upah Kerja", "Jumlah Gaji", "Kiraan Asing", "Pekerja Terlibat", "Jumlah Pinjaman"
+                });
 
         tblTransactionList.setModel(tableModel);
 
@@ -5394,7 +5535,6 @@ public class Main extends javax.swing.JFrame {
         query = "DELETE FROM transaction_workers WHERE transaction_id IN (" + id + ")";
         success = success && Database.instance().update(query);
 
-
         if (success && Database.instance().commit()) {
             JOptionPane.showMessageDialog(null, "Rekod telah dibatal dari sistem",
                     "", JOptionPane.INFORMATION_MESSAGE);
@@ -5429,8 +5569,8 @@ public class Main extends javax.swing.JFrame {
         tableModel = new DefaultTableModel(
                 new Object[][]{},
                 new String[]{
-            "", "Tarikh", "Name Pelanggan", "Keterangan", "Berat KG", "Harga Diterima Seton", "Jumlah Diterima", "Upah Kerja", "Jumlah Gaji", "Kiraan Asing", "Pekerja Terlibat", "Jumlah Pinjaman"
-        });
+                    "", "Tarikh", "Name Pelanggan", "Keterangan", "Berat KG", "Harga Diterima Seton", "Jumlah Diterima", "Upah Kerja", "Jumlah Gaji", "Kiraan Asing", "Pekerja Terlibat", "Jumlah Pinjaman"
+                });
 
         tblTransactionList1.setModel(tableModel);
 
@@ -5522,7 +5662,6 @@ public class Main extends javax.swing.JFrame {
         query = "DELETE FROM transaction_workers WHERE transaction_id IN (" + id + ")";
         success = success && Database.instance().update(query);
 
-
         if (success && Database.instance().commit()) {
             JOptionPane.showMessageDialog(null, "Rekod telah dibatal dari sistem",
                     "", JOptionPane.INFORMATION_MESSAGE);
@@ -5550,9 +5689,10 @@ public class Main extends javax.swing.JFrame {
         PrinterJob job = PrinterJob.getPrinterJob();
 
         PageFormat format = job.defaultPage();
-        format.setOrientation(PageFormat.LANDSCAPE);
+        format.setOrientation(PageFormat.PORTRAIT); // landscape
 
-        job.setPrintable(new ReportPrinter1(this, selected, transactions, calculations, savings, salaries, dates), format);
+        job.setPrintable(new ReportPrinter1(this, selected, transactions,
+                calculations, savings, salaries, dates), format);
 
         if (job.printDialog() == true) {
             try {
@@ -5581,7 +5721,10 @@ public class Main extends javax.swing.JFrame {
         }
 
         if (new File(filename).exists()) {
-            if (JOptionPane.showConfirmDialog(null, "Overwrite the existing file?", "", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) != JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null,
+                    "Overwrite the existing file?", "",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE) != JOptionPane.YES_OPTION) {
                 return;
             }
         }
@@ -5850,8 +5993,6 @@ public class Main extends javax.swing.JFrame {
             }
         }
 
-
-
         FileOutputStream out = null;
         try {
             out = new FileOutputStream(filename);
@@ -6054,7 +6195,6 @@ public class Main extends javax.swing.JFrame {
             int size = columns.size();
             for (ReportSalary rs : salaries) {
                 content += "<tr class=\"salary\">";
-
 
                 size = columns.size();
                 if (chkMonthlyReportDate.isSelected()) {
@@ -6482,8 +6622,6 @@ public class Main extends javax.swing.JFrame {
                 amount = Double.parseDouble(previous_amount.toString());
             }
 
-
-
             html += "<td class=\"currency\">" + Common.currency(amount) + "</td>";
         }
 
@@ -6545,7 +6683,6 @@ public class Main extends javax.swing.JFrame {
         }
 
         html += "</tr>";
-
 
         html += "</tbody></table></body></html>";
 
@@ -6672,7 +6809,6 @@ public class Main extends javax.swing.JFrame {
         //        if (txtTransactionWagesTax.getText().isEmpty()) {
         //            txtTransactionWagesTax.setText("0.00");
         //        }
-
         if ((txtTransactionWages.getText().isEmpty() || !Common.isDouble(txtTransactionWages.getText())) && (txtTransactionWagesTax.getText().isEmpty() || !Common.isDouble(txtTransactionWagesTax.getText()))) {
             return;
         }

@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package payroll;
 
 import java.awt.Font;
@@ -27,7 +26,7 @@ import payroll.model.WorkerReport;
 public class SavingReportPrinter implements Printable {
 
     private final int printCap = 28;
-    
+
     private int pagesNeeded = 0;
     private int itemCount = 0;
     private int currentIndex = 0;
@@ -39,12 +38,17 @@ public class SavingReportPrinter implements Printable {
     private String[] keys;
 
     private boolean printOrNot = true;
-    
+
     private FontMetrics fontMetrics;
 
     private Hashtable savings, previous, totals;
     private ArrayList<Worker> selected;
 
+    // cell size
+    String fontFamily = "Calibri";
+    int fontSize = 8;
+
+    int tarikh_size = 40;
 
     public SavingReportPrinter(Hashtable savings, Hashtable previous, ArrayList<Worker> selected) {
         this.savings = savings;
@@ -59,30 +63,30 @@ public class SavingReportPrinter implements Printable {
     }
 
     public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
-        Graphics2D g =(Graphics2D) graphics;
+        Graphics2D g = (Graphics2D) graphics;
 
         if (pageIndex >= pagesNeeded) {
-            System.out.println("No more pages");
+//            System.out.println("No more pages");
             return NO_SUCH_PAGE;
         }
 
         printOrNot = printOrNot ? false : true;
 
         if (printOrNot) {
-            System.out.println("Printing...");
+//            System.out.println("Printing...");
 
             x = 20;
             y = 80;
 
             int size = 0;
 
-            g.setFont(new Font("Calibri", Font.BOLD, 10));
+            g.setFont(new Font(fontFamily, Font.BOLD, fontSize));
 
             this.printHeader(g);
             x = 20;
             y += 20;
 
-            g.setFont(new Font("Calibri", Font.PLAIN, 9));
+            g.setFont(new Font(fontFamily, Font.PLAIN, fontSize));
             this.printPreviousBalance(g);
             x = 20;
             y += 20;
@@ -92,7 +96,7 @@ public class SavingReportPrinter implements Printable {
                 x = 20;
                 this.printSummary(g);
             }
-            System.out.println("Print Page " + (pageIndex + 1) + " out of " + pagesNeeded);
+//            System.out.println("Print Page " + (pageIndex + 1) + " out of " + pagesNeeded);
         }
 
         return PAGE_EXISTS;
@@ -133,7 +137,7 @@ public class SavingReportPrinter implements Printable {
 
         for (Worker worker : selected) {
             double amount = 0.0;
-            
+
             if (this.previous.get(worker.getId()) != null) {
                 amount = Double.parseDouble(this.previous.get(worker.getId()).toString());
             }
@@ -151,11 +155,11 @@ public class SavingReportPrinter implements Printable {
     private void printContent(Graphics2D g) {
         int size = 0;
 
-        for (int i = currentIndex; i < keys.length; i ++) {
+        for (int i = currentIndex; i < keys.length; i++) {
             if (i > printCap) {
                 break;
             }
-            
+
             String date = keys[i];
             x = 20;
 
@@ -179,7 +183,7 @@ public class SavingReportPrinter implements Printable {
                 }
 
                 size = 80;
-                for (int a = 0; a < counter; a ++) {
+                for (int a = 0; a < counter; a++) {
                     if (currentSubIndex >= 0) {
                         a = currentSubIndex;
                     }
@@ -187,42 +191,41 @@ public class SavingReportPrinter implements Printable {
                     if (a >= counter) {
                         break;
                     }
-                    
+
                     double amount = amounts.get(a);
                     total += amount;
-                    
+
                     g.drawString(Common.currency(amount), x, y + (a * 20));
-                    
+
                     g.drawLine(x - 5, y + 5 + (a * 20), x + 5 + size, y + 5 + (a * 20));
                     g.drawLine(x - 5, y - 15 + (a * 20), x + 5 + size, y - 15 + (a * 20));
                     g.drawLine(x - 5, y + 5 + (a * 20), x - 5, y - 15 + (a * 20));
                     g.drawLine(x + 5 + size, y + 5 + (a * 20), x + 5 + size, y - 15 + (a * 20));
-                    currentSubIndex ++;
+                    currentSubIndex++;
                 }
-                
-                g.drawLine(x - 5, y + 5 , x + 5 + size, y + 5);
+
+                g.drawLine(x - 5, y + 5, x + 5 + size, y + 5);
                 g.drawLine(x - 5, y - 15, x + 5 + size, y - 15);
-                g.drawLine(x - 5, y + 5, x - 5, y - 15 );
+                g.drawLine(x - 5, y + 5, x - 5, y - 15);
                 g.drawLine(x + 5 + size, y + 5, x + 5 + size, y - 15);
                 x += size + 10;
 
                 totals.put(worker.getId(), total);
             }
 
-
             if (currentSubIndex > 0) {
                 y += ((currentSubIndex - 1) * 20);
             }
 
             y += 20;
-            
+
             currentIndex++;
             currentSubIndex = -1;
         }
     }
 
     private void printSummary(Graphics2D g) {
-          int size = 0;
+        int size = 0;
 
         g.drawString("Baki", x, y);
         size = 80;
